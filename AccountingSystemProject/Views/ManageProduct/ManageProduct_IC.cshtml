@@ -48,8 +48,9 @@
     <!-- Tab Menu -->
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#detail">รายละเอียดสินค้า</a></li>
-        <li><a data-toggle="tab" href="#unitCounter">หน่วยนับสินค้า</a></li>
-        @*<li><a data-toggle="tab" href="#SetSellingPrice">กำหนดราคาขาย</a></li>*@
+        <li
+            ><a data-toggle="tab" href="#unitCounter">หน่วยนับสินค้า</a></li>
+        <li><a data-toggle="tab" href="#SetSellingPrice">กำหนดราคาขาย</a></li>
         @*
             <li><a data-toggle="tab" href="#StandardCost1">Standard Cost 1</a></li>
             <li><a data-toggle="tab" href="#StandardCost2">Standard Cost 2</a></li>*@
@@ -251,7 +252,7 @@
         </div>
 
         <!-- unitCounter -->
-        <div id="unitCounter" class="tab-pane fade">
+        <div id="unitCounter" class="tab-pane fade in active">
             <div class="container-fluid">
                 <div class="bg">
                     <div class="container-fluid">
@@ -271,7 +272,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <input class="form-control" name="stduname" id="stduname" />
+                                    <input class="form-control" name="stduname" id="stduname" disabled />
                                     <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
                                     <div class="modal fade" id="Find1" role="dialog">
                                         <div class="modal-dialog" style="width: 40%; height: 100%">
@@ -336,21 +337,18 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> <br>
-
+                        </div><br>
                         <div class="row">
                             @*<div class="col-sm-1"></div>*@
                             <div class="col-sm-2">หน่วยซื้อส่วนใหญ่ :</div>
                             <div class="col-sm-1">
                                 <input class="form-control" name="stbnum" id="stbnum" value="1" disabled />
                             </div>
-
-
                             <div class="col-sm-2">
                                 <div class="input-group">
-                                    <input class="form-control" name="buname" id="buname" />
-                                    <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
-                                    <div class="modal fade" id="Find1" role="dialog">
+                                    <input class="form-control" name="buname" id="buname" disabled />
+                                    <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find2"><i class="glyphicon glyphicon-search"></i></span>
+                                    <div class="modal fade" id="Find2" role="dialog">
                                         <div class="modal-dialog" style="width: 40%; height: 100%">
                                             <!-- Modal content-->
                                             <div class="modal-content">
@@ -398,17 +396,12 @@
                                 </div>
                             </div>
 
-
-
-
-
-
                             <div class="col-sm-1" style="text-align:center">=</div>
                             <div class="col-sm-2">
                                 <input class="form-control" type="number" name="bnum" id="bnum" value="1.0000" step="0.0001" />
                             </div>
-                            <div class="col-sm-3">
-                                <input class="form-control" name="stbuname" id="stbuname" />
+                            <div class="col-sm-2">
+                                <input class="form-control" name="stbuname" id="stbuname" disabled />
                             </div>
                         </div><br>
                         <div class="row">
@@ -419,16 +412,63 @@
                             </div>
                             <div class="col-sm-2">
                                 <div class="input-group">
-                                    <input class="form-control" name="suname" id="suname" />
-                                    <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
+                                    <input class="form-control" name="suname" id="suname" disabled />
+                                    <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find3"><i class="glyphicon glyphicon-search"></i></span>
+                                    <div class="modal fade" id="Find3" role="dialog">
+                                        <div class="modal-dialog" style="width: 40%; height: 100%">
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">รายชื่อหน่วยนับ</h4>
+                                                    </div><br />
+                                                    <div class=" table-responsive table-hover" id="getsuname">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>รหัสหน่วยนับ</th>
+                                                                    <th>ชื่อหน่วยนับภาษาไทย</th>
+                                                                    <th>ชื่อหน่วยนับภาษาอังกฤษ</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach (var unit in ViewBag.getunit)
+                                                                {
+                                                                    <tr class="pcontent">
+
+                                                                        <td data-id="@unit.uid" data-dismiss="modal">
+                                                                            @unit.ucode
+                                                                        </td>
+                                                                        <td data-dismiss="modal">
+                                                                            @unit.uname1
+                                                                        </td>
+                                                                        <td data-dismiss="modal">
+                                                                            @unit.uname2
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
+
                             <div class="col-sm-1" style="text-align:center">=</div>
                             <div class="col-sm-2">
                                 <input class="form-control" type="number" name="snum" id="snum" value="1.0000" step="0.0001" />
                             </div>
-                            <div class="col-sm-3">
-                                <input class="form-control" name="stsuname" id="stsuname" />
+                            <div class="col-sm-2">
+                                <input class="form-control" name="stsuname" id="stsuname" disabled />
                             </div>
                         </div><br>
                         <div class="row">
@@ -440,17 +480,62 @@
                             </div>
                             <div class="col-sm-2">
                                 <div class="input-group">
-                                    <input class="form-control" name="stuname" id="stuname" />
-                                    <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
+                                    <input class="form-control" name="stuname" id="stuname" disabled />
+                                    <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find4"><i class="glyphicon glyphicon-search"></i></span>
+                                    <div class="modal fade" id="Find4" role="dialog">
+                                        <div class="modal-dialog" style="width: 40%; height: 100%">
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">รายชื่อหน่วยนับ</h4>
+                                                    </div><br />
+                                                    <div class=" table-responsive table-hover" id="getstuname">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>รหัสหน่วยนับ</th>
+                                                                    <th>ชื่อหน่วยนับภาษาไทย</th>
+                                                                    <th>ชื่อหน่วยนับภาษาอังกฤษ</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach (var unit in ViewBag.getunit)
+                                                                {
+                                                                    <tr class="pcontent">
+
+                                                                        <td data-id="@unit.uid" data-dismiss="modal">
+                                                                            @unit.ucode
+                                                                        </td>
+                                                                        <td data-dismiss="modal">
+                                                                            @unit.uname1
+                                                                        </td>
+                                                                        <td data-dismiss="modal">
+                                                                            @unit.uname2
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-1" style="text-align:center">=</div>
                             <div class="col-sm-2">
                                 <input class="form-control" type="number" name="stnum" id="stnum" value="1.0000" step="0.0001" />
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 @* ชื่อหน่วยตาม หน่วยนับมาตรฐาน *@
-                                <input class="form-control" name="stduname1" id="stduname1" />
+                                <input class="form-control" name="stduname1" id="stduname1" disabled />
                             </div>
                         </div><br>
                         <div class="row">
@@ -461,345 +546,395 @@
                             </div>
                             <div class="col-sm-2">
                                 <div class="input-group">
-                                    <input class="form-control" name="st2uname" id="st2uname" />
-                                    <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
+                                    <input class="form-control" name="st2uname" id="st2uname" disabled />
+                                    <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find5"><i class="glyphicon glyphicon-search"></i></span>
+                                    <div class="modal fade" id="Find5" role="dialog">
+                                        <div class="modal-dialog" style="width: 40%; height: 100%">
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">รายชื่อหน่วยนับ</h4>
+                                                    </div><br />
+                                                    <div class=" table-responsive table-hover" id="getst2uname">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>รหัสหน่วยนับ</th>
+                                                                    <th>ชื่อหน่วยนับภาษาไทย</th>
+                                                                    <th>ชื่อหน่วยนับภาษาอังกฤษ</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach (var unit in ViewBag.getunit)
+                                                                {
+                                                                    <tr class="pcontent">
+
+                                                                        <td data-id="@unit.uid" data-dismiss="modal">
+                                                                            @unit.ucode
+                                                                        </td>
+                                                                        <td data-dismiss="modal">
+                                                                            @unit.uname1
+                                                                        </td>
+                                                                        <td data-dismiss="modal">
+                                                                            @unit.uname2
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-1" style="text-align:center">=</div>
                             <div class="col-sm-2">
                                 <input class="form-control" type="number" name="st2num" id="st2num" value="1.0000" step="0.0001" />
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 @* ชื่อหน่วยตาม หน่วยนับมาตรฐาน *@
-                                <input class="form-control" name="stduname2" id="stduname2" />
+                                <input class="form-control" name="stduname2" id="stduname2" disabled />
                             </div>
                         </div><br>
-                        @*<div class="row">*@
-                        @*<div class="col-sm-2"></div>*@
-                        @*<div class="col-sm-2 checkbox">
-                                    <label>
-                                        <input type="checkbox" name="MinimumPurchaseAmountCB" id="MinimumPurchaseAmountCB" /> จำนวนซื้อขั้นต่ำ
-                                    </label>
-                                </div>
-                                <div class="col-sm-2">
-                                    <input class="form-control" name="moq" id="moq" placeholder="0" disabled />
-                                </div>
-                                <div class="col-sm-1"></div>
-                                <div class="col-sm-3">
-                                    <input class="form-control" name="buid" id="buid" />
-                                </div>
-                            </div> <br>*@
+                        <div class="row">
+                            <div class="col-sm-2 checkbox">
+                                <label>
+                                    <input type="checkbox" name="checkbox" id="check" />จำนวนซื้อขั้นต่ำ :
+                                </label>
+                            </div>
+                            <div class="col-sm-1">
+                                <input class="form-control" name="moq" id="moq" value="0" disabled />
+                            </div>
+                            <div class="col-sm-2">
+                                <input class="form-control" name="buname2" id="buname2" disabled />
+                            </div>
+                        </div><br>
                     </div>
                 </div>
             </div>
         </div><br>
 
         <!-- SetSellingPrice -->
-        <div id="SetSellingPrice" class="tab-pane fade container-fluid">
-            <div class="row">
-                <div class="col-sm-2">ราคาขายมาตรฐาน :</div>
-                <div class="col-sm-3">
-                    <input class="form-control" id="u0s" name="u0s" disabled />
-                </div>
-                <div class="col-sm-1" style="text-align:center">ละ</div>
-                <div class="col-sm-2">
-                    <input class="form-control" placeholder="0.0000" id="s1" name="s1" />
-                </div>
-            </div> <br>
-            <div class="row">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-3">
-                    <div class="input-group">
-                        <input class="form-control" name="u1s" id="u1s" />
-                        <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
-                    </div>
-                </div>
-                <div class="col-sm-1" style="text-align:center">ละ</div>
-                <div class="col-sm-2">
-                    <input class="form-control" placeholder="0.0000" id="s2" name="s2" />
-                </div>
-                <div class="col-sm-1" style="text-align:center">=</div>
-                <div class="col-sm-2">
-                    <input class="form-control" id="ss1" name="ss1" placeholder="1.0000" />
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-3">
-                    <div class="input-group">
-                        <input class="form-control" name="u2s" id="u2s" />
-                        <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
-                    </div>
-                </div>
-                <div class="col-sm-1" style="text-align:center">ละ</div>
-                <div class="col-sm-2">
-                    <input class="form-control" placeholder="0.0000" id="s3" name="s3" />
-                </div>
-                <div class="col-sm-1" style="text-align:center">=</div>
-                <div class="col-sm-2">
-                    <input class="form-control" id="ss2" name="ss2" placeholder="1.0000" />
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-3">
-                    <div class="input-group">
-                        <input class="form-control" name="u3s" id="u3s" />
-                        <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
-                    </div>
-                </div>
-                <div class="col-sm-1" style="text-align:center">ละ</div>
-                <div class="col-sm-2">
-                    <input class="form-control" placeholder="0.0000" id="s4" name="s4" />
-                </div>
-                <div class="col-sm-1" style="text-align:center">=</div>
-                <div class="col-sm-2">
-                    <input class="form-control" id="ss3" name="ss3" placeholder="1.0000" />
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-3">
-                    <div class="input-group">
-                        <input class="form-control" name="u4s" id="u4s" />
-                        <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
-                    </div>
-                </div>
-                <div class="col-sm-1" style="text-align:center">ละ</div>
-                <div class="col-sm-2">
-                    <input class="form-control" placeholder="0.0000" id="s5" name="s5" />
-                </div>
-                <div class="col-sm-1" style="text-align:center">=</div>
-                <div class="col-sm-2">
-                    <input class="form-control" id="ss4" name="ss4" placeholder="1.0000" />
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-sm-2">ราคาต่ำสุด</div>
-                <div class="col-sm-3">
-                    <input class="form-control" name="u0s" id="u0s" disabled />
-                </div>
-                <div class="col-sm-1" style="text-align:center">ละ</div>
-                <div class="col-sm-2">
-                    <input class="form-control" placeholder="0.0000" id="s6" name="s6" />
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-sm-2">ส่วนลดมาตรฐาน(%) :</div>
-                <div class="col-sm-3">
-                    <input class="form-control" name="stddiscount" id="stddiscount" />
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-sm-2">ราคาขายตามบรรจุภัณฑ์ :</div>
-                <div class="col-sm-3">
-                    <input class="form-control" name="xprice" id="xprice" />
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-sm-2">ชื่อผู้จำหน่าย :</div>
-                <div class="col-sm-6">
-                    <div class="input-group">
-                        <input class="form-control" name="xname" id="xname" />
-                        <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find2"><i class="glyphicon glyphicon-search"></i></span>
-                        <div class="modal fade" id="Find2" role="dialog">
-                            <div class="modal-dialog" style="width: 80%; height: 100%">
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">ค้นหา รายชื่อผู้จำหน่าย</h4>
-                                        </div><br />
-                                        <div class="row">
-                                            <br />
-                                            <div class="col-sm-2" style="text-align:right">ค้น</div>
-                                            <div class="col-sm-4">
-                                                <select name="selectUnit" class="form-control">
-                                                    <option>รหัสผู้จำหน่าย</option>
-                                                    <option>ชื่อผู้จำหน่าย</option>
-                                                </select>
+        <div id="SetSellingPrice" class="tab-pane fade in active">
+            <div class="container-fluid">
+                <div class="bg">
+                    <div class="container-fluid">
+                        <br /><br />
+                        <div class="row">
+                            <div class="col-sm-2">ราคาขายมาตรฐาน :</div>
+                            <div class="col-sm-3">
+                                <input class="form-control" id="u0s" name="u0s" disabled />
+                            </div>
+                            <div class="col-sm-1" style="text-align:center">ละ</div>
+                            <div class="col-sm-2">
+                                <input class="form-control" placeholder="0.0000" id="s1" name="s1" />
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <input class="form-control" name="u1s" id="u1s" />
+                                    <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-1" style="text-align:center">ละ</div>
+                            <div class="col-sm-2">
+                                <input class="form-control" placeholder="0.0000" id="s2" name="s2" />
+                            </div>
+                            <div class="col-sm-1" style="text-align:center">=</div>
+                            <div class="col-sm-2">
+                                <input class="form-control" id="ss1" name="ss1" placeholder="1.0000" />
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <input class="form-control" name="u2s" id="u2s" />
+                                    <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-1" style="text-align:center">ละ</div>
+                            <div class="col-sm-2">
+                                <input class="form-control" placeholder="0.0000" id="s3" name="s3" />
+                            </div>
+                            <div class="col-sm-1" style="text-align:center">=</div>
+                            <div class="col-sm-2">
+                                <input class="form-control" id="ss2" name="ss2" placeholder="1.0000" />
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <input class="form-control" name="u3s" id="u3s" />
+                                    <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-1" style="text-align:center">ละ</div>
+                            <div class="col-sm-2">
+                                <input class="form-control" placeholder="0.0000" id="s4" name="s4" />
+                            </div>
+                            <div class="col-sm-1" style="text-align:center">=</div>
+                            <div class="col-sm-2">
+                                <input class="form-control" id="ss3" name="ss3" placeholder="1.0000" />
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <input class="form-control" name="u4s" id="u4s" />
+                                    <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-1" style="text-align:center">ละ</div>
+                            <div class="col-sm-2">
+                                <input class="form-control" placeholder="0.0000" id="s5" name="s5" />
+                            </div>
+                            <div class="col-sm-1" style="text-align:center">=</div>
+                            <div class="col-sm-2">
+                                <input class="form-control" id="ss4" name="ss4" placeholder="1.0000" />
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-sm-2">ราคาต่ำสุด</div>
+                            <div class="col-sm-3">
+                                <input class="form-control" name="u0s" id="u0s" disabled />
+                            </div>
+                            <div class="col-sm-1" style="text-align:center">ละ</div>
+                            <div class="col-sm-2">
+                                <input class="form-control" placeholder="0.0000" id="s6" name="s6" />
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-sm-2">ส่วนลดมาตรฐาน(%) :</div>
+                            <div class="col-sm-3">
+                                <input class="form-control" name="stddiscount" id="stddiscount" />
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-sm-2">ราคาขายตามบรรจุภัณฑ์ :</div>
+                            <div class="col-sm-3">
+                                <input class="form-control" name="xprice" id="xprice" />
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-sm-2">ชื่อผู้จำหน่าย :</div>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <input class="form-control" name="xname" id="xname" />
+                                    <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find2"><i class="glyphicon glyphicon-search"></i></span>
+                                    <div class="modal fade" id="Find2" role="dialog">
+                                        <div class="modal-dialog" style="width: 80%; height: 100%">
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">ค้นหา รายชื่อผู้จำหน่าย</h4>
+                                                    </div><br />
+                                                    <div class="row">
+                                                        <br />
+                                                        <div class="col-sm-2" style="text-align:right">ค้น</div>
+                                                        <div class="col-sm-4">
+                                                            <select name="selectUnit" class="form-control">
+                                                                <option>รหัสผู้จำหน่าย</option>
+                                                                <option>ชื่อผู้จำหน่าย</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input placeholder="คำค้น" name="word" id="word" class="form-control" />
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <input type="button" value="ค้นหา" class="btn btn-primary" id="SearchUnit" />
+                                                        </div>
+                                                    </div><br />
+                                                    <div class=" table-responsive table-hover">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>รหัสผู้จำหน่าย</th>
+                                                                    <th>ชื่อผู้จำหน่ายภาษาไทย</th>
+                                                                    <th>ชื่อผู้จำหน่ายภาษาอังกฤษ</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-4">
-                                                <input placeholder="คำค้น" name="word" id="word" class="form-control" />
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="button" value="ค้นหา" class="btn btn-primary" id="SearchUnit" />
-                                            </div>
-                                        </div><br />
-                                        <div class=" table-responsive table-hover">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>รหัสผู้จำหน่าย</th>
-                                                        <th>ชื่อผู้จำหน่ายภาษาไทย</th>
-                                                        <th>ชื่อผู้จำหน่ายภาษาอังกฤษ</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody></tbody>
-                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div><br>
                     </div>
                 </div>
-            </div><br>
-        </div>
+            </div>
+        </div><br>
 
-        <!-- StandardCost1 -->
-        @*<div id="StandardCost1" class="tab-pane fade container-fluid">
+            <!-- StandardCost1 -->
+            @*<div id="StandardCost1" class="tab-pane fade container-fluid">
             </div>*@
 
-        <!-- StandardCost2 -->
-        @*<div id="StandardCost2" class="tab-pane fade container-fluid">
+            <!-- StandardCost2 -->
+            @*<div id="StandardCost2" class="tab-pane fade container-fluid">
 
             </div>*@
 
-        <!-- ProductNote -->
-        <div id="ProductNote" class="tab-pane fade container-fluid">
-            <div class="row">
-                <div class="col-sm-1"></div>
-                <div class="col-sm-2">หมายเหตุ 1 :</div>
-                <div class="col-sm-3">
-                    <input class="form-control" name="note1" id="note1" />
-                </div>
-                <div class="col-sm-2">หมายเหตุ 2 :</div>
-                <div class="col-sm-3">
-                    <input class="form-control" name="note2" id="note2" />
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-sm-1"></div>
-                <div class="col-sm-2">หมายเหตุ 3 :</div>
-                <div class="col-sm-3">
-                    <input class="form-control" name="note3" id="note3" />
-                </div>
-                <div class="col-sm-2">หมายเหตุ 4 :</div>
-                <div class="col-sm-3">
-                    <input class="form-control" name="note4" id="note4" />
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-sm-1"></div>
-                <div class="col-sm-2">หมายเหตุ 5 :</div>
-                <div class="col-sm-3">
-                    <input class="form-control" name="note5" id="note5" />
-                </div>
-                <div class="col-sm-2">หมายเหตุ 6 :</div>
-                <div class="col-sm-3">
-                    <input class="form-control" name="note6" id="note6" />
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-sm-1"></div>
-                <div class="col-sm-2">หมายเหตุ 7 :</div>
-                <div class="col-sm-3">
-                    <input class="form-control" name="note7" id="note7" />
-                </div>
-                <div class="col-sm-2">หมายเหตุ 8 :</div>
-                <div class="col-sm-3">
-                    <input class="form-control" name="note8" id="note8" />
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-sm-1"></div>
-                <div class="col-sm-2">หมายเหตุ 9 :</div>
-                <div class="col-sm-3">
-                    <input class="form-control" name="note9" id="note9" />
-                </div>
-                <div class="col-sm-2">หมายเหตุ 10 :</div>
-                <div class="col-sm-3">
-                    <input class="form-control" name="note10" id="note10" />
-                </div>
-            </div><br>
+            <!-- ProductNote -->
+            <div id="ProductNote" class="tab-pane fade container-fluid">
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2">หมายเหตุ 1 :</div>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="note1" id="note1" />
+                    </div>
+                    <div class="col-sm-2">หมายเหตุ 2 :</div>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="note2" id="note2" />
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2">หมายเหตุ 3 :</div>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="note3" id="note3" />
+                    </div>
+                    <div class="col-sm-2">หมายเหตุ 4 :</div>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="note4" id="note4" />
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2">หมายเหตุ 5 :</div>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="note5" id="note5" />
+                    </div>
+                    <div class="col-sm-2">หมายเหตุ 6 :</div>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="note6" id="note6" />
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2">หมายเหตุ 7 :</div>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="note7" id="note7" />
+                    </div>
+                    <div class="col-sm-2">หมายเหตุ 8 :</div>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="note8" id="note8" />
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2">หมายเหตุ 9 :</div>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="note9" id="note9" />
+                    </div>
+                    <div class="col-sm-2">หมายเหตุ 10 :</div>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="note10" id="note10" />
+                    </div>
+                </div><br>
+            </div>
+
+            <!-- picture -->
+            <div id="picture" class="tab-pane fade container-fluid">
+                <input type="file" name="pic" accept="image/*">
+            </div>
+
+
         </div>
 
-        <!-- picture -->
-        <div id="picture" class="tab-pane fade container-fluid">
-            <input type="file" name="pic" accept="image/*">
-        </div>
-
-
-    </div>
-
-    <!--Show Table -->
-    <div class="container-fluid">
-        <div class="table-responsive table-hover" id="product_IC">
-            <table class="table">
-                <thead>
-                    <tr>
-                        @*
-                            <th>
-                                @Html.ActionLink("รหัสสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pcodeSortParm })
-                            </th>
-                            <th>
-                                @Html.ActionLink("ชื่อสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pname1SortParm })
-                            </th>
-                            <th>
-                                @Html.ActionLink("ชื่อย่อสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pname11SortParm })
-                            </th>
-                            <th>
-                                @Html.ActionLink("ชนิดสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.ptypeSortParm })
-                            </th>
-                            <th>
-                                @Html.ActionLink("สถานะสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pstatusSortParm })
-                            </th>
-                            <th>
-                                @Html.ActionLink("prod_id", "ManageProduct_IC", new { sortOrder = ViewBag.prod_idSortParm })
-                            </th>*@
-                        <th>
-                            @Html.ActionLink("รหัสสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pcodeSortParm }, new { @class = "my-class" })
-                        </th>
-                        <th>
-                            @Html.ActionLink("ชื่อสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pname1SortParm }, new { @class = "my-class" })
-                        </th>
-                        <th>
-                            @Html.ActionLink("ชื่อย่อสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pname11SortParm }, new { @class = "my-class" })
-                        </th>
-                        <th>
-                            @Html.ActionLink("ชนิดสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.ptypeSortParm }, new { @class = "my-class" })
-                        </th>
-                        <th>
-                            @Html.ActionLink("สถานะสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pstatusSortParm }, new { @class = "my-class" })
-                        </th>
-                        <th>
-                            @Html.ActionLink("prod_id", "ManageProduct_IC", new { sortOrder = ViewBag.prod_idSortParm }, new { @class = "my-class" })
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var product in ViewBag.MyData)
+            <!--Show Table -->
+            <div class="container-fluid">
+                <div class="table-responsive table-hover" id="product_IC">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                @*
+                                <th>
+                                    @Html.ActionLink("รหัสสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pcodeSortParm })
+                                </th>
+                                <th>
+                                    @Html.ActionLink("ชื่อสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pname1SortParm })
+                                </th>
+                                <th>
+                                    @Html.ActionLink("ชื่อย่อสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pname11SortParm })
+                                </th>
+                                <th>
+                                    @Html.ActionLink("ชนิดสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.ptypeSortParm })
+                                </th>
+                                <th>
+                                    @Html.ActionLink("สถานะสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pstatusSortParm })
+                                </th>
+                                <th>
+                                    @Html.ActionLink("prod_id", "ManageProduct_IC", new { sortOrder = ViewBag.prod_idSortParm })
+                                </th>*@
+                                <th>
+                                    @Html.ActionLink("รหัสสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pcodeSortParm }, new { @class = "my-class" })
+                                </th>
+                                <th>
+                                    @Html.ActionLink("ชื่อสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pname1SortParm }, new { @class = "my-class" })
+                                </th>
+                                <th>
+                                    @Html.ActionLink("ชื่อย่อสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pname11SortParm }, new { @class = "my-class" })
+                                </th>
+                                <th>
+                                    @Html.ActionLink("ชนิดสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.ptypeSortParm }, new { @class = "my-class" })
+                                </th>
+                                <th>
+                                    @Html.ActionLink("สถานะสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pstatusSortParm }, new { @class = "my-class" })
+                                </th>
+                                <th>
+                                    @Html.ActionLink("prod_id", "ManageProduct_IC", new { sortOrder = ViewBag.prod_idSortParm }, new { @class = "my-class" })
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var product in ViewBag.MyData)
                     {
-                        <tr class="pcontent">
+                    <tr class="pcontent">
 
-                            <td data-id="@product.prod_id">
-                                @product.pcode
-                            </td>
-                            <td>
-                                @product.pname1
-                            </td>
-                            <td>
-                                @product.pname11
-                            </td>
-                            <td>
-                                @product.ptype
-                            </td>
-                            <td>
-                                @product.pstatus
-                            </td>
-                            <td>
-                                @product.prod_id
-                            </td>
+                        <td data-id="@product.prod_id">
+                            @product.pcode
+                        </td>
+                        <td>
+                            @product.pname1
+                        </td>
+                        <td>
+                            @product.pname11
+                        </td>
+                        <td>
+                            @product.ptype
+                        </td>
+                        <td>
+                            @product.pstatus
+                        </td>
+                        <td>
+                            @product.prod_id
+                        </td>
 
-                        </tr>
+                    </tr>
                     }
-                </tbody>
-            </table>
-            <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("ManageProduct_IC", new { page, sortOrder = ViewBag.sortOrder }))</div>
+                        </tbody>
+                    </table>
+                    <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("ManageProduct_IC", new { page, sortOrder = ViewBag.sortOrder }))</div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
 
 @section scripts {
@@ -1032,14 +1167,14 @@
                 $('#st2uid').val("");
 
             }
-        })
+        });
 
         //click data on pop up and show in textbox
         $("div#getbuname table").delegate('tr', 'click', function () {
             var id = $(this).find("td:first").data("id");
             if (id != null) {
                 $.ajax({
-                    url: 'FinditemPopupUnit2',
+                    url: 'FinditemPopupSup',
                     type: 'get',
                     data: {
                         'id': id
@@ -1054,7 +1189,73 @@
                 $('#buname').val("");
                 $('#buid').val("");
             }
-        })
+        });
+
+        //click data on pop up and show in textbox
+        $("div#getsuname table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'FinditemPopupSup',
+                    type: 'get',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#suname').val(data.uname1);
+                        $('#suid').val(data.uid);
+                    }
+                });
+            } else {
+                $('#suname').val("");
+                $('#suid').val("");
+            }
+        });
+
+        //click data on pop up and show in textbox
+        $("div#getstuname table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'FinditemPopupSup',
+                    type: 'get',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#stuname').val(data.uname1);
+                        $('#stuid').val(data.uid);
+                    }
+                });
+            } else {
+                $('#stuname').val("");
+                $('#stuid').val("");
+            }
+        });
+
+        //click data on pop up and show in textbox
+        $("div#getst2uname table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'FinditemPopupSup',
+                    type: 'get',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#st2uname').val(data.uname1);
+                        $('#st2uid').val(data.uid);
+                    }
+                });
+            } else {
+                $('#st2uname').val("");
+                $('#st2uid').val("");
+            }
+        });
 
 
         $("#Save").on('click', function () {
@@ -1190,7 +1391,7 @@
                 } else {
                     return false;
                 }
-            
+
         });
 
         function Delete() {
@@ -1276,6 +1477,20 @@
             //$('#note10').val("");
 
 
+        });
+
+        $('#check').click(function () {
+           
+            if (document.getElementById("moq").disabled == true){
+                document.getElementById("moq").disabled = false;
+                $('#moq').val("1");
+                $('#buname2').val($('#buname').val());
+            }
+            else {
+                document.getElementById("moq").disabled = true;
+                $('#moq').val("0");
+                $('#buname2').val("");
+            }
         });
 
 
