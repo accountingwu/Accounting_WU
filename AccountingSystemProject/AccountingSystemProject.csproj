@@ -157,7 +157,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CustomerZoneController.cs" />
-    <Compile Include="Controllers\DeliveryOrderController.cs" />
+    <Compile Include="Controllers\ManageDeliveryOrderController.cs" />
     <Compile Include="Controllers\EmployeeGroupController.cs" />
     <Compile Include="Controllers\FactoryController.cs" />
     <Compile Include="Controllers\GroupCustomerController.cs" />
@@ -1282,7 +1282,7 @@
     <Content Include="Views\EmployeeGroup\ManageEmployeeGroup.cshtml" />
     <Content Include="Views\ManageSupplier\ManageSupplier.cshtml" />
     <Content Include="Views\ManageEmployee\ManageEmployee.cshtml" />
-    <Content Include="Views\DeliveryOrder\ManageDeliveryOrder.cshtml" />
+    <Content Include="Views\ManageDeliveryOrder\ManageDeliveryOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
