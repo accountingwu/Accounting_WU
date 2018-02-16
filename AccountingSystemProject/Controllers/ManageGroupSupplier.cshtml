@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "ManageGroupSupplier";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ManageGroupSupplier</h2>
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+<div class="container">
+    <div class="table-responsive table-hover" id="ManageGroupSupplier">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>รหัสกลุ่มผู้จำหน่าย</th>
+                    <th>ชื่อกลุ่มผู้จำหน่ายภาษาไทย</th>
+                    <th>ชื่อกลุ่มผู้จำหน่ายภาษาอังกฤษ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<form action="" id="formManageGroupSupplier">
+    <div class="row">
+        <div class="row">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-2" id="head">รหัสกลุ่มผู้จำหน่าย :</div>
+                <div class="col-md-2" id="head">
+                    <input class="form-control" name="CodeGroupSupplier" ID="CodeGroupSupplier" />
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-2" id="head">ชื่อกลุ่มผู้จำหน่ายภาษาไทย :</div>
+                <div class="col-md-2" id="head">
+                    <input class="form-control" name="NameTH_GroupSupplier" ID="NameTH_GroupSupplier" />
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-2" id="head">ชื่อกลุ่มผู้จำหน่ายภาษาอังกฤษ :</div>
+                <div class="col-md-2" id="head">
+                    <input class="form-control" name="NameEN_GroupSupplier" ID="NameEN_GroupSupplier" />
+                </div>
+            </div><br><br>
+
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-6">
+
+                    <input id="SubmitGroupSupplier" type="button" class="btn btn-primary" value="ตกลง" />
+                    <input id="EditGroupSupplier" type="button" class="btn btn-primary" value="แก้ไข" />
+                    <input id="DeleteGroupSupplier" type="button" class="btn btn-primary" value="ลบ" />
+                    <input id="CancleGroupSupplier" type="button" class="btn btn-primary" value="ยกเลิก" />
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+</form>
+

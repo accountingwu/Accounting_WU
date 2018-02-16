@@ -1,0 +1,228 @@
+﻿@model IEnumerable<AccountingSystemProject.DAL.EMBillGroup>
+@using AccountingSystemProject.Models
+@{
+    ViewBag.Title = "ManageBillGrp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+<div class="container-fluid">
+
+    <div class="container-fluid">
+        <h2>เพิ่ม/แก้ไขรหัสกลุ่มวางบิล</h2>        <br />
+        <div class="table-responsive table-hover" id="billGrp">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>รหัสกลุ่มวางบิล</th>
+                        <th>ชื่อกลุ่มวางบิล</th>
+                        <th>ชื่อกลุ่มวางบิล(Eng)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var BillGrp in Model)
+                    {
+                        <tr>
+                            <td data-id="@BillGrp.BillGroupID">
+                                @Html.DisplayFor(modelItem => BillGrp.BillGroupCode)
+                            </td>                            
+                            <td>
+                                @Html.DisplayFor(modelItem => BillGrp.BillGroupName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => BillGrp.BillGroupNameEng)
+                            </td>                            
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="bg">
+
+        <div class="btn-group" style="float: right">
+            <input type="submit" value="New" class="btn btn-primary btn-sm" id="new" />
+            <input type="submit" value="Save" class="btn btn-primary btn-sm" id="Save" />
+            <input type="submit" value="Delete" class="btn btn-primary btn-sm" id="Delete" />
+            <input type="submit" value="Find" class="btn btn-primary btn-sm" id="Find" />
+            <input type="submit" value="Refresh" class="btn btn-primary btn-sm" id="Refresh" />
+            <input type="submit" value="Preview" class="btn btn-primary btn-sm" id="Preview" />
+            <input type="submit" value="Print" class="btn btn-primary btn-sm" id="Print" />
+        </div>
+        <br />
+
+
+        <form action="" id="submit">
+            <input type="hidden" name="CustBillGrp" id="CustBillGrp" value="" />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-1" id="head">รหัสกลุ่มวางบิล : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="รหัสกลุ่มวางบิล" ID="BillGroupCode" />
+                </div>
+            </div><br />
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-1" id="head">ชื่อกลุ่มวางบิล : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อกลุ่มวางบิล" ID="BillGroupName" />
+                </div>
+            </div>
+
+            <br />
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-1" id="head">ชื่อกลุ่มวางบิล(Eng) : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อกลุ่มวางบิล(Eng)" ID="BillGroupNameEng" />
+                </div>
+            </div>
+
+            <br />
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-1" id="head">หมายเหตุ : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="หมายเหตุ" ID="Remark" />
+                </div>
+            </div><br />
+        </form>
+    </div>
+</div>
+
+@section scripts {
+
+    <script>
+
+
+
+            $("div#billGrp table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableBillGrp',
+                    type: 'post',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#BillGroupID').val(data.BillGroupID);
+                        $('#BillGroupCode').val(data.BillGroupCode);
+                        $('#BillGroupName').val(data.BillGroupName);
+                        $('#BillGroupNameEng').val(data.BillGroupNameEng);
+                        $('#Remark').val((data.Remark == null) ? "" : data.Remark);
+                    }
+                });
+            } else {
+                $('#BillGroupID').val("");
+                $('#BillGroupCode').val("");
+                $('#BillGroupName').val("");
+                $('#BillGroupNameEng').val("");
+                $('#Remark').val("");
+            }
+        })
+
+         $("#insert").click(function () {
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("InsertBillGrp", "MasterData")',
+                data: JSON.stringify({
+                    BillGroupID: $("#BillGroupID").val(),
+                    BillGroupCode: $("#BillGroupCode").val(),
+                    BillGroupName: $("#BillGroupName").val(),
+                    BillGroupNameEng: $("#BillGroupNameEng").val(),
+                    Remark: $("#Remark").val()
+                }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                processData: false,
+                success: function (response) {
+
+                    console.log();
+                }
+            })
+            });
+
+        $("#Save").click(function () {
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("EditBillGrp", "MasterData")',
+                data: JSON.stringify({
+                    BillGroupID: $("#BillGroupID").val(),
+                    BillGroupCode: $("#BillGroupCode").val(),
+                    BillGroupName: $("#BillGroupName").val(),
+                    BillGroupNameEng: $("#BillGroupNameEng").val(),
+                    Remark: $("#Remark").val()
+                }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                processData: false,
+                success: function (response) {
+
+                    console.log();
+                }
+            })
+        });
+
+        $("#Delete").click(function () {
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("DeleteBillGrp", "MasterData")',
+                data: JSON.stringify({
+                    BillGroupID: $("#BillGroupID").val(),
+                    BillGroupCode: $("#BillGroupCode").val(),
+                    BillGroupName: $("#BillGroupName").val(),
+                    BillGroupNameEng: $("#BillGroupNameEng").val(),
+                    Remark: $("#Remark").val()
+                }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                processData: false,
+                success: function (response) {
+
+                    console.log();
+                }
+            })
+            });
+
+
+    </script>
+}
+

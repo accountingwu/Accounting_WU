@@ -1,0 +1,233 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "ManageEmployeeGroup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+<div class="container-fluid"><h3>เพิ่ม/แก้ไขรหัสกลุ่มพนักงาน</h3></div>
+
+<div class="table-responsive table-hover" id="EmployeeGroup">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>รหัสกลุ่มพนักงาน</th>
+                <th>ชื่อกลุ่มพนักงาน 1</th>
+                <th>ชื่อภาษา 2</th>
+            </tr>
+        </thead>
+        <tbody>
+                @foreach (var employeegroup in ViewBag.MyData)
+                {
+                <tr>
+                    <td data-id="@employeegroup.EmGroupID">
+                        @employeegroup.EmCode
+                    </td>
+                    <td>
+                        @employeegroup.EmGroupName
+                    </td>
+                    <td>
+                        @employeegroup.EmGroupNameEng
+                    </td>
+
+                </tr>
+                }
+            </tbody>
+        </table>
+        <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("ManageEmployeeGroup", new { page }))</div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="bg">
+
+            <div class="btn-group" style="float: right">
+                <div class="btn-group" style="float: right">
+                    <input type="button" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="Clear" />
+                    <input type="button" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+                    <input type="button" value="ลบ" class="btn btn-primary btn-sm" id="Delete" />
+                    <input type="submit" value="ค้นหา" class="btn btn-primary btn-sm" id="Find" />
+                    <input type="submit" value="ดูตัวอย่าง" class="btn btn-primary btn-sm" id="Preview" />
+                    <input type="submit" value="พิมพ์" class="btn btn-primary btn-sm" id="Print" />
+                </div>
+            </div>
+            <br /><br /><br />
+
+            <form action="" id="FormEmployeeGroup">
+                <div class="container-fluid">
+                    <input type="hidden" name="EmGroupID" id="EmGroupID" value="" />
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-2" id="head">รหัสกลุ่มพนักงาน :  <font color="red">*</font></div>
+                        <div class="col-md-4" id="head">
+                            <input class="form-control" placeholder="รหัสกลุ่มพนักงาน" name="EmCode" ID="EmCode" />
+                        </div>
+                    </div><br />
+
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-2" id="head">ชื่อกลุ่มพนักงาน :  <font color="red">*</font></div>
+                        <div class="col-md-4" id="head">
+                            <input class="form-control" placeholder="ชื่อกลุ่มพนักงาน" name="EmGroupName" ID="EmGroupName" />
+                        </div>
+                    </div><br />
+
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-2" id="head">ชื่อภาษา 2  : </div>
+                        <div class="col-md-4" id="head">
+                            <input class="form-control" placeholder="ชื่อภาษา 2" name="EmGroupNameEng" ID="EmGroupNameEng" />
+                        </div>
+                    </div><br />
+
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-2" id="head">หมายเหตุ  : </div>
+                        <div class="col-md-4" id="head">
+                            <input class="form-control" placeholder="หมายเหตุ" name="EmGroupNote" ID="EmGroupNote" />
+                        </div>
+                    </div><br />
+                    <br />
+                </div>
+            </form>
+        </div>
+    </div>
+    <br />
+    <br />
+
+    @section scripts {
+
+        @Scripts.Render("~/Scripts/Validate/jquery.validate.js")
+        @Scripts.Render("~/Scripts/Validate/FormEmployeeGroup.js")
+        <script>
+            $("div#EmployeeGroup table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableEmployeeGroup',
+                    type: 'post',
+                    data: {
+                        'id': id
+
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#EmGroupID').val(data.EmGroupID);
+                        $('#EmCode').val(data.EmCode);
+                        $('#EmGroupName').val(data.EmGroupName);
+                        $('#EmGroupNameEng').val(data.EmGroupNameEng);
+                        $('#EmGroupNote').val(data.EmGroupNote);
+                    }
+                });
+            } else {
+                $('#EmGroupID').val("");
+                $('#EmCode').val("");
+                $('#EmGroupName').val("");
+                $('#EmGroupNameEng').val("");
+                $('#EmGroupNote').val("");
+            }
+        })
+
+        $("#Save").on('click', function () {
+            if ($("#FormEmployeeGroup").valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveEmployeeGroup", "EmployeeGroup")',
+                    data: JSON.stringify({
+                        EmGroupID: $("#EmGroupID").val(),
+                        EmCode: $("#EmCode").val(),
+                        EmGroupName: $("#EmGroupName").val(),
+                        EmGroupNameEng: $("#EmGroupNameEng").val(),
+                        EmGroupNote: $("#EmGroupNote").val(),
+                        grpcountstock: "0",
+                        ccode: "TBC",
+                        //bcode: $('#bcode').val()
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    success: function (response) {
+                        if (response == true){
+                        alert("บันทึกสำเร็จ");
+                        window.location.reload(true);
+                        } else {
+                            alert("รหัสกลุ่มพนักงานซ้ำ");
+                        }
+                    }
+                })
+            }
+        });
+
+
+        $("#Delete").click(function () {
+            if ($("#FormEmployeeGroup").valid()) {
+
+                if (confirm('ยืนยันการลบ')) {
+                    Delete();
+                } else {
+                    return false;
+                }
+            }
+        });
+
+        function Delete() {
+            $.ajax({
+                url: '@Url.Action("DeleteEmployeeGroup", "EmployeeGroup")',
+                type: 'post',
+                data: JSON.stringify({
+                    EmGroupID: $("#EmGroupID").val()
+                }),
+                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                }
+            });
+        }
+
+        $("#Clear").click(function () {
+
+            $('#EmGroupID').val("");
+            $('#EmCode').val("");
+            $('#EmGroupName').val("");
+            $('#EmGroupNameEng').val("");
+            $('#EmGroupNote').val("");
+
+        });
+
+
+        </script>
+
+    }
+

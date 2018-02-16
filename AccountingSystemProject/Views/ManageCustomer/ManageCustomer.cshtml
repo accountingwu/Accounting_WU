@@ -1,0 +1,1298 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "ManageCustomer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <style type="text/css">
+        .DetailsRequired {
+            font-size: 15px;
+            color: red;
+        }
+
+        .bg {
+            background-color: #ffffff;
+            border: 1px solid #4d79ff;
+        }
+
+        #head {
+            text-align: right;
+        }
+
+        tr {
+            border-bottom: 1px solid #4d79ff;
+        }
+
+            tr:nth-child(even) {
+                background-color: #e6eeff;
+            }
+
+        th {
+            background-color: #3c8dbc;
+        }
+
+        a.my-class:link {
+            color: #1a1a1a
+        }
+
+        a.my-class:visited {
+            color: #1a1a1a
+        }
+
+        .textinput {
+            float: left;
+            width: 100%;
+            min-height: 75px;
+            outline: none;
+            resize: none;
+            border: 1px solid grey;
+        }
+    </style>
+    <div class="container-fluid">
+        <h3 class="box-title">เพิ่ม/แก้ไขรายชื่อลูกหนี้</h3>
+    </div>
+    <!-- Tab Menu -->
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#page1">หน้าที่ 1</a></li>
+        <li><a data-toggle="tab" href="#page2">หน้าที่ 2</a></li>
+        <li><a data-toggle="tab" href="#page3">หน้าที่ 3</a></li>
+        <li><a data-toggle="tab" href="#page4">หน้าที่ 4</a></li>
+    </ul>
+    <div class="btn-group" style="float: right">
+        <input type="submit" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="Clear" />
+        <input type="button" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+        <input type="button" value="ลบ" class="btn btn-primary btn-sm" id="Delete" />
+        <input type="submit" value="ค้นหา" class="btn btn-primary btn-sm" id="Find" />
+        <input type="submit" value="ดูตัวอย่าง" class="btn btn-primary btn-sm" id="Preview" />
+        <input type="submit" value="พิมพ์" class="btn btn-primary btn-sm" id="Print" />
+    </div>
+    <br />
+    <br />
+    <form action="" id="FormCustomer">
+        <!-- Content Tab -->
+        <div class="tab-content">
+
+            <!-- หน้าที่ 1 -->
+            <div id="page1" class="tab-pane fade in active">
+                <div class="container-fluid">
+                    <div class="bg">
+                        <div class="container-fluid">
+                            <br />
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-3">
+                                    <div>รหัส</div>
+                                    <input type="hidden" name="cust_id" id="cust_id" value="" />
+                                    <input class="form-control" placeholder="รหัส" name="cuscode" id="cuscode" required />
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5">
+                                    <div>ชื่อภาษา</div>
+                                    <input class="form-control" placeholder="ชื่อภาษา" name="cusname1" id="cusname1" required />
+                                </div>
+                                <div class="col-md-2">
+                                    <div>รหัสไปรษณีย์</div>
+                                    <input class="form-control" placeholder="รหัสไปรษณีย์" name="cuszip" id="cuszip" />
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5">
+                                    <div>ชื่อย่อภาษา</div>
+                                    <input class="form-control" placeholder="ชื่อย่อภาษา" name="cusname11" id="cusname11" />
+                                </div>
+                                <div class="col-md-4">
+                                    <div>โทรศัพท์</div>
+                                    <input class="form-control" placeholder="โทรศัพท์" name="custel" id="custel" />
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5">
+                                    <div>ชื่อภาษา2</div>
+                                    <input class="form-control" placeholder="ชื่อภาษา2" name="cusname2" id="cusname2" />
+                                </div>
+                                <div class="col-md-4">
+                                    <div>Fax</div>
+                                    <input class="form-control" placeholder="Fax" name="cusfax" id="cusfax" />
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5">
+                                    <div>ชื่อย่อภาษา2</div>
+                                    <input class="form-control" placeholder="ชื่อย่อภาษา2" name="cusname21" id="cusname21" />
+                                </div>
+                                <div class="col-md-4">
+                                    <div>โทรศัพท์มือถือ</div>
+                                    <input class="form-control" placeholder="โทรศัพท์" name="cusmobile" id="cusmobile" />
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5">
+                                    <div>ที่อยู่ภาษาไทย</div>
+                                    <textarea class="textinput" rows="4" cols="60" id="cusaddress1" placeholder="ที่อยู่ภาษาไทย"></textarea>
+                                </div>
+                                <div class="col-md-4">
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            สถานะลูกหนี้
+                                        </div>
+                                        <div class="col-md-8" id="status" name="status">
+                                            <input type="radio" name="Active" value="True"> Active &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <input type="radio" name="Active" value="False"> Inactive
+                                        </div>
+                                    </div>
+                                    <br /><br />
+                                    <div class="row">
+                                        <div class="col-md-5">วันที่ Inactive</div>
+                                        <div class="col-md-7">
+                                            <input class="form-control" type="date" name="datecontact" id="datecontact" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5">
+                                    <div>ที่อยู่ภาษา2</div>
+                                    <textarea class="textinput" rows="4" cols="60" id="cusaddress2" placeholder="ที่อยู่ภาษา2"></textarea>
+                                </div>
+                                <div class="col-md-4">
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-5">ระยะเวลาในการจัดซื้อ</div>
+                                        <div class="col-md-5">
+                                            <input style="text-align:center" class="form-control" name="dateinact" id="dateinact" placeholder="0" />
+                                        </div>
+                                        <div class="col-md-2">
+                                            วัน
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+                </div><br />
+            </div>
+
+            <!-- หน้าที่ 2 -->
+            <div id="page2" class="tab-pane fade">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-4">
+                            <div>เลขที่บัตรประจำตัวประชาชน</div>
+                            <input class="form-control" name="p_id" id="p_id" />
+                        </div>
+                        <div class="col-md-2">
+                            <div>รหัส</div>
+                            <input class="form-control" name="cuszip" id="cuszip" />
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-4">
+                            <div>เลขที่ผู้เสียภาษี</div>
+                            <input class="form-control" name="t_id" id="t_id" />
+                        </div>
+                        <div class="col-md-2">
+                            <div>เป็นนิติบุคคล</div>
+                            <select name="niti" id="niti" class="form-control">
+                                <option>Y</option>
+                                <option>N</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <div>หมายเหตุใบรับวางบิล</div>
+                            <input class="form-control" name="notebill" id="notebill" />
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-2">
+                            <div>กลุ่มลูกหนี้</div>
+                            <select name="gcusid" class="form-control" id="gcusid">
+                                @foreach (var getgroupcustomer in ViewBag.getgroupcustomer)
+                                {
+                                    <option value="@getgroupcustomer.gcusid">@getgroupcustomer.gcusname1 </option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-6">
+                            <div>หมายเหตุภาษา</div>
+                            <input class="form-control" name="noteth" id="noteth" />
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-6">
+                            <div>หมายเหตุภาษา2</div>
+                            <input class="form-control" name="noteen" id="noteen" />
+                        </div>
+                    </div>
+                    <br />
+
+                    <b>ที่อยู่ที่ใช้ติดต่อ</b>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-4">
+                            <div>ที่อยู่ภาษาไทย</div>
+                            <textarea class="textinput" rows="3" cols="60" id="contaddress1" placeholder="ที่อยู่ภาษาไทย"></textarea>
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-4">
+                            <div>ที่อยู่ภาษา2</div>
+                            <textarea class="textinput" rows="3" cols="60" id="contaddress2" placeholder="ที่อยู่ภาษา2"></textarea>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+
+            <!-- หน้าที่ 3 -->
+            <div id="page3" class="tab-pane fade container-fluid">
+
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4">
+                        <div>เขตลูกหนี้</div>
+                        <select name="cuszid" class="form-control" id="cuszid">
+                            <option></option>
+                            @foreach (var getcustomerzone in ViewBag.getcustomerzone)
+                            {
+                                <option value="@getcustomerzone.cuszid">@getcustomerzone.cuszname1</option>
+                            }
+                        </select>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div>ชื่อผู้ติดต่อ</div>
+                        <input class="form-control" id="contname" name="contname" placeholder="ชื่อผู้ติดต่อ" />
+                    </div>
+                </div>
+                <br />
+
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-md-4">
+                        <div>ประเภทเครดิต</div>
+                        <select name="credittermtype" class="form-control" id="credittermtype">
+                            <option></option>
+                            @foreach (var getcredittermtype in ViewBag.getcredittermtype)
+                            {
+                                <option value="@getcredittermtype.crtypeid">@getcredittermtype.crtypename </option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <div>รหัสลูกหนี้ที่ใช้ออกใบ</div>
+                        <div class="input-group">
+                            <input class="form-control" id="cusidinvoice" name="cusidinvoice" placeholder="รหัสลูกหนี้ที่ใช้ออกใบ" />
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-search" data-toggle="modal" data-target="#FineDebtor"></i></span>
+                            <div class="modal fade" id="FineDebtor" role="dialog">
+                                <div class="modal-dialog" style="width: 80%; height: 100%">
+                                    @*Modal content*@
+                                    <div class="modal-content">
+                                        <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title"><b>ค้นหาลูกหนี้ที่ใช้ออกใบ</b></h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <br />
+                                                    <div class="col-sm-2" style="text-align:right">ค้น :</div>
+                                                    <div class="col-sm-4">
+                                                        <select name="selectUnit" class="form-control">
+                                                            <option>ทั้งหมด</option>
+                                                            <option>รหัสลูกหนี้ที่ใช้ออกใบ</option>
+                                                            <option>ชื่อลูกหนี้ที่ใช้ออกใบภาษาไทย</option>
+                                                            <option>ชื่อลูกหนี้ที่ใช้ออกใบภาษาไทย 2</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input placeholder="คำค้น" name="word" id="word" class="form-control" />
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <input type="button" value="ค้นหา" class="btn btn-primary" id="SearchUnit" />
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div class=" table-responsive table-hover" id="CustomerInvoice">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>รหัสลูกหนี้ที่ใช้ออกใบ</th>
+                                                                <th>ชื่อลูกหนี้ที่ใช้ออกใบภาษาไทย</th>
+                                                                <th>ชื่อลูกหนี้ที่ใช้ออกใบภาษาไทย 2</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var CustomerInvoice in ViewBag.getcustomerinvoice)
+                                                            {
+                                                                <tr>
+                                                                    <td data-id="@CustomerInvoice.cust_id" data-dismiss="modal">
+                                                                        @CustomerInvoice.cuscode
+                                                                    </td>
+                                                                    <td data-dismiss="modal">
+                                                                        @CustomerInvoice.cusname1
+                                                                    </td>
+                                                                    <td data-dismiss="modal">
+                                                                        @CustomerInvoice.cusname11
+                                                                    </td>
+
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <br />
+                        <input class="form-control" id="cusnameinvoice" name="cusnameinvoice" placeholder="ชื่อลูกหนี้ที่ใช้ออกใบ" />
+                    </div>
+                </div><br />
+
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-md-4">
+                        <div>เครดิตเทอม</div>
+                        <input class="form-control" id="credittermday" name="credittermday" placeholder="0" />
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div>รหัสลูกหนี้ที่จะเก็บ</div>
+                        <div class="input-group">
+                            <input class="form-control" id="cusidbill" name="cusidbill" placeholder="รหัสลูกหนี้ที่จะเก็บ" />
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-search" data-toggle="modal" data-target="#FineAccountsReceivable"></i></span>
+                            <div class="modal fade" id="FineAccountsReceivable" role="dialog">
+                                <div class="modal-dialog" style="width: 80%; height: 100%">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title"><b>ค้นหาลูกหนี้ที่จะเก็บ</b></h4>
+                                            </div>
+                                            <div class="row">
+                                                <br />
+                                                <div class="col-sm-2" style="text-align:right">ค้น :</div>
+                                                <div class="col-sm-4">
+                                                    <select name="selectUnit" class="form-control">
+                                                        <option>ทั้งหมด</option>
+                                                        <option>รหัสลูกหนี้ที่จะเก็บ</option>
+                                                        <option>ชื่อลูกหนี้ที่จะเก็บภาษาไทย</option>
+                                                        <option>ชื่อลูกหนี้ที่จะเก็บภาษา 2</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <input placeholder="คำค้น" name="word" id="word" class="form-control" />
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <input type="button" value="ค้นหา" class="btn btn-primary" id="SearchUnit" />
+                                                </div>
+                                            </div><br />
+                                            <div class=" table-responsive table-hover" id="Cusbill">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>รหัสลูกหนี้ที่จะเก็บ</th>
+                                                            <th>ชื่อลูกหนี้ที่จะเก็บภาษาไทย</th>
+                                                            <th>ชื่อลูกหนี้ที่จะเก็บภาษา 2</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var getCusbill in ViewBag.getCusbill)
+                                                        {
+                                                            <tr>
+                                                                <td data-id="@getCusbill.cust_id" data-dismiss="modal">
+                                                                    @getCusbill.cuscode
+                                                                </td>
+                                                                <td data-dismiss="modal">
+                                                                    @getCusbill.cusname1
+                                                                </td>
+                                                                <td data-dismiss="modal">
+                                                                    @getCusbill.cusname11
+                                                                </td>
+
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <br />
+                        <input class="form-control" id="cusnamebill" name="cusnamebill" placeholder="ชื่อลูกหนี้ที่จะเก็บ" />
+                    </div>
+                </div><br />
+
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-md-4">
+                        <div>วงเงินเครดิต</div>
+                        <input class="form-control" id="creditmoney" name="creditmoney" placeholder="0.0000" />
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div>รหัสลูกหนี้ที่ใช้ส่งของ</div>
+                        <div class="input-group">
+                            <input class="form-control" id="cusidsend" name="cusidsend" placeholder="รหัสลูกหนี้ที่ใช้ส่งของ" />
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-search" data-toggle="modal" data-target="#FineReceivable"></i></span>
+                            <div class="modal fade" id="FineReceivable" role="dialog">
+                                <div class="modal-dialog" style="width: 80%; height: 100%">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title"><b>ค้นหาลูกหนี้ที่ใช้ส่งของ</b></h4>
+                                            </div>
+                                            <div class="row">
+                                                <br />
+                                                <div class="col-sm-2" style="text-align:right">ค้น :</div>
+                                                <div class="col-sm-4">
+                                                    <select name="selectUnit" class="form-control">
+                                                        <option>ทั้งหมด</option>
+                                                        <option>รหัสลูกหนี้ที่ใช้ส่งของ</option>
+                                                        <option>ชื่อลูกหนี้ที่ใช้ส่งของภาษาไทย</option>
+                                                        <option>ชื่อลูกหนี้ที่ใช้ส่งของภาษา 2</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <input placeholder="คำค้น" name="word" id="word" class="form-control" />
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <input type="button" value="ค้นหา" class="btn btn-primary" id="SearchUnit" />
+                                                </div>
+                                            </div><br />
+                                            <div class=" table-responsive table-hover" id="Customersend">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>รหัสลูกหนี้ที่ใช้ส่งของ</th>
+                                                            <th>ชื่อลูกหนี้ที่ใช้ส่งของภาษาไทย</th>
+                                                            <th>ชื่อลูกหนี้ที่ใช้ส่งของภาษา 2</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var getCustomersend in ViewBag.getCustomersend)
+                                                        {
+                                                            <tr>
+                                                                <td data-id="@getCustomersend.cust_id" data-dismiss="modal">
+                                                                    @getCustomersend.cuscode
+                                                                </td>
+                                                                <td data-dismiss="modal">
+                                                                    @getCustomersend.cusname1
+                                                                </td>
+                                                                <td data-dismiss="modal">
+                                                                    @getCustomersend.cusname11
+                                                                </td>
+
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <br />
+                        <input class="form-control" id="cusnamesend" name="cusnamesend" placeholder="ชื่อลูกหนี้ที่ใช้ส่งของ" />
+                    </div>
+                </div><br />
+
+                @*<div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-md-2">
+                            <div>พนักงานขาย</div>
+                            <div class="input-group">
+                                <input type="hidden" name="saleid" id="saleid" value="" />
+                                <input class="form-control" id="salecode" name="salecode" placeholder="พนักงานขาย" />
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-search" data-toggle="modal" data-target="#FineSalesPerson"></i></span>
+                                <div class="modal fade" id="FineSalesPerson" role="dialog">
+                                    <div class="modal-dialog" style="width: 80%; height: 100%">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title"><b>ค้นหาพนักงานขาย</b></h4>
+                                                </div>
+                                                <div class="row">
+                                                    <br />
+                                                    <div class="col-sm-2" style="text-align:right">ค้น :</div>
+                                                    <div class="col-sm-4">
+                                                        <select name="selectUnit" class="form-control">
+                                                            <option>ทั้งหมด</option>
+                                                            <option>รหัสพนักงานขาย</option>
+                                                            <option>ชื่อพนักงานขายภาษาไทย</option>
+                                                            <option>ชื่อพนักงานขายภาษา 2</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input placeholder="คำค้น" name="word" id="word" class="form-control" />
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <input type="button" value="ค้นหา" class="btn btn-primary" id="SearchUnit" />
+                                                    </div>
+                                                </div><br />
+                                                <div class=" table-responsive table-hover" id="employee">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>รหัสพนักงานขาย</th>
+                                                                <th>ชื่อพนักงานขายภาษาไทย</th>
+                                                                <th>ชื่อพนักงานขายภาษา 2</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var getemployee in ViewBag.getemployee)
+                                                            {
+                                                                <tr>
+                                                                    <td data-id="@getemployee.eid" data-dismiss="modal">
+                                                                        @getemployee.ecode
+                                                                    </td>
+                                                                    <td data-dismiss="modal">
+                                                                        @getemployee.ename1
+                                                                    </td>
+                                                                    <td data-dismiss="modal">
+                                                                        @getemployee.ename2
+                                                                    </td>
+
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <br />
+
+                            <input class="form-control" id="salename" name="salename" placeholder="ชื่อพนักงานขาย" />
+                        </div>
+
+                        <div class="col-sm-2">
+                            <div>รหัสผู้ขนส่ง</div>
+                            <div class="input-group">
+                                <input class="form-control" id="salePersonCode" name="salePersonCode" placeholder="รหัสผู้ขนส่ง" />
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-search" data-toggle="modal" data-target="#FineTransporter"></i></span>
+                                <div class="modal fade" id="FineTransporter" role="dialog">
+                                    <div class="modal-dialog" style="width: 80%; height: 100%">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title"><b>ค้นหาผู้ขนส่ง</b></h4>
+                                                </div>
+                                                <div class="row">
+                                                    <br />
+                                                    <div class="col-sm-2" style="text-align:right">ค้น :</div>
+                                                    <div class="col-sm-4">
+                                                        <select name="selectUnit" class="form-control">
+                                                            <option>ทั้งหมด</option>
+                                                            <option>รหัสผู้ขนส่ง</option>
+                                                            <option>ชื่อผู้ขนส่งภาษาไทย</option>
+                                                            <option>ชื่อผู้ขนส่งภาษา 2</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input placeholder="คำค้น" name="word" id="word" class="form-control" />
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <input type="button" value="ค้นหา" class="btn btn-primary" id="SearchUnit" />
+                                                    </div>
+                                                </div><br />
+                                                <div class=" table-responsive table-hover">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>รหัสผู้ขนส่ง</th>
+                                                                <th>ชื่อผู้ขนส่งภาษาไทย</th>
+                                                                <th>ชื่ผู้ขนส่งภาษา 2</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var getemployee in ViewBag.getemployee)
+                                                            {
+                                                                <tr>
+                                                                    <td data-id="@getemployee.eid" data-dismiss="modal">
+                                                                        @getemployee.ecode
+                                                                    </td>
+                                                                    <td data-dismiss="modal">
+                                                                        @getemployee.ename1
+                                                                    </td>
+                                                                    <td data-dismiss="modal">
+                                                                        @getemployee.ename2
+                                                                    </td>
+
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <br />
+                            <input class="form-control" id="salePersonName" name="salePersonName" placeholder="ชื่อผู้ขนส่ง" />
+                        </div>
+                        <br />
+                    </div>*@
+
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-md-4">
+                        <div>ชื่อผู้ติดต่อ/ประสาน</div>
+                        <input class="form-control" id="contname" name="contname" placeholder="ชื่อผู้ติดต่อ/ประสาน" />
+                    </div>
+
+                    <div class="col-md-2">
+                        <div>รหัสนโยบายราคา</div>
+                        <input class="form-control" id="ncostcode" name="ncostcode" placeholder="รหัสนโยบายราคา" />
+                    </div>
+                    <div class="col-sm-4">
+                        <br />
+                        <input class="form-control" id="salePersonName" name="salePersonName" placeholder="ชื่อนโยบายราคา" />
+                    </div>
+                </div><br />
+
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2">
+                        <div>Blacklist</div>
+                        <select name="blacklist" class="form-control">
+                            <option value="Y">Yes</option>
+                            <option value="N">No</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <div>สาเหตุ</div>
+                        <input class="form-control" id="reason" name="reason" placeholder="สาเหตุ" />
+                    </div>
+                    <div class="col-sm-2">
+                        <div>รหัสนโยบายส่วน</div>
+                        <input class="form-control" id="ncostcode" name="ncostcode" placeholder="รหัสนโยบายส่วน" />
+                    </div>
+                    <div class="col-sm-4">
+                        <br />
+                        <input class="form-control" id="policyName" name="policyName" placeholder="ชื่อนโยบายส่วน" />
+                    </div>
+                </div><br />
+
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4">
+                        <div>ใช้ราคาขายเกรด</div>
+                        <select name="grade" class="form-control">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+
+
+            </div>
+
+
+            <!-- หน้าที่ 4 -->
+            <div id="page4" class="tab-pane fade container-fluid">
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2">หมายเหตุ 1 :</div>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="note1" id="note1" />
+                    </div>
+                    <div class="col-sm-2">หมายเหตุ 2 :</div>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="note2" id="note2" />
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2">หมายเหตุ 3 :</div>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="note3" id="note3" />
+                    </div>
+                    <div class="col-sm-2">หมายเหตุ 4 :</div>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="note4" id="note4" />
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2">หมายเหตุ 5 :</div>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="note5" id="note5" />
+                    </div>
+                    <div class="col-sm-2">หมายเหตุ 6 :</div>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="note6" id="note6" />
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2">หมายเหตุ 7 :</div>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="note7" id="note7" />
+                    </div>
+                    <div class="col-sm-2">หมายเหตุ 8 :</div>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="note8" id="note8" />
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2">หมายเหตุ 9 :</div>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="note9" id="note9" />
+                    </div>
+                    <div class="col-sm-2">หมายเหตุ 10 :</div>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="note10" id="note10" />
+                    </div>
+                </div><br>
+            </div>
+
+        </div>
+    </form>
+    <div class="container-fluid">
+        <div class="table-responsive table-hover" id="Customer">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>@Html.ActionLink("รหัสลูกหนี้", "ManageCustomer", new { sortOrder = ViewBag.cuscode }, new { @class = "my-class" })</th>
+                        <th>@Html.ActionLink("ชื่อลูกหนี้", "ManageCustomer", new { sortOrder = ViewBag.cusname1 }, new { @class = "my-class" })</th>
+                        <th>@Html.ActionLink("ชื่อย่อลูกหนี้ 2", "ManageCustomer", new { sortOrder = ViewBag.cusname11 }, new { @class = "my-class" })</th>
+                        <th>@Html.ActionLink("สถานะ", "ManageCustomer", new { sortOrder = ViewBag.status }, new { @class = "my-class" })</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var cust in ViewBag.MyData)
+                    {
+                        <tr>
+
+                            <td data-id="@cust.cust_id">
+                                @cust.cuscode
+                            </td>
+                            <td>
+                                @cust.cusname1
+                            </td>
+                            <td>
+                                @cust.cusname11
+                            </td>
+                            <td>
+                                @cust.status
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("ManageCustomer", new { page, sortOrder = ViewBag.sortOrder }))</div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+
+    @Scripts.Render("~/Scripts/Validate/jquery.validate.js")
+    @Scripts.Render("~/Scripts/Validate/FormProductGroup.js")
+    <script>
+        $("div#Customer table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableCustomer',
+                    type: 'post',
+                    data: {
+                        'id': id
+
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#cust_id').val(data.cust_id);
+                        $('#cuscode').val(data.cuscode);
+                        $('#cusname1').val(data.cusname1);
+                        $('#cusname11').val(data.cusname11);
+                        $('#cusname2').val(data.cusname2);
+                        $('#cusname21').val(data.cusname21);
+                        $('#cusaddress1').val(data.cusaddress1);
+                        $('#cusaddress2').val(data.cusaddress2);
+                        $('#cuszip').val(data.cuszip);
+                        $('#custel').val(data.custel);
+                        $('#cusfax').val(data.cusfax);
+                        $('#cusmobile').val(data.cusmobile);
+                        //$('#datecontact').val(data.datecontact);
+                        //$('#dateinact').val(data.dateinact);
+                        $('#p_id').val(data.p_id);
+                        $('#t_id').val(data.t_id);
+                        $('#niti').val(data.niti);
+                        $('#acc_code').val(data.acc_code);
+                        $('#gcusid').val(data.gcusid);
+                        $('#contaddress1').val(data.contaddress1);
+                        $('#contaddress2').val(data.contaddress2);
+                        $('#contzip').val(data.contzip);
+                        $('#notebill').val(data.notebill);
+                        $('#noteth').val(data.noteth);
+                        $('#noteen').val(data.noteen);
+                        $('#cuszid').val(data.cuszid);
+                        $('#credittermtype').val(data.credittermtype);
+                        $('#credittermday').val(data.credittermday);
+                        $('#creditmoney').val(data.creditmoney);
+
+                        $('#saleid').val(data.saleid);
+                        if (data.saleid == "") {
+                            $('#salecode').val("");
+                            $('#salename').val("");
+                        } else {
+                            $('#salecode').val(data.ecode);
+                            $('#salename').val(data.ename1);
+                        }
+
+
+                        $('#contname').val(data.contname);
+                        $('#blacklist').val(data.blacklist);
+                        $('#reason').val(data.reason);
+                        $('#grade').val(data.grade);
+                        $('#conname').val(data.conname);
+
+                        $('#cusidinvoice').val(data.cusidinvoice);
+                        if (data.cusidinvoice == "") {
+                            $('#cusnameinvoice').val("");
+                        } else {
+                            $('#cusnameinvoice').val(data.cusname1);
+                        }
+
+                        $('#cusidbill').val(data.cusidbill);
+                        if (data.cusidbill == "") {
+                            $('#cusnamebill').val("");
+                        } else {
+                            $('#cusnamebill').val(data.cusname1);
+                        }
+
+
+                        $('#cusidsend').val(data.cusidsend);
+                        if (data.cusidsend == "") {
+                            $('#cusnamesend').val("");
+                        } else {
+                            $('#cusnamesend').val(data.cusname1)
+                        }
+
+
+                        $('#sendid').val(data.sendid);
+                        $('#emname').val(data.ename1);
+
+                        $('#ncostcode').val(data.ncostcode);
+                        $('#ndiscountcode').val(data.ndiscountcode);
+                        $('#discountlist').val(data.discountlist);
+                        $('#discountbill').val(data.discountbill);
+                        $('#note1').val(data.note1);
+                        $('#note2').val(data.note2);
+                        $('#note3').val(data.note3);
+                        $('#note4').val(data.note4);
+                        $('#note5').val(data.note5);
+                        $('#note6').val(data.note6);
+                        $('#note7').val(data.note7);
+                        $('#note8').val(data.note8);
+                        $('#note9').val(data.note9);
+                        $('#note10').val(data.note10);
+
+
+                        if (data.status == 'False') {
+                            //$('#status').val(False);
+                            $('#status').find(':radio[name=Active][value="False"]').prop('checked', true)
+                        }
+                        else {
+                            $('#status').find(':radio[name=Active][value="True"]').prop('checked', true)
+                        }
+                    }
+                });
+            } else {
+                $('#cust_id').val("");
+                $('#cuscode').val("");
+                $('#cusname1').val("");
+                $('#cusname11').val("");
+                $('#cusname2').val("");
+                $('#cusname21').val("");
+                $('#cusaddress1').val("");
+                $('#cusaddress2').val("");
+                $('#cuszip').val("");
+                $('#custel').val("");
+                $('#cusfax').val("");
+                $('#cusmobile').val("");
+                //$('#datecontact').val("");
+                //$('#dateinact').val("");
+                $('#status').val("");
+                $('#p_id').val("");
+                $('#t_id').val("");
+                $('#niti').val("");
+                $('#acc_code').val("");
+                $('#gcusid').val("");
+                $('#contaddress1').val("");
+                $('#contaddress2').val("");
+                $('#contzip').val("");
+                $('#notebill').val("");
+                $('#noteth').val("");
+                $('#noteen').val("");
+                $('#cuszid').val("");
+                $('#credittermtype').val("");
+                $('#credittermday').val("");
+                $('#creditmoney').val("");
+                $('#saleid').val("");
+                $('#contname').val("");
+                $('#blacklist').val("");
+                $('#reason').val("");
+                $('#grade').val("");
+                $('#conname').val("");
+                $('#cusidinvoice').val("");
+                $('#cusidbill').val("");
+                $('#cusidsend').val("");
+                $('#sendid').val("");
+                $('#ncostcode').val("");
+                $('#ndiscountcode').val("");
+                $('#discountlist').val("");
+                $('#discountbill').val("");
+                $('#note1').val("");
+                $('#note2').val("");
+                $('#note3').val("");
+                $('#note4').val("");
+                $('#note5').val("");
+                $('#note6').val("");
+                $('#note7').val("");
+                $('#note8').val("");
+                $('#note9').val("");
+                $('#note10').val("");
+                $('#ShippingDate').val("");
+
+
+            }
+        })
+
+        $("div#CustomerInvoice table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'FindPopCustomerInvoice',
+                    type: 'get',
+                    data: {
+                        'id': id
+
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#cusidinvoice').val(data.cuscode);
+                        $('#cusnameinvoice').val(data.cusname1);
+                    }
+                });
+            } else {
+                $('#cusidinvoice').val("");
+                $('#cusnameinvoice').val("");
+            }
+        })
+
+        $("div#Cusbill table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'FindPopCusbill',
+                    type: 'get',
+                    data: {
+                        'id': id
+
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#cusidbill').val(data.cuscode);
+                        $('#cusnamebill').val(data.cusname1);
+                    }
+                });
+            } else {
+                $('#cusidbill').val("");
+                $('#cusnamebill').val("");
+            }
+        })
+
+        $("div#Customersend table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'FindPopCustomersend',
+                    type: 'get',
+                    data: {
+                        'id': id
+
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#cusidsend').val(data.cuscode);
+                        $('#cusnamesend').val(data.cusname1);
+                    }
+                });
+            } else {
+                $('#cusidsend').val("");
+                $('#cusnamesend').val("");
+            }
+        })
+
+        $("div#employee table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'FindPopEmployee',
+                    type: 'get',
+                    data: {
+                        'id': id
+
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#saleid').val(data.eid);
+                        $('#salecode').val(data.ecode);
+                        $('#salename').val(data.ename1);
+                    }
+                });
+            } else {
+                $('#saleid').val("");
+                $('#salecode').val("");
+                $('#salename').val("");
+            }
+        })
+
+        $("#Save").on('click', function () {
+            if ($("#FormCustomer").valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveCustomer", "ManageCustomer")',
+                    data: JSON.stringify({
+                        cust_id: $("#cust_id").val(),
+                        cuscode: $("#cuscode").val(),
+                        cusname1: $("#cusname1").val(),
+                        cusname11: $("#cusname11").val(),
+                        cusname2: $("#cusname2").val(),
+                        cusname21: $("#cusname21").val(),
+                        cusaddress1: $("#cusaddress1").val(),
+                        cusaddress2: $("#cusaddress2").val(),
+                        cuszip: $("#cuszip").val(),
+                        custel: $("#custel").val(),
+                        cusfax: $("#cusfax").val(),
+                        cusmobile: $("#cusmobile").val(),
+                        datecontact: $("#datecontact").val(),
+                        dateinact: $("#dateinact").val(),
+                        status: $("#status").val(),
+                        p_id: $("#p_id").val(),
+                        t_id: $("#t_id").val(),
+                        niti: $("#niti").val(),
+                        acc_code: $("#acc_code").val(),
+                        gcusid: $("#gcusid").val(),
+                        contaddress1: $("#contaddress1").val(),
+                        contaddress2: $("#contaddress2").val(),
+                        contzip: $("#contzip").val(),
+                        notebill: $("#notebill").val(),
+                        noteth: $("#noteth").val(),
+                        noteen: $("#noteen").val(),
+                        cuszid: $("#cuszid").val(),
+                        credittermtype: $("#credittermtype").val(),
+                        credittermday: $("#credittermday").val(),
+                        creditmoney: $("#creditmoney").val(),
+                        saleid: $("#saleid").val(),
+                        contname: $("#contname").val(),
+                        blacklist: $("#blacklist").val(),
+                        reason: $("#reason").val(),
+                        grade: $("#grade").val(),
+                        conname: $("#conname").val(),
+                        cusidinvoice: $("#cusidinvoice").val(),
+                        cusidbill: $("#cusidbill").val(),
+                        cusidsend: $("#cusidsend").val(),
+                        sendid: $("#sendid").val(),
+                        ncostcode: $("#ncostcode").val(),
+                        ndiscountcode: $("#ndiscountcode").val(),
+                        discountlist: $("#discountlist").val(),
+                        discountbill: $("#discountbill").val(),
+                        note1: $("#note1").val(),
+                        note2: $("#note2").val(),
+                        note3: $("#note3").val(),
+                        note4: $("#note4").val(),
+                        note5: $("#note5").val(),
+                        note6: $("#note6").val(),
+                        note7: $("#note7").val(),
+                        note8: $("#note8").val(),
+                        note9: $("#note9").val(),
+                        note10: $("#note10").val(),
+                        ShippingDate: $("#ShippingDate").val(),
+                        ccode: "TBC",
+                        //bcode: $('#bcode').val()
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    success: function (response) {
+                        if (response == true){
+                        alert("บันทึกสำเร็จ");
+                        window.location.reload(true);
+                        } else {
+                            alert("รหัสลูกหนี้ซ้ำ");
+                        }
+                    }
+                })
+            }
+        });
+
+
+        $("#Delete").click(function () {
+            if ($("#FormCustomer").valid()) {
+
+                if (confirm('ยืนยันการลบ')) {
+                    Delete();
+                } else {
+                    return false;
+                }
+            }
+        });
+
+        function Delete() {
+            $.ajax({
+                url: '@Url.Action("DeleteCustomer", "ManageCustomer")',
+                type: 'post',
+                data: JSON.stringify({
+                    cust_id: $("#cust_id").val()
+                }),
+                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                }
+            });
+        }
+
+        $("#Clear").click(function () {
+
+            $('#cust_id').val("");
+            $('#cuscode').val("");
+            $('#cusname1').val("");
+            $('#cusname11').val("");
+            $('#cusname2').val("");
+            $('#cusname21').val("");
+            $('#cusaddress1').val("");
+            $('#cusaddress2').val("");
+            $('#cuszip').val("");
+            $('#custel').val("");
+            $('#cusfax').val("");
+            $('#cusmobile').val("");
+            $('#datecontact').val("");
+            $('#dateinact').val("");
+            $('#status').val("");
+            $('#p_id').val("");
+            $('#t_id').val("");
+            $('#niti').val("");
+            $('#acc_code').val("");
+            $('#gcusid').val("");
+            $('#contaddress1').val("");
+            $('#contaddress2').val("");
+            $('#contzip').val("");
+            $('#notebill').val("");
+            $('#noteth').val("");
+            $('#noteen').val("");
+            $('#cuszid').val("");
+            $('#credittermtype').val("");
+            $('#credittermday').val("");
+            $('#creditmoney').val("");
+            $('#saleid').val("");
+            $('#contname').val("");
+            $('#blacklist').val("");
+            $('#reason').val("");
+            $('#grade').val("");
+            $('#conname').val("");
+            $('#cusidinvoice').val("");
+            $('#cusidbill').val("");
+            $('#cusidsend').val("");
+            $('#sendid').val("");
+            $('#ncostcode').val("");
+            $('#ndiscountcode').val("");
+            $('#discountlist').val("");
+            $('#discountbill').val("");
+            $('#note1').val("");
+            $('#note2').val("");
+            $('#note3').val("");
+            $('#note4').val("");
+            $('#note5').val("");
+            $('#note6').val("");
+            $('#note7').val("");
+            $('#note8').val("");
+            $('#note9').val("");
+            $('#note10').val("");
+            $('#ShippingDate').val("");
+
+
+        });
+
+
+    </script>
+
+}
+

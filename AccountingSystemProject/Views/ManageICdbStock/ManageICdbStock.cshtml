@@ -1,0 +1,260 @@
+﻿
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "ManageICdbStock";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        text-align: right;
+    }
+
+    tr {
+        border-bottom: 1px solid #4d79ff;
+    }
+
+        tr:nth-child(even) {
+            background-color: #e6eeff;
+        }
+
+    th {
+        background-color: #3c8dbc;
+    }
+
+    a.my-class:link {
+        color: #1a1a1a
+    }
+
+    a.my-class:visited {
+        color: #1a1a1a
+    }
+</style>
+
+<div class="container-fluid ">
+    <h3>เพิ่ม/แก้ไขคลังสินค้า/วัตถุดิบ</h3>
+    <div class="table-responsive " id="Warehouse">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.ActionLink("รหัสคลังสินค้า/วัตถุดิบ", "ManageICdbStock", new { sortOrder = ViewBag.wcodeSortParm }, new { @class = "my-class" })
+                    </th>
+                    <th>
+                        @Html.ActionLink("ชื่อคลังสินค้า/วัตถุดิบภาษาไทย", "ManageICdbStock", new { sortOrder = ViewBag.wname1SortParm }, new { @class = "my-class" })
+                    </th>
+                    <th>
+                        @Html.ActionLink("ชื่อคลังสินค้า/วัตถุดิบภาษา 2", "ManageICdbStock", new { sortOrder = ViewBag.wname2SortParm }, new { @class = "my-class" })
+                    </th>
+                    <th>
+                        @Html.ActionLink("ชนิดคลัง", "ManageICdbStock", new { sortOrder = ViewBag.wtypeSortParm }, new { @class = "my-class" })
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var WarehouseModel in ViewBag.MyData)
+                {
+                    <tr>
+                        <td data-id="@WarehouseModel.bciid">
+                            @WarehouseModel.wcode
+                        </td>
+                        <td>
+                            @WarehouseModel.wname1
+                        </td>
+                        <td>
+                            @WarehouseModel.wname2
+                        </td>
+                        <td>
+                            @WarehouseModel.wtype
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div style="text-align: center">
+            @*<div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("ManageICdbStock", new { page, sortOrder = ViewBag.sortOrder }))</div>*@
+            <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("ManageICdbStock", new { page, sortOrder = ViewBag.sortOrder }))</div>
+        </div>
+    </div>
+    <br />
+</div>
+
+<div class="bg">
+    <div class="container-fluid">
+        <div class="btn-group" style="float: right">
+            <input type="button" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="Clear" />
+            <input type="button" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+            <input type="button" value="ลบ" class="btn btn-primary btn-sm" id="Delete" />
+            <input type="submit" value="ค้นหา" class="btn btn-primary btn-sm" id="Find" />
+            <input type="submit" value="ดูตัวอย่าง" class="btn btn-primary btn-sm" id="Preview" />
+            <input type="submit" value="พิมพ์" class="btn btn-primary btn-sm" id="Print" />
+        </div><br /><br /><br />
+        <form id="FormICdbStock" class="container-fluid">
+            <input type="hidden" name="bciid" id="bciid" value="" />
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2" id="head">สาขา : <font color="red">*</font></div>
+                <div class="col-sm-3">
+                    <select class="form-control" name="bcode" id="bcode">
+                        @{
+                            foreach (var branchModel in ViewBag.branch)
+                            {
+                                <option value="@branchModel.bcode">
+                                    @branchModel.bname1
+                                </option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-sm-2" id="head">ประเภทคลัง : <font color="red">*</font></div>
+                <div class="col-sm-3">
+                    <select class="form-control" name="wtype" id="wtype">
+                        @{
+                            foreach (var warehouseTypeModel in ViewBag.warehouseType)
+                            {
+                                <option value="@warehouseTypeModel.whtype_value">
+                                    @warehouseTypeModel.whtype_name
+                                </option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div><br />
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2" id="head">รหัสคลังสินค้า : <font color="red">*</font></div>
+                <div class="col-sm-3">
+                    <input class="form-control" id="wcode" name="wcode" placeholder="รหัสคลังสินค้า" />
+                </div>
+            </div><br />
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2" id="head">ชื่อคลังสินค้าภาษาไทย : <font color="red">*</font></div>
+                <div class="col-sm-5">
+                    <input class="form-control" id="wname1" name="wname1" placeholder="ชื่อคลังสินค้าภาษาไทย" />
+                </div>
+            </div><br />
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2" id="head">ชื่อคลังสินค้าภาษา 2 :</div>
+                <div class="col-sm-5">
+                    <input class="form-control" id="wname2" name="wname2" placeholder="ชื่อคลังสินค้าภาษา 2" />
+                </div>
+            </div><br />
+        </form><br />
+    </div>
+</div>
+
+@section scripts {
+
+    @Scripts.Render("~/Scripts/Validate/jquery.validate.js")
+    @Scripts.Render("~/Scripts/Validate/FormICdbStock.js")
+
+    <script>
+        $("div#Warehouse table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableWarehouse',
+                    type: 'post',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#bciid').val(data.bciid);
+                        $('#bcode').val(data.bcode);
+                        $('#wcode').val(data.wcode);
+                        $('#wname1').val(data.wname1);
+                        $('#wname2').val(data.wname2);
+                        $('#wtype').val(data.wtype);
+                    }
+                });
+            } else {
+                $('#bciid').val("");
+                $('#bcode').val("");
+                $('#wcode').val("");
+                $('#wname1').val("");
+                $('#wname2').val("");
+                $('#wtype').val("");
+            }
+        })
+
+        $("#Clear").click(function () {
+            $('#bciid').val("");
+            $('#bcode').val("");
+            $('#wcode').val("");
+            $('#wname1').val("");
+            $('#wname2').val("");
+            $('#wtype').val("");
+
+        });
+
+        $("#Save").on('click', function () {
+            if ($("#FormICdbStock").valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveWarehouse", "ManageICdbStock")',
+                    data: JSON.stringify({
+                        bciid: $("#bciid").val(),
+                        bcode: $('#bcode option:selected').val(),
+                        wcode: $("#wcode").val(),
+                        wname1: $("#wname1").val(),
+                        wname2: $("#wname2").val(),
+                        wtype: $('#wtype option:selected').val()
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    success: function (response) {
+                        if (response == true){
+                        alert("บันทึกสำเร็จ");
+                        window.location.reload(true);
+                        } else {
+                            alert("รหัสฝ่ายซ้ำ");
+                        }
+                    }
+                })
+            }
+        });
+
+        $("#Delete").click(function () {
+            if ($("#FormICdbStock").valid()) {
+
+                if (confirm('ยืนยันการลบ')) {
+                    Delete();
+                } else {
+                    return false;
+                }
+            }
+        });
+
+        function Delete() {
+            $.ajax({
+                url: '@Url.Action("DeleteWarehouse", "ManageICdbStock")',
+                type: 'post',
+                data: JSON.stringify({
+                    bciid: $("#bciid").val()
+                }),
+                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                }
+            });
+        }
+    </script>
+}

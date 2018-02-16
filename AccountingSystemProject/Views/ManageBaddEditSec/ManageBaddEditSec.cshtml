@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "ManageBaddEditSec";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+
+<div class="container-fluid ">
+    <h3>เพิ่ม/แก้ไข รายชื่อแผนก</h3>
+    <div class="table-responsive table-hover" id="BaddEditSec">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>รหัสแผนก</th>
+                    <th>ชื่อแผนก</th>
+                    <th>ชื่อภาษา 2</th>
+                </tr>
+            </thead>
+            @*<tbody>
+                    @foreach (var busi in Model){
+                    <tr>
+                        <td data-id="@busi.BusiTypeID">
+                            @Html.DisplayFor(modelItem => busi.BusiTypeCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => busi.BusiTypeName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => busi.BusiTypeNameEng)
+                        </td>
+
+                    </tr>
+                }
+                     </tbody>*@
+        </table>
+    </div>
+</div>
+<br />
+
+<div class="container-fluid">
+    <div class="bg">
+        <div class="btn-group" style="float: right">
+            <input type="submit" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="new" />
+            <input type="submit" value="เพิ่ม" class="btn btn-primary btn-sm" id="Save" />
+            <input type="submit" value="ลบข้อมูล" class="btn btn-primary btn-sm" id="Delete" />
+            <input type="submit" value="ค้นหา" class="btn btn-primary btn-sm" id="Find" />
+            <input type="submit" value="Refresh" class="btn btn-primary btn-sm" id="Refresh" />
+            <input type="submit" value="Preview" class="btn btn-primary btn-sm" id="Preview" />
+            <input type="submit" value="พิมพ์" class="btn btn-primary btn-sm" id="Print" />
+        </div>
+        <br /><br /><br />
+
+
+
+                    <form action="" id="submit">
+                        <input type="hidden" name="BaddEditSecID" id="BaddEditSecID" value="" />
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-2" id="head">รหัสแผนก : </div>
+                            <div class="col-md-4" id="head">
+                                <input class="form-control" placeholder="รหัสแผนก" name="BaddEditSecCode" ID="BaddEditSecCode" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-2" id="head">ชื่อแผนก : </div>
+                            <div class="col-md-4" id="head">
+                                <input class="form-control" placeholder="ชื่อแผนก" name="BaddEditSecName" ID="BaddEditSecName" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-2" id="head">ชื่อภาษา2 : </div>
+                            <div class="col-md-4" id="head">
+                                <input class="form-control" placeholder="ชื่อภาษา2" name="BaddEditSecNameEng" ID="BaddEditSecNameEng" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-2" id="head">ฝ่าย : </div>
+                            <div class="col-md-4" id="head">
+                                <select class="form-control" runat="server" id="DepartName">
+                                    <option></option>
+                                    <option value="ซ่อมบำรุง">ซ่อมบำรุง</option>
+                                    <option value="การเงิน">การเงิน</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+        <br />
+        <br />
+    </div>
+</div>
+
+
+

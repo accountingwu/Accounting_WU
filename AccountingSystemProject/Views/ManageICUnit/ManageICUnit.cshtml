@@ -1,0 +1,234 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "ManageICUnit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: #ffffff;
+        border: 1px solid #4d79ff;
+    }
+
+    #head {
+        text-align: right;
+    }
+
+    tr {
+        border-bottom: 1px solid #4d79ff;
+    }
+
+        tr:nth-child(even) {
+            background-color: #e6eeff;
+        }
+
+    th {
+        background-color: #3c8dbc;
+    }
+
+    a.my-class:link {
+        color: #1a1a1a
+    }
+
+    a.my-class:visited {
+        color: #1a1a1a
+    }
+</style>
+
+
+<div class="container-fluid">
+    <h3>เพิ่ม/แก้ไข หน่วยนับ</h3>
+    <div class="table-responsive table-hover" id="unit">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@Html.ActionLink("รหัสหน่วยนับ", "ManageICUnit", new { sortOrder = ViewBag.ucode }, new { @class = "my-class" })</th>
+                    <th>@Html.ActionLink("ชื่อหน่วยนับ", "ManageICUnit", new { sortOrder = ViewBag.uname1 }, new { @class = "my-class" })</th>
+                    <th>@Html.ActionLink("ชื่อภาษา 2", "ManageICUnit", new { sortOrder = ViewBag.uname2 }, new { @class = "my-class" })</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var unit in ViewBag.MyData)
+                {
+                <tr>
+                    <td data-id="@unit.uid">
+                        @unit.ucode
+                    </td>
+                    <td>
+                        @unit.uname1
+                    </td>
+                    <td>
+                        @unit.uname2
+                    </td>
+
+                </tr>
+                }
+            </tbody>
+        </table>
+        <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("ManageICUnit", new { page , sortOrder = ViewBag.sortOrder }))</div>
+    </div>
+    <br />
+</div>
+
+
+
+<div class="container-fluid">
+    <div class="bg">
+        <div class="btn-group" style="float: right">
+            <input type="button" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="Clear" />
+            <input type="button" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+            <input type="button" value="ลบ" class="btn btn-primary btn-sm" id="Delete" />
+            <input type="submit" value="ค้นหา" class="btn btn-primary btn-sm" id="Find" />
+            <input type="submit" value="ดูตัวอย่าง" class="btn btn-primary btn-sm" id="Preview" />
+            <input type="submit" value="พิมพ์" class="btn btn-primary btn-sm" id="Print" />
+        </div>
+        <br /><br /><br />
+
+        <div class="container-fluid">
+            <form action="" id="FormUnit">
+                <input type="hidden" name="uid" id="uid" value="" />
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2" id="head">รหัสหน่วยนับ : <font color="red">*</font></div>
+                    <div class="col-md-4" id="head">
+                        <input class="form-control" placeholder="ตัวอย่าง ก-001, A-001, 123, " name="ucode" ID="ucode" />
+                    </div>
+                </div>
+                <br />
+
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2" id="head">ชื่อภาษาไทย : <font color="red">*</font></div>
+                    <div class="col-md-4" id="head">
+                        <input class="form-control" placeholder="ชื่อภาษาไทย" name="uname1" ID="uname1" />
+                    </div>
+                </div>
+                <br />
+
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2" id="head">ชื่อภาษา 2 : </div>
+                    <div class="col-md-4" id="head">
+                        <input class="form-control" placeholder="ชื่อภาษา 2" name="uname2" ID="uname2" />
+                    </div>
+                </div>
+                <br />
+            </form>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+
+
+
+@section scripts {
+
+    @Scripts.Render("~/Scripts/Validate/jquery.validate.js")
+    @Scripts.Render("~/Scripts/Validate/FormUnit.js")
+    <script>
+        $("div#unit table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableUnit',
+                    type: 'post',
+                    data: {
+                        'id': id
+
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#uid').val(data.uid);
+                        $('#ucode').val(data.ucode);
+                        $('#uname1').val(data.uname1);
+                        $('#uname2').val(data.uname2);
+                    }
+                });
+            } else {
+                $('#uid').val("");
+                $('#ucode').val("");
+                $('#uname1').val("");
+                $('#uname2').val("");
+            }
+        })
+
+        $("#Save").on('click', function () {
+            if ($("#FormUnit").valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveUnit", "ManageICUnit")',
+                    data: JSON.stringify({
+                        uid: $("#uid").val(),
+                        ucode: $("#ucode").val(),
+                        uname1: $("#uname1").val(),
+                        uname2: $("#uname2").val(),
+                        grpcountstock: "0",
+                        ccode: "TBC",
+                        //bcode: $('#bcode').val()
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    success: function (response) {
+                        if (response == true){
+                        alert("บันทึกสำเร็จ");
+                        window.location.reload(true);
+                        } else {
+                            alert("รหัสกลุ่มสินค้าซ้ำ");
+                        }
+                    }
+                })
+            }
+        });
+
+
+        $("#Delete").click(function () {
+            if ($("#FormUnit").valid()) {
+
+                if (confirm('ยืนยันการลบ')) {
+                    Delete();
+                } else {
+                    return false;
+                }
+            }
+        });
+
+        function Delete() {
+            $.ajax({
+                url: '@Url.Action("DeleteUnit", "ManageICUnit")',
+                type: 'post',
+                data: JSON.stringify({
+                    uid: $("#uid").val()
+                }),
+                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                }
+            });
+        }
+
+        $("#Clear").click(function () {
+
+            $('#uid').val("");
+            $('#ucode').val("");
+            $('#uname1').val("");
+            $('#uname2').val("");
+
+
+        });
+
+
+    </script>
+
+}

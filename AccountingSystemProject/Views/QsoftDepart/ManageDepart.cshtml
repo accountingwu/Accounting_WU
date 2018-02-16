@@ -1,0 +1,238 @@
+﻿@using AccountingSystemProject.Models
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "ManageDepart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+<div class="container-fluid ">
+    <h3>เพิ่ม/แก้ไขรหัสฝ่าย</h3>
+    <div class="table-responsive table-hover" id="depart">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>รหัสฝ่าย</th>
+                    <th>ชื่อฝ่าย</th>
+                    <th>ชื่อภาษา2</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var DepartModel in ViewBag.MyData)
+                {
+                    <tr>
+                        <td data-id="@DepartModel.d_id">
+                            @DepartModel.dcode
+                        </td>
+                        <td>
+                            @DepartModel.dname1
+                        </td>
+                        <td>
+                            @DepartModel.dname2
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("ManageDepart", new { page }))</div>
+    </div>
+    <br />
+</div>
+
+
+<div class="container-fluid">
+    <div class="bg">
+
+        <div class="btn-group" style="float: right">
+            <input type="button" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="Clear" />
+            <input type="button" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+            <input type="button" value="ลบ" class="btn btn-primary btn-sm" id="Delete" />
+            <input type="submit" value="ค้นหา" class="btn btn-primary btn-sm" id="Find" />
+            <input type="submit" value="ดูตัวอย่าง" class="btn btn-primary btn-sm" id="Preview" />
+            <input type="submit" value="พิมพ์" class="btn btn-primary btn-sm" id="Print" />
+        </div>
+        <br /><br /><br />
+
+
+
+        <form action="" id="FormDepart">
+            <input type="hidden" name="d_id" id="d_id" value="" />
+            <input type="hidden" name="ccode" id="ccode" value="" />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">รหัสแหล่งข้อมูลลูกค้า : <font color="red">*</font></div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="รหัสแหล่งข้อมูลลูกค้า" name="dcode" ID="dcode" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">ชื่อแหล่งข้อมูลลูกค้า : <font color="red">*</font></div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อแหล่งข้อมูลลูกค้า" name="dname1" ID="dname1" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">ชื่อภาษา2 : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อภาษา2" name="dname2" ID="dname2" />
+                </div>
+            </div>
+            <br />
+        </form>
+    </div>
+</div>
+<br />
+<br />
+
+
+
+@section scripts {
+
+    @Scripts.Render("~/Scripts/Validate/jquery.validate.js")
+    @Scripts.Render("~/Scripts/Validate/FormDepart.js")
+
+    <script>
+
+
+
+        $("div#depart table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableDepart',
+                    type: 'post',
+                    data: {
+                        'id': id
+                        
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#d_id').val(data.d_id);                        
+                        $('#dcode').val(data.dcode);
+                        $('#dname1').val(data.dname1);
+                        $('#dname2').val(data.dname2);
+                    }
+                });
+            } else {
+                $('#d_id').val("");
+                $('#dcode').val("");
+                $('#dname1').val("");
+                $('#dname2').val("");
+            }
+        })
+
+        $("#Save").on('click', function () {
+            if ($("#FormDepart").valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveDepart", "QsoftDepart")',
+                    data: JSON.stringify({
+                        d_id: $("#d_id").val(),
+                        dcode: $("#dcode").val(),
+                        dname1: $("#dname1").val(),
+                        dname2: $("#dname2").val(),
+                        ccode: "TBC"
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    success: function (response) {
+                        if (response == true){
+                        alert("บันทึกสำเร็จ");
+                        window.location.reload(true);
+                        } else {
+                            alert("รหัสฝ่ายซ้ำ");
+                        }
+                    }
+                })
+            }
+        });
+
+
+        $("#Delete").click(function () {
+            if ($("#FormDepart").valid()) {
+
+                if (confirm('ยืนยันการลบ')) {
+                    Delete();
+                } else {
+                    return false;
+                }
+            }
+        });
+
+        function Delete() {
+            $.ajax({
+                url: '@Url.Action("DeleteDepart", "QsoftDepart")',
+                type: 'post',
+                data: JSON.stringify({
+                    d_id: $("#d_id").val()
+                }),
+                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                }
+            });
+        }
+
+        $("#Clear").click(function () {
+
+            $('#d_id').val("");
+            $('#dcode').val("");
+            $('#dname1').val("");
+            $('#dname2').val("");
+           
+
+        });
+
+
+    </script>
+
+}
+
+
+
+
+
+
+
+

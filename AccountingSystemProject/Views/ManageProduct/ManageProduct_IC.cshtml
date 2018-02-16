@@ -1,0 +1,1284 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "ManageProduct_IC";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: #ffffff;
+        border: 1px solid #4d79ff;
+    }
+
+    #head {
+        text-align: right;
+    }
+
+    tr {
+        border-bottom: 1px solid #4d79ff;
+    }
+
+        tr:nth-child(even) {
+            background-color: #e6eeff;
+        }
+
+    th {
+        background-color: #3c8dbc;
+    }
+
+    a.my-class:link {
+        color: #1a1a1a
+    }
+
+    a.my-class:visited {
+        color: #1a1a1a
+    }
+</style>
+
+<div>
+    <div class="container-fluid">
+        <h3>เพิ่ม/แก้ไข สินค้าและวัตถุดิบ</h3>
+    </div>
+
+    <!-- Tab Menu -->
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#detail">รายละเอียดสินค้า</a></li>
+        <li><a data-toggle="tab" href="#unitCounter">หน่วยนับสินค้า</a></li>
+        @*<li><a data-toggle="tab" href="#SetSellingPrice">กำหนดราคาขาย</a></li>*@
+        @*
+            <li><a data-toggle="tab" href="#StandardCost1">Standard Cost 1</a></li>
+            <li><a data-toggle="tab" href="#StandardCost2">Standard Cost 2</a></li>*@
+        @*<li><a data-toggle="tab" href="#ProductNote">หมายเหตุสินค้า</a></li>
+            <li><a data-toggle="tab" href="#picture">รูปภาพประกอบ</a></li>*@
+    </ul>
+
+    <div class="container-fluid">
+        <div class="btn-group" style="float: right">
+            <input type="submit" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="Clear" />
+            <input type="button" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+            <input type="button" value="ลบ" class="btn btn-primary btn-sm" id="Delete" />
+            <input type="button" value="ค้นหา" class="btn btn-primary btn-sm" id="Search" />
+            @*<input type="submit" value="Update StandartCost" class="btn btn-primary btn-sm" id="UpdateSTDC" />*@
+        </div>
+    </div><br />
+    <!-- tap Menu -->
+    <div class="tab-content">
+
+        <!-- detail -->
+        <div id="detail" class="tab-pane fade in active">
+            <div class="container-fluid">
+                <div class="bg">
+                    <div class="container-fluid">
+                        <br /><br />
+                        <input type="hidden" name="prod_id" id="prod_id" value="" />
+
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div>รหัสสินค้า</div>
+                                <input class="form-control" placeholder="รหัสสินค้า" name="pcode" id="pcode" />
+                            </div>
+                            <div class="col-sm-3">
+                                @*<div>วันที่ Inactive</div>
+                                    <input class="form-control" type="date" placeholder="วันที่ Inactive" name="pinactive" id="pinactive" />*@
+                            </div>
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-3">
+                                <div>ราคาขายเป็นแบบภาษีแยกนอก?</div>
+                                <select name="psvat" class="form-control" id="psvat">
+                                    <option></option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                        </div><br />
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div>ชื่อสินค้าภาษาไทย</div>
+                                <input class="form-control" placeholder="ชื่อสินค้าภาษาไทย" name="pname1" id="pname1" />
+                            </div>
+                            <div class="col-sm-4">
+                                <div>ชื่อย่อสินค้าภาษาไทย</div>
+                                <input class="form-control" placeholder="ชื่อย่อสินค้าภาษาไทย" name="pname11" id="pname11" />
+                            </div>
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-3">
+                                <div>ราคาซื้อเป็นแบบภาษีแยกนอก?</div>
+                                <select name="ppvat" class="form-control" id="ppvat">
+                                    <option></option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                        </div><br />
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div>ชื่อสินค้าภาษาอังกฤษ</div>
+                                <input class="form-control" placeholder="ชื่อสินค้าภาษาอังกฤษ" name="pname2" id="pname2" />
+                            </div>
+                            <div class="col-sm-4">
+                                <div>ชื่อย่อสินค้าภาษาอังกฤษ</div>
+                                <input class="form-control" placeholder="ชื่อย่อสินค้าภาษาอังกฤษ" name="pname21" id="pname21" />
+                            </div>
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-3">
+                                <div>การนับยอดสต็อก</div>
+                                <select name="pcst" class="form-control" id="pcst">
+                                    <option></option>
+                                    <option value="0">ตามที่บริษัทกำหนด</option>
+                                    <option value="1">นับยอดสต็อคและไม่ติดลบ</option>
+                                    <option value="2">นับยอดสต็อคแต่ติดลบได้</option>
+                                    <option value="3">ยังไม่นับยอดสต็อค</option>
+                                </select>
+                            </div>
+                        </div><br />
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div>ชนิดสินค้า</div>
+                                <select name="ptype" class="form-control" id="ptype">
+                                    <option></option>
+                                    @foreach (var ptype in ViewBag.getptype)
+                                    {
+                                        <option value="@ptype.tpcode">@ptype.tpname1 </option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <div>คลังซื้อหลัก</div>
+                                <select name="wcode" class="form-control" id="wcode">
+                                    <option></option>
+                                    @foreach (var wcode in ViewBag.getwcode)
+                                    {
+                                        <option value="@wcode.wcode">@wcode.wname1 </option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-3">
+                                <div>เป็นสินค้าเพื่อออกรายงานสินค้าคงเหลือหรือไม่?</div>
+                                <select name="prpt" class="form-control" id="prpt">
+                                    <option></option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                        </div><br />
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div>กลุ่มสินค้า</div>
+                                <select name="grpcode" class="form-control" id="grpcode">
+                                    <option></option>
+                                    @foreach (var grpcode in ViewBag.getpgroup)
+                                    {
+                                        <option value="@grpcode.grpcode">@grpcode.grpname1 </option>
+                                    }
+                                </select>
+                            </div>
+
+                            <div class="col-sm-4">
+                                @*<div>กลุ่มสินค้า 2</div>
+                                    <select name="productGroup2" class="form-control">
+                                        <option></option>
+                                        <option></option>
+                                    </select>*@
+                            </div>
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-3">
+                                <div>เมื่อบันทึกรายการซื้อสินค้า ต้องการให้เเสดงราคาใด?</div>
+                                <select name="ctype" class="form-control" id="ctype" placeholder="เลือกรายการ">
+                                    <option></option>
+                                    <option value="0">ไม่ระบุ</option>
+                                    <option value="1">ราคาทุนมาตรฐาน</option>
+                                    <option value="2">ราคาซื้อล่าสุด</option>
+                                </select>
+                            </div>
+                        </div><br />
+                        <div class="row">
+                            <div class="col-sm-4">
+                                @*<div>กลุ่มสินค้า 3</div>
+                                    <select name="productGroup3" class="form-control">
+                                        <option></option>
+                                        <option></option>
+                                    </select>*@
+                            </div>
+                            <div class="col-sm-4">
+                                @*<div>กลุ่มสินค้า 4</div>
+                                    <select name="productGroup4" class="form-control">
+                                        <option></option>
+                                        <option></option>
+                                    </select>*@
+                            </div>
+                            <div class="col-sm-2">
+                                <div>ระยะเวลาก่อนจัดส่ง</div>
+                                <input class="form-control" placeholder="ระยะเวลาก่อนจัดส่ง" name="dayupSent" id="dayupSent" />
+
+                            </div>
+                            <div class="col-sm-2">
+                                <div>สถานะสินค้า</div>
+                                <select name="pstatus" class="form-control" id="pstatus">
+                                    <option></option>
+                                    <option value="A">Active</option>
+                                    <option value="I">Inactive</option>
+                                </select>
+                            </div>
+
+                        </div><br />
+
+                        <div class="row">
+                            <div class="col-sm-4">
+                                @*<div>กลุ่มสินค้า 5</div>
+                                    <select name="productGroup5" class="form-control">
+                                        <option></option>
+                                        <option></option>
+                                    </select>*@
+                            </div>
+                            <div class="col-sm-4">
+                                <div>Barcode ID</div>
+                                <input class="form-control" placeholder="Barcode ID" name="barcodeid" id="barcodeid" />
+                            </div>
+                            <div class="col-sm-4">
+                                <div>ราคาทุนมาตรฐาน</div>
+                                <input class="form-control" placeholder="ราคาทุนมาตรฐาน" name="pcost" id="pcost" />
+                            </div>
+                        </div><br />
+                    </div><br />
+                </div><br />
+            </div>
+        </div>
+
+        <!-- unitCounter -->
+        <div id="unitCounter" class="tab-pane fade">
+            <div class="container-fluid">
+                <div class="bg">
+                    <div class="container-fluid">
+                        <br /><br />
+                        <div class="row">
+                            <input type="hidden" name="stduid" id="stduid" value="" />
+                            <input type="hidden" name="buid" id="buid" value="" />
+                            <input type="hidden" name="stbuid" id="stbuid" value="" />
+                            <input type="hidden" name="suid" id="suid" value="" />
+                            <input type="hidden" name="stsuid" id="stsuid" value="" />
+                            <input type="hidden" name="stuid" id="stuid" value="" />
+                            <input type="hidden" name="st2uid" id="st2uid" value="" />
+
+                            @*<div class="col-sm-1"></div>*@
+                            <div class="col-sm-2">
+                                <div>หน่วยนับมาตรฐาน :</div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <input class="form-control" name="stduname" id="stduname" />
+                                    <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
+                                    <div class="modal fade" id="Find1" role="dialog">
+                                        <div class="modal-dialog" style="width: 40%; height: 100%">
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">รายชื่อหน่วยนับ</h4>
+                                                    </div><br />
+                                                    @*<div class="row">
+                                                            <br />
+                                                            <div class="col-sm-2" style="text-align:right">ค้น</div>
+                                                            <div class="col-sm-4">
+                                                                <select name="selectUnit" class="form-control">
+                                                                    <option>รหัสหน่วยนับ</option>
+                                                                    <option>ชื่อหน่วยนับ</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <input placeholder="คำค้น" name="word" id="word" class="form-control" />
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <input type="button" value="ค้นหา" class="btn btn-primary" id="SearchUnit" />
+                                                            </div>
+                                                        </div><br />*@
+                                                    <div class=" table-responsive table-hover" id="getunit">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>รหัสหน่วยนับ</th>
+                                                                    <th>ชื่อหน่วยนับภาษาไทย</th>
+                                                                    <th>ชื่อหน่วยนับภาษาอังกฤษ</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach (var unit in ViewBag.getunit)
+                                                                {
+                                                                    <tr class="pcontent">
+
+                                                                        <td data-id="@unit.uid" data-dismiss="modal">
+                                                                            @unit.ucode
+                                                                        </td>
+                                                                        <td data-dismiss="modal">
+                                                                            @unit.uname1
+                                                                        </td>
+                                                                        <td data-dismiss="modal">
+                                                                            @unit.uname2
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <br>
+
+                        <div class="row">
+                            @*<div class="col-sm-1"></div>*@
+                            <div class="col-sm-2">หน่วยซื้อส่วนใหญ่ :</div>
+                            <div class="col-sm-1">
+                                <input class="form-control" name="stbnum" id="stbnum" value="1" disabled />
+                            </div>
+
+
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <input class="form-control" name="buname" id="buname" />
+                                    <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
+                                    <div class="modal fade" id="Find1" role="dialog">
+                                        <div class="modal-dialog" style="width: 40%; height: 100%">
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">รายชื่อหน่วยนับ</h4>
+                                                    </div><br />
+                                                    <div class=" table-responsive table-hover" id="getbuname">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>รหัสหน่วยนับ</th>
+                                                                    <th>ชื่อหน่วยนับภาษาไทย</th>
+                                                                    <th>ชื่อหน่วยนับภาษาอังกฤษ</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach (var unit in ViewBag.getunit)
+                                                                {
+                                                                    <tr class="pcontent">
+
+                                                                        <td data-id="@unit.uid" data-dismiss="modal">
+                                                                            @unit.ucode
+                                                                        </td>
+                                                                        <td data-dismiss="modal">
+                                                                            @unit.uname1
+                                                                        </td>
+                                                                        <td data-dismiss="modal">
+                                                                            @unit.uname2
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            <div class="col-sm-1" style="text-align:center">=</div>
+                            <div class="col-sm-2">
+                                <input class="form-control" type="number" name="bnum" id="bnum" value="1.0000" step="0.0001" />
+                            </div>
+                            <div class="col-sm-3">
+                                <input class="form-control" name="stbuname" id="stbuname" />
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            @*<div class="col-sm-1"></div>*@
+                            <div class="col-sm-2">หน่วยขายส่วนใหญ่ :</div>
+                            <div class="col-sm-1">
+                                <input class="form-control" name="stsnum" id="stsnum" value="1" disabled />
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <input class="form-control" name="suname" id="suname" />
+                                    <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-1" style="text-align:center">=</div>
+                            <div class="col-sm-2">
+                                <input class="form-control" type="number" name="snum" id="snum" value="1.0000" step="0.0001" />
+                            </div>
+                            <div class="col-sm-3">
+                                <input class="form-control" name="stsuname" id="stsuname" />
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            @*<div class="col-sm-1"></div>*@
+                            <div class="col-sm-2">หน่วยนับระบบคุม Stock :</div>
+                            <div class="col-sm-1">
+                                @*Default = 1*@
+                                <input class="form-control" name="num3" id="num3" value="1" disabled />
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <input class="form-control" name="stuname" id="stuname" />
+                                    <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-1" style="text-align:center">=</div>
+                            <div class="col-sm-2">
+                                <input class="form-control" type="number" name="stnum" id="stnum" value="1.0000" step="0.0001" />
+                            </div>
+                            <div class="col-sm-3">
+                                @* ชื่อหน่วยตาม หน่วยนับมาตรฐาน *@
+                                <input class="form-control" name="stduname1" id="stduname1" />
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            @*<div class="col-sm-1"></div>*@
+                            <div class="col-sm-2">หน่วยนับระบบคุม Stock 2 :</div>
+                            <div class="col-sm-1">
+                                <input class="form-control" name="num4" id="num4" value="1" disabled />
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <input class="form-control" name="st2uname" id="st2uname" />
+                                    <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-1" style="text-align:center">=</div>
+                            <div class="col-sm-2">
+                                <input class="form-control" type="number" name="st2num" id="st2num" value="1.0000" step="0.0001" />
+                            </div>
+                            <div class="col-sm-3">
+                                @* ชื่อหน่วยตาม หน่วยนับมาตรฐาน *@
+                                <input class="form-control" name="stduname2" id="stduname2" />
+                            </div>
+                        </div><br>
+                        @*<div class="row">*@
+                        @*<div class="col-sm-2"></div>*@
+                        @*<div class="col-sm-2 checkbox">
+                                    <label>
+                                        <input type="checkbox" name="MinimumPurchaseAmountCB" id="MinimumPurchaseAmountCB" /> จำนวนซื้อขั้นต่ำ
+                                    </label>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input class="form-control" name="moq" id="moq" placeholder="0" disabled />
+                                </div>
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-3">
+                                    <input class="form-control" name="buid" id="buid" />
+                                </div>
+                            </div> <br>*@
+                    </div>
+                </div>
+            </div>
+        </div><br>
+
+        <!-- SetSellingPrice -->
+        <div id="SetSellingPrice" class="tab-pane fade container-fluid">
+            <div class="row">
+                <div class="col-sm-2">ราคาขายมาตรฐาน :</div>
+                <div class="col-sm-3">
+                    <input class="form-control" id="u0s" name="u0s" disabled />
+                </div>
+                <div class="col-sm-1" style="text-align:center">ละ</div>
+                <div class="col-sm-2">
+                    <input class="form-control" placeholder="0.0000" id="s1" name="s1" />
+                </div>
+            </div> <br>
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        <input class="form-control" name="u1s" id="u1s" />
+                        <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
+                    </div>
+                </div>
+                <div class="col-sm-1" style="text-align:center">ละ</div>
+                <div class="col-sm-2">
+                    <input class="form-control" placeholder="0.0000" id="s2" name="s2" />
+                </div>
+                <div class="col-sm-1" style="text-align:center">=</div>
+                <div class="col-sm-2">
+                    <input class="form-control" id="ss1" name="ss1" placeholder="1.0000" />
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        <input class="form-control" name="u2s" id="u2s" />
+                        <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
+                    </div>
+                </div>
+                <div class="col-sm-1" style="text-align:center">ละ</div>
+                <div class="col-sm-2">
+                    <input class="form-control" placeholder="0.0000" id="s3" name="s3" />
+                </div>
+                <div class="col-sm-1" style="text-align:center">=</div>
+                <div class="col-sm-2">
+                    <input class="form-control" id="ss2" name="ss2" placeholder="1.0000" />
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        <input class="form-control" name="u3s" id="u3s" />
+                        <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
+                    </div>
+                </div>
+                <div class="col-sm-1" style="text-align:center">ละ</div>
+                <div class="col-sm-2">
+                    <input class="form-control" placeholder="0.0000" id="s4" name="s4" />
+                </div>
+                <div class="col-sm-1" style="text-align:center">=</div>
+                <div class="col-sm-2">
+                    <input class="form-control" id="ss3" name="ss3" placeholder="1.0000" />
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        <input class="form-control" name="u4s" id="u4s" />
+                        <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find1"><i class="glyphicon glyphicon-search"></i></span>
+                    </div>
+                </div>
+                <div class="col-sm-1" style="text-align:center">ละ</div>
+                <div class="col-sm-2">
+                    <input class="form-control" placeholder="0.0000" id="s5" name="s5" />
+                </div>
+                <div class="col-sm-1" style="text-align:center">=</div>
+                <div class="col-sm-2">
+                    <input class="form-control" id="ss4" name="ss4" placeholder="1.0000" />
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-sm-2">ราคาต่ำสุด</div>
+                <div class="col-sm-3">
+                    <input class="form-control" name="u0s" id="u0s" disabled />
+                </div>
+                <div class="col-sm-1" style="text-align:center">ละ</div>
+                <div class="col-sm-2">
+                    <input class="form-control" placeholder="0.0000" id="s6" name="s6" />
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-sm-2">ส่วนลดมาตรฐาน(%) :</div>
+                <div class="col-sm-3">
+                    <input class="form-control" name="stddiscount" id="stddiscount" />
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-sm-2">ราคาขายตามบรรจุภัณฑ์ :</div>
+                <div class="col-sm-3">
+                    <input class="form-control" name="xprice" id="xprice" />
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-sm-2">ชื่อผู้จำหน่าย :</div>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <input class="form-control" name="xname" id="xname" />
+                        <span class="input-group-addon" runat="server" data-toggle="modal" data-target="#Find2"><i class="glyphicon glyphicon-search"></i></span>
+                        <div class="modal fade" id="Find2" role="dialog">
+                            <div class="modal-dialog" style="width: 80%; height: 100%">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">ค้นหา รายชื่อผู้จำหน่าย</h4>
+                                        </div><br />
+                                        <div class="row">
+                                            <br />
+                                            <div class="col-sm-2" style="text-align:right">ค้น</div>
+                                            <div class="col-sm-4">
+                                                <select name="selectUnit" class="form-control">
+                                                    <option>รหัสผู้จำหน่าย</option>
+                                                    <option>ชื่อผู้จำหน่าย</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input placeholder="คำค้น" name="word" id="word" class="form-control" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input type="button" value="ค้นหา" class="btn btn-primary" id="SearchUnit" />
+                                            </div>
+                                        </div><br />
+                                        <div class=" table-responsive table-hover">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>รหัสผู้จำหน่าย</th>
+                                                        <th>ชื่อผู้จำหน่ายภาษาไทย</th>
+                                                        <th>ชื่อผู้จำหน่ายภาษาอังกฤษ</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><br>
+        </div>
+
+        <!-- StandardCost1 -->
+        @*<div id="StandardCost1" class="tab-pane fade container-fluid">
+            </div>*@
+
+        <!-- StandardCost2 -->
+        @*<div id="StandardCost2" class="tab-pane fade container-fluid">
+
+            </div>*@
+
+        <!-- ProductNote -->
+        <div id="ProductNote" class="tab-pane fade container-fluid">
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2">หมายเหตุ 1 :</div>
+                <div class="col-sm-3">
+                    <input class="form-control" name="note1" id="note1" />
+                </div>
+                <div class="col-sm-2">หมายเหตุ 2 :</div>
+                <div class="col-sm-3">
+                    <input class="form-control" name="note2" id="note2" />
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2">หมายเหตุ 3 :</div>
+                <div class="col-sm-3">
+                    <input class="form-control" name="note3" id="note3" />
+                </div>
+                <div class="col-sm-2">หมายเหตุ 4 :</div>
+                <div class="col-sm-3">
+                    <input class="form-control" name="note4" id="note4" />
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2">หมายเหตุ 5 :</div>
+                <div class="col-sm-3">
+                    <input class="form-control" name="note5" id="note5" />
+                </div>
+                <div class="col-sm-2">หมายเหตุ 6 :</div>
+                <div class="col-sm-3">
+                    <input class="form-control" name="note6" id="note6" />
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2">หมายเหตุ 7 :</div>
+                <div class="col-sm-3">
+                    <input class="form-control" name="note7" id="note7" />
+                </div>
+                <div class="col-sm-2">หมายเหตุ 8 :</div>
+                <div class="col-sm-3">
+                    <input class="form-control" name="note8" id="note8" />
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2">หมายเหตุ 9 :</div>
+                <div class="col-sm-3">
+                    <input class="form-control" name="note9" id="note9" />
+                </div>
+                <div class="col-sm-2">หมายเหตุ 10 :</div>
+                <div class="col-sm-3">
+                    <input class="form-control" name="note10" id="note10" />
+                </div>
+            </div><br>
+        </div>
+
+        <!-- picture -->
+        <div id="picture" class="tab-pane fade container-fluid">
+            <input type="file" name="pic" accept="image/*">
+        </div>
+
+
+    </div>
+
+    <!--Show Table -->
+    <div class="container-fluid">
+        <div class="table-responsive table-hover" id="product_IC">
+            <table class="table">
+                <thead>
+                    <tr>
+                        @*
+                            <th>
+                                @Html.ActionLink("รหัสสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pcodeSortParm })
+                            </th>
+                            <th>
+                                @Html.ActionLink("ชื่อสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pname1SortParm })
+                            </th>
+                            <th>
+                                @Html.ActionLink("ชื่อย่อสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pname11SortParm })
+                            </th>
+                            <th>
+                                @Html.ActionLink("ชนิดสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.ptypeSortParm })
+                            </th>
+                            <th>
+                                @Html.ActionLink("สถานะสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pstatusSortParm })
+                            </th>
+                            <th>
+                                @Html.ActionLink("prod_id", "ManageProduct_IC", new { sortOrder = ViewBag.prod_idSortParm })
+                            </th>*@
+                        <th>
+                            @Html.ActionLink("รหัสสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pcodeSortParm }, new { @class = "my-class" })
+                        </th>
+                        <th>
+                            @Html.ActionLink("ชื่อสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pname1SortParm }, new { @class = "my-class" })
+                        </th>
+                        <th>
+                            @Html.ActionLink("ชื่อย่อสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pname11SortParm }, new { @class = "my-class" })
+                        </th>
+                        <th>
+                            @Html.ActionLink("ชนิดสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.ptypeSortParm }, new { @class = "my-class" })
+                        </th>
+                        <th>
+                            @Html.ActionLink("สถานะสินค้า", "ManageProduct_IC", new { sortOrder = ViewBag.pstatusSortParm }, new { @class = "my-class" })
+                        </th>
+                        <th>
+                            @Html.ActionLink("prod_id", "ManageProduct_IC", new { sortOrder = ViewBag.prod_idSortParm }, new { @class = "my-class" })
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in ViewBag.MyData)
+                    {
+                        <tr class="pcontent">
+
+                            <td data-id="@product.prod_id">
+                                @product.pcode
+                            </td>
+                            <td>
+                                @product.pname1
+                            </td>
+                            <td>
+                                @product.pname11
+                            </td>
+                            <td>
+                                @product.ptype
+                            </td>
+                            <td>
+                                @product.pstatus
+                            </td>
+                            <td>
+                                @product.prod_id
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("ManageProduct_IC", new { page, sortOrder = ViewBag.sortOrder }))</div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+
+    @*@Scripts.Render("~/Scripts/Validate/jquery.validate.js")
+        @Scripts.Render("~/Scripts/Validate/FormDepart.js")*@
+
+    <script>
+        $("div#product_IC table").delegate('tr.pcontent', 'click', function () {
+
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'GetTableFindItem',
+                    type: 'post',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data)
+                    {
+                        $('#prod_id').val(data.prod_id);
+                        $('#pcode').val(data.pcode);
+                        //$('#pinactive').val(data.pinactive);
+
+                        if (data.psvat == '0') {
+                            $('#psvat').val(0);
+                        } else {
+                            $('#psvat').val(1);
+                        }
+                        $('#pname1').val(data.pname1);
+                        $('#pname11').val(data.pname11);
+                        if (data.ppvat == '0') {
+                            $('#ppvat').val(0);
+                        } else {
+                            $('#ppvat').val(1);
+                        }
+                        $('#pname2').val(data.pname2);
+                        $('#pname22').val(data.pname22);
+                        $('#pcst').val(data.pcst);
+                        switch (data.pcst) {
+                            case "0":
+                                $('#pcst').val(0);
+                                break;
+                            case "1":
+                                $('#pcst').val(1);
+                                break;
+                            case "2":
+                                $('#pcst').val(2);
+                                break;
+                            case "3":
+                                $('#pcst').val(3);
+                                break;
+                        }
+                        $('#ptype').val(data.ptype);
+                        $('#wcode').val(data.wcode);
+
+                        if (data.prpt == '0') {
+                            $('#prpt').val(0);
+                        } else {
+                            $('#prpt').val(1);
+                        }
+                        $('#grpcode').val(data.grpcode);
+                        $('#ctype').val(data.ctype);
+                        $('#dayupSent').val(data.dayupSent);
+                        $('#pstatus').val(data.pstatus);
+                        $('#barcodeid').val(data.barcodeid);
+                        $('#pcost').val(data.pcost);
+
+                        $('#stduid').val(data.stduid);
+                        $('#buid').val(data.buid);
+                        $('#suid').val(data.suid);
+                        $('#stuid').val(data.stuid);
+                        $('#st2uid').val(data.st2uid);
+                        $('#stbuid').val(data.stbuid);
+                        $('#stsuid').val(data.stsuid);
+                        $('#bnum').val(data.bnum);
+                        $('#snum').val(data.snum);
+                        $('#stnum').val(data.stnum);
+                        $('#st2num').val(data.st2num);
+                        $('#stbnum').val(data.stbnum);
+                        $('#stsnum').val(data.stsnum);
+
+                        //$('#u0s').val(data.u0s);
+                        //$('#u1s').val(data.u1s);
+                        //$('#u2s').val(data.u2s);
+                        //$('#u3s').val(data.u3s);
+                        //$('#u4s').val(data.u4s);
+                        //$('#s1').val(data.s1);
+                        //$('#s2').val(data.s2);
+                        //$('#s3').val(data.s3);
+                        //$('#s4').val(data.s4);
+                        //$('#s5').val(data.s5);
+                        //$('#s6').val(data.s6);
+                        //$('#ss1').val(data.ss1);
+                        //$('#ss2').val(data.ss2);
+                        //$('#ss3').val(data.ss3);
+                        //$('#ss4').val(data.ss4);
+                        //$('#stddiscount').val(data.stddiscount);
+                        //$('#xprice').val(data.xprice);
+                        //$('#xname').val(data.xname);
+
+                        //$('#note1').val(data.note1);
+                        //$('#note2').val(data.note2);
+                        //$('#note3').val(data.note3);
+                        //$('#note4').val(data.note4);
+                        //$('#note5').val(data.note5);
+                        //$('#note6').val(data.note6);
+                        //$('#note7').val(data.note7);
+                        //$('#note8').val(data.note8);
+                        //$('#note9').val(data.note9);
+                        //$('#note10').val(data.note10);
+                    }
+                });
+            } else {
+                $('#prod_id').val("");
+                $('#pcode').val("");
+                $('#psvat').val("");
+                $('#pname1').val("");
+                $('#pname11').val("");
+                $('#ppvat').val("");
+                $('#pname2').val("");
+                $('#pname21').val("");
+                $('#pcst').val("");
+                $('#ptype').val("");
+                $('#wcode').val("");
+                $('#prpt').val("");
+                $('#grpcode').val("");
+                //$('#pinactive').val("");
+                $('#ctype').val("");
+                $('#dayupSent').val("");
+                $('#pstatus').val("");
+                $('#barcodeid').val("");
+                $('#pcost').val("");
+
+                $('#stduid').val("");
+                $('#buid').val("");
+                $('#suid').val("");
+                $('#stuid').val("");
+                $('#stbuid').val("");
+                $('#stsuid').val("");
+                $('#bnum').val("");
+                $('#snum').val("");
+                $('#stnum').val("");
+                $('#stbnum').val("");
+                $('#stsnum').val("");
+                $('#u0s').val("");
+                $('#u1s').val("");
+                $('#u2s').val("");
+                $('#u3s').val("");
+                $('#u4s').val("");
+                $('#s1').val("");
+                $('#s2').val("");
+                $('#s3').val("");
+                $('#s4').val("");
+                $('#s5').val("");
+                $('#s6').val("");
+                $('#ss1').val("");
+                $('#ss2').val("");
+                $('#ss3').val("");
+                $('#ss4').val("");
+                $('#stddiscount').val("");
+                $('#xprice').val("");
+                $('#xname').val("");
+
+                $('#note1').val("");
+                $('#note2').val("");
+                $('#note3').val("");
+                $('#note4').val("");
+                $('#note5').val("");
+                $('#note6').val("");
+                $('#note7').val("");
+                $('#note8').val("");
+                $('#note9').val("");
+                $('#note10').val("");
+
+            }
+        });
+
+        //click data on pop up and show in textbox
+        $("div#getunit table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'FinditemPopupSup',
+                    type: 'get',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#stduname').val(data.uname1);
+                        $('#buname').val(data.uname1);
+                        $('#stbuname').val(data.uname1);
+                        $('#suname').val(data.uname1);
+                        $('#stsuname').val(data.uname1);
+                        $('#stuname').val(data.uname1);
+                        $('#stduname1').val(data.uname1);
+                        $('#st2uname').val(data.uname1);
+                        $('#stduname2').val(data.uname1);
+
+                        $('#stduid').val(data.uid);
+                        $('#buid').val(data.uid);
+                        $('#stbuid').val(data.uid);
+                        $('#suid').val(data.uid);
+                        $('#stsuid').val(data.uid);
+                        $('#stuid').val(data.uid);
+                        $('#st2uid').val(data.uid);
+
+                    }
+                });
+            } else {
+
+                $('#stduname').val("");
+                $('#buname').val("");
+                $('#stbuname').val("");
+                $('#suname').val("");
+                $('#stsuname').val("");
+                $('#stuname').val("");
+                $('#stduname1').val("");
+                $('#st2uname').val("");
+                $('#stduname2').val("");
+
+                $('#stduid').val("");
+                $('#buid').val("");
+                $('#stbuid').val("");
+                $('#suid').val("");
+                $('#stsuid').val("");
+                $('#stuid').val("");
+                $('#st2uid').val("");
+
+            }
+        })
+
+        //click data on pop up and show in textbox
+        $("div#getbuname table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'FinditemPopupUnit2',
+                    type: 'get',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#buname').val(data.uname1);
+                        $('#buid').val(data.uid);
+                    }
+                });
+            } else {
+                $('#buname').val("");
+                $('#buid').val("");
+            }
+        })
+
+
+        $("#Save").on('click', function () {
+            //if ($("#FormDepart").valid()) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("SaveProduct", "ManageProduct")',
+
+                data: JSON.stringify({
+                    prod_id: $("#prod_id").val(),
+                    pcode: $("#pcode").val(),
+                    //pname1: $("#pname1").val($.trim($("#pname1").val())),
+                    pname1: $("#pname1").val(),
+                    pname11: $("#pname11").val(),
+                    pinactive: '' ,
+                    psvat: $("#psvat").val(),
+                    ppvat: $("#ppvat").val(),
+                    pname2: $("#pname2").val(),
+                    pname21: $("#pname21").val(),
+                    pcst: $("#pcst").val(),
+                    pbook: $("#pbook").val(),
+                    ptype: $("#ptype").val(),
+                    wcode: $("#wcode").val(),
+                    prpt: $("#prpt").val(),
+                    grpcode: $("#grpcode").val(),
+                    ctype: $("#ctype").val(),
+                    dayupSent: $("#dayupSent").val(),
+                    pstatus: $("#pstatus").val(),
+                    barcodeid: $("#barcodeid").val(),
+                    pcost: $("#pcost").val(),
+
+                    stduid: $('#stduid').val(),
+                    buid: $('#buid').val(),
+                    suid: $('#suid').val(),
+                    stuid: $('#stuid').val(),
+                    stbuid: $('#stbuid').val(),
+                    st2uid: $('#st2uid').val(),
+                    stsuid: $('#stsuid').val(),
+                    bnum: $('#bnum').val(),
+                    snum: $('#snum').val(),
+                    stnum: $('#stnum').val(),
+                    stbnum: $('#stbnum').val(),
+                    stsnum: $('#stsnum').val(),
+                    st2num: $('#st2num').val(),
+
+                    u0s: $('#u0s').val(),
+                    u1s: $('#u1s').val(),
+                    u2s: $('#u2s').val(),
+                    u3s: $('#u3s').val(),
+                    u4s: $('#u4s').val(),
+                    s1: $('#s1').val(),
+                    s2: $('#s2').val(),
+                    s3: $('#s3').val(),
+                    s4: $('#s4').val(),
+                    s5: $('#s5').val(),
+                    s6: $('#s6').val(),
+                    ss1: $('#ss1').val(),
+                    ss2: $('#ss2').val(),
+                    ss3: $('#ss3').val(),
+                    ss4: $('#ss4').val(),
+                    stddiscount: $('#stddiscount').val(),
+                    xprice: $('#xprice').val(),
+                    xname: $('#xname').val(),
+
+                    a1: $('#a1').val(),
+                    a2: $('#a2').val(),
+                    a3: $('#a3').val(),
+                    a4: $('#a4').val(),
+                    a5: $('#a5').val(),
+                    b1: $('#b1').val(),
+                    b2: $('#b2').val(),
+                    b3: $('#b3').val(),
+                    b4: $('#b4').val(),
+                    b5: $('#b5').val(),
+                    c1: $('#c1').val(),
+                    c2: $('#c2').val(),
+                    c3: $('#c3').val(),
+                    c4: $('#c4').val(),
+                    c5: $('#c5').val(),
+                    d1: $('#d1').val(),
+                    d2: $('#d2').val(),
+                    d3: $('#d3').val(),
+                    d4: $('#d4').val(),
+                    d5: $('#d5').val(),
+
+                    note1: $('#note1').val(),
+                    note2: $('#note2').val(),
+                    note3: $('#note3').val(),
+                    note4: $('#note4').val(),
+                    note5: $('#note5').val(),
+                    note6: $('#note6').val(),
+                    note7: $('#note7').val(),
+                    note8: $('#note8').val(),
+                    note9: $('#note9').val(),
+                    note10: $('#note10').val(),
+
+                    imgpath: '',
+                    mstatus: '',
+                    ltsale: '',
+                    ltsend: '',
+                    AmountSet: '',
+                    file_img: '',
+                    file_type: '',
+                    moq: '',
+                    grpcode2: '',
+                    grpcode3: '',
+                    grpcode4: '',
+                    grpcode5: '',
+
+                    ccode: 'TBC',
+                    LotSerialExpireFlag: '0'
+                }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                processData: false,
+                success: function (response) {
+                    if (response == true) {
+                        alert("บันทึกสำเร็จ");
+                        window.location.reload(true);
+                    } else {
+                        alert("รหัสสินค้าซ้ำ");
+                    }
+                }
+            });
+        });
+
+
+        $("#Delete").click(function () {
+            //if ($("#FormDepart").valid()) {
+
+                if (confirm('ยืนยันการลบ')) {
+                    Delete();
+                } else {
+                    return false;
+                }
+            
+        });
+
+        function Delete() {
+            $.ajax({
+                url: '@Url.Action("DeleteProducts", "ManageProduct")',
+                type: 'post',
+                data: JSON.stringify({
+                    p_id: $("#prod_id").val()
+                }),
+                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                }
+            });
+        }
+
+        $("#Clear").click(function () {
+
+            $('#prod_id').val("");
+            $('#pcode').val("");
+            $('#psvat').val("");
+            $('#pname1').val("");
+            $('#pname11').val("");
+            $('#ppvat').val("");
+            $('#pname2').val("");
+            $('#pname21').val("");
+            $('#pcst').val("");
+            $('#ptype').val("");
+            $('#wcode').val("");
+            $('#prpt').val("");
+            $('#grpcode').val("");
+            //$('#pinactive').val("");
+            $('#ctype').val("");
+            $('#dayupSent').val("");
+            $('#pstatus').val("");
+            $('#barcodeid').val("");
+            $('#pcost').val("");
+
+            $('#stduid').val("");
+            $('#buid').val("");
+            $('#suid').val("");
+            $('#stuid').val("");
+            $('#stbuid').val("");
+            $('#stsuid').val("");
+            $('#bnum').val("1.000");
+            $('#snum').val("1.000");
+            $('#stnum').val("1.000");
+            $('#st2num').val("1.000");
+
+
+            //$('#u0s').val("");
+            //$('#u1s').val("");
+            //$('#u2s').val("");
+            //$('#u3s').val("");
+            //$('#u4s').val("");
+            //$('#s1').val("");
+            //$('#s2').val("");
+            //$('#s3').val("");
+            //$('#s4').val("");
+            //$('#s5').val("");
+            //$('#s6').val("");
+            //$('#ss1').val("");
+            //$('#ss2').val("");
+            //$('#ss3').val("");
+            //$('#ss4').val("");
+            //$('#stddiscount').val("");
+            //$('#xprice').val("");
+            //$('#xname').val("");
+
+            //$('#note1').val("");
+            //$('#note2').val("");
+            //$('#note3').val("");
+            //$('#note4').val("");
+            //$('#note5').val("");
+            //$('#note6').val("");
+            //$('#note7').val("");
+            //$('#note8').val("");
+            //$('#note9').val("");
+            //$('#note10').val("");
+
+
+        });
+
+
+    </script>
+
+}

@@ -1,0 +1,1337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{57490101-724A-4350-BB1F-DF16B5B18D17}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AccountingSystemProject</RootNamespace>
+    <AssemblyName>AccountingSystemProject</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CustomerZoneController.cs" />
+    <Compile Include="Controllers\DeliveryOrderController.cs" />
+    <Compile Include="Controllers\EmployeeGroupController.cs" />
+    <Compile Include="Controllers\FactoryController.cs" />
+    <Compile Include="Controllers\GroupCustomerController.cs" />
+    <Compile Include="Controllers\GroupSupplierController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageBaddEditFactoryController.cs" />
+    <Compile Include="Controllers\ManageBaddEditScrapController.cs" />
+    <Compile Include="Controllers\ManageBaddEditSecController.cs" />
+    <Compile Include="Controllers\ManageBranchController.cs" />
+    <Compile Include="Controllers\ManageCauseOfReductionDebtController.cs" />
+    <Compile Include="Controllers\ManageCompanyProfileController.cs" />
+    <Compile Include="Controllers\ManageCunitCurrencyController.cs" />
+    <Compile Include="Controllers\ManageCustomerController.cs" />
+    <Compile Include="Controllers\ManageEmployeeController.cs" />
+    <Compile Include="Controllers\ManageICdbStockController.cs" />
+    <Compile Include="Controllers\ManageICProductGroupController.cs" />
+    <Compile Include="Controllers\ManageICProductGroupIIController.cs" />
+    <Compile Include="Controllers\ManageICProductGroupIIIController.cs" />
+    <Compile Include="Controllers\ManageICProductGroupIXController.cs" />
+    <Compile Include="Controllers\ManageICProductGroupXController.cs" />
+    <Compile Include="Controllers\ManageICUnitController.cs" />
+    <Compile Include="Controllers\ManageProductController.cs" />
+    <Compile Include="Controllers\ManageSupplierController.cs" />
+    <Compile Include="Controllers\ManageTransportasionAreaController.cs" />
+    <Compile Include="Controllers\QsoftDepartController.cs" />
+    <Compile Include="Controllers\MasterDataController.cs" />
+    <Compile Include="Controllers\ReOrderSafetyEOQController.cs" />
+    <Compile Include="Controllers\SOSaleOrderController.cs" />
+    <Compile Include="DAL\alccost.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\APSMyMenu.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\AROption.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\ASP_Permission_Menu_Users.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\audit.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Branch.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\causeLose_pm.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\coonectDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>coonectDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\coonectDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\coonectDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>coonectDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Corp.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\CQOption.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\CreditTermType.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\crepdoc_pm.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Currency.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Customer.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\CustomerZone.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Depart.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\do.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DodocNo.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\door.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\dtproperties.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Employee.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\EmployeeGroup.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\EMTranspArea.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\EOQ_warehouse.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Factory.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Form.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\FormItem.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\FormName.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\GLOption.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Gmachine.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\grn.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\grnDetail.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\grndoc.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Groupcustomer.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Grouping.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Groupproduct.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Groupproduct2.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Groupproduct3.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Groupproduct4.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Groupproduct5.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\GroupSupplier.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Holiday.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\irepdoc_pm.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Location.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Lot.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Machine.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Machine2.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Machinept.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Machine_pms.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MCDocNo.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\McGM.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MCGM_Details.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MCGM_RawMat.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\McM.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MCM_Details.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MCM_RawMat.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\McP.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MCP_Details.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MCP_RawMat.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDAcc.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDAccType.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDBank.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDBankBookType.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDBankBrch.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDBillGroup.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDBranch.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDBusiType.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDChannel.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDCNRemarkType.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDCostCode.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDCQPicture.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDCreditDeptCus.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDCreditDeptCusGroup.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDCreditDeptHD.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDCusContact.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDCusMedia.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDCusTempCreditDT.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDCusTempCreditHD.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDCusType.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDEmGroup.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDEmpApprovCreditCus.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDEmpApprovCreditCusGroup.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDEmpApprovCreditHD.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDEmpApprovPOHD.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDEmpGroup.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDEmployee.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDEmPosition.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDExpn.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDPayPicture.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDPosition.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDPriorty.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDReceivePlace.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDRun.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDRunBrch.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDSaleArea.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDSalePeriod.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDSupplierType.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDTransp.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDTranspArea.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDTransportationzone.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDVatDes.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDVATGroup.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MDVatOption.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Menu.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MODocNo.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MoGM.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MOGM_RawMat.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MoM.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MOM_RawMat.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MoP.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MOP_RawMat.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\movement.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MovementTable.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MovementTableIn.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MPDocNo.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MpGM.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MpM.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MPM_RawMat.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MRPGenDate.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MRPGenDate_Plan.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\mrp_bookFG.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\mrp_bookFG_detail.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MRP_SubMenu.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Mts.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\mtsdocno.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Mts_details.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\OSODocno.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Paret.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Pdst.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Pdst_opr.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Pdst_oprOLD.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_adjust.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_adjustdoc.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_groupline.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\PM_group_machine.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_issue.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_issuedoc.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_issue_componentcost.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_menuItems.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_menulist.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_plangroup.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_priorityJob.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_req.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_reqdoc.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_req_ComponentCost.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_ro.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_rodetail.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_statusJob.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_sym_workstep.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_userpermissionItems.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_wc.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_wcdoc.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_wo.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_wodoc.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_wo_changemachine.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_wo_componentcost.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_wo_workinstruction.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_wp.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_wp_componentcost.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\pm_wp_workinstruction.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\PODocno.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\POOption.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\PowerLate.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\PR.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\PR2.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\PRDocNo.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\PRDocNo2.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\prepdoc_pm.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Products.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\ProductSet_detail.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\ProductVersion.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Project.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\RawMat.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\RCG.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\RCGDocNo.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\RCW.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\RCWDocNo.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Receipt.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\ReorderEOQ.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\RFG.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\RFGDocNo.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SCC.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SCCDocNo.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SCC_Member.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SCG.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SCGDocNo.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SCG_Member.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\schedualtime_pm.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Scrap.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Section.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Setproduct.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SetProductloss.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Shelf.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SOCreditApprov.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SODocNo.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SODT_2.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SOOption.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\srepdoc_pm.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Stdoperate.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Stock.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Supplier.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\symptoms.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\TmpPdst_opr.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\TmpRawMat.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\TrAccconfig.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\TrWin_POWH.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Typeproduct.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\t_cost_type.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\t_count_stock_type.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\t_purchase_order.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\t_purchase_order_member.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\t_sale_order.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\t_sale_order_member.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\t_warehouse_type.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\t_yesno.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Unit.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\UnitResource.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\UserMenu.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\UserName.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\vat.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\W1.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\W1DocNo.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\W1P.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\W1PDocNo.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\W1P_Member.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\W1_Member.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Warehouse.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Waste.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WasteDocNo.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Waste_Detail.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WF.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WFDocNo.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WF_Member.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Workcenter.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Workplan.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WP.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WPDocNo.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WP_Member.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WT.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WTDocNo.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WT_Member.cs">
+      <DependentUpon>coonectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccModel.cs" />
+    <Compile Include="Models\BadScrapModel.cs" />
+    <Compile Include="Models\BillGrp.cs" />
+    <Compile Include="Models\BranchModel.cs" />
+    <Compile Include="Models\BusiType.cs" />
+    <Compile Include="Models\CauseOfReductionDebtModel.cs" />
+    <Compile Include="Models\CustomerModel.cs" />
+    <Compile Include="Models\DepartModel.cs" />
+    <Compile Include="Models\EmployeeGroupModel.cs" />
+    <Compile Include="Models\EmployeeModel.cs" />
+    <Compile Include="Models\FactoryModel.cs" />
+    <Compile Include="Models\GroupCustomerModel.cs" />
+    <Compile Include="Models\GroupProductModel.cs" />
+    <Compile Include="Models\Media.cs" />
+    <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\Product_ICModel.cs" />
+    <Compile Include="Models\QuestionViewModel.cs" />
+    <Compile Include="Models\Side.cs" />
+    <Compile Include="Models\SupplierModel.cs" />
+    <Compile Include="Models\TransportasionAreaModel.cs" />
+    <Compile Include="Models\UnitModel.cs" />
+    <Compile Include="Models\WarehouseModel.cs" />
+    <Compile Include="Models\WarehouseTypeModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\dist\css\AdminLTE.css" />
+    <Content Include="Content\dist\css\AdminLTE_.min.css" />
+    <Content Include="Content\dist\css\alt\AdminLTE-bootstrap-social.css" />
+    <Content Include="Content\dist\css\alt\AdminLTE-bootstrap-social.min.css" />
+    <Content Include="Content\dist\css\alt\AdminLTE-fullcalendar.css" />
+    <Content Include="Content\dist\css\alt\AdminLTE-fullcalendar.min.css" />
+    <Content Include="Content\dist\css\alt\AdminLTE-select2.css" />
+    <Content Include="Content\dist\css\alt\AdminLTE-select2.min.css" />
+    <Content Include="Content\dist\css\alt\AdminLTE-without-plugins.css" />
+    <Content Include="Content\dist\css\alt\AdminLTE-without-plugins.min.css" />
+    <Content Include="Content\dist\css\skins\skin-black-light.css" />
+    <Content Include="Content\dist\css\skins\skin-black-light.min.css" />
+    <Content Include="Content\dist\css\skins\skin-black.css" />
+    <Content Include="Content\dist\css\skins\skin-black.min.css" />
+    <Content Include="Content\dist\css\skins\skin-blue-light.css" />
+    <Content Include="Content\dist\css\skins\skin-blue-light.min.css" />
+    <Content Include="Content\dist\css\skins\skin-blue.css" />
+    <Content Include="Content\dist\css\skins\skin-blue.min.css" />
+    <Content Include="Content\dist\css\skins\skin-green-light.css" />
+    <Content Include="Content\dist\css\skins\skin-green-light.min.css" />
+    <Content Include="Content\dist\css\skins\skin-green.css" />
+    <Content Include="Content\dist\css\skins\skin-green.min.css" />
+    <Content Include="Content\dist\css\skins\skin-purple-light.css" />
+    <Content Include="Content\dist\css\skins\skin-purple-light.min.css" />
+    <Content Include="Content\dist\css\skins\skin-purple.css" />
+    <Content Include="Content\dist\css\skins\skin-purple.min.css" />
+    <Content Include="Content\dist\css\skins\skin-red-light.css" />
+    <Content Include="Content\dist\css\skins\skin-red-light.min.css" />
+    <Content Include="Content\dist\css\skins\skin-red.css" />
+    <Content Include="Content\dist\css\skins\skin-red.min.css" />
+    <Content Include="Content\dist\css\skins\skin-yellow-light.css" />
+    <Content Include="Content\dist\css\skins\skin-yellow-light.min.css" />
+    <Content Include="Content\dist\css\skins\skin-yellow.css" />
+    <Content Include="Content\dist\css\skins\skin-yellow.min.css" />
+    <Content Include="Content\dist\css\skins\_all-skins.css" />
+    <Content Include="Content\dist\css\skins\_all-skins.min.css" />
+    <Content Include="Content\dist\img\avatar.png" />
+    <Content Include="Content\dist\img\avatar04.png" />
+    <Content Include="Content\dist\img\avatar2.png" />
+    <Content Include="Content\dist\img\avatar3.png" />
+    <Content Include="Content\dist\img\avatar5.png" />
+    <Content Include="Content\dist\img\boxed-bg.jpg" />
+    <Content Include="Content\dist\img\boxed-bg.png" />
+    <Content Include="Content\dist\img\credit\american-express.png" />
+    <Content Include="Content\dist\img\credit\cirrus.png" />
+    <Content Include="Content\dist\img\credit\mastercard.png" />
+    <Content Include="Content\dist\img\credit\mestro.png" />
+    <Content Include="Content\dist\img\credit\paypal.png" />
+    <Content Include="Content\dist\img\credit\paypal2.png" />
+    <Content Include="Content\dist\img\credit\visa.png" />
+    <Content Include="Content\dist\img\default-50x50.gif" />
+    <Content Include="Content\dist\img\icons.png" />
+    <Content Include="Content\dist\img\photo1.png" />
+    <Content Include="Content\dist\img\photo2.png" />
+    <Content Include="Content\dist\img\photo3.jpg" />
+    <Content Include="Content\dist\img\photo4.jpg" />
+    <Content Include="Content\dist\img\user1-128x128.jpg" />
+    <Content Include="Content\dist\img\user2-160x160.jpg" />
+    <Content Include="Content\dist\img\user3-128x128.jpg" />
+    <Content Include="Content\dist\img\user4-128x128.jpg" />
+    <Content Include="Content\dist\img\user5-128x128.jpg" />
+    <Content Include="Content\dist\img\user6-128x128.jpg" />
+    <Content Include="Content\dist\img\user7-128x128.jpg" />
+    <Content Include="Content\dist\img\user8-128x128.jpg" />
+    <Content Include="Content\dist\js\adminlte.js" />
+    <Content Include="Content\dist\js\adminlte.min.js" />
+    <Content Include="Content\dist\js\app.js" />
+    <Content Include="Content\dist\js\app.min.js" />
+    <Content Include="Content\dist\js\demo.js" />
+    <Content Include="Content\dist\js\pages\dashboard.js" />
+    <Content Include="Content\dist\js\pages\dashboard2.js" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\plugins\bootstrap-slider\bootstrap-slider.js" />
+    <Content Include="Content\plugins\bootstrap-slider\slider.css" />
+    <Content Include="Content\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.js" />
+    <Content Include="Content\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.min.js" />
+    <Content Include="Content\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.css" />
+    <Content Include="Content\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.min.css" />
+    <Content Include="Content\plugins\iCheck\all.css" />
+    <Content Include="Content\plugins\iCheck\flat\aero%402x.png" />
+    <Content Include="Content\plugins\iCheck\flat\aero.css" />
+    <Content Include="Content\plugins\iCheck\flat\aero.png" />
+    <Content Include="Content\plugins\iCheck\flat\blue%402x.png" />
+    <Content Include="Content\plugins\iCheck\flat\blue.css" />
+    <Content Include="Content\plugins\iCheck\flat\blue.png" />
+    <Content Include="Content\plugins\iCheck\flat\flat%402x.png" />
+    <Content Include="Content\plugins\iCheck\flat\flat.css" />
+    <Content Include="Content\plugins\iCheck\flat\flat.png" />
+    <Content Include="Content\plugins\iCheck\flat\green%402x.png" />
+    <Content Include="Content\plugins\iCheck\flat\green.css" />
+    <Content Include="Content\plugins\iCheck\flat\green.png" />
+    <Content Include="Content\plugins\iCheck\flat\grey%402x.png" />
+    <Content Include="Content\plugins\iCheck\flat\grey.css" />
+    <Content Include="Content\plugins\iCheck\flat\grey.png" />
+    <Content Include="Content\plugins\iCheck\flat\orange%402x.png" />
+    <Content Include="Content\plugins\iCheck\flat\orange.css" />
+    <Content Include="Content\plugins\iCheck\flat\orange.png" />
+    <Content Include="Content\plugins\iCheck\flat\pink%402x.png" />
+    <Content Include="Content\plugins\iCheck\flat\pink.css" />
+    <Content Include="Content\plugins\iCheck\flat\pink.png" />
+    <Content Include="Content\plugins\iCheck\flat\purple%402x.png" />
+    <Content Include="Content\plugins\iCheck\flat\purple.css" />
+    <Content Include="Content\plugins\iCheck\flat\purple.png" />
+    <Content Include="Content\plugins\iCheck\flat\red%402x.png" />
+    <Content Include="Content\plugins\iCheck\flat\red.css" />
+    <Content Include="Content\plugins\iCheck\flat\red.png" />
+    <Content Include="Content\plugins\iCheck\flat\yellow%402x.png" />
+    <Content Include="Content\plugins\iCheck\flat\yellow.css" />
+    <Content Include="Content\plugins\iCheck\flat\yellow.png" />
+    <Content Include="Content\plugins\iCheck\flat\_all.css" />
+    <Content Include="Content\plugins\iCheck\futurico\futurico%402x.png" />
+    <Content Include="Content\plugins\iCheck\futurico\futurico.css" />
+    <Content Include="Content\plugins\iCheck\futurico\futurico.png" />
+    <Content Include="Content\plugins\iCheck\icheck.js" />
+    <Content Include="Content\plugins\iCheck\icheck.min.js" />
+    <Content Include="Content\plugins\iCheck\line\aero.css" />
+    <Content Include="Content\plugins\iCheck\line\blue.css" />
+    <Content Include="Content\plugins\iCheck\line\green.css" />
+    <Content Include="Content\plugins\iCheck\line\grey.css" />
+    <Content Include="Content\plugins\iCheck\line\line%402x.png" />
+    <Content Include="Content\plugins\iCheck\line\line.css" />
+    <Content Include="Content\plugins\iCheck\line\line.png" />
+    <Content Include="Content\plugins\iCheck\line\orange.css" />
+    <Content Include="Content\plugins\iCheck\line\pink.css" />
+    <Content Include="Content\plugins\iCheck\line\purple.css" />
+    <Content Include="Content\plugins\iCheck\line\red.css" />
+    <Content Include="Content\plugins\iCheck\line\yellow.css" />
+    <Content Include="Content\plugins\iCheck\line\_all.css" />
+    <Content Include="Content\plugins\iCheck\minimal\aero%402x.png" />
+    <Content Include="Content\plugins\iCheck\minimal\aero.css" />
+    <Content Include="Content\plugins\iCheck\minimal\aero.png" />
+    <Content Include="Content\plugins\iCheck\minimal\blue%402x.png" />
+    <Content Include="Content\plugins\iCheck\minimal\blue.css" />
+    <Content Include="Content\plugins\iCheck\minimal\blue.png" />
+    <Content Include="Content\plugins\iCheck\minimal\green%402x.png" />
+    <Content Include="Content\plugins\iCheck\minimal\green.css" />
+    <Content Include="Content\plugins\iCheck\minimal\green.png" />
+    <Content Include="Content\plugins\iCheck\minimal\grey%402x.png" />
+    <Content Include="Content\plugins\iCheck\minimal\grey.css" />
+    <Content Include="Content\plugins\iCheck\minimal\grey.png" />
+    <Content Include="Content\plugins\iCheck\minimal\minimal%402x.png" />
+    <Content Include="Content\plugins\iCheck\minimal\minimal.css" />
+    <Content Include="Content\plugins\iCheck\minimal\minimal.png" />
+    <Content Include="Content\plugins\iCheck\minimal\orange%402x.png" />
+    <Content Include="Content\plugins\iCheck\minimal\orange.css" />
+    <Content Include="Content\plugins\iCheck\minimal\orange.png" />
+    <Content Include="Content\plugins\iCheck\minimal\pink%402x.png" />
+    <Content Include="Content\plugins\iCheck\minimal\pink.css" />
+    <Content Include="Content\plugins\iCheck\minimal\pink.png" />
+    <Content Include="Content\plugins\iCheck\minimal\purple%402x.png" />
+    <Content Include="Content\plugins\iCheck\minimal\purple.css" />
+    <Content Include="Content\plugins\iCheck\minimal\purple.png" />
+    <Content Include="Content\plugins\iCheck\minimal\red%402x.png" />
+    <Content Include="Content\plugins\iCheck\minimal\red.css" />
+    <Content Include="Content\plugins\iCheck\minimal\red.png" />
+    <Content Include="Content\plugins\iCheck\minimal\yellow%402x.png" />
+    <Content Include="Content\plugins\iCheck\minimal\yellow.css" />
+    <Content Include="Content\plugins\iCheck\minimal\yellow.png" />
+    <Content Include="Content\plugins\iCheck\minimal\_all.css" />
+    <Content Include="Content\plugins\iCheck\polaris\polaris%402x.png" />
+    <Content Include="Content\plugins\iCheck\polaris\polaris.css" />
+    <Content Include="Content\plugins\iCheck\polaris\polaris.png" />
+    <Content Include="Content\plugins\iCheck\square\aero%402x.png" />
+    <Content Include="Content\plugins\iCheck\square\aero.css" />
+    <Content Include="Content\plugins\iCheck\square\aero.png" />
+    <Content Include="Content\plugins\iCheck\square\blue%402x.png" />
+    <Content Include="Content\plugins\iCheck\square\blue.css" />
+    <Content Include="Content\plugins\iCheck\square\blue.png" />
+    <Content Include="Content\plugins\iCheck\square\green%402x.png" />
+    <Content Include="Content\plugins\iCheck\square\green.css" />
+    <Content Include="Content\plugins\iCheck\square\green.png" />
+    <Content Include="Content\plugins\iCheck\square\grey%402x.png" />
+    <Content Include="Content\plugins\iCheck\square\grey.css" />
+    <Content Include="Content\plugins\iCheck\square\grey.png" />
+    <Content Include="Content\plugins\iCheck\square\orange%402x.png" />
+    <Content Include="Content\plugins\iCheck\square\orange.css" />
+    <Content Include="Content\plugins\iCheck\square\orange.png" />
+    <Content Include="Content\plugins\iCheck\square\pink%402x.png" />
+    <Content Include="Content\plugins\iCheck\square\pink.css" />
+    <Content Include="Content\plugins\iCheck\square\pink.png" />
+    <Content Include="Content\plugins\iCheck\square\purple%402x.png" />
+    <Content Include="Content\plugins\iCheck\square\purple.css" />
+    <Content Include="Content\plugins\iCheck\square\purple.png" />
+    <Content Include="Content\plugins\iCheck\square\red%402x.png" />
+    <Content Include="Content\plugins\iCheck\square\red.css" />
+    <Content Include="Content\plugins\iCheck\square\red.png" />
+    <Content Include="Content\plugins\iCheck\square\square%402x.png" />
+    <Content Include="Content\plugins\iCheck\square\square.css" />
+    <Content Include="Content\plugins\iCheck\square\square.png" />
+    <Content Include="Content\plugins\iCheck\square\yellow%402x.png" />
+    <Content Include="Content\plugins\iCheck\square\yellow.css" />
+    <Content Include="Content\plugins\iCheck\square\yellow.png" />
+    <Content Include="Content\plugins\iCheck\square\_all.css" />
+    <Content Include="Content\plugins\input-mask\jquery.inputmask.date.extensions.js" />
+    <Content Include="Content\plugins\input-mask\jquery.inputmask.extensions.js" />
+    <Content Include="Content\plugins\input-mask\jquery.inputmask.js" />
+    <Content Include="Content\plugins\input-mask\jquery.inputmask.numeric.extensions.js" />
+    <Content Include="Content\plugins\input-mask\jquery.inputmask.phone.extensions.js" />
+    <Content Include="Content\plugins\input-mask\jquery.inputmask.regex.extensions.js" />
+    <Content Include="Content\plugins\input-mask\phone-codes\readme.txt" />
+    <Content Include="Content\plugins\jQueryUI\jquery-ui.js" />
+    <Content Include="Content\plugins\jQueryUI\jquery-ui.min.js" />
+    <Content Include="Content\plugins\jvectormap\jquery-jvectormap-1.2.2.css" />
+    <Content Include="Content\plugins\jvectormap\jquery-jvectormap-1.2.2.min.js" />
+    <Content Include="Content\plugins\jvectormap\jquery-jvectormap-usa-en.js" />
+    <Content Include="Content\plugins\jvectormap\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="Content\plugins\pace\pace.css" />
+    <Content Include="Content\plugins\pace\pace.js" />
+    <Content Include="Content\plugins\pace\pace.min.css" />
+    <Content Include="Content\plugins\pace\pace.min.js" />
+    <Content Include="Content\plugins\timepicker\bootstrap-timepicker.css" />
+    <Content Include="Content\plugins\timepicker\bootstrap-timepicker.js" />
+    <Content Include="Content\plugins\timepicker\bootstrap-timepicker.min.css" />
+    <Content Include="Content\plugins\timepicker\bootstrap-timepicker.min.js" />
+    <Content Include="DAL\coonectDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>coonectDB.edmx</DependentUpon>
+      <LastGenOutput>coonectDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DAL\coonectDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>coonectDB.edmx</DependentUpon>
+      <LastGenOutput>coonectDB.cs</LastGenOutput>
+    </Content>
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\dist\css\adminlte.css.map" />
+    <Content Include="Content\dist\css\adminlte.min.css.map" />
+    <Content Include="Content\plugins\input-mask\phone-codes\phone-be.json" />
+    <Content Include="Content\plugins\input-mask\phone-codes\phone-codes.json" />
+    <EntityDeploy Include="DAL\coonectDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>coonectDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DAL\coonectDB.edmx.diagram">
+      <DependentUpon>coonectDB.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-1.11.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.11.1.js" />
+    <Content Include="Scripts\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\jquery-1.11.1.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Validate\additional-methods.js" />
+    <Content Include="Scripts\Validate\FormBadScrap.js" />
+    <Content Include="Scripts\Validate\FormCauseOfReductionDebt.js" />
+    <Content Include="Scripts\Validate\FormCustomer.js" />
+    <Content Include="Scripts\Validate\FormDepart.js" />
+    <Content Include="Scripts\Validate\FormEmployeeGroup.js" />
+    <Content Include="Scripts\Validate\FormFactory.js" />
+    <Content Include="Scripts\Validate\FormICdbStock.js" />
+    <Content Include="Scripts\Validate\FormManageGroupCustomer.js" />
+    <Content Include="Scripts\Validate\FormProductGroup.js" />
+    <Content Include="Scripts\Validate\FormTransportasionArea.js" />
+    <Content Include="Scripts\Validate\FormUnit.js" />
+    <Content Include="Scripts\Validate\jquery.validate.js" />
+    <Content Include="Scripts\Validate\Media.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\MasterData\ManageCusID.cshtml" />
+    <Content Include="Views\MasterData\ManageBusinessType.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Shared\LoginLayout.cshtml" />
+    <Content Include="Views\MasterData\BUssiness.cshtml" />
+    <Content Include="Views\MasterData\ManageSideCode.cshtml" />
+    <Content Include="Views\MasterData\ManageCustMedia.cshtml" />
+    <Content Include="Views\MasterData\ManageBillGrp.cshtml" />
+    <Content Include="Views\MasterData\Index.cshtml" />
+    <Content Include="Views\SOSaleOrder\ManageSaleOrder.cshtml" />
+    <Content Include="Views\QsoftDepart\ManageDepart.cshtml" />
+    <Content Include="Views\ManageICUnit\ManageICUnit.cshtml" />
+    <Content Include="Views\ManageICdbStock\ManageICdbStock.cshtml" />
+    <Content Include="Views\ManageCunitCurrency\ManageCunitCurrency.cshtml" />
+    <Content Include="Views\ManageICProductGroupIII\ManageICProductGroupIII.cshtml" />
+    <Content Include="Views\ManageICProductGroupII\ManageICProductGroupII.cshtml" />
+    <Content Include="Views\ManageICProductGroupIX\ManageICProductGroupIX.cshtml" />
+    <Content Include="Views\ManageICProductGroupX\ManageICProductGroupX.cshtml" />
+    <Content Include="Views\ManageICProductGroup\ManageICProductGroup.cshtml" />
+    <Content Include="Views\ManageBaddEditScrap\ManageBaddEditScrap.cshtml" />
+    <Content Include="Views\ManageProduct\ManageProduct_IC.cshtml" />
+    <Content Include="Views\ReOrderSafetyEOQ\ReOrderSafetyEOQ.cshtml" />
+    <Content Include="Views\ManageBranch\ManageBranch.cshtml" />
+    <Content Include="Views\ManageBaddEditFactory\ManageBaddEditFactory.cshtml" />
+    <Content Include="Views\ManageBaddEditSec\ManageBaddEditSec.cshtml" />
+    <Content Include="Views\CustomerZone\ManageCustomerZone.cshtml" />
+    <Content Include="Views\GroupCustomer\ManageGroupCustomer.cshtml" />
+    <Content Include="Views\GroupSupplier\ManageGroupSupplier.cshtml" />
+    <Content Include="Views\ManageCompanyProfile\ManageCompanyProfile.cshtml" />
+    <Content Include="Views\ManageCustomer\ManageCustomer.cshtml" />
+    <Content Include="Views\Factory\ManageFactory.cshtml" />
+    <Content Include="Views\ManageCauseOfReductionDebt\ManageCauseOfReductionDebt.cshtml" />
+    <Content Include="Views\ManageTransportasionArea\ManageTransportasionArea.cshtml" />
+    <Content Include="Views\EmployeeGroup\ManageEmployeeGroup.cshtml" />
+    <Content Include="Views\ManageSupplier\ManageSupplier.cshtml" />
+    <Content Include="Views\ManageEmployee\ManageEmployee.cshtml" />
+    <Content Include="Views\DeliveryOrder\ManageDeliveryOrder.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51001</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:51001/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

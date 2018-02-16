@@ -1,0 +1,228 @@
+﻿
+@using PagedList.Mvc;
+@using AccountingSystemProject.Models
+@{
+    ViewBag.Title = "ManageCustMedia";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+<div class="container-fluid ">
+    <h3>เพิ่ม/แก้ไขรหัสแหล่งข้อมูลลูกค้า</h3>
+    <div class="table-responsive table-hover" id="media">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>รหัสแหล่งข้อมูลลูกค้า</th>
+                    <th>ชื่อแหล่งข้อมูลลูกค้า</th>
+                    <th>ชื่อแหล่งข้อมูลลูกค้า(Eng)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Media in ViewBag.MyData)
+                {
+                    <tr>
+                        <td data-id="@Media.CustMediaID">
+                            @Media.CustMediaCode
+                        </td>
+                        <td>
+                            @Media.CustMediaName
+                        </td>
+                        <td>
+                            @Media.CustMediaNameEng
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>        
+    </div>
+    <br />
+</div>
+
+
+<div class="container-fluid">
+    <div class="bg">
+
+        <div class="btn-group" style="float: right">
+            <input type="button" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="Clear" />
+            <input type="button" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+            <input type="button" value="ลบ" class="btn btn-primary btn-sm" id="Delete" />
+            <input type="submit" value="ค้นหา" class="btn btn-primary btn-sm" id="Find" />
+            <input type="submit" value="ดูตัวอย่าง" class="btn btn-primary btn-sm" id="Preview" />
+            <input type="submit" value="พิมพ์" class="btn btn-primary btn-sm" id="Print" />
+        </div>
+        <br /><br /><br />
+
+
+
+        <form action="" id="FormCustMedia">
+            <input type="hidden" name="CustMediaID" id="CustMediaID" value="" />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">รหัสแหล่งข้อมูลลูกค้า : <font color="red">*</font></div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="รหัสแหล่งข้อมูลลูกค้า" name="CustMediaCode" ID="CustMediaCode" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">ชื่อแหล่งข้อมูลลูกค้า : <font color="red">*</font></div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อแหล่งข้อมูลลูกค้า" name="CustMediaName" ID="CustMediaName" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">ชื่อแหล่งข้อมูลลูกค้า(Eng): </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อแหล่งข้อมูลลูกค้า(Eng)" name="CustMediaNameEng" ID="CustMediaNameEng" />
+                </div>
+            </div>
+            <br />
+        </form>
+    </div>
+</div>
+
+
+
+@section scripts {
+
+    @Scripts.Render("~/Scripts/validate/jquery.validate.js")
+    @Scripts.Render("~/Scripts/validate/Media.js")
+
+    <script>
+
+
+
+        $("div#media table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableMedia',
+                    type: 'post',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#CustMediaID').val(data.CustMediaID);
+                        $('#CustMediaCode').val(data.CustMediaCode);
+                        $('#CustMediaName').val(data.CustMediaName);
+                        $('#CustMediaNameEng').val(data.CustMediaNameEng);
+                        $('#Remark').val((data.Remark == null) ? "" : data.Remark);
+                    }
+                });
+            } else {
+                $('#CustMediaID').val("");
+                $('#CustMediaCode').val("");
+                $('#CustMediaName').val("");
+                $('#CustMediaNameEng').val("");
+                $('#Remark').val("");
+            }
+        })
+
+        $("#Save").on('click', function () {
+            if ($("#FormCustMedia").valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveMedia", "MasterData")',
+                    data: JSON.stringify({
+                        CustMediaID: $("#CustMediaID").val(),
+                        CustMediaCode: $("#CustMediaCode").val(),
+                        CustMediaName: $("#CustMediaName").val(),
+                        CustMediaNameEng: $("#CustMediaNameEng").val(),
+                        Remark: $("#Remark").val()
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    success: function (response) {
+                        if (response == true){
+                        alert("บันทึกสำเร็จ");
+                        window.location.reload(true);
+                        } else {
+                            alert("รหัสแหล่งข้อมูลลูกค้าซ้ำ");
+                        }
+                    }
+                })
+            }
+        });
+
+
+        $("#Delete").click(function () {
+            if ($("#FormCustMedia").valid()) {
+
+                if (confirm('ยืนยันการลบ')) {
+                    Delete();
+                } else {
+                    return false;
+                }
+            }
+        });
+
+        function Delete() {
+            $.ajax({
+                url: '@Url.Action("DeleteMedia", "MasterData")',
+                type: 'post',
+                data: JSON.stringify({
+                    CustMediaID: $("#CustMediaID").val()
+                }),
+                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                }
+            });
+        }
+
+        $("#Clear").click(function () {
+
+            $('#CustMediaID').val("");
+            $('#CustMediaCode').val("");
+            $('#CustMediaName').val("");
+            $('#CustMediaNameEng').val("");
+            $('#Remark').val("");
+
+        });
+
+
+    </script>
+
+}
+
+

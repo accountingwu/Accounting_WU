@@ -1,0 +1,252 @@
+﻿
+@model IEnumerable<AccountingSystemProject.DAL.ReorderEOQ>
+
+@{
+    ViewBag.Title = "ReOrderSafetyEOQ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ReOrderSafetyEOQ</h2>
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+<div class="container">
+    <div class="table-responsive table-hover" id="ReOrderSafetyEOQ">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>คลัง</th>
+                    <th>Max</th>
+                    <th>Min</th>
+                    <th>Safty</th>
+                    <th>Reorder Point</th>
+                    <th>E.O.Q</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<form action="" id="formReOrderSafetyEOQ">
+
+    <div class="row">
+
+
+        <div class="col-md-6">
+
+            <div class="row">
+
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">สาขา : </div>
+                <div class="col-md-4" id="head">
+                    <select id="BranchReOrderSafetyEOQ">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
+                </div>
+            </div><br>
+
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">รหัส :</div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" name="CodeReOrderSafetyEOQ" ID="CodeReOrderSafetyEOQ" />
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">ชื่อสินค้า :</div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" name="ProductNameReOrderSafetyEOQ" ID="ProductNameReOrderSafetyEOQ" />
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">หน่วยนับ :</div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" name="UnitReOrderSafetyEOQ" ID="UnitReOrderSafetyEOQ" />
+                </div>
+            </div><br>
+
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <h4>มูลค่าของคลัง</h4>
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">คลังสินค้า :</div>
+                <div class="col-md-3" id="head">
+                    <input class="form-control" name="WHReOrderSafetyEOQ" ID="WHReOrderSafetyEOQ" />
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">Max :</div>
+                <div class="col-md-3" id="head">
+                    <input class="form-control" name="MaxReOrderSafetyEOQ" ID="MaxReOrderSafetyEOQ" placeholder="0.0000" />
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">Min :</div>
+                <div class="col-md-3" id="head">
+                    <input class="form-control" name="MinReOrderSafetyEOQ" ID="MinReOrderSafetyEOQ" placeholder="0.0000" />
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">Safty :</div>
+                <div class="col-md-3" id="head">
+                    <input class="form-control" name="SaftyReOrderSafetyEOQ" ID="SaftyReOrderSafetyEOQ" placeholder="0.0000" />
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">Reorder Point :</div>
+                <div class="col-md-3" id="head">
+                    <input class="form-control" name="ReorderPointReOrderSafetyEOQ" ID="ReorderPointReOrderSafetyEOQ" placeholder="0.0000" />
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head"> E.O.Q :</div>
+                <div class="col-md-3" id="head">
+                    <input class="form-control" name="EOQReOrderSafetyEOQ" ID="EOQReOrderSafetyEOQ" placeholder="0.0000" />
+                </div>
+            </div><br>
+
+
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-6">
+
+                    <input id="submitRE" type="button" class="btn btn-primary" value="ตกลง" />
+                    <input id="cancleRE" type="button" class="btn btn-primary" value="ยกเลิก" />
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <br />
+    <br />
+
+    <div>
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-1">
+                <h4>มูลค่าของสาขา</h4>
+            </div>
+            <div class="col-md-1" id="head">
+                <input class="form-control" name="valueBranchReOrderSafetyEOQ" ID="valueBranchReOrderSafetyEOQ" readonly />
+            </div>
+
+        </div>
+        <br />
+
+
+        <div class="row">
+
+            <div class="col-md-1"></div>
+            <div class="col-sm-1" id="head">Max :
+                <input class="form-control" name="MaxBranchReOrderSafetyEOQ" ID="MaxBranchReOrderSafetyEOQ" placeholder="0.0000" />
+            </div>
+
+            <div class="col-md-1"></div>
+
+            <div class="col-sm-1" id="head">Min :
+                <input class="form-control" name="MinBranchReOrderSafetyEOQ" ID="MinBranchReOrderSafetyEOQ" placeholder="0.0000" />
+            </div>
+
+            <div class="col-md-1"></div>
+
+            <div class="col-sm-1" id="head">Safty :
+                <input class="form-control" name="SaftyBranchReOrderSafetyEOQ" ID="SaftyBranchReOrderSafetyEOQ" placeholder="0.0000" />
+            </div>
+
+            <div class="col-md-1"></div>
+
+            <div class="col-sm-1" id="head">Reoder point :
+                <input class="form-control" name="ReoderPointBranchReOrderSafetyEOQ" ID="ReoderPointBranchReOrderSafetyEOQ" placeholder="0.0000" />
+            </div>
+
+            <div class="col-md-1"></div>
+
+            <div class="col-sm-1" id="head">E.O.Q :
+                <input class="form-control" name="EOQBranchReOrderSafetyEOQ" ID="EOQBranchReOrderSafetyEOQ" placeholder="0.0000" />
+            </div>
+
+        </div>
+
+        <br />
+        <br />
+
+        <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2">
+
+                <input id="saveAll" type="button" class="btn btn-primary" value="บันทึก" />
+                <input id="esc" type="button" class="btn btn-primary" value="ออก" />
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+</form>

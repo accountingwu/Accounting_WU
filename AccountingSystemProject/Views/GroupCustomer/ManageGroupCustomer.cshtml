@@ -1,0 +1,223 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "ManageGroupCustomer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+<div class="container">
+    <h3>เพิ่ม/แก้ไข รายชื่อ กลุ่มลูกหนี้</h3>
+    <div class="table-responsive table-hover" id="GroupCustomer">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>รหัสกลุ่มลูกหนี้</th>
+                    <th>ชื่อกลุ่มลูกหนี้</th>
+                    <th>ชื่อกลุ่มลูกหนี้ภาษา 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var groupcustomer in ViewBag.MyData)
+                {
+                    <tr>
+                        <td data-id="@groupcustomer.gcusid">
+                            @groupcustomer.gcuscode
+                        </td>
+                        <td>
+                            @groupcustomer.gcusname1
+                        </td>
+                        <td>
+                            @groupcustomer.gcusname2
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("ManageGroupCustomer", new { page }))</div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="bg">
+        <div class="btn-group" style="float: right">
+            <div class="btn-group" style="float: right">
+                <input type="button" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="Clear" />
+                <input type="button" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+                <input type="button" value="ลบ" class="btn btn-primary btn-sm" id="Delete" />
+                <input type="submit" value="ค้นหา" class="btn btn-primary btn-sm" id="Find" />
+                <input type="submit" value="ดูตัวอย่าง" class="btn btn-primary btn-sm" id="Preview" />
+                <input type="submit" value="พิมพ์" class="btn btn-primary btn-sm" id="Print" />
+            </div>
+        </div>
+        <br /><br /><br />
+
+
+        <form action="" id="FormManageGroupCustomer">
+            <input type="hidden" name="gcusid" id="gcusid" value="" />
+            <div class="row">
+                <div class="row">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-2" id="head">รหัสกลุ่มลูกหนี้ :</div>
+                        <div class="col-md-2" id="head">
+                            <input class="form-control" name="gcuscode" ID="gcuscode" placeholder="รหัสกลุ่มลูกค้า" />
+                        </div>
+                    </div><br>
+
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-2" id="head">ชื่อกลุ่มลูกหนี้ภาษาไทย :</div>
+                        <div class="col-md-2" id="head">
+                            <input class="form-control" name="gcusname1" ID="gcusname1" placeholder="ชื่อกลุ่มลูกค้าภาษาไทย" />
+                        </div>
+                    </div><br>
+
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-2" id="head">ชื่อกลุ่มลูกหนี้ภาษา 2 :</div>
+                        <div class="col-md-2" id="head">
+                            <input class="form-control" name="gcusname2" ID="gcusname2" placeholder="ชื่อกลุ่มลูกค้าภาษา 2" />
+                        </div>
+                    </div><br><br>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section scripts {
+
+    @Scripts.Render("~/Scripts/Validate/jquery.validate.js")
+    @Scripts.Render("~/Scripts/Validate/FormManageGroupCustomer.js")
+    <script>
+        $("div#GroupCustomer table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableGroupCustomer',
+                    type: 'post',
+                    data: {
+                        'id': id
+
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#gcusid').val(data.gcusid);
+                        $('#gcuscode').val(data.gcuscode);
+                        $('#gcusname1').val(data.gcusname1);
+                        $('#gcusname2').val(data.gcusname2);
+                    }
+                });
+            } else {
+                $('#gcusid').val("");
+                $('#gcuscode').val("");
+                $('#gcusname1').val("");
+                $('#gcusname2').val("");
+            }
+        })
+
+        $("#Save").on('click', function () {
+            if ($("#FormManageGroupCustomer").valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveGroupCustomer", "GroupCustomer")',
+                    data: JSON.stringify({
+                        gcusid: $("#gcusid").val(),
+                        gcuscode: $("#gcuscode").val(),
+                        gcusname1: $("#gcusname1").val(),
+                        gcusname2: $("#gcusname2").val(),
+                        ccode: "TBC",
+                        //bcode: $('#bcode').val()
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    success: function (response) {
+                        if (response == true){
+                        alert("บันทึกสำเร็จ");
+                        window.location.reload(true);
+                        } else {
+                            alert("รหัสกลุ่มลูกหนี้ซ้ำ");
+                        }
+                    }
+                })
+            }
+        });
+
+
+        $("#Delete").click(function () {
+            if ($("#FormManageGroupCustomer").valid()) {
+
+                if (confirm('ยืนยันการลบ')) {
+                    Delete();
+                } else {
+                    return false;
+                }
+            }
+        });
+
+        function Delete() {
+            $.ajax({
+                url: '@Url.Action("DeleteGroupCustomer", "GroupCustomer")',
+                type: 'post',
+                data: JSON.stringify({
+                    gcusid: $("#gcusid").val()
+                }),
+                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                }
+            });
+        }
+
+        $("#Clear").click(function () {
+
+            $('#gcusid').val("");
+            $('#gcuscode').val("");
+            $('#gcusname1').val("");
+            $('#gcusname2').val("");
+
+
+        });
+
+
+    </script>
+
+}

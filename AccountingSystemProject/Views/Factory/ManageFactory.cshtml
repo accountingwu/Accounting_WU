@@ -1,0 +1,238 @@
+﻿
+@{
+    ViewBag.Title = "ManageFactory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+
+<div class="container-fluid ">
+    <h3>เพิ่ม/แก้ไข รายชื่อโรงงาน</h3>
+    <div class="table-responsive table-hover" id="Factory">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>รหัสโรงงาน</th>
+                    <th>ชื่อโรงงาน</th>
+                    <th>ชื่อภาษา 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var factory in ViewBag.MyData)
+                {
+                    <tr>
+                        <td data-id="@factory.fac_id">
+                            @factory.fcode
+                        </td>
+                        <td>
+                            @factory.fname1
+                        </td>
+                        <td>
+                            @factory.fname2
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<br />
+
+<div class="container-fluid">
+    <div class="bg">
+        <div class="btn-group" style="float: right">
+            <input type="submit" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="new" />
+            <input type="submit" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+            <input type="submit" value="ลบข้อมูล" class="btn btn-primary btn-sm" id="Delete" />
+            <input type="submit" value="ค้นหา" class="btn btn-primary btn-sm" id="Find" />
+            <input type="submit" value="Refresh" class="btn btn-primary btn-sm" id="Refresh" />
+            <input type="submit" value="Preview" class="btn btn-primary btn-sm" id="Preview" />
+            <input type="submit" value="พิมพ์" class="btn btn-primary btn-sm" id="Print" />
+        </div>
+        <br /><br /><br />
+
+
+
+        <form action="" id="FormFactory">
+            <input type="hidden" name="fac_id" id="fac_id" value="" />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">สาขา : </div>
+                <div class="col-md-4" id="head">
+                    <select class="form-control" runat="server" id="bcode" name="bcode">
+                        @foreach (var brach in ViewBag.brach)
+                        {
+                            <option value="@brach.bcode">@brach.bname1 </option>
+
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">รหัสโรงงาน : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="รหัสโรงงาน" name="fcode" ID="fcode" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">ชื่อโรงงาน : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อโรงงาน" name="fname1" ID="fname1" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">ชื่อภาษา2 : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อภาษา2" name="fname2" ID="fname2" />
+                </div>
+            </div>
+        </form>
+        <br />
+        <br />
+    </div>
+</div>
+@section scripts {
+
+    @Scripts.Render("~/Scripts/Validate/jquery.validate.js")
+    @Scripts.Render("~/Scripts/Validate/FormFactory.js")
+    <script>
+        $("div#Factory table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableFactory',
+                    type: 'post',
+                    data: {
+                        'id': id
+
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#fac_id').val(data.fac_id);
+                        $('#fcode').val(data.fcode);
+                        $('#fname1').val(data.fname1);
+                        $('#fname2').val(data.fname2);
+                        $('#bcode').val(data.bcode);
+                    }
+                });
+            } else {
+                $('#fac_id').val("");
+                $('#fcode').val("");
+                $('#fname1').val("");
+                $('#fname2').val("");
+                $('#bcode').val("");
+            }
+        })
+
+        $("#Save").on('click', function () {
+            if ($("#FormFactory").valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveFactory", "Factory")',
+                    data: JSON.stringify({
+                        fac_id: $("#fac_id").val(),
+                        fcode: $("#fcode").val(),
+                        fname1: $("#fname1").val(),
+                        fname2: $("#fname2").val(),
+                        ccode: "TBC",
+                        fcap: "0.00000",
+                        //bcode: $('#bcode').val()
+                        bcode: $('#bcode option:selected').val()
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    success: function (response) {
+                        if (response == true){
+                        alert("บันทึกสำเร็จ");
+                        window.location.reload(true);
+                        } else {
+                            alert("รหัสฝ่ายซ้ำ");
+                        }
+                    }
+                })
+            }
+        });
+
+
+        $("#Delete").click(function () {
+            if ($("#FormFactory").valid()) {
+
+                if (confirm('ยืนยันการลบ')) {
+                    Delete();
+                } else {
+                    return false;
+                }
+            }
+        });
+
+        function Delete() {
+            $.ajax({
+                url: '@Url.Action("DeleteFactory", "Factory")',
+                type: 'post',
+                data: JSON.stringify({
+                    fac_id: $("#fac_id").val()
+                }),
+                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                }
+            });
+        }
+
+        $("#Clear").click(function () {
+
+            $('#fac_id').val("");
+            $('#fcode').val("");
+            $('#fname1').val("");
+            $('#fname2').val("");
+            $('#bcode').val("");
+
+
+        });
+
+
+    </script>
+
+}
+
+
+
+
+

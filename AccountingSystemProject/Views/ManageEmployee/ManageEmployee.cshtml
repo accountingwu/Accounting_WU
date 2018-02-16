@@ -1,0 +1,805 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "ManageEmployee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: #ffffff;
+        border: 1px solid #4d79ff;
+    }
+
+    #head {
+        text-align: right;
+    }
+
+    tr {
+        border-bottom: 1px solid #4d79ff;
+    }
+
+        tr:nth-child(even) {
+            background-color: #e6eeff;
+        }
+
+    th {
+        background-color: #3c8dbc;
+    }
+
+    a.my-class:link {
+        color: #1a1a1a
+    }
+
+    a.my-class:visited {
+        color: #1a1a1a
+    }
+</style>
+
+<div class="container-fluid">
+    <h3 class="box-title">เพิ่ม/แก้ไข ข้อมูลพนักงาน</h3>
+</div>
+
+<div class="btn-group" style="float: right">
+    <input type="submit" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="Clear" />
+    <input type="button" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+    <input type="button" value="ลบ" class="btn btn-primary btn-sm" id="Delete" />
+    <input type="submit" value="ค้นหา" class="btn btn-primary btn-sm" id="Find" />
+    <input type="submit" value="ดูตัวอย่าง" class="btn btn-primary btn-sm" id="Preview" />
+    <input type="submit" value="พิมพ์" class="btn btn-primary btn-sm" id="Print" />
+</div><br /><br /><br />
+
+<form id="FormEmployee">
+    <div class="container-fluid">
+        <input type="hidden" name="EmpID" id="EmpID" value="" />
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-3">
+                <div>รหัสพนักงาน<font color="red">*</font></div>
+                <div>
+                    <input class="form-control" placeholder="รหัสพนักงาน" name="EmpCode" ID="EmpCode" />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div>ชื่อผู้ใช้</div>
+                <input class="form-control" placeholder="ชื่อผู้ใช้" name="Username" ID="Username" />
+            </div>
+            <div class="col-sm-3">
+                <div>ประเภทพนักงาน <font color="red">*</font></div>
+                <select name="EmpType" id="EmpType" class="form-control">
+                    <option value="1">พนักงานทั่วไป</option>
+                    <option value="2">พนักงานขาย</option>
+                </select>
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-3">
+                <div>คำนำหน้า</div>
+                <input class="form-control" placeholder="คำนำหน้า" name="EmpTitle" ID="EmpTiTle" />
+            </div>
+            <div class="col-sm-5">
+                <div>ชื่อพนักงาน</div>
+                <input class="form-control" placeholder="ชื่อพนักงาน" name="EmpName" ID="EmpName" />
+            </div>
+            <div class="col-sm-2">
+                <div>สถานะปัจจุบัน <font color="red">*</font></div>
+                <select name="EmpStatus" id="EmpStatus" class="form-control">
+                    <option value="1">ทำงาน</option>
+                    <option value="2">พักงาน</option>
+                    <option value="3">ลาออก</option>
+                    <option value="4">เกษียณ</option>
+                </select>
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-3">
+                <div>คำนำหน้าภาษา 2</div>
+                <input class="form-control" placeholder="คำนำหน้าภาษา 2" name="EmpTitleEng" ID="EmpTiTleEng" />
+            </div>
+            <div class="col-sm-5">
+                <div>ชื่อพนักงานภาษา 2</div>
+                <input class="form-control" placeholder="ชื่อพนักงานภาษา 2" name="EmpName" ID="EmpNameEng" />
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-3">
+                <div>แผนก</div>
+                <div class="input-group">
+                    <input class="form-control" ID="secode" name="secode" placeholder="รหัสแผนก" />
+                    <span class="input-group-addon" data-toggle="modal" data-target="#FindDeptID"><i class="glyphicon glyphicon-search"></i></span>
+                    <!-- Modal -->
+                    <div class="modal fade" id="FindDeptID" role="dialog">
+                        <div class="modal-dialog " style="width: 80%; height: 80%">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">ค้นหาแผนก</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <br>
+                                        <div class="col-sm-1"></div>
+                                        <div class="col-sm-2" style="text-align:right">ค้นหาโดย</div>
+                                        <div class="col-sm-3" id="head">
+                                            <select class="form-control">
+                                                <option>รหัสแผนก</option>
+                                                <option>ชื่อแผนก</option>
+                                                <option>ชื่อแผนกภาษา 2</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input class="form-control" ID="" name="width" placeholder="กรุณากรอกคำค้น" />
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <input type="submit" value="ค้นหา" class="btn btn-primary" id="" />
+                                        </div>
+                                    </div><br />
+                                    <div class="table-responsive table-hover" id="section">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>รหัสแผนก</th>
+                                                    <th>ชื่อแผนก</th>
+                                                    <th>ชื่อแผนกภาษา 2</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var sec in ViewBag.MyDataSec)
+                                                {
+                                                    <tr>
+                                                        <td data-id="@sec.sec_id" data-dismiss="modal">
+                                                            @sec.secode
+                                                        </td>
+                                                        <td data-dismiss="modal">
+                                                            @sec.sename1
+                                                        </td>
+                                                        <td data-dismiss="modal">
+                                                            @sec.sename2
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                        <div style="text-align: center">
+                                            <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("ManageEmployee", new { page }))</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <br />
+                <input class="form-control" disabled placeholder="ชื่อแผนก" name="sename1" ID="sename1" />
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-3">
+                <div>ตำแหน่ง</div>
+                <div class="input-group">
+                    <input class="form-control" ID="PostID" name="PostID" placeholder="รหัสตำแหน่ง" />
+                    <span class="input-group-addon" data-toggle="modal" data-target="#FindPostID"><i class="glyphicon glyphicon-search"></i></span>
+                    <!-- Modal -->
+                    <div class="modal fade" id="FindPostID" role="dialog">
+                        <div class="modal-dialog " style="width: 80%; height: 80%">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">ค้นหาตำแหน่ง</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <br>
+                                        <div class="col-sm-1"></div>
+                                        <div class="col-sm-2" style="text-align:right">ค้นหาโดย</div>
+                                        <div class="col-sm-3" id="head">
+                                            <select class="form-control">
+                                                <option>รหัสตำแหน่ง</option>
+                                                <option>ชื่อตำแหน่ง</option>
+                                                <option>ชื่อตำแหน่งภาษา 2</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input class="form-control" ID="" name="width" placeholder="กรุณากรอกคำค้น" />
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <input type="submit" value="ค้นหา" class="btn btn-primary" id="" />
+                                        </div>
+                                    </div><br />
+                                    <div class="table-responsive table-hover" id="position">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>รหัสตำแหน่ง</th>
+                                                    <th>ชื่อตำแหน่ง</th>
+                                                    <th>ชื่อตำแหน่งภาษา 2</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var position in ViewBag.MyDataPos)
+                                                {
+                                                    <tr>
+                                                        <td data-id="@position.PostID" data-dismiss="modal">
+                                                            @position.PostCode
+                                                        </td>
+                                                        <td data-dismiss="modal">
+                                                            @position.PostName
+                                                        </td>
+                                                        <td data-dismiss="modal">
+                                                            @position.PostNameEng
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                        <div style="text-align: center">
+                                            <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("ManageEmployee", new { page }))</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <br />
+                <input class="form-control" disabled placeholder="ชื่อตำแหน่ง" name="PostName" ID="PostName" />
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-3">
+                <div>กลุ่มพนักงาน</div>
+                <div class="input-group">
+                    <input class="form-control" ID="EmpGroupCode" name="EmpGroupCode" placeholder="รหัสกลุ่มพนักงาน" />
+                    <span class="input-group-addon" data-toggle="modal" data-target="#FindEmpGroupID"><i class="glyphicon glyphicon-search"></i></span>
+                    <!-- Modal -->
+                    <div class="modal fade" id="FindEmpGroupID" role="dialog">
+                        <div class="modal-dialog " style="width: 80%; height: 80%">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">ค้นหากลุ่มพนักงาน</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <br>
+                                        <div class="col-sm-1"></div>
+                                        <div class="col-sm-2" style="text-align:right">ค้นหาโดย</div>
+                                        <div class="col-sm-3" id="head">
+                                            <select class="form-control">
+                                                <option>รหัสกลุ่มพนักงาน</option>
+                                                <option>ชื่อกลุ่มพนักงาน</option>
+                                                <option>ชื่อกลุ่มพนักงานภาษา 2</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input class="form-control" ID="" name="width" placeholder="กรุณากรอกคำค้น" />
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <input type="submit" value="ค้นหา" class="btn btn-primary" id="" />
+                                        </div>
+                                    </div><br />
+                                    <div class="table-responsive table-hover" id="empCode">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>รหัสกลุ่มพนักงาน</th>
+                                                    <th>ชื่อกลุ่มพนักงาน</th>
+                                                    <th>ชื่อกลุ่มพนักงานภาษา 2</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var empGrp in ViewBag.MyDataEmpGrp)
+                                                {
+                                                    <tr>
+                                                        <td data-id="@empGrp.EmpGroupID" data-dismiss="modal">
+                                                            @empGrp.EmpGroupCode
+                                                        </td>
+                                                        <td data-dismiss="modal">
+                                                            @empGrp.EmpGroupName
+                                                        </td>
+                                                        <td data-dismiss="modal">
+                                                            @empGrp.EmpGroupNameEng
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                        <div style="text-align: center">
+                                            <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("ManageEmployee", new { page }))</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <br />
+                <input class="form-control" disabled placeholder="ชื่อกลุ่มพนักงาน" name="EmpGroupName" ID="EmpGroupName" />
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-3">
+                <div>หัวหน้าทีม</div>
+                <div class="input-group">
+                    <input class="form-control" ID="EmpHeadCode" name="EmpHeadCode" placeholder="รหัสหัวหน้าทีม" />
+                    <span class="input-group-addon" data-toggle="modal" data-target="#FindEmpHead"><i class="glyphicon glyphicon-search"></i></span>
+                    <!-- Modal -->
+                    <div class="modal fade" id="FindEmpHead" role="dialog">
+                        <div class="modal-dialog " style="width: 80%; height: 80%">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">ค้นหาหัวหน้าทีม</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <br>
+                                        <div class="col-sm-1"></div>
+                                        <div class="col-sm-2" style="text-align:right">ค้นหาโดย</div>
+                                        <div class="col-sm-3" id="head">
+                                            <select class="form-control">
+                                                <option>รหัสหัวหน้าทีม</option>
+                                                <option>ชื่อหัวหน้าทีม</option>
+                                                <option>ชื่อหัวหน้าทีมภาษา 2</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input class="form-control" ID="" name="width" placeholder="กรุณากรอกคำค้น" />
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <input type="submit" value="ค้นหา" class="btn btn-primary" id="" />
+                                        </div>
+                                    </div><br />
+                                    <div class="table-responsive table-hover" id="empHead">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>รหัสหัวหน้าทีม</th>
+                                                    <th>ชื่อหัวหน้าทีม</th>
+                                                    <th>ชื่อหัวหน้าทีมภาษา 2</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var empHead in ViewBag.MyData)
+                                                {
+                                                    <tr>
+                                                        <td data-id="@empHead.EmpID" data-dismiss="modal">
+                                                            @empHead.EmpCode
+                                                        </td>
+                                                        <td data-dismiss="modal">
+                                                            @empHead.EmpName
+                                                        </td>
+                                                        <td data-dismiss="modal">
+                                                            @empHead.EmpNameEng
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                        <div style="text-align: center">
+                                            <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("ManageEmployee", new { page }))</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <br />
+                <input class="form-control" disabled placeholder="ชื่อหัวหน้าทีม" name="EmpHeadName" ID="EmpHeadName" />
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <div>หมายเลขประจำตัวประชาชน <font color="red">*</font></div>
+                <input class="form-control" placeholder="หมายเลขประจำตัวประชาชน" name="IDCard" ID="IDCard" />
+            </div>
+            <div class="col-sm-3">
+                <div>วันที่เข้าทำงาน <font color="red">*</font></div>
+                <input class="form-control" type="date" ID="EmpStartDate" name="EmpStartDate" />
+            </div>
+            <div class="col-sm-3">
+                <div>วันที่ปรับปรุงเงินเดือน</div>
+                <input class="form-control" type="date" ID="EmpPromoteDate" name="EmpPromoteDate" />
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <div>เลขประจำตัวผู้เสียภาษี</div>
+                <input class="form-control" placeholder="เลขประจำตัวผู้เสียภาษี" name="TaxID" ID="TaxID" />
+            </div>
+            <div class="col-sm-3">
+                <div>วันที่ลาออก</div>
+                <input class="form-control" type="date" ID="EmpResignDate" name="EmpResignDate" />
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-7">
+                <div>ที่อยู่</div>
+                <input class="form-control" placeholder="ที่อยู่" name="EmpAddr1" ID="EmpAddr1" />
+            </div>
+            <div class="col-sm-3">
+                <div>ตำบล</div>
+                <input class="form-control" placeholder="ตำบล" name="District" ID="District" />
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-3">
+                <div>อำเภอ</div>
+                <input class="form-control" placeholder="อำเภอ" name="Amphur" ID="Amphur" />
+            </div>
+            <div class="col-sm-4">
+                <div>จังหวัด</div>
+                <input class="form-control" placeholder="จังหวัด" name="Province" ID="Province" />
+            </div>
+            <div class="col-sm-3">
+                <div>รหัสไปรษณีย์</div>
+                <input class="form-control" placeholder="รหัสไปรษณีย์" name="PostCode" ID="PostCode" />
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-3">
+                <div>เบอร์ติดต่อ</div>
+                <input class="form-control" placeholder="เบอร์ติดต่อ" name="Tel" ID="Tel" />
+            </div>
+            <div class="col-sm-7">
+                <div>อีเมล</div>
+                <input class="form-control" placeholder="อีเมล" name="Email" ID="Email" />
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <div>หมายเหตุ</div>
+                <textarea class="form-control" id="Remark" name="Remark" placeholder="หมายเหตุ"></textarea>
+            </div>
+        </div>
+    </div><br /><br />
+</form>
+
+<div class="container-fluid ">
+    <div class="table-responsive " id="Employee">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>รหัสพนักงาน</th>
+                    <th>ชื่อพนักงาน</th>
+                    <th>ชื่อพนักงานภาษา 2</th>
+                    @*<th>ชื่อกลุ่มพนักงาน</th>*@
+                    @*<th>ชื่อตำแหน่ง</th>
+                    <th>ชื่อแผนก</th>*@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var EmployeeModel in ViewBag.MyData)
+                {
+                    <tr>
+                        <td data-id="@EmployeeModel.EmpID">
+                            @EmployeeModel.EmpCode
+                        </td>
+                        <td>
+                            @EmployeeModel.EmpName
+                        </td>
+                        <td>
+                            @EmployeeModel.EmpNameEng
+                        </td>
+                        @*<td>
+                            @EmployeeModel.wtype
+                        </td>*@
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div style="text-align: center">
+            <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("ManageEmployee", new { page }))</div>
+        </div>
+    </div>
+    <br />
+</div>
+
+@section scripts {
+
+    @Scripts.Render("~/Scripts/Validate/jquery.validate.js")
+    @Scripts.Render("~/Scripts/Validate/FormEmployee.js")
+    <script>
+        $("div#Employee table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableEmployee',
+                    type: 'post',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#EmpID').val(data.EmpID);
+                        $('#EmpHeadCode').val(data.EmpHead);
+                        $('#EmpCode').val(data.EmpCode);
+                        $('#EmpName').val(data.EmpName);
+                        $('#EmpTitle').val(data.EmpTitle);
+                        $('#EmpNameEng').val(data.EmpNameEng);
+                        $('#EmpType').val(data.EmpType);
+                        $('#Tel').val(data.Tel);
+                        $('#Email').val(data.Email);
+                        $('#EmpStartDate').val(data.EmpStartDate);
+                        $('#EmpPromoteDate').val(data.EmpPromoteDate);
+                        $('#EmpResignDate').val(data.EmpResignDate);
+                        $('#EmpAddr1').val(data.EmpAddr1);
+                        $('#District').val(data.District);
+                        $('#Amphur').val(data.Amphur);
+                        $('#Province').val(data.Province);
+                        $('#PostCode').val(data.PostCode);
+                        $('#EmpStatus').val(data.EmpStatus);
+                        $('#EmpTitleEng').val(data.EmpTitleEng);
+                        $('#Username').val(data.Username);
+                        $('#secode').val(data.DeptID);
+                        $("#EmpGroupCode").val(data.EmpGrouID);
+                        $('#PostID').val(data.PostID);
+                        $("#TaxID").val(data.TaxID);
+                        $("#IDCard").val(data.IDCard);
+                        $("#Remark").val(data.Remark);
+                    }
+                });
+            } else {
+                $('#EmpID').val("");
+                $('#EmpHeadCode').val("");
+                $('#EmpCode').val("");
+                $('#EmpName').val("");
+                $('#EmpTitle').val("");
+                $('#EmpNameEng').val("");
+                $('#EmpType').val("");
+                $('#Tel').val("");
+                $('#Email').val("");
+                $('#EmpStartDate').val("");
+                $('#EmpPromoteDate').val("");
+                $('#EmpResignDate').val("");
+                $('#EmpAddr1').val("");
+                $('#District').val("");
+                $('#Amphur').val("");
+                $('#Province').val("");
+                $('#PostCode').val("");
+                $('#EmpStatus').val("");
+                $('#EmpTitleEng').val("");
+                $('#Username').val("");
+                $('#secode').val("");
+                $("#EmpGroupCode").val("");
+                $('#PostID').val("");
+                $("#TaxID").val("");
+                $("#IDCard").val("");
+                $("#Remark").val("");
+            }
+        })
+
+        $("#Clear").click(function () {
+            $('#EmpID').val("");
+            $('#EmpHeadCode').val("");
+            $('#EmpCode').val("");
+            $('#EmpName').val("");
+            $('#EmpTitle').val("");
+            $('#EmpNameEng').val("");
+            $('#EmpType').val("");
+            $('#Tel').val("");
+            $('#Email').val("");
+            $('#EmpStartDate').val("");
+            $('#EmpPromoteDate').val("");
+            $('#EmpResignDate').val("");
+            $('#EmpAddr1').val("");
+            $('#District').val("");
+            $('#Amphur').val("");
+            $('#Province').val("");
+            $('#PostCode').val("");
+            $('#EmpStatus').val("");
+            $('#EmpTitleEng').val("");
+            $('#Username').val("");
+            $('#secode').val("");
+            $("#EmpGroupCode").val("");
+            $('#PostID').val("");
+            $("#TaxID").val("");
+            $("#IDCard").val("");
+            $("#Remark").val("");
+
+        });
+
+        $("#Save").on('click', function () {
+            if ($("#FormEmployee").valid()) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("SaveEmployee", "ManageEmployee")',
+                    data: JSON.stringify({
+                        bciid: $("#bciid").val(),
+                        EmpID: $("#EmpID").val(),
+                        EmpHead: $("#EmpHeadCode").val(),
+                        EmpCode: $("#EmpCode").val(),
+                        EmpName: $("#EmpName").val(),
+                        EmpTitle: $("#EmpTitle").val(),
+                        EmpNameEng: $("#EmpNameEng").val(),
+                        EmpType: $('#EmpType option:selected').val(),
+                        Tel: $("#Tel").val(),
+                        Email: $("#Email").val(),
+                        EmpStartDate: $("#EmpStartDate").val(),
+                        EmpPromoteDate: $("#EmpPromoteDate").val(),
+                        EmpResignDate: $("#EmpResignDate").val(),
+                        EmpAddr1: $("#EmpAddr1").val(),
+                        District: $("#District").val(),
+                        Amphur: $("#Amphur").val(),
+                        Province: $("#Province").val(),
+                        PostCode: $("#PostCode").val(),
+                        EmpStatus: $('#EmpStatus option:selected').val(),
+                        EmpTitleEng: $("#EmpTitleEng").val(),
+                        EmpSignature: "",
+                        Username: $("#Username").val(),
+                        DeptID: $("#secode").val(),
+                        EmpGroupID: $("#EmpgroupCode").val(),
+                        PostID: $("#PostID").val(),
+                        TaxID: $("#TaxID").val(),
+                        IDCard: $("#IDCard").val(),
+                        Remark: $("#Remark").val(),
+                        ccode: "TBC"
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    success: function (response) {
+                        if (response == true){
+                        alert("บันทึกสำเร็จ");
+                        window.location.reload(true);
+                        } else {
+                            alert("รหัสฝ่ายซ้ำ");
+                        }
+                    }
+                })
+            }
+        });
+
+        $("div#section table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableSection',
+                    type: 'get',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#secode').val(data.secode);
+                        $('#sename1').val(data.sename1);
+                    }
+                });
+            } else {
+
+                $('#sename1').val("");
+                $('#sename1').val("");
+
+            }
+        })
+
+        $("div#position table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTablePosition',
+                    type: 'get',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#PostCode').val(data.PostCode);
+                        $('#PostName').val(data.PostName);
+                    }
+                });
+            } else {
+
+                $('#PostCode').val("");
+                $('#PostName').val("");
+
+            }
+        })
+
+        $("div#empGrp table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableEmpGrp',
+                    type: 'get',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#EmpGroupCode').val(data.EmpGroupCode);
+                        $('#EmpGroupName').val(data.EmpGroupName);
+                    }
+                });
+            } else {
+
+                $('#EmpGroupCode').val("");
+                $('#EmpGroupName').val("");
+
+            }
+        })
+
+        $("div#empHead table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableEmpHead',
+                    type: 'get',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#EmpHeadCode').val(data.EmpCode);
+                        $('#EmpHeadName').val(data.EmpName);
+                    }
+                });
+            } else {
+
+                $('#EmpHeadCode').val("");
+                $('#EmpHeadName').val("");
+
+            }
+        })
+
+        $("#Delete").click(function () {
+            if ($("#FormEmployee").valid()) {
+
+                if (confirm('ยืนยันการลบ')) {
+                    Delete();
+                } else {
+                    return false;
+                }
+            }
+        });
+
+        function Delete() {
+            $.ajax({
+                url: '@Url.Action("DeleteEmployee", "ManageEmployee")',
+                type: 'post',
+                data: JSON.stringify({
+                    EmpID: $("#EmpID").val()
+                }),
+                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                }
+            });
+        }
+    </script>
+}

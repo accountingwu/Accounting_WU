@@ -1,0 +1,942 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@using AccountingSystemProject.Models;
+@{
+    ViewBag.Title = "ManageSupplier";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+<!-- Tab Menu -->
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#page1">หน้าที่ 1</a></li>
+    <li><a data-toggle="tab" href="#page2">หน้าที่ 2</a></li>
+    <li><a data-toggle="tab" href="#page3">หน้าที่ 3</a></li>
+</ul>
+<div class="btn-group" style="float: right">
+    <input type="submit" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="Clear" />
+    <input type="button" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+    <input type="button" value="ลบ" class="btn btn-primary btn-sm" id="Delete" />
+    <input type="button" value="ค้นหา" class="btn btn-primary btn-sm" id="Search" />
+</div><br /><br />
+
+<!-- tap Menu -->
+<div class="tab-content">
+    <!-- หน้าที่ 1 -->
+    <div id="page1" class="tab-pane fade in active">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-3">
+                    <div>รหัส</div>
+                    <input type="hidden" name="sup_id" id="sup_id" value="" />
+                    <input class="form-control" placeholder="รหัส" name="supcode" id="supcode" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <div>ชื่อภาษา</div>
+                    <input class="form-control" placeholder="ชื่อภาษา" name="supname1" id="supname1" />
+                </div>
+                <div class="col-md-2">
+                    <div>รหัสไปรษณีย์</div>
+                    <input class="form-control" placeholder="รหัสไปรษณีย์" name="supzip" id="supzip" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <div>ชื่อย่อภาษา</div>
+                    <input class="form-control" placeholder="ชื่อย่อภาษา" name="supname11" id="supname11" />
+                </div>
+                <div class="col-md-4">
+                    <div>โทรศัพท์</div>
+                    <input class="form-control" placeholder="โทรศัพท์" name="suptel" id="suptel" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <div>ชื่อภาษา2</div>
+                    <input class="form-control" placeholder="ชื่อภาษา2" name="supname2" id="supname2" />
+                </div>
+                <div class="col-md-4">
+                    <div>Fax</div>
+                    <input class="form-control" placeholder="Fax" name="supfax" id="supfax" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <div>ชื่อย่อภาษา2</div>
+                    <input class="form-control" placeholder="ชื่อย่อภาษา2" name="supname21" id="supname21" />
+                </div>
+                <div class="col-md-4">
+                    <div>โทรศัพท์มือถือ</div>
+                    <input class="form-control" placeholder="โทรศัพท์" name="supmobile" id="supmobile" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <div>ที่อยู่ภาษาไทย</div>
+                    <textarea rows="4" cols="60" placeholder="ที่อยู่ภาษาไทย" name="supaddress1" id="supaddress1"></textarea>
+                </div>
+                <div class="col-md-4">
+                    <br />
+                    <div class="row">
+                        <div class="col-md-4">
+                            สถานะเจ้าหนี้
+                        </div>
+                        @*<select class="col-md-8" runat="server" id="status" name="status">
+                                <option value="True">Active</option>
+                                <option value="False">Inactive</option>
+                            </select>*@
+                        <div class="col-md-8" id="status" name="status">
+                            <input type="radio"  name="Active" value="True"> Active &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio"  name="Active" value="Flust"> Inactive
+                        </div>
+                    </div>
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-md-5">วันที่ Inactive</div>
+                        <div class="col-md-7">
+                            <input class="form-control" type="datetime-local" name="dateinact" id="dateinact" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <div>ที่อยู่ภาษา2</div>
+                    <textarea rows="4" cols="60" placeholder="ที่อยู่ภาษา2" name="supaddress2" id="supaddress2"></textarea>
+                </div>
+                @*<div class="col-md-4">
+                        <br />
+                        <div class="row">
+                            <div class="col-md-5">ระยะเวลาในการจัดซื้อ</div>
+                            <div class="col-md-5">
+                                <input style="text-align:center" class="form-control" name="DataInactive" id="DataInactive" placeholder="0" />
+                            </div>
+                            <div class="col-md-2">
+                                วัน
+                            </div>
+                        </div>
+                    </div>*@
+            </div>
+            <br />
+        </div><br />
+    </div>
+
+    <div id="page2" class="tab-pane fade">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-4">
+                    <div>เลขที่บัตรประจำตัวประชาชน</div>
+                    <input class="form-control" name="p_id" id="p_id" />
+                </div>
+                @*<div class="col-md-2">
+                        <div>รหัส</div>
+                        <input class="form-control" name="Code" id="Code" />
+                    </div>*@
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-4">
+                    <div>เลขที่ผู้เสียภาษี</div>
+                    <input class="form-control" name="t_id" id="t_id" />
+                </div>
+                <div class="col-md-2">
+                    <div>เป็นนิติบุคคล</div>
+                    <select class="form-control" runat="server" id="niti" name="niti">
+                        <option value="Y">Y</option>
+                        <option value="N">N</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <div>หมายเหตุใบรับวางบิล</div>
+                    <input class="form-control" name="notebill" id="notebill" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-4">
+                    <div>รหัสบัญชี</div>
+                    @*<input type="hidden" name="AccID" id="AccID" value="" />*@
+
+                    <input class="form-control" ID="AccCode" name="AccCode" placeholder="รหัสบัญชี" />
+
+                </div>
+                <br />
+
+                <div class="col-md-4">
+
+                    <div class="input-group">
+                        <input class="form-control" ID="AccName" name="AccName" />
+                        <span class="input-group-addon" data-toggle="modal" data-target="#FinditemPopupSup"><i class="glyphicon glyphicon-search"></i></span>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="FinditemPopupSup" role="dialog">
+                            <div class="modal-dialog " style="width: 80%; height: 80%">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">ค้นหา รายชื่อบัญชี</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="table-responsive table-hover" id="popup">
+                                                <br>
+                                                <div class="col-md-2">ค้นหาโดย</div>
+                                                <div class="col-md-3" id="head">
+                                                    <select class="form-control">
+                                                        <option>ชื่อบัญชี</option>
+                                                        <option>รหัสบัญชี</option>
+                                                    </select>
+
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input class="form-control" ID="Acc" name="width" placeholder="" />
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <input type="submit" value="ค้นหา" class="btn btn-primary" id="SearchAcc" />
+                                                </div>
+                                                <br />
+
+                                                <table class="table">
+
+                                                    <thead>
+                                                        <tr>
+                                                            <th>รหัสบัญชี</th>
+                                                            <th>ชื่อบัญชี</th>
+                                                            <th>ชื่อบัญชี(Eng)</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var Acc in ViewBag.MyData)
+                                                        {
+                                                            <tr>
+                                                                <td data-id="@Acc.AccID" data-dismiss="modal">
+                                                                    @Acc.AccCode
+                                                                </td>
+                                                                <td data-dismiss="modal">
+                                                                    @Acc.AccName
+                                                                </td>
+                                                                <td data-dismiss="modal">
+                                                                    @Acc.AccNameEng
+                                                                </td>
+
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-4">
+                    <div>หมายเหตุภาษา</div>
+                    <input class="form-control" name="noteth" id="noteth" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                    <div>กลุ่มเจ้าหนี้</div>
+                    <select class="form-control" runat="server" id="gsupid" name="gsupid">
+                        @foreach (var group in ViewBag.MyData1)
+                        {
+                            <option value="@group.gsupcode">@group.gsupcode </option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-4"></div>
+                @*<div class="col-md-4">
+                        <div>หมายเหตุภาษา</div>
+                        <input class="form-control" name="noteen" id="noteen" />
+                    </div>*@
+            </div>
+            <br />
+
+            <b>ที่อยู่ที่ใช้ติดต่อ</b>
+            <hr />
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-4">
+                    <div>ที่อยู่ภาษาไทย</div>
+                    <textarea rows="3" cols="60" placeholder="ที่อยู่ภาษาไทย" name="contaddress1" id="contaddress1"></textarea>
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-4">
+                    <div>ที่อยู่ภาษา2</div>
+                    <textarea rows="3" cols="60" placeholder="ที่อยู่ภาษา2" name="contaddress2" id="contaddress2"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <div id="page3" class="tab-pane fade">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <br />
+                        <div class="col-md-5">เครดิตเทอม</div>
+                        <div class="col-md-5">
+                            <input style="text-align:center" class="form-control" name="credittermday" id="credittermday" placeholder="0" />
+                        </div>
+                        <div class="col-md-2">วัน</div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div>หมายเหตุ 1 :</div>
+                    <input class="form-control" name="note1" id="note1" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-3">
+                    <div>วงเงินเครดิต</div>
+                    <input class="form-control" name="creditmoney" id="creditmoney" />
+                </div>
+                <div class="col-md-8">
+                    <div>หมายเหตุ 2 :</div>
+                    <input class="form-control" name="note2" id="note2" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-3">
+                    <div>ชื่อผู้ติดต่อ/ประสาน</div>
+                    <input class="form-control" name="contname" id="contname" />
+                </div>
+                <div class="col-md-8">
+                    <div>หมายเหตุ 3 :</div>
+                    <input class="form-control" name="note3" id="note3" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-3">
+                    <div>รหัสนโยบายราคา</div>
+                    <select name="ncostcode" class="form-control" id="ncostcode">
+                        <option></option>
+                        <option></option>
+                    </select>
+                </div>
+                <div class="col-md-8">
+                    <div>หมายเหตุ 4 :</div>
+                    <input class="form-control" name="note4" id="note4" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-3">
+                    <div>รหัสนโยบายส่วนลด</div>
+                    <select name="ndiscountcode" class="form-control" id="ndiscountcode">
+                        <option></option>
+                        <option></option>
+                    </select>
+                </div>
+                <div class="col-md-8">
+                    <div>หมายเหตุ 5 :</div>
+                    <input class="form-control" name="note5" id="note5" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-8">
+                    <div>หมายเหตุ 6 :</div>
+                    <input class="form-control" name="note6" id="note6" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-8">
+                    <div>หมายเหตุ 7 :</div>
+                    <input class="form-control" name="note7" id="note7" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-8">
+                    <div>หมายเหตุ 8 :</div>
+                    <input class="form-control" name="note8" id="note8" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-8">
+                    <div>หมายเหตุ 9 :</div>
+                    <input class="form-control" name="note9" id="note9" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-8">
+                    <div>หมายเหตุ 10 :</div>
+                    <input class="form-control" name="note10" id="note10" />
+                </div>
+            </div>
+            <br />
+
+
+        </div>
+    </div>
+
+
+</div>
+
+<div class="container-fluid">
+    <div class="table-responsive table-hover" id="Supplier">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>รหัสเจ้าหนี้</th>
+                    <th>ชื่อเจ้าหนี้</th>
+                    <th>ชื่อย่อเจ้าหนี้</th>
+                    <th>สถานะ</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Sup in ViewBag.MyData2)
+                {
+                    <tr>
+
+                        <td data-id="@Sup.sup_id">
+                            @Sup.supcode
+                        </td>
+                        <td >
+                            @Sup.supname1
+                        </td>
+                        <td >
+                            @Sup.supname11
+                        </td>
+                        <td>
+                            @Sup.status
+                        </td>
+
+                        <td class='hidden'>
+                            @Sup.supname2
+                        </td>
+
+                        <td class='hidden'>
+                            @Sup.supname21
+                        </td>
+
+                        <td class='hidden'>
+                            @Sup.supaddress1
+                        </td>
+                        <td class='hidden'>
+                            @Sup.supaddress2
+                        </td>
+
+                        <td class='hidden'>
+                            @Sup.supzip
+                        </td>
+
+                        <td class='hidden'>
+                            @Sup.suptel
+                        </td>
+                        <td class='hidden'>
+                            @Sup.supfax
+                        </td>
+                        <td td class='hidden'>
+                            @Sup.supmobile
+                        </td>
+                        <td class='hidden'>
+                            @Sup.p_id
+                        </td>
+
+                        <td class='hidden'>
+                            @Sup.t_id
+                        </td>
+                        <td class='hidden'>
+                            @Sup.acc_code
+                        </td>
+
+                        <td class='hidden'>
+                            @Sup.gsupid
+                        </td>
+                        <td class='hidden'>
+                            @Sup.contaddress1
+                        </td>
+
+                        <td class='hidden'>
+                            @Sup.contaddress2
+                        </td>
+                        <td class='hidden'>
+                            @Sup.contzip
+                        </td>
+
+                        <td class='hidden'>
+                            @Sup.notebill
+                        </td>
+                        <td class='hidden'>
+                            @Sup.noteth
+                        </td>
+
+                        <td class='hidden'>
+                            @Sup.noteen
+                        </td>
+                        <td class='hidden'>
+                            @Sup.credittermday
+                        </td>
+
+                        <td class='hidden'>
+                            @Sup.creditmoney
+                        </td>
+                        <td class='hidden'>
+                            @Sup.contname
+                        </td>
+
+                        <td class='hidden'>
+                            @Sup.ncostcode
+                        </td>
+                        <td class='hidden'>
+                            @Sup.ndiscountcode
+                        </td>
+
+                        <td class='hidden'>
+                            @Sup.note1
+                        </td>
+                        <td class='hidden'>
+                            @Sup.note2
+                        </td>
+                        <td class='hidden'>
+                            @Sup.note3
+                        </td>
+                        <td>
+                            @Sup.note4
+                        </td>
+                        <td class='hidden'>
+                            @Sup.note5
+                        </td>
+                        <td class='hidden'>
+                            @Sup.note6
+                        </td>
+                        <td td class='hidden'>
+                            @Sup.note7
+                        </td>
+                        <td class='hidden'>
+                            @Sup.note8
+                        </td>
+                        <td class='hidden'>
+                            @Sup.note9
+                        </td>
+                        <td class='hidden'>
+                            @Sup.note10
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData2, page => Url.Action("ManageSupplier", new { page }))</div>
+    </div>
+</div>
+@section scripts {
+    @*@Scripts.Render("~/Scripts/validate/jquery.validate.js")
+        @Scripts.Render("~/Scripts/validate/ManageSection.js")*@
+    <script>
+
+
+
+        $("div#Supplier table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableSupplier',
+                    type: 'post',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#sup_id').val(data.sup_id);
+                        $('#supcode').val(data.supcode);
+                        $('#supname1').val(data.supname1);
+                        $('#supname11').val(data.supname11);
+                        $('#supname2').val(data.supname2);
+
+                        $('#supname21').val(data.supname21);
+                        $('#supaddress1').val(data.supaddress1);
+                        $('#supaddress2').val(data.supaddress2);
+                        $('#supzip').val(data.supzip);
+                        $('#suptel').val(data.suptel);
+
+                        $('#supfax').val(data.supfax);
+                        $('#supmobile').val(data.supmobile);
+                        $('#dateinact').val(data.dateinact);
+
+                        $('#supfax').val(data.supfax);
+
+                        $('#supmobile').val(data.supmobile);
+                        $('#niti').val(data.niti);
+                        $('#AccCode').val(data.acc_code);
+                        $('#AccName').val(data.AccName);
+                        $('#gsupid').val(data.gsupid);
+                        $('#contaddress1').val(data.contaddress1);
+
+                        $('#contaddress2').val(data.contaddress2);
+                        $('#contzip').val(data.contzip);
+                        $('#notebill').val(data.notebill);
+                        $('#noteth').val(data.noteth);
+                        $('#noteen').val(data.noteen);
+                        $('#p_id').val(data.p_id);
+                        $('#t_id').val(data.t_id);
+                        $('#credittermday').val(data.credittermday);
+                        $('#creditmoney').val(data.creditmoney);
+                        $('#contname').val(data.contname);
+                        $('#ncostcode').val(data.ncostcode);
+                        $('#ndiscountcode').val(data.ndiscountcode);
+
+                        $('#note1').val(data.note1);
+                        $('#note2').val(data.note2);
+                        $('#note3').val(data.note3);
+                        $('#note4').val(data.note4);
+                        $('#note5').val(data.note5);
+                        $('#note6').val(data.note6);
+                        $('#note7').val(data.note7);
+                        $('#note8').val(data.note8);
+                        $('#note9').val(data.note9);
+                        $('#note10').val(data.note10);
+
+                        if (data.status == 'False') {
+                            //$('#status').val(False);
+                            $('#status').find(':radio[name=Active][value="False"]').prop('checked', true)
+                        }
+                        else {
+                            $('#status').find(':radio[name=Active][value="True"]').prop('checked', true)
+                        }
+                    }
+                });
+            } else {
+                $('#sup_id').val("");
+                $('#supcode').val("");
+                $('#supname1').val("");
+                $('#supname11').val("");
+                $('#supname2').val("");
+                $('#AccName').val(data.AccName);
+                $('#supname21').val("");
+                $('#supaddress1').val("");
+                $('#supaddress2').val("");
+                $('#supzip').val("");
+                $('#suptel').val("");
+                $('#supfax').val("");
+
+                $('#supmobile').val("");
+                $('#dateinact').val("");
+                $('#status').val("");
+                $('#p_id').val("");
+                $('#t_id').val("");
+
+                $('#niti').val("");
+                $('#AccCode').val("");
+                $('#gsupid').val("");
+                $('#contaddress1').val("");
+                $('#contaddress2').val("");
+
+                $('#contzip').val("");
+                $('#notebill').val("");
+                $('#noteth').val("");
+                $('#noteen').val("");
+                $('#credittermday').val("");
+
+                $('#creditmoney').val("");
+                $('#contname').val("");
+                $('#ncostcode').val("");
+                $('#ndiscountcode').val("");
+                $('#note1').val("");
+
+
+                $('#note2').val("");
+                $('#note3').val("");
+                $('#note4').val("");
+                $('#note5').val("");
+                $('#note6').val("");
+                $('#note7').val("");
+                $('#note8').val("");
+                $('#note9').val("");
+                $('#note10').val("");
+
+            }
+        })
+
+
+
+
+    $("div#popup table").delegate('tr', 'click', function () {
+        var id = $(this).find("td:first").data("id");
+        if (id != null) {
+            $.ajax({
+                url: 'FinditemPopupSup',
+                type: 'get',
+                data: {
+                    'id': id
+                },
+                dataType: "json",
+                success: function (data) {
+                    $('#AccCode').val(data.AccCode);
+                    $('#AccName').val(data.AccName);
+                }
+            });
+        } else {
+
+            $('#AccCode').val("");
+            $('#AccName').val("");
+
+        }
+    })
+
+        $("#Save").click(function () {
+
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Save", "ManageSupplier")',
+                    data: JSON.stringify({
+                        sup_id: $("#sup_id").val(),
+                        supcode: $("#supcode").val(),
+                        supname1: $("#supname1").val(),
+                        supname11: $("#supname11").val(),
+                        supname2: $("#supname2").val(),
+                        supname21: $("#supname21").val(),
+                        supaddress1: $("#supaddress1").val(),
+                        supaddress2: $("#supaddress2").val(),
+                        supzip: $("#supzip").val(),
+                        suptel: $("#suptel").val(),
+                        supfax: $("#supfax").val(),
+                        supmobile: $("#supmobile").val(),
+                        dateinact: $("#dateinact").val(),
+                        status: $('#status input:checked').val(),
+                        p_id: $("#p_id").val(),
+                        t_id: $("#t_id").val(),
+                        niti: $('#niti option:selected').val(),
+                        acc_code: $("#AccCode").val(),
+                        gsupid: $('#gsupid option:selected').val(),
+                        
+                        contaddress1: $("#contaddress1").val(),
+                        contaddress2: $("#contaddress2").val(),
+                        contzip: $("#contzip").val(),
+                        notebill: $("#notebill").val(),
+                        noteth: $("#noteth").val(),
+                        noteen: $("#noteen").val(),
+                        ncostcode: $('#ncostcode option:selected').val(),
+                        ndiscountcode: $('#ndiscountcode option:selected').val(),
+                        contname: $("#contname").val(),
+                        creditmoney: $("#creditmoney").val(),
+                        credittermday: $("#credittermday").val(),
+
+
+                        note1: $("#note1").val(),
+                        note2: $('#note2').val(),
+                        note3: $('#note3').val(),
+                        note4: $("#note4").val(),
+                        note5: $("#note5").val(),
+                        note6: $("#note6").val(),
+
+                        note7: $("#note7").val(),
+                        note8: $('#note8').val(),
+                        note9: $('#note9').val(),
+                        note10: $("#note10").val(),
+                        ccode: "TBC"
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    success: function (response) {
+                        if (response == true) {
+                            alert("บันทึกสำเร็จ");
+                            window.location.reload(true);
+                        } else {
+                            alert("รหัสเจ้าหนี้ซ้ำ");
+                        }
+
+                    }
+                })
+
+        });
+
+        @*$("#Delete").click(function () {
+            //if ($("#SectionFrom").valid()) {
+
+                if (confirm('ยืนยันการลบ')) {
+                    Delete();
+                } else {
+                    return false;
+                }
+            //}
+        });
+
+        function Delete() {
+            $.ajax({
+                url: '@Url.Action("DeleteSection", "Section")',
+                type: 'post',
+                data: JSON.stringify({
+                    sec_id: $("#sec_id").val()
+                }),
+                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                }
+            });
+        }*@
+
+        $("#Clear").click(function () {
+
+                $('#sup_id').val("");
+                $('#supcode').val("");
+                $('#supname1').val("");
+                $('#supname11').val("");
+                $('#supname2').val("");
+
+                $('#supname21').val("");
+                $('#supaddress1').val("");
+                $('#supaddress2').val("");
+                $('#supzip').val("");
+                $('#suptel').val("");
+                $('#supfax').val("");
+
+                $('#supmobile').val("");
+                $('#dateinact').val("");
+                $('#status').val("");
+                $('#p_id').val("");
+                $('#t_id').val("");
+
+                $('#niti').val("");
+                $('#AccCode').val("");
+                $('#gsupid').val("");
+                $('#contaddress1').val("");
+                $('#contaddress2').val("");
+
+                $('#contzip').val("");
+                $('#notebill').val("");
+                $('#noteth').val("");
+                $('#noteen').val("");
+                $('#credittermday').val("");
+                $('#AccName').val("");
+                $('#creditmoney').val("");
+                $('#contname').val("");
+                $('#ncostcode').val("");
+                $('#ndiscountcode').val("");
+                $('#note1').val("");
+
+
+                $('#note2').val("");
+                $('#note3').val("");
+                $('#note4').val("");
+                $('#note5').val("");
+                $('#note6').val("");
+
+
+                $('#note7').val("");
+                $('#note8').val("");
+                $('#note9').val("");
+                $('#note10').val("");
+
+
+        });
+
+
+    </script>
+
+}
+
+

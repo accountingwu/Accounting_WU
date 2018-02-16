@@ -1,0 +1,244 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "ManageTransportasionArea";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: #ffffff;
+        border: 1px solid #4d79ff;
+    }
+
+    #head {
+        text-align: right;
+    }
+
+    tr {
+        border-bottom: 1px solid #4d79ff;
+    }
+
+        tr:nth-child(even) {
+            background-color: #e6eeff;
+        }
+
+    th {
+        background-color: #3c8dbc;
+    }
+
+    a.my-class:link {
+        color: #1a1a1a
+    }
+
+    a.my-class:visited {
+        color: #1a1a1a
+    }
+</style>
+
+
+
+<div class="container-fluid ">
+    <h3>เพิ่ม/แก้ไขรหัสเขตการขนส่ง</h3>
+
+    <div class="table-responsive table-hover" id="transpArea">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@Html.ActionLink("รหัสเขตการขนส่ง", "ManageTransportasionArea", new { sortOrder = ViewBag.TranspAreaCode }, new { @class = "my-class" })</th>
+                    <th>@Html.ActionLink("ชื่อเขตการขนส่ง", "ManageTransportasionArea", new { sortOrder = ViewBag.TranspAreaName }, new { @class = "my-class" })</th>
+                    <th>@Html.ActionLink("ชื่อเขตการขนส่ง(Eng)", "ManageTransportasionArea", new { sortOrder = ViewBag.TranspAreaNameEng }, new { @class = "my-class" })</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var transpArea in ViewBag.MyData)
+            {
+                    <tr>
+                        <td data-id="@transpArea.TranspAreaID">
+                            @transpArea.TranspAreaCode
+                        </td>
+                        <td>
+                            @transpArea.TranspAreaName
+                        </td>
+                        <td>
+                            @transpArea.TranspAreaNameEng
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("ManageTransportasionArea", new { page, sortOrder = ViewBag.sortOrder }))</div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="bg">
+
+        <div class="btn-group" style="float: right">
+            <input type="button" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="Clear" />
+            <input type="button" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+            <input type="button" value="ลบ" class="btn btn-primary btn-sm" id="Delete" />
+            <input type="submit" value="ค้นหา" class="btn btn-primary btn-sm" id="Find" />
+            <input type="submit" value="ดูตัวอย่าง" class="btn btn-primary btn-sm" id="Preview" />
+            <input type="submit" value="พิมพ์" class="btn btn-primary btn-sm" id="Print" />
+        </div>
+        <br /><br /><br />
+
+
+
+        <form action="" id="FormTransportasionArea">
+            <input type="hidden" name="TranspAreaID" id="TranspAreaID" value="" />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">รหัสเขตการขนส่ง : <font color="red">*</font></div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="รหัสเขตการขนส่ง" name="TranspAreaCode" ID="TranspAreaCode" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">ชื่อเขตการขนส่ง : <font color="red">*</font></div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อเขตการขนส่ง" name="TranspAreaName" ID="TranspAreaName" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">ชื่อเขตการขนส่ง(Eng) : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อเขตการขนส่ง(Eng)" name="TranspAreaNameEng" ID="TranspAreaNameEng" />
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">หมายเหตุ : <font color="red">*</font></div>
+                <div class="col-md-4" id="head">
+                    <textarea rows="4" cols="50" name="Remark" ID="Remark" placeholder="หมายเหตุ"></textarea>
+                </div>
+            </div>
+            <br />
+        </form>
+    </div>
+</div>
+
+@section scripts {
+
+    @Scripts.Render("~/Scripts/validate/jquery.validate.js")
+    @Scripts.Render("~/Scripts/validate/Media.js")
+
+    <script>
+
+
+
+        $("div#transpArea table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableTranspArea',
+                    type: 'post',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#TranspAreaID').val(data.TranspAreaID);
+                        $('#TranspAreaCode').val(data.TranspAreaCode);
+                        $('#TranspAreaName').val(data.TranspAreaName);
+                        $('#TranspAreaNameEng').val(data.TranspAreaNameEng);
+                        $('#Remark').val(data.Remark);
+                    }
+                });
+            } else {
+                $('#TranspAreaID').val("");
+                $('#TranspAreaCode').val("");
+                $('#TranspAreaName').val("");
+                $('#TranspAreaNameEng').val("");
+                $('#Remark').val("");
+            }
+        })
+
+        $("#Save").on('click', function () {
+            if ($("#FormTransportasionArea").valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveTranspArea", "ManageTransportasionArea")',
+                    data: JSON.stringify({
+                        TranspAreaID: $("#TranspAreaID").val(),
+                        TranspAreaCode: $("#TranspAreaCode").val(),
+                        TranspAreaName: $("#TranspAreaName").val(),
+                        TranspAreaNameEng: $("#TranspAreaNameEng").val(),
+                        Remark: $("#Remark").val(),
+                        ccode: "TBC"
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    success: function (response) {
+                        if (response == true){
+                        alert("บันทึกสำเร็จ");
+                        window.location.reload(true);
+                        } else {
+                            alert("รหัสเขตการขนส่งซ้ำ");
+                        }
+                    }
+                })
+            }
+        });
+
+
+        $("#Delete").click(function () {
+            if ($("#FormTransportasionArea").valid()) {
+
+                if (confirm('ยืนยันการลบ')) {
+                    Delete();
+                } else {
+                    return false;
+                }
+            }
+        });
+
+        function Delete() {
+            $.ajax({
+                url: '@Url.Action("DeleteTranspArea", "ManageTransportasionArea")',
+                type: 'post',
+                data: JSON.stringify({
+                    CustMediaID: $("#TranspAreaID").val()
+                }),
+                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                }
+            });
+        }
+
+        $("#Clear").click(function () {
+
+            $('#TranspAreaID').val("");
+            $('#TranspAreaCode').val("");
+            $('#TranspAreaName').val("");
+            $('#TranspAreaNameEng').val("");
+            $('#Remark').val("");
+
+        });
+
+
+    </script>
+
+}
+

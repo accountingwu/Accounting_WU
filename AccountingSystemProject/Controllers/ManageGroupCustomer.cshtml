@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "ManageGroupCustomer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ManageGroupCustomer</h2>
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+<div class="container">
+    <div class="table-responsive table-hover" id="ManageGroupCustomer">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>รหัสกลุ่มลูกค้า</th>
+                    <th>ชื่อกลุ่มลูกค้า</th>
+                    <th>ชื่อกลุ่มลูกค้าภาษา 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<form action="" id="formManageGroupCustomer">
+    <div class="row">
+        <div class="row">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-2" id="head">รหัสกลุ่มลูกค้า :</div>
+                <div class="col-md-2" id="head">
+                    <input class="form-control" name="CodeGroupCustomer" ID="CodeGroupCustomer" />
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-2" id="head">ชื่อกลุ่มลูกค้าภาษาไทย :</div>
+                <div class="col-md-2" id="head">
+                    <input class="form-control" name="NameTH_GroupCustomer" ID="NameTH_GroupCustomer" />
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-2" id="head">ชื่อกลุ่มลูกค้าภาษาอังกฤษ :</div>
+                <div class="col-md-2" id="head">
+                    <input class="form-control" name="NameEN_GroupCustomer" ID="NameEN_GroupCustomer" />
+                </div>
+            </div><br><br>
+
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-6">
+
+                    <input id="SubmitGroupCustomer" type="button" class="btn btn-primary" value="ตกลง" />
+                    <input id="EditGroupCustomer" type="button" class="btn btn-primary" value="แก้ไข" />
+                    <input id="DeleteGroupCustomer" type="button" class="btn btn-primary" value="ลบ" />
+                    <input id="CancleGroupCustomer" type="button" class="btn btn-primary" value="ยกเลิก" />
+
+                </div>
+
+            </div>
+
+           
+        </div>
+    </div>
+
+
+</form>

@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "ManageCustomerZone";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>เพิ่ม/แก้ไข รายชื่อ เขตลูกค้า</h2>
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+<div class="container">
+    <div class="table-responsive table-hover" id="ManageCustomerZone">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>รหัสเขตลูกค้า</th>
+                    <th>ชื่อเขตลูกค้าภาษาไทย</th>
+                    <th>ชื่อเขตลูกค้าภาษาอังกฤษ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="bg">
+        <div class="btn-group" style="float: right">
+            <input type="button" value="ตกลง" class="btn btn-primary btn-sm" id="Clear" />
+            <input type="button" value="แก้ไข" class="btn btn-primary btn-sm" id="Save" />
+            <input type="button" value="ลบ" class="btn btn-primary btn-sm" id="Delete" />
+            <input type="button" value="ยกเลิก" class="btn btn-primary btn-sm" id="Find" />
+        </div>
+        <br /><br /><br />
+        <form action="" id="formManageCustomerZone">
+            <div class="row">
+                <div class="row">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-2" id="head">รหัสเขตลูกค้า :</div>
+                        <div class="col-md-2" id="head">
+                            <input class="form-control" name="CodeCustomerZone" ID="CodeCustomerZone" />
+                        </div>
+                    </div><br>
+
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-2" id="head">ชื่อเขตลูกค้าภาษาไทย :</div>
+                        <div class="col-md-2" id="head">
+                            <input class="form-control" name="NameTH_CustomerZone" ID="NameTH_CustomerZone" />
+                        </div>
+                    </div><br>
+
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-2" id="head">ชื่อเขตลูกค้าภาษาอังกฤษ :</div>
+                        <div class="col-md-2" id="head">
+                            <input class="form-control" name="NameEN_CustomerZone" ID="NameEN_CustomerZone" />
+                        </div>
+                    </div><br><br>
+
+                    <div class="row">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-6">
+
+                            <input id="SubmitCustomerZone" type="button" class="btn btn-primary" value="ตกลง" />
+                            <input id="EditCustomerZone" type="button" class="btn btn-primary" value="แก้ไข" />
+                            <input id="DeleteCustomerZone" type="button" class="btn btn-primary" value="ลบ" />
+                            <input id="CancleCustomerZone" type="button" class="btn btn-primary" value="ยกเลิก" />
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>

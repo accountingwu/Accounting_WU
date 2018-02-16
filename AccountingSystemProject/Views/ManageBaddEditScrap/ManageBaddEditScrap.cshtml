@@ -1,0 +1,219 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "ManageBaddEditScrap";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+
+<div class="container-fluid ">
+    <h3>เพิ่ม/แก้ไขสาเหตุของเสีย</h3>
+    <div class="table-responsive table-hover" id="BadScrap">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>รหัสสาเหตุของเสีย</th>
+                    <th>ชื่อสาเหตุของเสียภาษา 1</th>
+                    <th>ชื่อสาเหตุของเสียภาษา 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var BaddEditScrap in ViewBag.MyData)
+                {
+                    <tr>
+                        <td data-id="@BaddEditScrap.scid">
+                            @BaddEditScrap.scode
+                        </td>
+                        <td>
+                            @BaddEditScrap.scname1
+                        </td>
+                        <td>
+                            @BaddEditScrap.scname2
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("ManageBaddEditScrap", new { page }))</div>
+    </div>
+</div>
+<br />
+
+<div class="container-fluid">
+    <div class="bg">
+        <div class="btn-group" style="float: right">
+            <input type="submit" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="new" />
+            <input type="submit" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+            <input type="submit" value="ลบข้อมูล" class="btn btn-primary btn-sm" id="Delete" />
+            <input type="submit" value="ค้นหา" class="btn btn-primary btn-sm" id="Find" />
+            <input type="submit" value="Preview" class="btn btn-primary btn-sm" id="Preview" />
+            <input type="submit" value="พิมพ์" class="btn btn-primary btn-sm" id="Print" />
+        </div>
+        <br /><br /><br />
+
+
+
+        <form action="" id="FormBadScrap">
+            <input type="hidden" name="scid" id="scid" value="" />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">รหัสสาเหตุของเสีย : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="รหัสสาเหตุของเสีย" name="scode" ID="scode" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">ชื่อสาเหตุของเสียภาษา 1 : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อสาเหตุของเสีย" name="scname1" ID="scname1" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">ชื่อสาเหตุของเสียภาษา 2 : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อสาเหตุของเสีย(Eng)" name="scname2" ID="scname2" />
+                </div>
+            </div>
+        </form>
+        <br />
+        <br />
+    </div>
+</div>
+
+@section scripts {
+
+    @Scripts.Render("~/Scripts/Validate/jquery.validate.js")
+    @Scripts.Render("~/Scripts/Validate/FormBadScrap.js")
+    <script>
+        $("div#BadScrap table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableScrapp',
+                    type: 'post',
+                    data: {
+                        'id': id
+
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#scid').val(data.scid);
+                        $('#scode').val(data.scode);
+                        $('#scname1').val(data.scname1);
+                        $('#scname2').val(data.scname2);
+                    }
+                });
+            } else {
+                $('#scid').val("");
+                $('#scode').val("");
+                $('#scname1').val("");
+                $('#scname2').val("");
+            }
+        })
+
+        $("#Save").on('click', function () {
+            if ($("#FormBadScrap").valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveScrap", "ManageBaddEditScrap")',
+                    data: JSON.stringify({
+                        scid: $("#scid").val(),
+                        scode: $("#scode").val(),
+                        scname1: $("#scname1").val(),
+                        scname2: $("#scname2").val(),
+                        ccode: "TBC",
+                        //bcode: $('#bcode').val()
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    success: function (response) {
+                        if (response == true){
+                        alert("บันทึกสำเร็จ");
+                        window.location.reload(true);
+                        } else {
+                            alert("รหัสสาเหตุของเสียซ้ำ");
+                        }
+                    }
+                })
+            }
+        });
+
+
+        $("#Delete").click(function () {
+            if ($("#FormBadScrap").valid()) {
+
+                if (confirm('ยืนยันการลบ')) {
+                    Delete();
+                } else {
+                    return false;
+                }
+            }
+        });
+
+        function Delete() {
+            $.ajax({
+                url: '@Url.Action("DeleteScrapp", "ManageBaddEditScrap")',
+                type: 'post',
+                data: JSON.stringify({
+                    scid: $("#scid").val()
+                }),
+                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                }
+            });
+        }
+
+        $("#Clear").click(function () {
+
+            $('#scid').val("");
+            $('#scode').val("");
+            $('#scname1').val("");
+            $('#scname2').val("");
+
+
+        });
+
+
+    </script>
+
+}

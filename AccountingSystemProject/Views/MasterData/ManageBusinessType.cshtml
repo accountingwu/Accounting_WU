@@ -1,0 +1,284 @@
+﻿
+
+@model IEnumerable<AccountingSystemProject.DAL.EMBusiType>
+
+@*@model  AccountingSystemProject.DAL.EMBusiType*@
+
+@*@model IPagedList<AccountingSystemProject.DAL.EMBusiType>*@
+@using AccountingSystemProject.Models
+
+@*@model AccountingSystemProject.DAL.EMBusiType*@
+
+@{
+    ViewBag.Title = "ManageBusinessType";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*@using (Html.BeginForm("insertBus", "MasterData", FormMethod.Post))
+    {*@
+
+
+ 
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+       
+    }
+    tr:nth-child(even) {
+            background-color: #f2f2f3;
+    }
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+
+<!--<div class="container-fluid">
+    <h3>เพิ่ม/แก้ไขรหัสประเภทธุรกิจ</h3>
+    <div class="btn-group" style="float: right">
+        <input type="submit" value="New" class="btn btn-primary btn-sm" id="new" />
+        <input type="submit" value="Save" class="btn btn-primary btn-sm" id="Save" />
+        <input type="submit" value="เพิ่ม" class="btn btn-primary btn-sm" id="insert" />
+        <input type="submit" value="Delete" class="btn btn-primary btn-sm" id="Delete" />
+        <input type="submit" value="Find" class="btn btn-primary btn-sm" id="Find" />
+        <input type="submit" value="Refresh" class="btn btn-primary btn-sm" id="Refresh" />
+        <input type="submit" value="Preview" class="btn btn-primary btn-sm" id="Preview" />
+        <input type="submit" value="Print" class="btn btn-primary btn-sm" id="Print" />
+    </div>
+</div><br /><br />-->
+
+<div class="container-fluid ">
+    <h3>เพิ่ม/แก้ไขรหัสประเภทธุรกิจ</h3>
+    <div class="table-responsive table-hover" id="businessType">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>รหัสประเภทธุรกิจ</th>
+                    <th>ชื่อประเภทธุรกิจ</th>
+                    <th>ชื่อประเภทธุรกิจ(Eng)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var busi in Model)
+                {
+                    <tr>
+                        <td data-id="@busi.BusiTypeID">
+                            @Html.DisplayFor(modelItem => busi.BusiTypeCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => busi.BusiTypeName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => busi.BusiTypeNameEng)
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@*<div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-5">
+                <div style="text-align: left">รหัสประเภทธุรกิจ</div>
+               <input class="form-control" placeholder="รหัสประเภทธุรกิจ" ID="BusiTypeCode" />
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-5">
+                <div style="text-align: left">ชื่อประเภทธุรกิจ</div>
+                <input class="form-control" placeholder="ชื่อประเภทธุรกิจ" ID="BusiTypeName" />
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-5">
+                <div style="text-align: left">ชื่อประเภทธุรกิจ(Eng)</div>
+                <input class="form-control" placeholder="ชื่อประเภทธุรกิจ(Eng)" ID="BusiTypeNameEng" />
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-5">
+                <div style="text-align: left">หมายเหตุ</div>
+                <input class="form-control" placeholder="หมายเหตุ" ID="Remark" />
+            </div>
+        </div><br />
+    </div>
+    }*@
+<br />
+
+<div class="container-fluid">
+    <div class="bg">
+        <div class="btn-group" style="float: right">
+            <input type="submit" value="New" class="btn btn-primary btn-sm" id="new" />
+            <input type="submit" value="Save" class="btn btn-primary btn-sm" id="Save" />
+            <input type="submit" value="เพิ่ม" class="btn btn-primary btn-sm" id="insert" />
+            <input type="submit" value="Delete" class="btn btn-primary btn-sm" id="Delete" />
+            <input type="submit" value="Find" class="btn btn-primary btn-sm" id="Find" />
+            <input type="submit" value="Refresh" class="btn btn-primary btn-sm" id="Refresh" />
+            <input type="submit" value="Preview" class="btn btn-primary btn-sm" id="Preview" />
+            <input type="submit" value="Print" class="btn btn-primary btn-sm" id="Print" />
+        </div>
+        <br /><br /><br />
+
+      
+
+      <form action="" id="submit">
+            <input type="hidden" name="BusiTypeID" id="BusiTypeID" value="" />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">รหัสประเภทธุรกิจ : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="รหัสประเภทธุรกิจ" name="BusiTypeCode" ID="BusiTypeCode" />
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">ชื่อประเภทธุรกิจ : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อประเภทธุรกิจ" name="BusiTypeName" ID="BusiTypeName" />
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">ชื่อประเภทธุรกิจ(Eng) : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อประเภทธุรกิจ(Eng)" name="BusiTypeNameEng" ID="BusiTypeNameEng" />
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">หมายเหตุ : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="หมายเหตุ" name="Remark" ID="Remark" />
+                </div>
+            </div><br>
+        </form>
+
+            <br />
+            <br />
+        </div>
+</div>
+
+
+        @section scripts {
+
+            <script>
+
+
+
+        $("div#businessType table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'test',
+                    type: 'get',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#BusiTypeID').val(data.BusiTypeID);
+                        $('#BusiTypeCode').val(data.BusiTypeCode);
+                        $('#BusiTypeName').val(data.BusiTypeName);
+                        $('#BusiTypeNameEng').val(data.BusiTypeNameEng);
+                        $('#Remark').val((data.Remark == null) ? "" : data.Remark);
+                    }
+                });
+            } else {
+                $('#BusiTypeID').val("");
+                $('#BusiTypeCode').val("");
+                $('#BusiTypeName').val("");
+                $('#BusiTypeNameEng').val("");
+                $('#Remark').val("");
+            }
+        })
+
+        $("#insert").click(function () {
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("insertBus", "MasterData")',
+                data: JSON.stringify({
+                    BusiTypeID: $("#BusiTypeID").val(),
+                    BusiTypeCode: $("#BusiTypeCode").val(),
+                    BusiTypeName: $("#BusiTypeName").val(),
+                    BusiTypeNameEng: $("#BusiTypeNameEng").val(),
+                    Remark: $("#Remark").val()
+                }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                processData: false,
+                success: function (response) {
+
+                    console.log();
+                }
+            })
+            });
+
+        $("#Save").click(function () {
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("EditBus", "MasterData")',
+                data: JSON.stringify({
+                    BusiTypeID: $("#BusiTypeID").val(),
+                    BusiTypeCode: $("#BusiTypeCode").val(),
+                    BusiTypeName: $("#BusiTypeName").val(),
+                    BusiTypeNameEng: $("#BusiTypeNameEng").val(),
+                    Remark: $("#Remark").val()
+                }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                processData: false,
+                success: function (response) {
+
+                    console.log();
+                }
+            })
+        });
+
+        $("#Delete").click(function () {
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("DeleteBus", "MasterData")',
+                data: JSON.stringify({
+                    BusiTypeID: $("#BusiTypeID").val(),
+                    BusiTypeCode: $("#BusiTypeCode").val(),
+                    BusiTypeName: $("#BusiTypeName").val(),
+                    BusiTypeNameEng: $("#BusiTypeNameEng").val(),
+                    Remark: $("#Remark").val()
+                }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                processData: false,
+                success: function (response) {
+
+                    console.log();
+                }
+            })
+            });
+
+
+            </script>
+        }
+
+

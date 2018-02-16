@@ -1,0 +1,1572 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "ManageCusID";
+}
+
+<div class="row">
+    <div class="col-sm-7"></div>
+    <div class="btn-group">
+        <input type="submit" Class="btn btn-info" value="New" ID="btnNew" />
+        <input type="submit" class="btn btn-info" value="Save"  OnClick="btnSave_Click" ValidationGroup="login" />
+        <input type="submit" Class="btn btn-info" value="Delete" ID="btnDelete2" />
+        <input type="submit" Class="btn btn-info" value="Find" ID="btnFind" />
+        <input type="submit" Class="btn btn-info" value="Copy" ID="btnCopy" />
+        <input type="submit" Class="btn btn-info" value="Preview" ID="btnPreview" />
+        <input type="submit" Class="btn btn-info" value="Print" ID="btnPrint" />
+    </div>
+</div>
+
+
+<!-- Tab Menu -->
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#address" style="font-size :medium">Address</a></li>
+    <li><a data-toggle="tab" href="#detail" style="font-size : medium">Detail</a></li>
+    <li><a data-toggle="tab" href="#credit" style="font-size : medium">Credit</a></li>
+    <li><a data-toggle="tab" href="#general" style="font-size : medium">General</a></li>
+    <li><a data-toggle="tab" href="#contact" style="font-size : medium">Contact/Client</a></li>
+    <li><a data-toggle="tab" href="#account" style="font-size : medium">Account</a></li>
+    <li><a data-toggle="tab" href="#branch" style="font-size : medium">Branch</a></li>
+    <li><a data-toggle="tab" href="#sale" style="font-size : medium">Sale</a></li>
+    <li><a data-toggle="tab" href="#shipment" style="font-size : medium">Shipment</a></li>
+    <li><a data-toggle="tab" href="#map" style="font-size : medium">Map</a></li>
+    <li><a data-toggle="tab" href="#define" style="font-size : medium">Define</a></li>
+    <li><a data-toggle="tab" href="#description" style="font-size : medium">description</a></li>
+</ul>
+<br />
+
+<!-- Content Tab -->
+<div class="tab-content">
+    <!-- content tab address -->
+    <div id="address" class="tab-pane fade in active">
+        <div class="container-fluid row">
+            <div class="col-sm-5">
+                <div>รหัสลูกค้า</div>
+                <div class="input-group">
+                    <input Class="form-control" ID="CustCode" />
+                    @*<TextBox  CssClass="form-control" ID="CustCode"></TextBox>*@
+                    <span class="input-group-addon" data-toggle="modal" data-target="#FindUnitOfMeasure"><i class="glyphicon glyphicon-plane"></i></span>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div style="text-align: left">คำนำหน้า</div>
+                <!--<asp:DropDownList class="form-control" runat="server" id="CustTitle">
+                    <asp:ListItem></asp:ListItem>
+                    <asp:ListItem value="บริษัท">บริษัท</asp:ListItem>
+                    <asp:ListItem value="ห้างหุ้นส่วนจำกัด">ห้างหุ้นส่วนจำกัด</asp:ListItem>
+                    <asp:ListItem value="คุณ">คุณ</asp:ListItem>
+                    <asp:ListItem value="นาย">นาย</asp:ListItem>
+                    <asp:ListItem value="นางสาว">นางสาว</asp:ListItem>
+                    <asp:ListItem value="นาง">นาง</asp:ListItem>
+                    <asp:ListItem value="คณะบุคคล">คณะบุคคล</asp:ListItem>
+                </asp:DropDownList> -->
+                <select class="form-control" runat="server" id="CustTitle">
+                    <option></option>
+                    <option value="บริษัท">บริษัท</option>
+                    <option value="ห้างหุ้นส่วนจำกัด">ห้างหุ้นส่วนจำกัด</option>
+                    <option value="คุณ">คุณ</option>
+                    <option value="นาย">นาย</option>
+                    <option value="นางสาว">นางสาว</option>
+                    <option value="นาง">นาง</option>
+                    <option value="คณะบุคคล">คณะบุคคล</option>
+                </select>
+            </div>
+
+            <div class="col-sm-2">
+                <div>
+                    <br />
+                    <input type="checkbox" value="1" ID="onHold" />
+                    On Hold
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="container-fluid row">
+            <div class="col-sm-5">
+                <!--<div>ชื่อลูกค้า</div>
+                <asp:TextBox runat="server" CssClass="form-control" ID="CustName"></asp:TextBox>-->
+                <div>ชื่อลูกค้า</div>
+                <input class="form-control" placeholder="ชื่อลูกค้า" name="CustName" ID="CustName" />
+            </div>
+            <div class="col-sm-5">
+                <div>ชื่อลูกค้า (ENG)</div>
+                <input Class="form-control" placeholder="ชื่อลูกค้า (ENG)" name="CustNameEng" ID="CustNameEng" />
+            </div>
+            <div class="col-sm-2">
+                <div>
+                    <br />
+                    <input type="checkbox" value="1" name="inActive" ID="inActive" />
+                    InActive
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="container-fluid row">
+            <div class="col-sm-5">
+                <div>ชื่อลูกค้า (ออกบิล)</div>
+                <input Class="form-control" placeholder="ชื่อลูกค้า (ออกบิล)" name="nameCusBill" ID="nameCusBill" />
+            </div>
+            <div class="col-sm-7">
+                <div>Short Name</div>
+                <input Class="form-control" placeholder="Short Name" name="ShortName" ID="ShortName"/>
+            </div>
+        </div>
+        <br />
+        <div class="container-fluid">
+            <H5><b>ที่อยู่ ภพ.20</b></H5>
+            <div class="row">
+                    
+                <br />
+                <div class="col-md-12">
+                    <div>ที่อยู่</div>
+                    <input Class="form-control" placeholder="ที่อยู่" name="CustAddr1" ID="CustAddr1"/>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-6">
+                    <div>แขวง/ตำบล</div>
+                    <input Class="form-control" placeholder="แขวง/ตำบล" name="CusDistrict" ID="CusDistrict"/>
+                </div>
+                <div class="col-md-6">
+                    <div>เขต/อำเภอ</div>
+                    <input Class="form-control" placeholder="เขต/อำเภอ" name="Amphur" ID="Amphur"/>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <div>จังหวัด</div>
+                    <input Class="form-control" placeholder="จังหวัด" name="Province" ID="Province"/>
+                </div>
+                <div class="col-md-6">
+                    <div>รหัสไปรษณี</div>
+                    <input Class="form-control" placeholder="รหัสไปรษณี" name="PostCode" ID="PostCode"/>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="container-fluid">
+            <div class="row">
+                <div class="input-group">
+                    <p><b>ที่อยู่ติดต่อ (ตามที่อยู่ ภพ.20 <span class="input-group-addon"><i class="glyphicon glyphicon-fast-forward" style="color: darkcyan"></i></span>)</b></p>
+                </div>
+                <br />
+                <div class="col-sm-12">
+                    <div>ที่อยู่</div>
+                    <input Class="form-control" placeholder="ที่อยู่" name="ContAddr1" ID="ContAddr1"/>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-6">
+                    <div>แขวง/ตำบล</div>
+                    <input Class="form-control" placeholder="แขวง/ตำบล" name="ContDistrict" ID="ContDistrict" />
+                </div>
+                <!-- _____________HERE_____________ -->
+                <div class="col-sm-6">
+                    <div>เขต/อำเภอ</div>
+                    <asp:TextBox CssClass="form-control" runat="server" ID="ContAmphur"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-6">
+                    <div>จังหวัด</div>
+                    <asp:TextBox CssClass="form-control" runat="server" ID="ContProvince"></asp:TextBox>
+                </div>
+                <div class="col-sm-6">
+                    <div>รหัสไปรษณี</div>
+                    <asp:TextBox CssClass="form-control" runat="server" ID="ContPostCode"></asp:TextBox>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div>โทรศัพท์</div>
+                    <div class="input-group">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="ContTel"></asp:TextBox>
+                        <span class="input-group-addon">ต่อ</span>
+                        <asp:TextBox runat="server" CssClass="form-control" ID="tel1"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div>แฟ็กซ์</div>
+                    <asp:TextBox runat="server" CssClass="form-control" ID="ContFax"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-6">
+                    <div>E-mail</div>
+                    <asp:TextBox runat="server" CssClass="form-control" ID="ContEMail"></asp:TextBox>
+                </div>
+                <div class="col-sm-6">
+                    <div>Homepage</div>
+                    <asp:TextBox runat="server" CssClass="form-control" ID="ContHomePage"></asp:TextBox>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br /><br />
+
+    <!-- Content teb Detail -->
+    <div id="detail" class="tab-pane fade">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-5">
+                    <div>วันที่เริ่มเป็นลูกค้า</div>
+                    <asp:TextBox runat="server" CssClass="form-control" ID="startDate" Type="date"></asp:TextBox>
+                </div>
+                <div class="col-sm-7">
+                    <div>วันเกิดลูกค้า</div>
+                    <asp:TextBox CssClass="form-control" runat="server" ID="cusBirthday" Type="date"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-5">
+                    <div>ชนิดรายการลูกค้า</div>
+                    <select class="form-control">
+                        <option value="1">ลูกค้า</option>
+                        <option value="2">Prospect</option>
+                    </select>
+                </div>
+                <div class="col-sm-7">
+                    <div>เลขที่บัตรประชาชน</div>
+                    <asp:TextBox runat="server" CssClass="form-control" ID="idCard"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-5">
+                    <div>เลขประจำตัวผู้เสียภาษี</div>
+                    <asp:TextBox runat="server" CssClass="form-control" ID="taxIden"></asp:TextBox>
+                </div>
+                <div class="col-sm-7">
+                    <div>ทุนจดทะเบียน</div>
+                    <asp:TextBox runat="server" CssClass="form-control" ID="TextBox9" placeholder=".00"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-5">
+                    <div>เลขที่จดทะเบียน</div>
+                    <asp:TextBox runat="server" CssClass="form-control" ID="TextBox10"></asp:TextBox>
+                </div>
+                <div class="col-sm-7">
+                    <div>ชนิดประเภทลูกค้า</div>
+                    <select class="form-control">
+                        <option value="1">นิติบุคคล</option>
+                        <option value="2">บุคคลธรรมดา</option>
+                    </select>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-3">
+                    <div>สาขา</div>
+                    <div class="input-group">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="IDbrach"></asp:TextBox>
+                        <span class="input-group-addon" data-toggle="modal" data-target="#FindBranch"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        <div class="modal fade" id="FindBranch" role="dialog">
+                            <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+
+                                    <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title"><b>Find สาขา</b></h4>
+                                        </div>
+                                        <iframe class="embed-responsive-item" src="FindBranch.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <br />
+                    <asp:TextBox runat="server" CssClass="form-control" ID="nameBrach" ReadOnly="true"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-3">
+                    <div>กลุ่มลูกค้า</div>
+                    <div class="input-group">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox11"></asp:TextBox>
+                        <span class="input-group-addon" data-toggle="modal" data-target="#FindGroupOfCustomers"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        <div class="modal fade" id="FindGroupOfCustomers" role="dialog">
+                            <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+
+                                    <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title"><b>Find กลุ่มลูกค้า</b></h4>
+                                        </div>
+                                        <iframe class="embed-responsive-item" src="FindGroupOfCustomers.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <br />
+                    <asp:TextBox runat="server" CssClass="form-control" ID="TextBox12" ReadOnly="true"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-3">
+                    <div>กลุ่มภาษี</div>
+                    <div class="input-group">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox13"></asp:TextBox>
+                        <span class="input-group-addon" data-toggle="modal" data-target="#FindTaxGroup"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        <div class="modal fade" id="FindTaxGroup" role="dialog">
+                            <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+
+                                    <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title"><b>Find กลุ่มภาษี</b></h4>
+                                        </div>
+                                        <iframe class="embed-responsive-item" src="FindTaxGroup.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <br />
+                    <asp:TextBox runat="server" CssClass="form-control" ID="TextBox14" ReadOnly="true"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-3">
+                    <div>กลุ่มวางบิล</div>
+                    <div class="input-group">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox15"></asp:TextBox>
+                        <span class="input-group-addon" data-toggle="modal" data-target="#FindBillingGroup"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        <div class="modal fade" id="FindBillingGroup" role="dialog">
+                            <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+
+                                    <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title"><b>Find กลุ่มวางบิล</b></h4>
+                                        </div>
+                                        <iframe class="embed-responsive-item" src="FindBillingGroup.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <br />
+                    <asp:TextBox runat="server" CssClass="form-control" ID="TextBox16" ReadOnly="true"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-3">
+                    <div>ประเภทลูกค้า</div>
+                    <div class="input-group">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox17"></asp:TextBox>
+                        <span class="input-group-addon" data-toggle="modal" data-target="#FindCustomerType"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        <div class="modal fade" id="FindCustomerType" role="dialog">
+                            <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+
+                                    <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title"><b>Find ประเภทลูกค้า</b></h4>
+                                        </div>
+                                        <iframe class="embed-responsive-item" src="FindCustomerType.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <br />
+                    <asp:TextBox runat="server" CssClass="form-control" ID="TextBox18" ReadOnly="true"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-3">
+                    <div>ประเภทธุรกิจ</div>
+                    <div class="input-group">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox19"></asp:TextBox>
+                        <span class="input-group-addon" data-toggle="modal" data-target="#FindBusinessType"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        <div class="modal fade" id="FindBusinessType" role="dialog">
+                            <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+
+                                    <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title"><b>Find ประเภทธุรกิจ</b></h4>
+                                        </div>
+                                        <iframe class="embed-responsive-item" src="FindBusinessType.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <br />
+                    <asp:TextBox runat="server" CssClass="form-control" ID="TextBox20" ReadOnly="true"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-3">
+                    <div>เขตการขาย</div>
+                    <div class="input-group">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox21"></asp:TextBox>
+                        <span class="input-group-addon" data-toggle="modal" data-target="#FindSaleArea"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        <div class="modal fade" id="FindSaleArea" role="dialog">
+                            <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+
+                                    <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title"><b>Find เขตการขาย</b></h4>
+                                        </div>
+                                        <iframe class="embed-responsive-item" src="FindSaleArea.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <br />
+                    <asp:TextBox runat="server" CssClass="form-control" ID="TextBox22" ReadOnly="true"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-3">
+                    <div>ช่องทางการจำหน่าย</div>
+                    <div class="input-group">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox23"></asp:TextBox>
+                        <span class="input-group-addon" data-toggle="modal" data-target="#FindDistributionChannel"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        <div class="modal fade" id="FindDistributionChannel" role="dialog">
+                            <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+
+                                    <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title"><b>Find ช่องทางการจำหน่าย</b></h4>
+                                        </div>
+                                        <iframe class="embed-responsive-item" src="FindDistributionChannel.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <br />
+                    <asp:TextBox runat="server" CssClass="form-control" ID="TextBox24" ReadOnly="true"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-3">
+                    <div>รหัสสกุลเงิน</div>
+                    <div class="input-group">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox25"></asp:TextBox>
+                        <span class="input-group-addon" data-toggle="modal" data-target="#FindCurrency"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        <div class="modal fade" id="FindCurrency" role="dialog">
+                            <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+
+                                    <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title"><b>Find รหัสสกุลเงิน</b></h4>
+                                        </div>
+                                        <iframe class="embed-responsive-item" src="FindCurrency.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <br />
+                    <asp:TextBox runat="server" CssClass="form-control" ID="TextBox27" ReadOnly="true"></asp:TextBox>
+                </div>
+                <div class="col-sm-7">
+                    <br />
+                    <asp:TextBox runat="server" CssClass="form-control" ID="TextBox26" ReadOnly="true"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-3">
+                    <div>รหัสความสำคัญ</div>
+                    <div class="input-group">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox28"></asp:TextBox>
+                        <span class="input-group-addon" data-toggle="modal" data-target="#FindIdImportance"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        <div class="modal fade" id="FindIdImportance" role="dialog">
+                            <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+
+                                    <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title"><b>Find รหัสความสำคัญ</b></h4>
+                                        </div>
+                                        <iframe class="embed-responsive-item" src="FindIdImportance.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <br />
+                    <asp:TextBox runat="server" CssClass="form-control" ID="TextBox29" ReadOnly="true"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-3">
+                    <div>แหล่งข้อมูล</div>
+                    <div class="input-group">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox30"></asp:TextBox>
+                        <span class="input-group-addon" data-toggle="modal" data-target="#FindDataSource"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        <div class="modal fade" id="FindDataSource" role="dialog">
+                            <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+
+                                    <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title"><b>Find แหล่งข้อมูล</b></h4>
+                                        </div>
+                                        <iframe class="embed-responsive-item" src="FindDataSource.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <br />
+                    <asp:TextBox runat="server" CssClass="form-control" ID="TextBox31" ReadOnly="true"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-3">
+                    <div>รหัสเส้นทาง</div>
+                    <div class="input-group">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox32"></asp:TextBox>
+                        <span class="input-group-addon" data-toggle="modal" data-target="#FindIdroute"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        <div class="modal fade" id="FindIdroute" role="dialog">
+                            <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+
+                                    <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title"><b>Find รหัสเส้นทาง</b></h4>
+                                        </div>
+                                        <iframe class="embed-responsive-item" src="FindIdroute.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <br />
+                    <asp:TextBox runat="server" CssClass="form-control" ID="TextBox33" ReadOnly="true"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <br />
+        </div>
+    </div>
+
+    <!-- Content tab Credit -->
+    <div id="credit" class="tab-pane fade">
+        <div class="container-fluid">
+            <div>
+                <p><b>Credit</b></p>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-4">
+                    <div>วงเงินเครดิต</div>
+                    <asp:TextBox runat="server" CssClass="form-control" ID="amountCredit" placeholder=".00"></asp:TextBox>
+                </div>
+                <div class="col-sm-4">
+                    <div>ระดับการขาย</div>
+                    <select class="form-control">
+                        <option value="1">ระดับที่ 1</option>
+                        <option value="2">ระดับที่ 2</option>
+                        <option value="3">ระดับที่ 3</option>
+                        <option value="4">ระดับที่ 4</option>
+                        <option value="5">ระดับที่ 5</option>
+                        <option value="6">ระดับที่ 6</option>
+                        <option value="7">ระดับที่ 7</option>
+                        <option value="8">ระดับที่ 8</option>
+                        <option value="9">ระดับที่ 9</option>
+                        <option value="10">ระดับที่ 10</option>
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <div>จำนวนวันเครดิต</div>
+                    <asp:TextBox runat="server" CssClass="form-control" ID="countCreditDate"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div>
+                <p><b>เงื่อนไขการตัดจากวงเงินเครดิต</b></p>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-4">
+                    <div>ตัดจาก</div>
+                    <select class="form-control">
+                        <option value="1">รับชำระหนี้</option>
+                        <option value="2">เช็คผ่าน</option>
+                    </select>
+                </div>
+            </div>
+            <br />
+            <div>
+                <p><b>Discount</b></p>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-4">
+                    <div>ส่วนลดท้ายบิล</div>
+                    <asp:TextBox runat="server" CssClass="form-control" ID="discount"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-6">
+                    <div>
+                        <p><b>เงื่อนไขการวางบิล</b></p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div>
+                        <p><b>เงื่อนไขการเก็บเงิน</b></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <select id="billingCondition" class="form-control">
+                        <option value="0">ไม่ระบุเงื่อนไข</option>
+                        <option value="cashSale.aspx">วางบิลทุกวัน </option>
+                        <option value="2">ระบุวันวางบิล</option>
+                        <option value="3">ระบุวันที่วางบิล</option>
+                        <option value="4">ระบุสัปดาห์ที่วางบิล</option>
+                        <option value="5">ระบุทุกวันของสัปดาห์ที่วางบิล</option>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <select id="TermsOfPayment" class="form-control">
+                        <option value="0">ไม่ระบุเงื่อนไข</option>
+                        <option value="1">เก็บเงินทุกวัน</option>
+                        <option value="2">ระบุวันเก็บเงิน</option>
+                        <option value="3">ระบุวันที่เก็บเงิน</option>
+                        <option value="4">ระบุสัปดาห์ที่เก็บเงิน</option>
+                        <option value="5">ระบุทุกวันของสัปดาห์ที่เก็บเงิน</option>
+                    </select>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <div>ลูกหนี้ออกแทน</div>
+                    <div class="input-group">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="deptor"></asp:TextBox>
+                        <span class="input-group-addon" data-toggle="modal" data-target="#FindIdCustomerSO"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        <div class="modal fade" id="FindIdCustomerSO" role="dialog">
+                            <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+
+                                    <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title"><b>Find ลูกหนี้ออกแทน</b></h4>
+                                        </div>
+                                        <iframe class="embed-responsive-item" src="FindIdCustomerSO.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <asp:TextBox runat="server" CssClass="form-control" ID="deptor2" ReadOnly="true"></asp:TextBox>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-6">
+                    <div>อื่นๆ</div>
+                    <asp:TextBox runat="server" CssClass="form-control" ID="other"></asp:TextBox>
+                </div>
+                <div class="col-sm-6">
+                    <div>อื่นๆ</div>
+                    <asp:TextBox runat="server" CssClass="form-control" ID="other2"></asp:TextBox>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content tab General -->
+    <div id="general" class="tab-pane fade">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div>
+                    <label><b>OwnerShip</b></label>
+                </div>
+                <br />
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                    <asp:CheckBox runat="server" ID="thaiOwner" />
+                    Thai Owner
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2">
+                    <br />
+                    <asp:CheckBox runat="server" ID="thaiForeigners" />
+                    Thai and Foreigners
+                </div>
+                <div class="col-sm-3">
+                    <div>Thai (%)</div>
+                    <asp:TextBox runat="server" ID="thai" CssClass="form-control" placeholder=".00"></asp:TextBox>
+                </div>
+                <div class="col-sm-3">
+                    <div>Foreigners (%)</div>
+                    <asp:TextBox runat="server" ID="foreigners" CssClass="form-control" placeholder=".00"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-4">
+                    <div>
+                        <label><b>Decision</b></label>
+                    </div>
+                    <br />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <div>Decision</div>
+                    <select id="decision" class="form-control">
+                        <option value=""></option>
+                        <option value="1">ผู้รับผิดชอบ</option>
+                        <option value="2">Management Straff</option>
+                    </select>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <div>Management Style</div>
+                    <select id="managementStyle" class="form-control">
+                        <option value=""></option>
+                        <option value="1">Family</option>
+                        <option value="2">Professional</option>
+                        <option value="3">International</option>
+                    </select>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-4">
+                    <div>
+                        <label><b>Size of business</b></label>
+                    </div>
+                    <br />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <div>RevenueMB</div>
+                    <asp:TextBox runat="server" CssClass="form-control" ID="revenue"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <div>No.of Staff, Head office</div>
+                    <asp:TextBox runat="server" CssClass="form-control" ID="TextBox34"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <div>Factory Staff</div>
+                    <asp:TextBox runat="server" CssClass="form-control" ID="TextBox35"></asp:TextBox>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                    <div>
+                        <label><b>Strength</b></label>
+                    </div>
+                    <br />
+                </div>
+                <div class="col-sm-5">
+                    <div>
+                        <label><b>Weakness</b></label>
+                    </div>
+                    <br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Strength</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>1</label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="s1"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>2</label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox36"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>3</label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox37"></asp:TextBox>
+                                    </td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Weekness</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>1</label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox38"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>2</label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox39"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>3</label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox40"></asp:TextBox>
+                                    </td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="btn-group">
+                            <asp:Button runat="server" CssClass="btn btn-info" Text="เพิ่มแถว" ID="addRow" />
+                            <asp:Button runat="server" CssClass="btn btn-info" Text="แทรกแถว" ID="insertRow" />
+                            <asp:Button runat="server" CssClass="btn btn-info" Text="ลบแถว" ID="deleteRow" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="btn-group">
+                            <asp:Button runat="server" CssClass="btn btn-info" Text="เพิ่มแถว" ID="addRow1" />
+                            <asp:Button runat="server" CssClass="btn btn-info" Text="แทรกแถว" ID="insertRow1" />
+                            <asp:Button runat="server" CssClass="btn btn-info" Text="ลบแถว" ID="deleteRow1" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content tab Contact/Client -->
+    <div id="contact" class="tab-pane fade">
+        <div class="container-fluid">
+            <div class="row">
+                <label><b>ผู้ติดต่อ</b></label><br />
+                <div class="col-sm-12">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>ชื่อผู้ติดต่อ</th>
+                                    <th>โทร</th>
+                                    <th>ตำแเหน่งของผู้ติดต่อ</th>
+                                    <th>หน้าที่ความรับผิดชอบ</th>
+                                    <th>ที่อยู่</th>
+                                    <th>E-mail</th>
+                                    <th>Default</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="contactName"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox41"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox42"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox43"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox44"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox45"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox46"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox47"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox48"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox49"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox50"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox51"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox52"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox53"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox54"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox55"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox56"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox57"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox58"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox59"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox60"></asp:TextBox>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="btn-group">
+                    <asp:Button runat="server" CssClass="btn btn-info" Text="เพิ่มแถว" ID="Button1" />
+                    <asp:Button runat="server" CssClass="btn btn-info" Text="แทรกแถว" ID="Button2" />
+                    <asp:Button runat="server" CssClass="btn btn-info" Text="ลบแถว" ID="Button3" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <label><b>บริษัทในเครือ</b></label><br />
+                <div class="col-sm-12">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>รหัสลูกค้า</th>
+                                    <th>ชื่อลูกค้า</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <div class="input-group">
+                                            <asp:TextBox runat="server" CssClass="form-control" ID="idCus1"></asp:TextBox>
+                                            <span class="input-group-addon" data-toggle="modal" data-target="#FindIdCustomerSO2"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                                            <div class="modal fade" id="FindIdCustomerSO2" role="dialog">
+                                                <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+
+                                                        <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h4 class="modal-title"><b>Find รหัสลูกค้า</b></h4>
+                                                            </div>
+                                                            <iframe class="embed-responsive-item" src="FindIdCustomerSO.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="nameCus" ReadOnly="true"></asp:TextBox>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="btn-group">
+                    <asp:Button runat="server" CssClass="btn btn-info" Text="เพิ่มแถว" ID="Button4" />
+                    <asp:Button runat="server" CssClass="btn btn-info" Text="แทรกแถว" ID="Button5" />
+                    <asp:Button runat="server" CssClass="btn btn-info" Text="ลบแถว" ID="Button6" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content tab account -->
+    <div id="account" class="tab-pane fade">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>รหัสบัญชี</th>
+                                    <th>ชื่อบัญชี</th>
+                                    <th>ชื่อบัญชี (ENG)</th>
+                                    <th>คำอธิบาย</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <div class="input-group">
+                                            <asp:TextBox runat="server" CssClass="form-control" ID="idAccount"></asp:TextBox>
+                                            <span class="input-group-addon" data-toggle="modal" data-target="#FindIdAccount"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                                            <div class="modal fade" id="FindIdAccount" role="dialog">
+                                                <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+
+                                                        <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h4 class="modal-title"><b>Find รหัสบัญชี</b></h4>
+                                                            </div>
+                                                            <iframe class="embed-responsive-item" src="FindIdAccount.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="nameAccount" ReadOnly="true"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="nameAccountENG" ReadOnly="true"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="explain" ReadOnly="true"></asp:TextBox>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="btn-group">
+                    <asp:Button runat="server" CssClass="btn btn-info" Text="เพิ่มแถว" ID="Button7" />
+                    <asp:Button runat="server" CssClass="btn btn-info" Text="แทรกแถว" ID="Button8" />
+                    <asp:Button runat="server" CssClass="btn btn-info" Text="ลบแถว" ID="Button9" />
+                </div>
+            </div>
+            <br />
+        </div>
+    </div>
+
+    <!-- Content tab Branch -->
+    <div id="branch" class="tab-pane fade">
+        <div class="container-fluid">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>สาขา</th>
+                            <th>สาขา ENG</th>
+                            <th>สำนักงานใหญ่</th>
+                            <th>คำอธิบาย</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="branch2"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="branchENG" ReadOnly="true"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="TextBox73" ReadOnly="true"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="TextBox74" ReadOnly="true"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="default" ReadOnly="true"></asp:TextBox>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <div class="row">
+                <div class="btn-group">
+                    <asp:Button runat="server" CssClass="btn btn-info" Text="เพิ่มแถว" ID="Button10" />
+                    <asp:Button runat="server" CssClass="btn btn-info" Text="แทรกแถว" ID="Button11" />
+                    <asp:Button runat="server" CssClass="btn btn-info" Text="ลบแถว" ID="Button12" />
+                </div>
+            </div>
+            <br />
+        </div>
+    </div>
+
+    <!-- Content tab Sale -->
+    <div id="sale" class="tab-pane fade">
+        <div class="container-fluid">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>รหัสพนักงานขาย</th>
+                            <th>ชื่อพนักงานขาย</th>
+                            <th>คำอธิบาย</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <div class="input-group">
+                                    <asp:TextBox runat="server" CssClass="form-control" ID="idSale"></asp:TextBox>
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#FindSalePerson"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                                    <div class="modal fade" id="FindSalePerson" role="dialog">
+                                        <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+
+                                                <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title"><b>Find รหัสพนักงานขาย</b></h4>
+                                                    </div>
+                                                    <iframe class="embed-responsive-item" src="FindSalePerson.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="saleName" ReadOnly="true"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="explainSale" ReadOnly="true"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="defaultSale" ReadOnly="true"></asp:TextBox>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <div class="row">
+                <div class="btn-group">
+                    <asp:Button runat="server" CssClass="btn btn-info" Text="เพิ่มแถว" ID="Button13" />
+                    <asp:Button runat="server" CssClass="btn btn-info" Text="แทรกแถว" ID="Button14" />
+                    <asp:Button runat="server" CssClass="btn btn-info" Text="ลบแถว" ID="Button15" />
+                </div>
+            </div>
+            <br />
+        </div>
+    </div>
+
+    <!-- Content tab Shipment -->
+    <div id="shipment" class="tab-pane fade">
+        <div class="container-fluid">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>รหัสสถานที่ส่งของ</th>
+                            <th>สถานที่ส่งของ</th>
+                            <th>ผู้ติดต่อ</th>
+                            <th>โทร</th>
+                            <th>ระยะเวลาขนส่ง(วัน)</th>
+                            <th>เงื่อนไขการส่งของ</th>
+                            <th>คำอธิบาย</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="TextBox75"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="TextBox76" ReadOnly="true"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="TextBox77" ReadOnly="true"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="TextBox78" ReadOnly="true"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="TextBox79" ReadOnly="true"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="TextBox80" ReadOnly="true"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="TextBox81" ReadOnly="true"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="TextBox82" ReadOnly="true"></asp:TextBox>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <div class="row">
+                <div class="btn-group">
+                    <asp:Button runat="server" CssClass="btn btn-info" Text="เพิ่มแถว" ID="Button16" />
+                    <asp:Button runat="server" CssClass="btn btn-info" Text="แทรกแถว" ID="Button17" />
+                    <asp:Button runat="server" CssClass="btn btn-info" Text="ลบแถว" ID="Button18" />
+                </div>
+            </div>
+            <br />
+        </div>
+    </div>
+
+    <!-- Content tab Map -->
+    <div id="map" class="tab-pane fade">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Name</th>
+                                    <th>Fullpath</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="name"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <input type="file" name="imageUpload" id="imageUpload" class="hide" />
+                                        <label for="imageUpload" class="btn btn-large">Select file</label><br />
+                                        <br />
+                                        <br />
+                                    </td>
+                                    <td>
+                                        <asp:CheckBox runat="server" ID="check" />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox89"></asp:TextBox>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <img src="." id="imagePreview" alt="Preview Image" width="200" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content tab Define -->
+    <div id="define" class="tab-pane fade">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label></label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="define1"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label></label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox83"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label></label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox84"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label></label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" CssClass="form-control" ID="TextBox85"></asp:TextBox>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <asp:Button ID="Button19" runat="server" CssClass="btn btn-info" Text="เพิ่ม" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content tab Description -->
+    <div id="description" class="tab-pane fade">
+        <div class="container-fluid">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>รายละเอียด</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="des"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="TextBox86"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="TextBox87"></asp:TextBox>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="btn-group">
+                    <asp:Button runat="server" CssClass="btn btn-info" Text="เพิ่มแถว" ID="Button20" />
+                    <asp:Button runat="server" CssClass="btn btn-info" Text="แทรกแถว" ID="Button21" />
+                    <asp:Button runat="server" CssClass="btn btn-info" Text="ลบแถว" ID="Button22" />
+                </div>
+            </div>
+            <br />
+        </div>
+    </div>
+</div>
+

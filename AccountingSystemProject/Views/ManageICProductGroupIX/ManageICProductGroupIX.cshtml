@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "ManageICProductGroupIX";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+<div class="container-fluid"><h3>เพิ่ม/แก้ไข กลุ่มสินค้า 4</h3></div>
+
+<div class="table-responsive table-hover">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>รหัสกลุ่มสินค้า</th>
+                <th>ชื่อกุล่มสินค้า</th>
+                <th>ชื่อภาษา 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="container-fluid">
+    <div class="bg">
+
+        <div class="btn-group" style="float: right">
+            <input type="submit" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="Clear" />
+            <input type="button" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+            <input type="button" value="ลบ" class="btn btn-primary btn-sm" id="Delete" />
+            <input type="button" value="ค้นหา" class="btn btn-primary btn-sm" id="Find" />
+
+        </div><br /><br /><br />
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-2" id="head">รหัสกลุ่มสินค้า :  <font color="red">*</font></div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="รหัสกลุ่มสินค้า" name="productGroupNo" ID="productGroupNo" />
+                </div>
+            </div><br />
+
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-2" id="head">ชื่อภาษาไทย :  <font color="red">*</font></div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อภาษาไทย" name="productGroupNameTH" ID="productGroupNameTH" />
+                </div>
+            </div><br />
+
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-2" id="head">ชื่อภาษา 2  : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อภาษา 2" name="productGroupNameEN" ID="productGroupNameEN" />
+                </div>
+            </div><br />
+            <br />
+        </div>
+    </div>
+</div>
