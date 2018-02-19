@@ -9,7 +9,7 @@ using AccountingSystemProject.Models;
 
 namespace AccountingSystemProject.Controllers
 {
-    public class DeliveryOrderController : Controller
+    public class ManageDeliveryOrderController : Controller
     {
         public QSoft_WUEntities _db = new QSoft_WUEntities();
         // GET: DeliveryOrder
