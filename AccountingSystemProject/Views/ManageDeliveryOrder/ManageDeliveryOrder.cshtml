@@ -30,6 +30,13 @@
         background-color: lightgrey;
         color: black;
     }
+
+    div.scr {
+        background-color: white;
+        width: 100%;
+        height: 170px;
+        overflow: scroll;
+    }
 </style>
 
 
@@ -77,7 +84,30 @@
 
         <div class="col-md-4">
             <div style="text-align: left">เลขที่อ้างอิง</div>
-            <input class="form-control" placeholder="เลขที่อ้างอิง" name="invoiceNumber1" ID="invoiceNumber1" />
+            <div class="input-group">
+                <input class="form-control" placeholder="เลขที่อ้างอิง" name="invoiceNumber1" ID="invoiceNumber1" />
+                <span class="input-group-addon" data-toggle="modal" data-target="#FindRefNum" runat="server"><i class="glyphicon glyphicon-triangle-bottom"></i></span>
+                <div class="modal fade" id="FindRefNum" role="dialog">
+                    <div class="modal-dialog" style="width: 80%; height: 100%">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title"><b>Find เลขที่อ้างอิง</b></h4>
+                                </div>
+                                <div class="modal-body">
+
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" value="ตกลง" class="btn btn-primary btn-md" id="ok" />
+                                    <input type="submit" value="ยกเลิก" class="btn btn-danger btn-md" id="cancel" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="col-md-2">
@@ -370,290 +400,115 @@
             </table>
         </div>
     </div>
-</div><hr />
+</div>
 
 
 <!-- Content Tab Detail -->
 <div class="tab-content">
-    <div id="detail" class="tab-pane fade in active">
-        <div class="container-fluid">
-
-            <div class="btn-group" style="float: right">
-                <input type="submit" value="เพิ่มสินค้า" class="btn btn-primary btn-sm" id="Clear" />
-                <input type="button" value="แก้ไขสินค้า" class="btn btn-primary btn-sm" id="Save" />
-                <input type="button" value="ลบสินค้า" class="btn btn-primary btn-sm" id="Delete" />
-            </div>
-            <br />
-            <br />
-
-
-            <div class="row">
-                <div class="col-md-2">
-                    <div style="text-align: left">ชุดสินค้า</div>
-                    <select name="cars" class="form-control">
-                        <option value="P">P</option>
-                        <option value="F">F</option>
-                    </select>
-                </div>
-
-
-                <div class="col-md-1">
-                    <div style="text-align: left">กว้างxยาวxสูง</div>
-                    <input class="form-control" ID="width" name="width" placeholder="กว้าง" />
-                </div>
-
-                <div class="col-md-1">
-                    <br />
-                    <input class="form-control" ID="long" name="long" placeholder="ยาว" />
-                </div>
-
-                <div class="col-md-1">
-                    <br />
-                    <input class="form-control" ID="higth" name="higth" placeholder="สูง" />
-                </div>
-
-
-                <div class="col-md-2">
-                    <div style="text-align: left">จำนวนขาย</div>
-                    <input class="form-control" ID="unit" name="width" placeholder="0.0000" />
-                </div>
-                <div class="col-md-2">
-                    <br />
-                    <input class="form-control" ID="emtpy" name="width" />
-                </div>
-
-                <div class="col-md-3">
-                    <div style="text-align: left">ราคา:หน่วย</div>
-                    <input class="form-control" ID="unit" name="width" placeholder="0.00" />
-                </div>
-            </div>
-            <br />
-
-
-            <div class="row">
-                <div class="col-md-2">
-                    <div style="text-align: left">สินค้า</div>
-                    <input type="hidden" name="prod_id" id="prod_id" value="" />
-                    <input class="form-control" ID="pcode" name="pcode" placeholder="สินค้า" />
-                </div>
-
-                <div class="col-md-3">
-                    <br />
-                    <div class="input-group">
-                        <input class="form-control" ID="pname1" name="pname1" />
-                        <span class="input-group-addon" data-toggle="modal" data-target="#FindItemPopup"><i class="glyphicon glyphicon-search"></i></span>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="FindItemPopup" role="dialog">
-                            <div class="modal-dialog" style="width: 80%; height: 80%">
-
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">ค้นหาสินค้า/วัตถุดิบ</h4>
-                                    </div>
-
-                                    <div class="modal-body">
-                                        <div class="row">
-
-
-                                            <div class="col-md-1">ชนิดสินค้า</div>
-                                            <div class="col-md-2">
-                                                <select class="form-control" id="item">
-                                                    <option value="1001">สินค้าสำเร็จรูป</option>
-                                                    <option value="1002">สินค้ากึ่งสำเร็จรูป</option>
-                                                    <option value="1003">วัตถุดิบ</option>
-                                                    <option value="1004">บรรจุภัณฑ์</option>
-                                                    <option value="1006">วัสดุสิ้นเปลือง</option>
-                                                    <option value="2001">สิ้นค้า จัดซื้อ</option>
-                                                    <option value="1007">อะไหล่</option>
-                                                    <option value="1008">เครื่องมือ</option>
-                                                    <option value="1009">อื่นๆ</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-1">ค้นโดย</div>
-                                            <div class="col-md-3">
-                                                <input class="form-control" ID="InsertItem" name="width" placeholder="" />
-                                            </div>
-                                            <div class="col-md-1">
-                                                <input type="submit" value="ค้นหา" class="btn btn-primary" id="SearchItem" />
-                                            </div>
-                                        </div>
-                                        <br />
-
-                                        <table class="table table-responsive table-hover" id="product">
-                                            @*<thead>
-                                                    <tr>
-                                                        <th>รหัส</th>
-                                                        <th>ชื่อ</th>
-                                                        <th>ชื่อภาษา2</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach (var ProductModel in ViewBag.MyData)
-                                                    {
-                                                        <tr>
-                                                            <td data-id="@ProductModel.prod_id">
-                                                                @ProductModel.pcode
-                                                            </td>
-                                                            <td>
-                                                                @ProductModel.pname1
-                                                            </td>
-                                                            <td>
-                                                                @ProductModel.pname11
-                                                            </td>
-
-                                                        </tr>
-                                                    }
-                                                </tbody>*@
-                                        </table>
-                                    </div>
-                                    <br />
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="col-md-2">
-                    <div style="text-align: left">จำนวนมาตรฐาน</div>
-                    <input class="form-control" ID="unit" name="width" placeholder="0.0000" />
-                </div>
-                <div class="col-md-2">
-                    <br />
-                    <input class="form-control" ID="emtpy" name="width" />
-                </div>
-
-                <div class="col-md-3">
-                    <div style="text-align: left">ส่วนลด</div>
-                    <input class="form-control" ID="Discount" name="width" placeholder="0.00" />
-                </div>
-            </div>
-            <br />
-
-            <div class="row">
-                <div class="col-md-2">
-                    <div style="text-align: left">Lot</div>
-                    <div class="input-group">
-                        <input class="form-control" ID="StockName" name="width" />
-                        <span class="input-group-addon" runat="server"><i class="glyphicon glyphicon-search"></i></span>
-                    </div>
-                </div>
-
-                <div class="col-md-3"></div>
-
-                <div class="col-md-2">
-                    <div style="text-align: left">วันเวลาที่ส่งสินค้า</div>
-                    <input class="form-control" type="date" ID="ManufacturedDate" name="ManufacturedDate" />
-                </div>
-                <div class="col-md-2">
-                    <br />
-                    <input class="form-control" type="time" ID="ManufacturedTime" name="ManufacturedTime" />
-                </div>
-
-                <div class="col-md-3">
-                    <div style="text-align: left">มูลค่า</div>
-                    <input class="form-control" ID="Discount" name="Discount" placeholder="0.00" />
-                </div>
-            </div>
-            <br />
-
-            <div class="row">
-                <div class="col-md-2">
-                    <div style="text-align: left">TagId</div>
-                    <input class="form-control" ID="TagId" name="TagId" />
-                </div>
-            </div>
-
-            <br />
-            <div class="table-responsive table-hover">
+    <div id="detail" class="container-fluid tab-pane fade in active">
+        <div class="table-responsive table-hover">
+            &nbsp;&nbsp;<input class="form-check-input check" type="checkbox" value="" id="checkAll">
+           <b>เลือกทั้งหมด</b>
+            <div class="scr">
                 <table class="table">
-                    <thead>
+                    @*<thead>
                         <tr>
-                            <th>No.</th>
-                            <th>รหัสสินค้า</th>
-                            <th>ชื่อสินค้า</th>
-                            <th>Lot</th>
-                            <th>ที่เก็บ</th>
-                            <th>จำนวน</th>
-                            <th>หน่วยขาย</th>
-                            <th>จำนวน</th>
-                            <th>หน่วยมาตรฐาน</th>
-                            <th>ราคาขาย</th>
-                            <th>จำนวนเงิน</th>
-                            <th>ส่วนลด</th>
-                            <th>TabId</th>
-                            <th>วันที่ส่งของ</th>
+                            <td>
+                                <input class="form-check-input check" type="checkbox" value="" id="checkAll">
+                                <b>Check All</b>
+                            </td>
                         </tr>
-                    </thead>
+                    </thead>*@
                     <tbody>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td >
+                                <div class="form-check">
+                                    <input class="form-check-input check" type="checkbox" value="" id="defaultCheck1">
+                                </div>
+                            </td>
+                            <td>รหัสสินค้า 1</td>
+                            <td>ชื่อสินค้า 1</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input check" type="checkbox" value="" id="defaultCheck1">
+                                </div>
+                            </td>
+                            <td>รหัสสินค้า 2</td>
+                            <td>ชื่อสินค้า 2</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input check" type="checkbox" value="" id="defaultCheck1">
+                                </div>
+                            </td>
+                            <td>รหัสสินค้า 3</td>
+                            <td>ชื่อสินค้า 3</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input check" type="checkbox" value="" id="defaultCheck1">
+                                </div>
+                            </td>
+                            <td>รหัสสินค้า 4</td>
+                            <td>ชื่อสินค้า 4</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input check" type="checkbox" value="" id="defaultCheck1">
+                                </div>
+                            </td>
+                            <td>รหัสสินค้า 5</td>
+                            <td>ชื่อสินค้า 5</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <br />
-            <br />
 
-            <div class="row">
-                <div class="col-md-8"></div>
-                <div class="col-md-2" style="text-align: right">จำนวนเงินรวม</div>
-                <div class="col-md-2"><input class="form-control" name="totalCash" placeholder=".00" ReadOnly /></div>
-            </div>
-            <br />
 
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-2" style="text-align: right">ส่วนลดการค้า</div>
-                <div class="col-md-2"><input class="form-control" name="tradeDiscount1" placeholder=".00" /></div>
-                <div class="col-md-2"><input class="form-control" name="tradeDiscount2" placeholder=".00" ReadOnly /></div>
-                <div class="col-md-2"><input class="form-control" name="tradeDiscount3" placeholder=".00" ReadOnly /></div>
-            </div>
-            <br />
-
-            <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-2" style="text-align: right">VAT แยกนอก</div>
-                <div class="col-md-1">
-                    <select class="form-control">
-                        <option>Y</option>
-                        <option>N</option>
-                    </select>
-                </div>
-                <div class="col-md-1" style="text-align: right">ฐานภาษี</div>
-                <div class="col-md-2"><input class="form-control" id="" name="taxBase" placeholder=".00" /></div>
-                <div class="col-md-2"><input class="form-control" id="" name="taxRate" placeholder="อัตราภาษี(%)" ReadOnly /></div>
-                <div class="col-md-2"><input class="form-control" id="" name="productName" placeholder=".00" /></div>
-            </div>
-            <br />
-
-            <div class="row">
-                <div class="col-md-9"></div>
-                <div class="col-md-1" style="text-align: right">รวมทั้งสิ้น</div>
-                <div class="col-md-2"><input class="form-control" name="total" placeholder=".00" ReadOnly /></div>
-            </div>
-            <br />
-
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>รหัสสินค้า</th>
+                        <th>ชื่อสินค้า</th>
+                        <th>Lot</th>
+                        <th>ที่เก็บ</th>
+                        <th>จำนวน</th>
+                        <th>หน่วยขาย</th>
+                        <th>จำนวน</th>
+                        <th>หน่วยมาตรฐาน</th>
+                        <th>ราคาขาย</th>
+                        <th>จำนวนเงิน</th>
+                        <th>ส่วนลด</th>
+                        <th>TabId</th>
+                        <th>วันที่ส่งของ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -1010,3 +865,9 @@
         <br />
     </div>
 </div>
+
+<script>
+    $("#checkAll").click(function () {
+        $(".check").prop('checked', $(this).prop('checked'));
+    });
+</script>
