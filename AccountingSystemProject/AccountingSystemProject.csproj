@@ -930,8 +930,10 @@
     <Compile Include="Models\BranchModel.cs" />
     <Compile Include="Models\BusiType.cs" />
     <Compile Include="Models\CauseOfReductionDebtModel.cs" />
+    <Compile Include="Models\Class1.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\DepartModel.cs" />
+    <Compile Include="Models\doModel.cs" />
     <Compile Include="Models\EmployeeGroupModel.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\FactoryModel.cs" />
