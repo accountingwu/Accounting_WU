@@ -1,0 +1,230 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@using AccountingSystemProject.Models;
+@{
+    ViewBag.Title = "ManageSection";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+
+<div class="container-fluid ">
+    <h3>เพิ่ม/แก้ไข รายชื่อแผนก</h3>
+    <div class="table-responsive table-hover" id="section">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>รหัสแผนก</th>
+                    <th>ชื่อแผนก</th>
+                    <th>ชื่อภาษา 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var section1 in ViewBag.section)
+                {
+                    <tr>
+                        <td data-id="@section1.sec_id">
+                            @section1.secode
+                        </td>
+                        <td>
+                            @section1.sename1
+                        </td>
+                        <td>
+                            @section1.sename2
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.section, page => Url.Action("Section", new { page }))</div>
+</div>
+<br />
+
+<div class="container-fluid">
+    <div class="bg">
+        <div class="btn-group" style="float: right">
+            <input type="submit" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="Clear" />
+            <input type="submit" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+            <input type="submit" value="ลบข้อมูล" class="btn btn-primary btn-sm" id="Delete" />
+            <input type="submit" value="ค้นหา" class="btn btn-primary btn-sm" id="Find" />
+            <input type="submit" value="Preview" class="btn btn-primary btn-sm" id="Preview" />
+            <input type="submit" value="พิมพ์" class="btn btn-primary btn-sm" id="Print" />
+        </div>
+        <br /><br /><br />
+
+        <form action="" id="SectionFrom" class="container-fluid ">
+            <input type="hidden" name="sec_id" id="sec_id" value="" />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">ฝ่าย : <font color="red"> * </font></div>
+                <div class="col-md-4" id="head">
+                    <select class="form-control" runat="server" id="dcode" name="dcode" required>
+                        <option value="">None</option>
+                        @foreach (var depart1 in ViewBag.depart)
+                        {
+                            <option value="@depart1.dcode">@depart1.dname1 </option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">รหัสแผนก : <font color="red"> * </font></div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="รหัสแผนก" name="secode" ID="secode" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">ชื่อแผนก : <font color="red"> * </font></div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อแผนก" name="sename1" ID="sename1" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">ชื่อภาษา2 : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อภาษา2" name="sename2" ID="sename2" />
+                </div>
+            </div>
+        </form>
+        <br />
+        <br />
+    </div>
+</div>
+@section scripts {
+
+    @Scripts.Render("~/Scripts/validate/jquery.validate.js")
+    @Scripts.Render("~/Scripts/validate/ManageSection.js")
+    <script>
+        $("div#section table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableSection',
+                    type: 'post',
+                    data: {
+                        'id': id
+
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#sec_id').val(data.sec_id);
+                        $('#secode').val(data.secode);
+                        $('#sename1').val(data.sename1);
+                        $('#sename2').val(data.sename2);
+                        $('#dcode').val(data.dcode);
+                    }
+                });
+            } else {
+                $('#sec_id').val("");
+                $('#secode').val("");
+                $('#sename1').val("");
+                $('#sename2').val("");
+                $('#dcode').val("");
+            }
+        })
+
+        $("#Save").on('click', function () {
+            if ($("#SectionFrom").valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveSection", "Section")',
+                    data: JSON.stringify({
+                        sec_id: $("#sec_id").val(),
+                        secode: $("#secode").val(),
+                        sename1: $("#sename1").val(),
+                        sename2: $("#sename2").val(),
+                        ccode: "TBC",
+                        dcode: $('#dcode option:selected').val()
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    success: function (response) {
+                        if (response == true){
+                        alert("บันทึกสำเร็จ");
+                        window.location.reload(true);
+                        } else {
+                            alert("รหัสฝ่ายซ้ำ");
+                        }
+                    }
+                })
+            }
+        });
+
+
+        $("#Delete").click(function () {
+            if ($("#SectionFrom").valid()) {
+
+                if (confirm('ยืนยันการลบ')) {
+                    Delete();
+                } else {
+                    return false;
+                }
+            }
+        });
+
+        function Delete() {
+            $.ajax({
+                url: '@Url.Action("DeleteSection", "Section")',
+                type: 'post',
+                data: JSON.stringify({
+                    sec_id: $("#sec_id").val()
+                }),
+                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                }
+            });
+        }
+
+        $("#Clear").click(function () {
+
+            $('#sec_id').val("");
+            $('#secode').val("");
+            $('#sename1').val("");
+            $('#sename2').val("");
+            $('#dcode').val("");
+
+
+        });
+
+
+    </script>
+
+}
+

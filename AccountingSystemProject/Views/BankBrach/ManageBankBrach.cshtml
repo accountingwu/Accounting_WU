@@ -1,0 +1,273 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@using AccountingSystemProject.Models;
+@{
+    ViewBag.Title = "ManageBankBrach";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .alert {
+        display: none;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+<div class="container-fluid ">
+    <h3>เพิ่ม/แก้ไขรหัสสาขาธนาคาร</h3>
+    <div class="table-responsive table-hover" id="Bank">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>รหัสสาขาธนาคาร</th>
+                    <th>ชื่อสาขาธนาคาร</th>
+                    <th>ชื่อสาขาธนาคาร(Eng)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Brch in ViewBag.MyData)
+                {
+                    <tr>
+                        <td data-id="@Brch.BankBrchID">
+                            @Brch.BankBrchCode
+                        </td>
+                        <td>
+                            @Brch.BankBrchName
+                        </td>
+                        <td>
+                            @Brch.BankBrchNameEng
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+        <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("BankBrach", new { page }))</div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="bg">
+
+        <div class="btn-group" style="float: right">
+            <input type="submit" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="new" />
+            <input type="button" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+            <input type="submit" value="ลบ" class="btn btn-primary btn-sm" id="Delete" />
+            <input type="submit" value="ค้นหา" class="btn btn-primary btn-sm" id="Find" />
+            <input type="submit" value="ดูตัวอย่าง" class="btn btn-primary btn-sm" id="Preview" />
+            <input type="submit" value="พิมพ์" class="btn btn-primary btn-sm" id="Print" />
+        </div>
+        <br /><br /><br />
+
+
+
+        <form id="formBrach">
+            <input type="hidden" name="BankBrchID" id="BankBrchID" value="" />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-1" id="head">รหัสสาขาธนาคาร :  <font color="red"> * </font> </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="รหัสสาขาธนาคาร" name="BankBrchCode" ID="BankBrchCode" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-1" id="head">ชื่อสาขาธนาคาร : <font color="red"> * </font></div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อสาขาธนาคาร" name="BankBrchName" ID="BankBrchName" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-1" id="head">ชื่อย่อสาขาธนาคาร:</div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อย่อสาขาธนาคาร" name="BankBrchNameEng" ID="BankBrchNameEng" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-1" id="head">ที่อยู่: </div>
+                <div class="col-md-4" id="head">
+                    <textarea class="form-control" placeholder="ที่อยู่" name="BankBrchAddr1" ID="BankBrchAddr1"> 
+                        
+                        </textarea>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-1" id="head">ที่อยู่2: </div>
+                <div class="col-md-4" id="head">
+                    <textarea class="form-control" placeholder="ที่อยู่2" name="BankBrchAddr2" ID="BankBrchAddr2"> 
+                        
+                        </textarea>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-1" id="head">หมายเหตุ: </div>
+                <div class="col-md-4" id="head">
+                    <textarea class="form-control" placeholder="หมายเหตุ" name="Remark" ID="Remark"> 
+                        
+                        </textarea>
+                </div>
+            </div>
+            <br />
+            <br />
+        </form>
+    </div>
+</div>
+
+
+@section scripts {
+
+    @Scripts.Render("~/Scripts/validate/jquery.validate.js")
+    @Scripts.Render("~/Scripts/validate/ManageBankBrach.js")
+
+    <script>
+
+            $("div#Bank table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableBankBrach',
+                    type: 'post',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#BankBrchID').val(data.BankBrchID);
+                        $('#BankBrchCode').val(data.BankBrchCode);
+                        $('#BankBrchName').val(data.BankBrchName);
+                        $('#BankBrchNameEng').val(data.BankBrchNameEng);
+                        $('#BankBrchAddr1').val(data.BankBrchAddr1);
+                        $('#BankBrchAddr2').val(data.BankBrchAddr2);
+                        $('#Remark').val((data.Remark == null) ? "" : data.Remark);
+                    }
+                });
+            } else {
+                $('#BankBrchID').val("");
+                $('#BankBrchCode').val("");
+                $('#BankBrchName').val("");
+                $('#BankBrchNameEng').val("");
+                $('#BankBrchAddr1').val("");
+                $('#BankBrchAddr2').val("");
+                $('#Remark').val("");
+            }
+            })
+
+     $("#Save").on('click', function () {
+         if ($("#formBrach").valid()) {
+             $.ajax({
+                 type: "POST",
+                 url: '@Url.Action("SaveBankBrach", "BankBrach")',
+                 data: JSON.stringify({
+                     BankBrchID: $("#BankBrchID").val(),
+                     BankBrchCode: $("#BankBrchCode").val(),
+                     BankBrchName: $("#BankBrchName").val(),
+                     BankBrchNameEng: $("#BankBrchNameEng").val(),
+                     BankBrchAddr1: $("#BankBrchAddr1").val(),
+                     BankBrchAddr2: $("#BankBrchAddr2").val(),
+                     Remark: $("#Remark").val()
+                 }),
+                 dataType: "json",
+                 contentType: "application/json; charset=utf-8",
+                 processData: false,
+                 success: function (response) {
+                     if (response == true)
+                     {
+                         alert("บันทึกสำเร็จ");
+                         window.location.reload(true);
+                     } else {
+                         alert('รหัสสาขาธนาคารซ้ำ');
+                     }
+                 }
+             })
+         }
+        });
+      $("#Delete").click(function() {
+          if ($("#formBrach").valid())
+          {
+              if (confirm('ยืนยันการลบ')) {
+                  Delete();
+              } else {
+                  return false;
+              }
+          }
+        });
+
+      function Delete()
+      {
+          $.ajax
+          ({
+              url: '@Url.Action("DeleteBankBrach", "BankBrach")',
+              type: 'post',
+              data: JSON.stringify
+                  ({
+                  BankBrchID: $("#BankBrchID").val()
+                  }),
+              dataType: "json",
+              contentType: 'application/json; charset=utf-8',
+              processData: false,
+              success: function (data) {
+                  if (data) {
+                      window.location.reload(true);
+                  }
+              }
+
+
+              });
+            }
+
+
+            $("#new").click(function () {
+
+                $('#BankBrchID').val("");
+                $('#BankBrchCode').val("");
+                $('#BankBrchName').val("");
+                $('#BankBrchNameEng').val("");
+                $('#BankBrchAddr1').val("");
+                $('#BankBrchAddr2').val("");
+                $('#Remark').val("");
+
+            });
+
+    </script>
+}
+
+
+
+

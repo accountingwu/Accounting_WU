@@ -1,0 +1,393 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@using AccountingSystemProject.Models;
+@{
+    ViewBag.Title = "ManageExpn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+
+<div class="container-fluid ">
+    <h3>เพิ่ม/แก้ไข รหัสรายได้</h3>
+    <div class="table-responsive table-hover" id="Expn">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>รหัสรายได้</th>
+                    <th>รหัสบัญชี</th>
+                    <th>ชื่อบัญชี</th>
+                    <th>ชื่อรายได้</th>
+                    <th>ชื่อย่อรายได้</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Expn in ViewBag.MyData)
+                {
+                    <tr>
+                        <td data-id="@Expn.ExpnID">
+                            @Expn.ExpnCode
+                        </td>
+                        <td data-id="@Expn.AccID">
+                            @Expn.AccCode
+                        </td>
+                        <td>
+                            @Expn.AccName
+                        </td>
+                        <td>
+                            @Expn.ExpnName
+                        </td>
+                        <td>
+                            @Expn.ExpnNameEng
+                        </td>
+
+                    </tr>
+                }           
+            </tbody>
+        </table>
+    </div>
+    <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("Expn", new { page }))</div>
+</div>
+<br />
+
+<div class="container-fluid">
+    <div class="bg">
+        <div class="btn-group" style="float: right">
+            <input type="submit" value="ล้างข้อมูล" class="btn btn-primary btn-sm btn-responsive" id="Clear" />
+            <input type="submit" value="บันทึก" class="btn btn-primary btn-sm btn-responsive" id="Save" />
+            <input type="submit" value="ลบข้อมูล" class="btn btn-primary btn-sm btn-responsive" id="Delete" />
+            <input type="submit" value="ค้นหา" class="btn btn-primary btn-sm btn-responsive" id="Find" />
+            <input type="submit" value="Refresh" class="btn btn-primary btn-sm btn-responsive" id="Refresh" />
+            @*<input type="submit" value="Preview" class="btn btn-primary btn-sm btn-responsive" id="Preview" />
+            <input type="submit" value="พิมพ์" class="btn btn-primary btn-sm btn-responsive" id="Print" />*@
+        </div>
+        <br /><br /><br />
+
+        <form action="" id="ExpnFrom" class="container-fluid ">
+
+            <input type="hidden" name="ExpnID" id="ExpnID" value="" />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">รหัสรายได้ : <font color="red"> * </font></div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="รหัสรายได้" name="ExpnCode" ID="ExpnCode" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">ชื่อรายได้ : <font color="red"> * </font></div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อรายได้" name="ExpnName" ID="ExpnName" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">ชื่อย่อรายได้ : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ชื่อย่อรายได้" name="ExpnNameEng" ID="ExpnNameEng" />
+                </div>
+            </div>
+            @*<div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">ประเภทรายรับหรือรายจ่าย : <font color="red"> * </font></div>
+                <div class="col-md-4" id="head">
+                    <select class="form-control" runat="server" id="ExpnType" name="ExpnType" required>
+                        <option value="">None</option>
+                        <option value="1">รายได้</option>
+                        <option value="2">ค่าใช้จ่าย</option>
+                        
+                    </select>
+                </div>
+            </div>*@
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">รหัสบัญชี : <font color="red"> * </font></div>
+                <input type="hidden" name="AccID" id="AccID" value="" />
+                <div class="col-md-2" id="head">
+                    <input class="form-control" ID="AccCode" name="AccCode" placeholder="รหัสบัญชี" />
+                </div>
+
+                <div class="col-md-4">
+                    
+                    <div class="input-group">
+                        <input class="form-control" ID="AccName" name="AccName" />
+                        <span class="input-group-addon" data-toggle="modal" data-target="#FinditemPopupExp"><i class="glyphicon glyphicon-search"></i></span>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="FinditemPopupExp" role="dialog">
+                            <div class="modal-dialog " style="width: 80%; height: 80%">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">ค้นหา รายชื่อบัญชี</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="table-responsive table-hover" id="popup">
+                                                <br>
+                                                <div class="col-md-2">ค้นหาโดย</div>
+                                                <div class="col-md-3" id="head">
+                                                    <select class="form-control">
+                                                        <option>ชื่อบัญชี</option>
+                                                        <option>รหัสบัญชี</option>
+                                                    </select>
+
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input class="form-control" ID="Acc" name="width" placeholder="" />
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <input type="submit" value="ค้นหา" class="btn btn-primary" id="SearchAcc" />
+                                                </div>
+                                                <br />
+
+                                                <table class="table">
+
+                                                    <thead>
+                                                        <tr>
+                                                            <th>รหัสบัญชี</th>
+                                                            <th>ชื่อบัญชี</th>
+                                                            <th>ชื่อบัญชี(Eng)</th>
+                                                            <th>หมวดบัญชี</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var Acc in ViewBag.MyData1)
+                                                        {
+                                                            <tr>
+                                                                <td data-id="@Acc.AccID" data-dismiss="modal">
+                                                                    @Acc.AccCode
+                                                                </td>
+                                                                <td data-dismiss="modal">
+                                                                    @Acc.AccName
+                                                                </td>
+                                                                <td data-dismiss="modal">
+                                                                    @Acc.AccNameEng
+                                                                </td>
+                                                                <td data-dismiss="modal">
+                                                                    @Acc.AccTypeName
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">Remark : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="Remark" name="Remark" ID="Remark" />
+                </div>
+            </div>
+        </form>
+        <br />
+        <br />
+    </div>
+</div>
+
+
+@section scripts {
+
+    @Scripts.Render("~/Scripts/validate/jquery.validate.js")
+        @Scripts.Render("~/Scripts/validate/ManageExpn.js")
+    <script>
+        $("div#Expn table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableExpn',
+                    type: 'post',
+                    data: {
+                        'id': id
+
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#ExpnID').val(data.ExpnID);
+                        $('#ExpnCode').val(data.ExpnCode);
+                        $('#ExpnName').val(data.ExpnName);
+                        $('#AccCode').val(data.AccCode);
+                        $('#AccName').val(data.AccName);
+                        $('#AccID').val(data.AccID);
+                        //$('#ExpnType').val(data.ExpnType);
+                        $('#ExpnNameEng').val(data.ExpnNameEng);
+
+
+                    }
+                });
+            } else {
+                $('#ExpnID').val("");
+                $('#ExpnCode').val("");
+                $('#ExpnName').val("");
+                $('#ExpnNameEng').val("");
+                $('#AccCode').val("");
+                $('#AccName').val("");
+                //$('#ExpnType').val("");
+                $('#AccID').val("");
+
+
+            }
+        })
+        $("div#popup table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'FinditemPopupExp',
+                    type: 'get',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#AccID').val(data.AccID);
+                        $('#AccCode').val(data.AccCode);
+                        $('#AccName').val(data.AccName);
+                    }
+                });
+            } else {
+                $('#AccID').val("");
+                $('#AccCode').val("");
+                $('#AccName').val("");
+
+            }
+        })
+
+        $("#Save").on('click', function () {
+            if ($("#ExpnFrom").valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveExpn", "Expn")',
+                    data: JSON.stringify({
+                        ExpnID: $("#ExpnID").val(),
+                        ExpnCode: $("#ExpnCode").val(),
+                        ExpnName: $("#ExpnName").val(),
+                        ExpnNameEng: $("#ExpnNameEng").val(),
+                        Remark: $("#Remark").val(),
+                        AccID: $("#AccID").val(),
+                        //ExpnType: $('#ExpnType option:selected').val(),
+                        ExpnType: "1",
+                        ccode: "TBC"
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    success: function (response) {
+                        if (response == true){
+                        alert("บันทึกสำเร็จ");
+                        window.location.reload(true);
+                        } else {
+                            alert("รหัสรายได้ซ้ำ");
+                        }
+                    }
+                })
+            }
+        });
+
+
+        $("#Delete").click(function () {
+            if ($("#ExpnFrom").valid()) {
+
+                if (confirm('ยืนยันการลบ')) {
+                    Delete();
+                } else {
+                    return false;
+                }
+            }
+        });
+
+        function Delete() {
+            $.ajax({
+                url: '@Url.Action("DeleteExpn", "Expn")',
+                type: 'post',
+                data: JSON.stringify({
+                    ExpnID: $("#ExpnID").val()
+                }),
+                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                }
+            });
+        }
+
+        $("#Clear").click(function () {
+
+            $('#ExpnID').val("");
+            $('#ExpnCode').val("");
+            $('#ExpnName').val("");
+            $('#ExpnNameEng').val("");
+            $('#Remark').val("");
+            $('#AccID').val("");
+            $('#AccCode').val("");
+            $('#ExpnType').val("");
+            $('#AccName').val("");
+
+
+        });
+
+
+    </script>
+
+}
+
+
+
+
+
+
+
+
+

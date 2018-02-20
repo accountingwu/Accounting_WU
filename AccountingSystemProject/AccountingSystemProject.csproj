@@ -156,7 +156,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BankBookTypeController.cs" />
+    <Compile Include="Controllers\BankBrachController.cs" />
+    <Compile Include="Controllers\BrachController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CustomerZoneController.cs" />
+    <Compile Include="Controllers\ExchController.cs" />
+    <Compile Include="Controllers\ExpnController.cs" />
     <Compile Include="Controllers\ManageDeliveryOrderController.cs" />
     <Compile Include="Controllers\EmployeeGroupController.cs" />
     <Compile Include="Controllers\FactoryController.cs" />
@@ -184,8 +190,12 @@
     <Compile Include="Controllers\ManageTransportasionAreaController.cs" />
     <Compile Include="Controllers\QsoftDepartController.cs" />
     <Compile Include="Controllers\MasterDataController.cs" />
+    <Compile Include="Controllers\ReceivePlaceController.cs" />
     <Compile Include="Controllers\ReOrderSafetyEOQController.cs" />
+    <Compile Include="Controllers\SectionController.cs" />
     <Compile Include="Controllers\SOSaleOrderController.cs" />
+    <Compile Include="Controllers\VatDesController.cs" />
+    <Compile Include="Controllers\VatGroupController.cs" />
     <Compile Include="DAL\alccost.cs">
       <DependentUpon>coonectDB.tt</DependentUpon>
     </Compile>
@@ -926,14 +936,21 @@
     </Compile>
     <Compile Include="Models\AccModel.cs" />
     <Compile Include="Models\BadScrapModel.cs" />
+    <Compile Include="Models\BankBookType.cs" />
+    <Compile Include="Models\BankbookTypeModel.cs" />
+    <Compile Include="Models\BankBrach.cs" />
     <Compile Include="Models\BillGrp.cs" />
+    <Compile Include="Models\BrachModel.cs" />
     <Compile Include="Models\BranchModel.cs" />
     <Compile Include="Models\BusiType.cs" />
     <Compile Include="Models\CauseOfReductionDebtModel.cs" />
+    <Compile Include="Models\CompanyModel.cs" />
+    <Compile Include="Models\corpModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\DepartModel.cs" />
     <Compile Include="Models\EmployeeGroupModel.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
+    <Compile Include="Models\ExpnModel.cs" />
     <Compile Include="Models\FactoryModel.cs" />
     <Compile Include="Models\GroupCustomerModel.cs" />
     <Compile Include="Models\GroupProductModel.cs" />
@@ -941,10 +958,14 @@
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\Product_ICModel.cs" />
     <Compile Include="Models\QuestionViewModel.cs" />
+    <Compile Include="Models\ReceivePlaceModel.cs" />
+    <Compile Include="Models\SectionModel.cs" />
     <Compile Include="Models\Side.cs" />
     <Compile Include="Models\SupplierModel.cs" />
     <Compile Include="Models\TransportasionAreaModel.cs" />
     <Compile Include="Models\UnitModel.cs" />
+    <Compile Include="Models\VatDesModel.cs" />
+    <Compile Include="Models\VATGroupModel.cs" />
     <Compile Include="Models\WarehouseModel.cs" />
     <Compile Include="Models\WarehouseTypeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1231,7 +1252,16 @@
     <Content Include="Scripts\Validate\FormTransportasionArea.js" />
     <Content Include="Scripts\Validate\FormUnit.js" />
     <Content Include="Scripts\Validate\jquery.validate.js" />
+    <Content Include="Scripts\Validate\ManageBankBookType.js" />
+    <Content Include="Scripts\Validate\ManageBankBrach.js" />
+    <Content Include="Scripts\Validate\ManageBrach1.js" />
+    <Content Include="Scripts\Validate\ManageCompany.js" />
+    <Content Include="Scripts\Validate\ManageExch1 .js" />
+    <Content Include="Scripts\Validate\ManageExpn.js" />
+    <Content Include="Scripts\Validate\ManageSection.js" />
+    <Content Include="Scripts\Validate\ManageTax.js" />
     <Content Include="Scripts\Validate\Media.js" />
+    <Content Include="Scripts\Validate\ReceiveTypedata.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1283,6 +1313,16 @@
     <Content Include="Views\ManageSupplier\ManageSupplier.cshtml" />
     <Content Include="Views\ManageEmployee\ManageEmployee.cshtml" />
     <Content Include="Views\ManageDeliveryOrder\ManageDeliveryOrder.cshtml" />
+    <Content Include="Views\BankBookType\ManageBankBookType.cshtml" />
+    <Content Include="Views\BankBrach\ManageBankBrach.cshtml" />
+    <Content Include="Views\Brach\ManageBrach.cshtml" />
+    <Content Include="Views\Company\ManageCompany.cshtml" />
+    <Content Include="Views\Exch\ManageExch.cshtml" />
+    <Content Include="Views\Expn\ManageExpn.cshtml" />
+    <Content Include="Views\ReceivePlace\ManageReceivePlace.cshtml" />
+    <Content Include="Views\Section\ManageSection.cshtml" />
+    <Content Include="Views\VatDes\ManageVatDes.cshtml" />
+    <Content Include="Views\VatGroup\ManageVATGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
