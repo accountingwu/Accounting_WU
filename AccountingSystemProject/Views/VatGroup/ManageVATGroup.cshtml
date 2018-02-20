@@ -1,0 +1,390 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@using AccountingSystemProject.Models;
+@{
+    ViewBag.Title = "ManageVATGroup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+<div class="container-fluid ">
+    <h3>เพิ่ม/แก้ไข รหัสกลุ่มภาษี </h3>
+    <div class="table-responsive table-hover" id="Vat">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>รหัสกลุ่มภาษี</th>
+                    <th>ประเภทภาษี</th>
+                    <th>อัตราภาษี(%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var vat in ViewBag.MyData)
+                {
+                    <tr>
+                        <td data-id="@vat.VATGroupID">
+                            @vat.VATGroupCode
+                        </td>
+                        <td>
+                            @vat.VatType
+                        </td>
+                        <td>
+                            @vat.VatRate
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("VatGroup", new { page }))</div>
+    </div>
+
+</div>
+
+<div class="container-fluid">
+    <div class="bg">
+        <div class="btn-group" style="float: right">
+            <input type="button" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="Clear" />
+            <input type="button" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+            <input type="button" value="ลบ" class="btn btn-primary btn-sm" id="Delete" />
+            <input type="submit" value="ค้นหา" class="btn btn-primary btn-sm" id="Find" />
+        </div>
+        <br /><br /><br />
+
+        <form action="" id="vatgroupfrom" class="container-fluid ">
+            <input type="hidden" name="VATGroupID" id="VATGroupID" value="" />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-1" id="head">รหัสกลุ่มภาษี : <font color="red"> * </font></div>
+                <div class="col-md-3" id="head">
+                    <input class="form-control" placeholder="รหัสกลุ่มภาษี" name="VATGroupCode" ID="VATGroupCode" />
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-1" id="head">รหัสบัญชี : <font color="red"> * </font></div>
+                <div class="col-md-3"id="head">
+                    <input class="form-control" ID="AccCode" name="AccCode" placeholder="รหัสบัญชี" required />
+                </div>
+
+                <div class="col-md-3">
+
+                    <div class="input-group">
+                        <input class="form-control" ID="AccName" name="AccName" />
+                        <span class="input-group-addon" data-toggle="modal" data-target="#FinditemPopupSup"><i class="glyphicon glyphicon-search"></i></span>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="FinditemPopupSup" role="dialog">
+                            <div class="modal-dialog " style="width: 80%; height: 80%">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">ค้นหา รายชื่อบัญชี</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="table-responsive table-hover" id="popup">
+                                                <br>
+                                                <div class="col-md-2">ค้นหาโดย</div>
+                                                <div class="col-md-3" id="head">
+                                                    <select class="form-control">
+                                                        <option>ชื่อบัญชี</option>
+                                                        <option>รหัสบัญชี</option>
+                                                    </select>
+
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input class="form-control" ID="Acc" name="width" placeholder="" />
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <input type="submit" value="ค้นหา" class="btn btn-primary" id="SearchAcc" />
+                                                </div>
+                                                <br />
+
+                                                <table class="table">
+
+                                                    <thead>
+                                                        <tr>
+                                                            <th>รหัสบัญชี</th>
+                                                            <th>ชื่อบัญชี</th>
+                                                            <th>ชื่อบัญชี(Eng)</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var Acc in ViewBag.MyData1)
+                                                        {
+                                                            <tr>
+                                                                <td data-id="@Acc.AccID" data-dismiss="modal">
+                                                                    @Acc.AccCode
+                                                                </td>
+                                                                <td data-dismiss="modal">
+                                                                    @Acc.AccName
+                                                                </td>
+                                                                <td data-dismiss="modal">
+                                                                    @Acc.AccNameEng
+                                                                </td>
+
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-1" id="head">  ประเภทภาษี : <font color="red"> * </font></div>
+
+                    <div class="col-md-3" id="VatType" name="VatType">
+                        <input type="radio" name="Type" value="แยกนอก"> แยกนอก &nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="Type" value="รวมใน"> รวมใน&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="Type" value="ยกเว้น"> ยกเว้น
+                    </div>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-1" id="head">อัตราภาษี : <font color="red"> * </font></div>
+                    <div class="col-md-3" id="head">
+                        <input class="form-control" placeholder="อัตราภาษี" name="VatRate" ID="VatRate" />
+                    </div>
+                </div>
+                @*<div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2" id="head">หมายเหตุ : </div>
+                    <div class="col-md-4" id="head">
+                        <input class="form-control" placeholder="ชื่อแผนก" name="sename1" ID="sename1" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2" id="head">ชื่อภาษา2 : </div>
+                    <div class="col-md-4" id="head">
+                        <input class="form-control" placeholder="ชื่อภาษา2" name="sename2" ID="sename2" />
+                    </div>
+                </div>*@
+</form>
+        <br />
+        <br />
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/Scripts/validate/jquery.validate.js")
+    @Scripts.Render("~/Scripts/validate/ManageTax.js")
+    <script>
+        $("div#Vat table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableVat',
+                    type: 'post',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#VATGroupID').val(data.VATGroupID);
+                        $('#VATGroupCode').val(data.VATGroupCode);
+                        $('#AccCode').val(data.AccCode);
+                        $('#AccName').val(data.AccName);
+                        $('#VatRate').val(data.VatRate);
+                        $('#VatType').val(data.VatType);
+
+                        if (data.VatType == 'แยกนอก') {
+
+                            $('#VatType').find(':radio[name=Type][value="แยกนอก"]').prop('checked', true)
+                        }
+                        else if (data.VatType == 'รวมใน')  {
+                            $('#VatType').find(':radio[name=Type][value="รวมใน"]').prop('checked', true)
+                        }
+                        else {
+                            $('#VatType').find(':radio[name=Type][value="ยกเว้น"]').prop('checked', true)
+                        }
+                    }
+                });
+            } else {
+                $('#VATGroupID').val("");
+                $('#VATGroupCode').val("");
+                $('#AccCode').val("");
+                $('#AccName').val("");
+                $('#VatRate').val("");
+                $('#VatType').val("");
+               
+            }
+        })
+
+
+            $("div#popup table").delegate('tr', 'click', function () {
+                var id = $(this).find("td:first").data("id");
+                if (id != null) {
+                    $.ajax({
+                        url: 'FinditemPopupSup',
+                        type: 'get',
+                        data: {
+                            'id': id
+                        },
+                        dataType: "json",
+                        success: function (data) {
+                            $('#AccCode').val(data.AccCode);
+                            $('#AccName').val(data.AccName);
+                        }
+                    });
+                } else {
+
+                    $('#AccCode').val("");
+                    $('#AccName').val("");
+
+                }
+            })
+
+
+
+        $("#Save").click(function () {
+            if ($("#vatgroupfrom").valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Save", "VatGroup")',
+                    data: JSON.stringify({
+                        VATGroupID: $("#VATGroupID").val(),
+                        VATGroupCode: $("#VATGroupCode").val(),
+                        AccCode: $("#AccCode").val(),
+                        VatRate: $("#VatRate").val(),                
+                        VatType: $('#VatType input:checked').val(),
+                        ccode: "TBC"
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    success: function (response) {
+                        if (response == true) {
+                            alert("บันทึกสำเร็จ");
+                            window.location.reload(true);
+                        } else {
+                            alert("รหัสภาษีซ้ำ");
+                        }
+
+                    }
+                })
+            }
+
+        });
+
+        $("#Delete").click(function () {
+            if ($("#vatgroupfrom").valid()) {
+                if (confirm('ยืนยันการลบ')) {
+                    Delete();
+                } else {
+                    return false;
+                }
+            }
+        });
+
+        function Delete() {
+            $.ajax({
+                url: '@Url.Action("DeleteVat", "VatGroup")',
+                type: 'post',
+                data: JSON.stringify({
+                    VATGroupID: $("#VATGroupID").val()
+                }),
+                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                }
+            });
+        }
+
+        $("#Clear").click(function () {
+
+            $('#VATGroupID').val("");
+            $('#VATGroupCode').val("");
+            $('#AccCode').val("");
+            $('#AccName').val("");
+            $('#VatRate').val("");
+            $('#VatType').val("");
+
+
+        });
+
+            //var tabs = $("#tabs").tabs();
+            //var validator = $("#supplierfrom").validate();
+
+            //$("#Save").click(function () {
+            //    //var selected = $("#tabs").tabs("option", "selected");
+            //    //$("#tabs").tabs("option", "selected", selected + 1);
+            //    var valid = true;
+            //    var i = 0;
+            //    var $inputs = $(this).closest("div").find("input");
+
+            //    $inputs.each(function () {
+            //        if (!validator.element(this) && valid) {
+            //            valid = false;
+            //        }
+            //    });
+
+            //    if (valid) {
+            //        $("#tabs").tabs("select", this.hash);
+            //    }
+            //});
+
+            ////use link to submit form instead of button
+            //$("a[id=Save]").click(function () {
+            //    $(this).parents("form").submit();
+            //});
+
+    </script>
+
+
+}

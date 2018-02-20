@@ -1,0 +1,168 @@
+﻿
+@{
+    ViewBag.Title = "ManageVatDes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+<div class="container-fluid ">
+ 
+    <h3>เพิ่ม/แก้ไข รายละเอียดภาษี </h3>
+    <div class="table-responsive table-hover" id="Vat">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ระบบ</th>
+                    <th>เมนู</th>
+                    <th>คำอธิบาย</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var vat in ViewBag.MyData)
+                {
+                    <tr>
+                        <td data-id="@vat.VatDesID" class="doodleEdit addDate">
+                            @vat.System
+                        </td>
+                        <td class="doodleEdit addDate">
+                            @vat.DocuName
+                        </td>
+                        <td class="doodleEdit addDate">
+                            @vat.Remark
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="bg">
+        <div class="btn-group" style="float: right">
+            <input type="submit" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+        </div>
+        <br /><br /><br />
+
+        <form action="" id="submit">
+            <input type="hidden" name="VatDesID" id="VatDesID" value="" />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">ระบบ : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="ระบบ" name="System" ID="System" readonly />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">เมนู : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="เมนู" name="DocuName" ID="DocuName" readonly/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="head">คำอธิบาย : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" placeholder="คำอธิบาย" name="Remark" ID="Remark" />
+                </div>
+            </div>
+        </form>
+        <br />
+        <br />
+    </div>
+</div>
+
+
+
+        @section scripts {
+
+            @*@Scripts.Render("~/Scripts/validate/jquery.validate.js")
+                @Scripts.Render("~/Scripts/validate/FormDepart.js")*@
+            <script>
+                $("div#Vat table").delegate('tr', 'click', function () {
+                    var id = $(this).find("td:first").data("id");
+                    if (id != null) {
+                        $.ajax({
+                            url: 'ShowTableVat',
+                            type: 'post',
+                            data: {
+                                'id': id
+
+                            },
+                            dataType: "json",
+                            success: function (data) {
+                                $('#VatDesID').val(data.VatDesID);
+                                $('#System').val(data.System);
+                                $('#DocuName').val(data.DocuName);
+                                $('#Remark').val(data.Remark);
+                               
+                            }
+                        });
+                    } else {
+                        $('#VatDesID').val("");
+                        $('#fcode').val("");
+                        $('#System').val("");
+                        $('#DocuName').val("");
+                        $('#Remark').val("");
+                    }
+                })
+
+
+        $("#Save").on('click', function () {
+            //if ($("#formdepart").valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveVat", "VatDes")',
+                    data: JSON.stringify({
+                        VatDesID: $("#VatDesID").val(),
+                        Remark: $("#Remark").val(),
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    success: function (response) {
+                        if (response == true){
+                        alert("บันทึกสำเร็จ");
+                        window.location.reload(true);
+                        } else {
+                            alert("รหัสฝ่ายซ้ำ");
+                        }
+                    }
+                })
+            //}
+        });
+
+
+            </script>
+
+        }
