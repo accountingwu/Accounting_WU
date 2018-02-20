@@ -182,6 +182,8 @@
     <Compile Include="Controllers\ManageProductController.cs" />
     <Compile Include="Controllers\ManageSupplierController.cs" />
     <Compile Include="Controllers\ManageTransportasionAreaController.cs" />
+    <Compile Include="Controllers\POController.cs" />
+    <Compile Include="Controllers\PReqController.cs" />
     <Compile Include="Controllers\QsoftDepartController.cs" />
     <Compile Include="Controllers\MasterDataController.cs" />
     <Compile Include="Controllers\ReOrderSafetyEOQController.cs" />
@@ -1283,6 +1285,8 @@
     <Content Include="Views\ManageSupplier\ManageSupplier.cshtml" />
     <Content Include="Views\ManageEmployee\ManageEmployee.cshtml" />
     <Content Include="Views\DeliveryOrder\ManageDeliveryOrder.cshtml" />
+    <Content Include="Views\PO\ManagePo.cshtml" />
+    <Content Include="Views\PReq\ManagePReq.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

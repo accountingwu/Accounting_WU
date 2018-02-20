@@ -1,0 +1,485 @@
+﻿
+@{
+    ViewBag.Title = "ManagePReq";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+<div class="container-fluid">
+    <h3>เพิ่ม/แก้ไข ใบขอซื้อ</h3>
+
+
+    <div class="bg">
+        <div class="btn-group" style="float: right">
+            <input type="button" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="Clear" />
+            <input type="button" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+            <input type="button" value="ลบ" class="btn btn-primary btn-sm" id="Delete" />
+            <input type="submit" value="ค้นหา" class="btn btn-primary btn-sm" id="Find" />
+        </div>
+        <br /><br /><br />
+
+        <form action="" id="PReqform" class="container-fluid ">
+
+            <input type="hidden" name="pReqID" id="pReqID" value="" />
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-1" id="head">เล่มที่ : <font color="red"> * </font></div>
+                <div class="col-md-1" id="head">
+                    <input class="form-control" placeholder="" name="docNo" ID="docNo" />
+                </div>
+
+                <div class="col-md-1"></div>
+                <div class="col-md-1" id="head">เลขที่ : <font color="red"> * </font></div>
+                <div class="col-md-1" id="head">
+                    <input class="form-control" placeholder="" name="No" ID="No" />
+                </div>
+
+                <div class="col-md-1"></div>
+                <div class="col-md-1" id="head">วันที่เอกสาร : <font color="red"> * </font></div>
+                <div class="col-md-2" id="head">
+                    <input type="date" class="form-control" name="Docdate" ID="Docdate" />
+                </div>
+
+            </div> <br />
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-1" id="head">ฝ่าย : <font color="red"> * </font></div>
+                <div class="col-md-1" id="head">
+                    <select class="form-control" runat="server" id="dcode" name="dcode" required>
+                        <option value="">None</option>
+                        @foreach (var depart1 in ViewBag.depart)
+                        {
+                            <option value="@depart1.dcode">@depart1.dname1 </option>
+                        }
+                    </select>
+
+
+
+                </div>
+
+
+
+                <div class="col-md-1"></div>
+                <div class="col-md-1" id="head">ผู้จำหน่าย : </div>
+                <div class="col-md-1" id="head">
+                    <input class="form-control" ID="Vcode" name="Vcode" placeholder="" />
+                </div>
+
+                <div class="col-md-2">
+
+                    <div class="input-group">
+                        <input class="form-control" ID="Vname" name="Vname" />
+                        <span class="input-group-addon" data-toggle="modal" data-target="#FindVenderPopup"><i class="glyphicon glyphicon-search"></i></span>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="FindVenderPopup" role="dialog">
+                            <div class="modal-dialog " style="width: 80%; height: 80%">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">ค้นหา รายชื่อผู้จำหน่าย</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="table-responsive table-hover" id="popup">
+                                                <br>
+                                                <div class="col-md-2">ค้นหาโดย</div>
+                                                <div class="col-md-3" id="head">
+                                                    <select class="form-control">
+                                                        <option>ชื่อ</option>
+                                                        <option>รหัส</option>
+                                                    </select>
+
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input class="form-control" ID="Vender" name="width" placeholder="" />
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <input type="submit" value="ค้นหา" class="btn btn-primary" id="SearchVender" />
+                                                </div>
+                                                <br />
+
+                                                <table class="table">
+
+                                                    <thead>
+                                                        <tr>
+                                                            <th>รหัสผู้จำหน่าย</th>
+                                                            <th>ชื่อผู้จำหน่าย</th>
+                                                            <th>ชื่อผู้จำหน่ายภาษา 2</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>123</td>
+                                                            <td>วิช เฟม</td>
+                                                            <td>wich fame</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div> <br />
+
+            <div class="row">
+
+                <div class="col-md-2"></div>
+                <div class="col-md-1" id="head">หมายเหตุ : </div>
+                <div class="col-md-4" id="head">
+                    <input class="form-control" name="note" ID="note" />
+                </div>
+            </div> <br />
+
+            <div class="row">
+                <table class="table">
+
+                    <thead>
+                        <tr>
+                            <th>วันกำหนดส่ง</th>
+                            <th>จำนวนวันเครดิต</th>
+                            <th>ขนส่งโดย</th>
+                            <th>ชื่อผู้ขอซื้อ</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="date" class="form-control" name="SendDate" ID="SendDate" /></td>
+                            <td><input class="form-control" name="CreditDate" ID="CreditDate" /></td>
+                            <td>
+
+                                <select class="form-control" runat="server" id="Tracode" name="Tracode" required>
+                                    <option value="0">None</option>
+                                    <option value="1">รถยนต์</option>
+                                    <option value="2">รถไฟ</option>
+                                    <option value="3">เรือ</option>
+                                    <option value="4">เครื่องบิน</option>
+
+                                </select>
+
+                            </td>
+
+                            <td>
+
+                                <select class="form-control" runat="server" id="dcode" name="dcode" required>
+                                    <option value="">None</option>
+                                    @foreach (var employee in ViewBag.employee)
+                                    {
+                                        <option value="@employee.ecode">@employee.ename1 </option>
+                                    }
+                                </select>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div> <br />
+
+            <div class="row">
+                <table class="table">
+
+                    <thead>
+                        <tr>
+                            <th>รหัสสินค้า</th>
+                            <th>ชื่อสินค้า</th>
+                            <th>จำนวน</th>
+                            <th>ราคา/หน่วย</th>
+                            <th>ส่วนลด</th>
+                            <th>จำนวนเงิน</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="input-group">
+                                    <input class="form-control" ID="pcode" name="pcode" />
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#FinditemPopup"><i class="glyphicon glyphicon-search"></i></span>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="FinditemPopup" role="dialog">
+                                        <div class="modal-dialog " style="width: 80%; height: 80%">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">ค้นหา สินค้า</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="table-responsive table-hover" id="popup">
+                                                            <br>
+                                                            <div class="col-md-2">ค้นหาโดย</div>
+                                                            <div class="col-md-3" id="head">
+                                                                <select class="form-control">
+                                                                    <option>ชื่อ</option>
+                                                                    <option>รหัส</option>
+                                                                </select>
+
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input class="form-control" ID="Item" name="width" placeholder="" />
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <input type="submit" value="ค้นหา" class="btn btn-primary" id="SearchVender" />
+                                                            </div>
+                                                            <br />
+
+                                                            <table class="table">
+
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>รหัสสิน</th>
+                                                                        <th>ชื่อสินค้า</th>
+                                                                        <th>ชื่อสินค้า 2</th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>123</td>
+                                                                        <td>วิช เฟม</td>
+                                                                        <td>wich fame</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer">
+
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </td>
+                            <td><input class="form-control" name="pname1" ID="pname1" /></td>
+                            <td><input class="form-control" name="num" ID="num" /></td>
+                            <td><input class="form-control" name="PriceperOne" ID="PriceperOne" /></td>
+                            <td><input class="form-control" name="discount" ID="discount" /></td>
+                            <td><input class="form-control" name="price" ID="price" /></td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                <div class="input-group">
+                                    <input class="form-control" ID="pcode" name="pcode" />
+                                    <span class="input-group-addon" data-toggle="modal" data-target="#FinditemPopup"><i class="glyphicon glyphicon-search"></i></span>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="FinditemPopup" role="dialog">
+                                        <div class="modal-dialog " style="width: 80%; height: 80%">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">ค้นหา สินค้า</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="table-responsive table-hover" id="popup">
+                                                            <br>
+                                                            <div class="col-md-2">ค้นหาโดย</div>
+                                                            <div class="col-md-3" id="head">
+                                                                <select class="form-control">
+                                                                    <option>ชื่อ</option>
+                                                                    <option>รหัส</option>
+                                                                </select>
+
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input class="form-control" ID="Item" name="width" placeholder="" />
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <input type="submit" value="ค้นหา" class="btn btn-primary" id="SearchVender" />
+                                                            </div>
+                                                            <br />
+
+                                                            <table class="table">
+
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>รหัสสิน</th>
+                                                                        <th>ชื่อสินค้า</th>
+                                                                        <th>ชื่อสินค้า 2</th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>123</td>
+                                                                        <td>วิช เฟม</td>
+                                                                        <td>wich fame</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer">
+
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </td>
+                            <td><input class="form-control" name="pname1" ID="pname1" /></td>
+                            <td><input class="form-control" name="num" ID="num" /></td>
+                            <td><input class="form-control" name="PriceperOne" ID="PriceperOne" /></td>
+                            <td><input class="form-control" name="discount" ID="discount" /></td>
+                            <td><input class="form-control" name="price" ID="price" /></td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+
+            </div> <br />
+
+
+
+            <div class="row">
+
+                <div class="col-md-7"></div>
+                <div class="col-md-1">รวมรายการสินค้า</div>
+                <div class="col-md-1" id="head">
+                    <input class="form-control" ID="allProduct" name="allProduct" placeholder="0" />
+                </div>
+
+
+                <div class="col-md-1">มูลค่าส่วนลด</div>
+                <div class="col-md-1" id="head">
+                    <input class="form-control" ID="alldiscount" name="alldiscount" placeholder="0" />
+                </div>
+
+
+
+            </div> <br />
+
+            <div class="row">
+
+                <div class="col-md-7"></div>
+                <div class="col-md-1">ส่วนลด %</div>
+                <div class="col-md-1" id="head">
+                    <input class="form-control" ID="discountPersen" name="discountPersen" placeholder="0" />
+                </div>
+
+
+                <div class="col-md-1">มูลค่าก่อน Vat</div>
+                <div class="col-md-1" id="head">
+                    <input class="form-control" ID="beforeVat" name="beforeVat" placeholder="0" />
+                </div>
+
+            </div> <br />
+
+            <div class="row">
+
+                <div class="col-md-5"></div>
+                <div class="col-md-1">Vat แยกนอก</div>
+                <div class="col-md-1" id="head">
+
+                    <select class="form-control" runat="server" id="OutVat" name="OutVat" required>
+
+                        <option value="1">Y</option>
+                        <option value="2">N</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="col-md-1">ชนิด Vat(%)</div>
+                <div class="col-md-1" id="head">
+                    <input class="form-control" ID="persenVat" name="persenVat" placeholder="0" />
+                </div>
+
+                <div class="col-md-1">มูลค่า Vat</div>
+                <div class="col-md-1" id="head">
+                    <input class="form-control" ID="PriceVat" name="PriceVat" placeholder="0" />
+                </div>
+
+            </div> <br />
+
+            <div class="row">
+
+                <div class="col-md-8"></div>
+                <div class="col-md-1">ยอดสุทธิ</div>
+                <div class="col-md-2" id="head">
+                    <input class="form-control" ID="AllPrice" name="AllPrice" placeholder="0" />
+                </div>
+
+            </div> <br />
+
+
+
+
+        </form>
+
+    </div>
+
+</div>
