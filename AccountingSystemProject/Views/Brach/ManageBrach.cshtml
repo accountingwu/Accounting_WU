@@ -1,0 +1,285 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@using AccountingSystemProject.Models;
+@{
+    ViewBag.Title = "ManageBrach";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+
+    input.placeholder {
+        text-align: center;
+    }
+</style>
+
+<div class="container-fluid">
+    <h3 class="box-title">เพิ่ม / แก้ไขข้อมูลสาขา</h3>
+</div><hr />
+<div class="container-fluid">
+    <div class="bg">
+        <div class="btn-group" style="float: right">
+            <input type="submit" value="ล้างข้อมูล" class="btn btn-primary btn-sm btn-responsive" id="Clear" />
+            <input type="submit" value="บันทึก" class="btn btn-primary btn-sm btn-responsive" id="Save" />
+            <input type="submit" value="ลบข้อมูล" class="btn btn-primary btn-sm btn-responsive" id="Delete" />
+            <input type="submit" value="ค้นหา" class="btn btn-primary btn-sm btn-responsive" id="Find" />
+            
+        </div>
+        <br /><br /><br />
+
+        <form action="" id="formBrach1" class="container-fluid ">
+            <div class="row">
+                <div class="col-md-2">
+                    <div style="text-align: left">รหัสสาขา <font color="red"> * </font></div>
+                    <input type="hidden" name="b_id" id="b_id" value="" />
+                    <input class="form-control" ID="bcode" name="bcode" placeholder="รหัสสาขา"  />
+                </div>
+            </div><br />
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div style="text-align: left">ชื่อเต็มสาขา<font color="red"> * </font></div>
+                    <input class="form-control" ID="bname1" name="bname1" placeholder="ชื่อเต็มสาขา"  />
+                </div>
+                <div class="col-md-4">
+                    <div style="text-align: left">รหัสไปรษณีย์</div>
+                    <input class="form-control" ID="bzip" name="bzip" placeholder="รหัสไปรษณีย์" />
+                </div>
+            </div><br />
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div style="text-align: left">ชื่อย่อสาขา</div>
+                    <input class="form-control" ID="bname12" name="bname12" placeholder="ชื่อย่อสาขา"  />
+                </div>
+                <div class="col-md-4">
+                    <div style="text-align: left">โทรศัพท์</div>
+                    <input class="form-control" ID="btel" name="btel" placeholder="โทรศัพท์" />
+                </div>
+            </div><br />
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div style="text-align: left">ชื่อภาษา 2</div>
+                    <input class="form-control" ID="bname2" name="bname2" placeholder="ชื่อภาษา 2" />
+                </div>
+                <div class="col-md-4">
+                    <div style="text-align: left">แฟ็กซ์</div>
+                    <input class="form-control" ID="bfax" name="bfax" placeholder="แฟ็กซ์" />
+                </div>
+            </div><br />
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div style="text-align: left">ชื่อย่อภาษา 2</div>
+                    <input class="form-control" ID="bname22" name="bname22" placeholder="ชื่อย่อภาษา 2" />
+                </div>
+
+            </div><br />
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div style="text-align: left">ที่อยู่ภาษาไทย</div>
+                    <textarea class="form-control" rows="5" id="baddress1" name="baddress1" placeholder="ที่อยู่ภาษาไทย"></textarea>
+                </div>
+         
+            </div><br />
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div style="text-align: left">ที่อยู่ภาษา 2</div>
+                    <textarea class="form-control" rows="5" id="baddress2" name="baddress2" placeholder="ที่อยู่ภาษา 2"></textarea>
+                </div>
+            </div><br />
+        </form>
+    </div>
+</div>
+<div class="container-fluid ">
+    <div class="table-responsive table-hover" id="Brach">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>รหัสสาขา</th>
+                    <th>ชื่อสาขา</th>
+                    <th>ชื่อย่อสาขา</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Expn in ViewBag.MyData)
+                {
+                    <tr>
+                        <td data-id="@Expn.b_id">
+                            @Expn.bcode
+                        </td>
+                        <td>
+                            @Expn.bname1
+                        </td>
+                        <td>
+                            @Expn.bname2
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("ManageBrach", new { page }))</div>
+</div>
+<br />
+
+
+@section scripts {
+
+    @Scripts.Render("~/Scripts/validate/jquery.validate.js")
+    @Scripts.Render("~/Scripts/validate/ManageBrach1.js")
+
+    <script>
+
+        $("div#Brach table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableBrach',
+                    type: 'post',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#b_id').val(data.b_id);
+                        $('#bcode').val(data.bcode);
+                        $('#bname1').val(data.bname1);
+                        $('#bname12').val(data.bname12);
+                        $('#bname2').val(data.bname2);
+                        $('#bname22').val(data.bname22);
+                        $('#baddress2').val(data.baddress2);
+                        $('#bzip').val(data.bzip);
+                        $('#btel').val(data.btel);
+                        $('#bfax').val(data.bfax);
+                        
+                    }
+                });
+            } else {
+                $('#b_id').val("");
+                $('#bcode').val("");
+                $('#bname1').val("");
+                $('#bname12').val("");
+                $('#bname2').val("");
+                $('#bname22').val("");
+                $('#baddress2').val("");
+                $('#bzip').val("");
+                $('#btel').val("");
+                $('#bfax').val("");
+               
+            }
+            })
+
+     $("#Save").on('click', function () {
+         if ($("#formBrach1").valid()) {
+             $.ajax({
+                 type: "POST",
+                 url: '@Url.Action("SaveBrach", "Brach")',
+                 data: JSON.stringify({
+                     b_id: $("#b_id").val(),
+                     bcode: $("#bcode").val(),
+                     bname1: $("#bname1").val(),
+                     bname12: $("#bname12").val(),
+                     bname2: $("#bname2").val(),
+                     bname22: $("#bname22").val(),
+                     bzip: $("#bzip").val(),
+                     btel: $("#btel").val(),
+                     bfax: $("#bfax").val(),
+                     ccode: 'TBC'
+                 }),
+                 dataType: "json",
+                 contentType: "application/json; charset=utf-8",
+                 processData: false,
+                 success: function (response) {
+                     if (response == true)
+                     {
+                         alert("บันทึกสำเร็จ");
+                         window.location.reload(true);
+                     } else {
+                         alert('รหัสสาขาซ้ำ');
+                     }
+                 }
+             })
+         }
+        });
+      $("#Delete").click(function() {
+          if ($("#formBrach1").valid())
+          {
+              if (confirm('ยืนยันการลบ')) {
+                  Delete();
+              } else {
+                  return false;
+              }
+          }
+        });
+
+      function Delete()
+      {
+          $.ajax
+          ({
+              url: '@Url.Action("DeleteBrach", "Brach")',
+              type: 'post',
+              data: JSON.stringify
+                  ({
+                  b_id: $("#b_id").val()
+                  }),
+              dataType: "json",
+              contentType: 'application/json; charset=utf-8',
+              processData: false,
+              success: function (data) {
+                  if (data) {
+                      window.location.reload(true);
+                  }
+              }
+
+
+              });
+            }
+
+
+        $("#Clear").click(function () {
+            $('#b_id').val("");
+            $('#bcode').val("");
+            $('#bname1').val("");
+            $('#bname12').val("");
+            $('#bname2').val("");
+            $('#bname22').val("");
+            $('#baddress2').val("");
+            $('#bzip').val("");
+            $('#btel').val("");
+            $('#bfax').val("");
+
+            });
+
+    </script>
+}

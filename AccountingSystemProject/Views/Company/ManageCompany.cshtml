@@ -1,0 +1,750 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@using AccountingSystemProject.Models;
+@{
+    ViewBag.Title = "ManageCompany";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+
+    input.placeholder {
+        text-align: center;
+    }
+</style>
+
+<div class="container-fluid">
+    <h3 class="box-title">เพิ่ม / แก้ไขข้อมูลบริษัท</h3>
+</div><hr />
+<form action="" id="companyfrom" class="container-fluid">
+    <ul class="nav nav-tabs" id="tabs">
+        <li class="active"><a data-toggle="tab" href="#page1">หน้าที่ 1</a></li>
+        <li><a data-toggle="tab" href="#page2">หน้าที่ 2</a></li>
+        <li><a data-toggle="tab" href="#page3">หน้าที่ 3</a></li>
+        <li><a data-toggle="tab" href="#page4">หน้าที่ 4</a></li>
+        <li><a data-toggle="tab" href="#more">รูปภาพและอื่นๆ</a></li>
+
+    </ul>
+
+    <div class="btn-group" style="float: right">
+        <input type="submit" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="Clear" />
+        <input type="button" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+        <input type="button" value="ลบ" class="btn btn-primary btn-sm" id="Delete" />
+        <input type="submit" value="ค้นหา" class="btn btn-primary btn-sm" id="Find" />
+        <input type="submit" value="ดูตัวอย่าง" class="btn btn-primary btn-sm" id="Preview" />
+        <input type="submit" value="พิมพ์" class="btn btn-primary btn-sm" id="Print" />
+    </div>
+    <br />
+    <br />
+    <br />
+
+    <!-- Content Tab page1 -->
+    <div class="tab-content">
+        <div id="page1" class="tab-pane fade in active">
+            <div class="container-fluid">
+                <br />
+                <div class="row">
+                    <div class="col-md-2">
+                        <div style="text-align: left">รหัสบริษัท <font color="red"> * </font></div>
+                        <input type="hidden" name="corp_id" id="corp_id" value="" />
+                        <input class="form-control" ID="ccode" name="ccode" placeholder="รหัสบริษัท"  required/>
+                    </div>
+                </div><br />
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div style="text-align: left">ชื่อเต็มบริษัท<font color="red"> * </font></div>
+                        <input class="form-control" ID="cname1" name="cname1" placeholder="ชื่อเต็มบริษัท"  required/>
+                    </div>
+                    <div class="col-md-4">
+                        <div style="text-align: left">รหัสไปรษณีย์</div>
+                        <input class="form-control" ID="czip" name="czip" placeholder="รหัสไปรษณีย์" />
+                    </div>
+                </div><br />
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div style="text-align: left">ชื่อย่อบริษัท<font color="red"> * </font></div>
+                        <input class="form-control" ID="cname11" name="cname11" placeholder="ชื่อย่อบริษัท" required/>
+                    </div>
+                    <div class="col-md-4">
+                        <div style="text-align: left">โทรศัพท์</div>
+                        <input class="form-control" ID="ctel" name="ctel" placeholder="โทรศัพท์" />
+                    </div>
+                </div><br />
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div style="text-align: left">ชื่อภาษา 2</div>
+                        <input class="form-control" ID="cname2" name="cname2" placeholder="ชื่อภาษา 2" />
+                    </div>
+                    <div class="col-md-4">
+                        <div style="text-align: left">แฟ็กซ์</div>
+                        <input class="form-control" ID="cfax" name="cfax" placeholder="แฟ็กซ์" />
+                    </div>
+                </div><br />
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div style="text-align: left">ชื่อย่อภาษา 2</div>
+                        <input class="form-control" ID="cname21" name="cname21" placeholder="ชื่อย่อภาษา 2" />
+                    </div>
+                    @*<div class="col-md-4">
+                            <div style="text-align: left">วันที่เริ่มใช้ระบบ</div>
+                            <input class="form-control" type="date" name="SystemStartDate" ID="SystemStartDate" />
+                        </div>*@
+                </div><br />
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div style="text-align: left">ที่อยู่ภาษาไทย</div>
+                        <textarea class="form-control" rows="5" id="caddress1" name="caddress1" placeholder="ที่อยู่ภาษาไทย"></textarea>
+                    </div>
+                    <div class="col-md-4">
+                        <div style="text-align: left">เลขที่ผู้เสียภาษี <font color="red"> * </font></div>
+                        <input class="form-control" ID="taxid" name="taxid" placeholder="เลขที่ผู้เสียภาษี" required/>
+                    </div>
+                </div><br />
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div style="text-align: left">ที่อยู่ภาษา 2</div>
+                        <textarea class="form-control" rows="5" id="caddress2" name="caddress2" placeholder="ที่อยู่ภาษา 2"></textarea>
+                    </div>
+                </div><br />
+            </div>
+        </div>
+
+        <!-- Content Tab page2 -->
+        <div id="page2" class="tab-pane fade container-fluid">
+            <div class="container-fluid">
+                <br />
+                <h4>จำนวนหลักตัวเลขสูงสุดที่ใช้ในการบันทึกข้อมูล</h4><br /><br />
+
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2" id="head">จำนวนหลักของจำนวนสินค้า  </div>
+                    <div class="col-md-1" id="head">
+                        <input class="form-control" placeholder="0" style="text-align: center" name="number1" ID="number1" />
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-1" id="head">
+                        <input class="form-control" placeholder="0" style="text-align: center" name="decimal1" ID="decimal1" />
+                    </div>
+                    <div class="col-md-1"></div>
+                    @*<div class="col-md-3" id="head">
+                            <input class="form-control" placeholder="" style="text-align: center" name="AA" ID="AA" />
+                        </div>*@
+                </div><br />
+
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2" id="head">จำนวนหลักของราคาสินค้า  </div>
+                    <div class="col-md-1" id="head">
+                        <input class="form-control" placeholder="0" style="text-align: center" name="number2" ID="number2" />
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-1" id="head">
+                        <input class="form-control" placeholder="0" style="text-align: center" name="decimal2" ID="decimal2" />
+                    </div>
+                    <div class="col-md-1"></div>
+                    @*<div class="col-md-3" id="head">
+                            <input class="form-control" placeholder="" style="text-align: center" name="BB" ID="BB" />
+                        </div>*@
+                </div><br />
+
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2" id="head">จำนวนหลักของจำนวนเงิน  </div>
+                    <div class="col-md-1" id="head">
+                        <input class="form-control" placeholder="0" style="text-align: center" name="number3" ID="number3" />
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-1" id="head">
+                        <input class="form-control" placeholder="0" style="text-align: center" name="decimal3" ID="decimal3" />
+                    </div>
+                    <div class="col-md-1"></div>
+                    @*<div class="col-md-3" id="head">
+                            <input class="form-control" placeholder="" style="text-align: center" name="CC" ID="CC" />
+                        </div>*@
+                </div><br />
+
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2" id="head">จำนวนหลักของมูลค่าภาษี  </div>
+                    <div class="col-md-1" id="head">
+                        <input class="form-control" placeholder="0" style="text-align: center" name="number4" ID="number4" />
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-1" id="head">
+                        <input class="form-control" placeholder="0" style="text-align: center" name="decimal4" ID="decimal4" />
+                    </div>
+                    <div class="col-md-1"></div>
+                    @*<div class="col-md-3" id="head">
+                            <input class="form-control" placeholder="" style="text-align: center" name="DD" ID="DD" />
+                        </div>*@
+                </div><br />
+
+            </div>
+        </div>
+
+        <!-- Content Tab page3 -->
+        <div id="page3" class="tab-pane fade container-fluid">
+            <div class="container-fluid">
+                <br />
+                <h4>จำนวนหลักตัวเลขสูงสุดที่ใช้ในการแสดงรายงาน</h4><br /><br />
+
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2" id="head">จำนวนหลักของจำนวนสินค้า  </div>
+                    <div class="col-md-1" id="head">
+                        <input class="form-control" placeholder="0" style="text-align: center" name="number5" ID="number5" />
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-1" id="head">
+                        <input class="form-control" placeholder="0" style="text-align: center" name="decimal5" ID="decimal5" />
+                    </div>
+                    <div class="col-md-1"></div>
+                    @*<div class="col-md-3" id="head">
+                            <input class="form-control" placeholder="" style="text-align: center" name="EE" ID="EE" />
+                        </div>*@
+                </div><br />
+
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2" id="head">จำนวนหลักของราคาสินค้า  </div>
+                    <div class="col-md-1" id="head">
+                        <input class="form-control" placeholder="0" style="text-align: center" name="number6" ID="number6" />
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-1" id="head">
+                        <input class="form-control" placeholder="0" style="text-align: center" name="decimal6" ID="decimal6" />
+                    </div>
+                    <div class="col-md-1"></div>
+                    @*<div class="col-md-3" id="head">
+                            <input class="form-control" placeholder="" style="text-align: center" name="FF" ID="FF" />
+                        </div>*@
+                </div><br />
+
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2" id="head">จำนวนหลักของจำนวนเงิน  </div>
+                    <div class="col-md-1" id="head">
+                        <input class="form-control" placeholder="0" style="text-align: center" name="number7" ID="number7" />
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-1" id="head">
+                        <input class="form-control" placeholder="0" style="text-align: center" name="decimal7" ID="decimal7" />
+                    </div>
+                    <div class="col-md-1"></div>
+                    @*<div class="col-md-3" id="head">
+                            <input class="form-control" placeholder="" style="text-align: center" name="GG" ID="GG" />
+                        </div>*@
+                </div><br />
+
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2" id="head">จำนวนหลักของมูลค่าภาษี  </div>
+                    <div class="col-md-1" id="head">
+                        <input class="form-control" placeholder="0" style="text-align: center" name="number8" ID="number8" />
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-1" id="head">
+                        <input class="form-control" placeholder="0" style="text-align: center" name="decimal8" ID="decimal8" />
+                    </div>
+                    <div class="col-md-1"></div>
+                    @*<div class="col-md-3" id="head">
+                            <input class="form-control" placeholder="" style="text-align: center" name="HH" ID="HH" />
+                        </div>*@
+                </div><br />
+
+            </div>
+        </div>
+
+        <!-- Content Tab page4 -->
+        <div id="page4" class="tab-pane fade container-fluid">
+            <div class="container-fluid">
+                <br />
+                <h4>การนับยอดสต็อก</h4><hr />
+                <div class="row">
+                    @*<div class="col-md-8" id="status" name="status">
+                            <input type="radio" name="Active" value="True"> Active &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="Active" value="Flust"> Inactive
+                        </div>*@
+                    <div class="col-md-4" id="stockcount" name="stockcount">
+                        <input type="radio" name="Stock" value="1">  &nbsp;นับยอดสต็อกและติดลบไม่ได้<br>
+                        <input type="radio" name="Stock" value="2">  &nbsp;นับยอดสต็อกและติดลบได้<br>
+                        <input type="radio" name="Stock" value="3">  &nbsp;ไม่นับยอดสต็อก<br>
+                    </div>
+                </div><br /><hr />
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="checkbox" name="active" value="active"> &nbsp;ใช้ระบบจองสินค้าและสร้างใบขอซื้ออัตโนมัติ<br>
+                    </div>
+                </div><br /><hr />
+
+                <h4>รูปแบบการจองสินค้าและวัตถุดิบ</h4><hr />
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="radio" name="Stock" value="A"> &nbsp; จองเกินสต็อกไม่ได้<br>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="radio" name="Stock" value="B"> &nbsp; จองเกินสต้อกได้<br>
+                    </div>
+
+                </div><br /><hr />
+
+                <h4>ลักษณะการจองวัตถุดิบ</h4><hr />
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="radio" name="Stock" value="A"> &nbsp; จองไม่ครบก็สามารถออกใบสั่งผลิตได้<br>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="radio" name="Stock" value="B"> &nbsp; จองครบ จึงจะออกใบสั่งผลิตได้<br>
+                    </div>
+
+                </div><br /><hr />
+
+                <h4>ตั้งค่า Alert</h4><hr />
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="checkbox" name="active" value="active">&nbsp; แจ้งเตือนเมื่อสินค้าน้อยกว่า Safty Stock<br><br />
+                        <input type="checkbox" name="active" value="active">&nbsp; แจ้งเตือนเมื่อสินค้าน้อยกว่า Minimum Stock<br>
+
+                    </div>
+                    <div class="col-md-4">
+                        <input type="radio" name="Stock" value="A"> &nbsp; เริ่มต้นคลังสินค้าที่ ฐานข้อมูลเล่มเอกสาร<br><br />
+                        <input type="radio" name="Stock" value="A"> &nbsp; คลังสินค้าที่ ฐานข้อมูลสินค้า<br>
+                    </div>
+
+                </div><br /><hr />
+            </div>
+        </div>
+
+        <!-- Content Tab more -->
+        <div id="more" class="tab-pane fade container-fluid">
+            <div class="container-fluid">
+                <br />
+                <h4>Upload Picture</h4><hr />
+                <input type="file" name="Stock" value="A"><br />
+
+            </div>
+        </div>
+    </div>
+    </form>
+    <div class="container-fluid">
+        <div class="table-responsive table-hover" id="Company">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>รหัสบริษัท</th>
+                        <th>ชื่อบริษัท</th>
+                        <th>ชื่อย่อบริษัท</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var com in ViewBag.MyData)
+                    {
+                        <tr>
+
+                            <td data-id="@com.corp_id">
+                                @com.ccode
+                            </td>
+                            <td>
+                                @com.cname1
+                            </td>
+                            <td>
+                                @com.cname11
+                            </td>
+                            @*<td>
+                                @com.cname2
+                            </td>
+                            <td>
+                                @com.cname21
+                            </td>
+
+                            <td class='hidden'>
+                                @com.caddress1
+                            </td>
+
+                            <td class='hidden'>
+                                @com.caddress2
+                            </td>
+
+                            <td class='hidden'>
+                                @com.czip
+                            </td>
+                            <td class='hidden'>
+                                @com.ctel
+                            </td>
+
+                            <td class='hidden'>
+                                @com.cfax
+                            </td>
+
+                            <td class='hidden'>
+                                @com.cdatestart
+                            </td>
+                            <td class='hidden'>
+                                @com.taxid
+                            </td>
+                            <td td class='hidden'>
+                                @com.number1
+                            </td>
+                            <td class='hidden'>
+                                @com.number2
+                            </td>
+
+                            <td class='hidden'>
+                                @com.number3
+                            </td>
+                            <td class='hidden'>
+                                @com.number4
+                            </td>
+
+                            <td class='hidden'>
+                                @com.number5
+                            </td>
+                            <td class='hidden'>
+                                @com.number6
+                            </td>
+
+                            <td class='hidden'>
+                                @com.number7
+                            </td>
+                            <td class='hidden'>
+                                @com.number8
+                            </td>
+
+                            <td class='hidden'>
+                                @com.decimal1
+                            </td>
+                            <td class='hidden'>
+                                @com.decimal2
+                            </td>
+
+                            <td class='hidden'>
+                                @com.decimal3
+                            </td>
+                            <td class='hidden'>
+                                @com.decimal4
+                            </td>
+
+                            <td class='hidden'>
+                                @com.decimal5
+                            </td>
+                            <td class='hidden'>
+                                @com.decimal6
+                            </td>
+                            <td class='hidden'>
+                                @com.decimal7
+                            </td>
+
+                            <td class='hidden'>
+                                @com.decimal8
+                            </td>
+                            <td class='hidden'>
+                                @com.stockcount
+                            </td>
+                            <td class='hidden'>
+                                @com.WLN_SO
+                            </td>
+
+                            <td class='hidden'>
+                                @com.file_img
+                            </td>
+                            <td class='hidden'>
+                                @com.ref_tr
+                            </td>
+
+                            <td class='hidden'>
+                                @com.winstatus
+                            </td>
+                            <td class='hidden'>
+                                @com.wintrauto
+                            </td>
+                            <td class='hidden'>
+                                @com.wintrautonum
+                            </td>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("Company", new { page }))</div>
+        </div>
+    </div>
+
+    @section scripts {
+        @Scripts.Render("~/Scripts/validate/jquery.validate.js")
+        @Scripts.Render("~/Scripts/validate/ManageCompany.js")
+        <script>
+
+
+
+        $("div#Company table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableCompany',
+                    type: 'post',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#corp_id').val(data.corp_id);
+                        $('#ccode').val(data.ccode);
+                        $('#cname1').val(data.cname1);
+                        $('#cname11').val(data.cname11);
+                        $('#cname2').val(data.cname2);
+                        $('#cname21').val(data.cname21);
+
+                        $('#caddress1').val(data.caddress1);
+                        $('#caddress2').val(data.caddress2);
+                        $('#czip').val(data.czip);
+                        $('#ctel').val(data.ctel);
+                        $('#cfax').val(data.cfax);
+
+                        $('#taxid').val(data.taxid);
+                        $('#number1').val(data.number1);
+                        $('#number2').val(data.number2);
+
+                        $('#number3').val(data.number3);
+
+                        $('#number4').val(data.number4);
+                        $('#number5').val(data.number5);
+                        $('#number6').val(data.number6);
+                        $('#number7').val(data.number7);
+                        $('#number8').val(data.number8);
+                        $('#decimal1').val(data.decimal1);
+
+                        $('#decimal2').val(data.decimal2);
+                        $('#decimal3').val(data.decimal3);
+                        $('#decimal4').val(data.decimal4);
+                        $('#decimal5').val(data.decimal5);
+                        $('#decimal6').val(data.decimal6);
+                        $('#decimal7').val(data.decimal7);
+                        $('#decimal8').val(data.decimal8);
+
+                        if (data.stockcount == 1) {
+
+                            $('#stockcount').find(':radio[name=Stock][value="1"]').prop('checked', true)
+                        }
+                        else if (data.stockcount == 2)
+                        {
+                            $('#stockcount').find(':radio[name=Stock][value="2"]').prop('checked', true)
+                        }
+                        else
+                        {
+                            $('#stockcount').find(':radio[name=Stock][value="3"]').prop('checked', true)
+                        }
+
+                    }
+                });
+            } else {
+                $('#corp_id').val("");
+                $('#ccode').val("");
+                $('#cname1').val("");
+                $('#cname11').val("");
+                $('#cname2').val("");
+                $('#cname21').val("");
+                $('#caddress1').val("");
+                $('#caddress2').val("");
+                $('#czip').val("");
+                $('#ctel').val("");
+                $('#cfax').val("");
+                $('#taxid').val("");
+
+                $('#number1').val("");
+                $('#number2').val("");
+                $('#number3').val("");
+                $('#number4').val("");
+                $('#number5').val("");
+
+                $('#number6').val("");
+                $('#number7').val("");
+                $('#number8').val("");
+                $('#decimal1').val("");
+                $('#decimal2').val("");
+
+                $('#decimal3').val("");
+                $('#decimal4').val("");
+                $('#decimal5').val("");
+                $('#decimal6').val("");
+                $('#decimal7').val("");
+
+                $('#decimal8').val("");
+                $('#stockcount').val("");
+
+            }
+        })
+
+
+        $("#Save").click(function () {
+            if ($("#companyfrom").valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Save", "Company")',
+                    data: JSON.stringify({
+                        corp_id: $("#corp_id").val(),
+                        ccode: $("#ccode").val(),
+                        cname1: $("#cname1").val(),
+                        cname11: $("#cname11").val(),
+                        cname2: $("#cname2").val(),
+                        cname21: $("#cname21").val(),
+                        caddress1: $("#caddress1").val(),
+                        caddress2: $("#caddress2").val(),
+                        czip: $("#czip").val(),
+                        ctel: $("#ctel").val(),
+                        cfax: $("#cfax").val(),
+                        taxid: $("#taxid").val(),
+                        number1: $("#number1").val(),
+                        //status: $('#status input:checked').val(),
+                        stockcount: $('#stockcount input:checked').val(),
+                        number2: $("#number2").val(),
+                        number3: $("#number3").val(),
+                        //niti: $('#niti option:selected').val(),
+                        number4: $("#number4").val(),
+                        //gsupid: $('#gsupid option:selected').val(),
+
+                        number5: $("#number5").val(),
+                        number6: $("#number6").val(),
+                        number7: $("#number7").val(),
+                        number8: $("#number8").val(),
+                        decimal1: $("#decimal1").val(),
+                        decimal2: $("#decimal2").val(),
+                        //ncostcode: $('#ncostcode option:selected').val(),
+                        //ndiscountcode: $('#ndiscountcode option:selected').val(),
+                        decimal3: $("#decimal3").val(),
+                        decimal4: $("#decimal4").val(),
+                        decimal5: $("#decimal5").val(),
+
+
+                        decimal6: $("#decimal6").val(),
+                        decimal7: $('#decimal7').val(),
+                        decimal8: $('#decimal8').val(),
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    success: function (response) {
+                        if (response == true) {
+                            alert("บันทึกสำเร็จ");
+                            window.location.reload(true);
+                        } else {
+                            alert("รหัสบริษัทซ้ำ");
+                        }
+
+                    }
+                })
+            }
+
+        });
+
+        $("#Delete").click(function () {
+            if ($("#companyfrom").valid()) {
+                if (confirm('ยืนยันการลบ')) {
+                    Delete();
+                } else {
+                    return false;
+                }
+            }
+        });
+
+        function Delete() {
+            $.ajax({
+                url: '@Url.Action("DeleteCompany", "Company")',
+                type: 'post',
+                data: JSON.stringify({
+                    corp_id: $("#corp_id").val()
+                }),
+                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                }
+            });
+        }
+
+        $("#Clear").click(function () {
+            $('#corp_id').val("");
+            $('#ccode').val("");
+            $('#cname1').val("");
+            $('#cname11').val("");
+            $('#cname2').val("");
+            $('#cname21').val("");
+            $('#caddress1').val("");
+            $('#caddress2').val("");
+            $('#czip').val("");
+            $('#ctel').val("");
+            $('#cfax').val("");
+            $('#taxid').val("");
+
+            $('#number1').val("");
+            $('#number2').val("");
+            $('#number3').val("");
+            $('#number4').val("");
+            $('#number5').val("");
+
+            $('#number6').val("");
+            $('#number7').val("");
+            $('#number8').val("");
+            $('#decimal1').val("");
+            $('#decimal2').val("");
+
+            $('#decimal3').val("");
+            $('#decimal4').val("");
+            $('#decimal5').val("");
+            $('#decimal6').val("");
+            $('#decimal7').val("");
+
+            $('#decimal8').val("");
+
+        });
+
+ 
+        </script>
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
