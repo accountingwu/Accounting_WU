@@ -185,9 +185,13 @@
     <Compile Include="Controllers\ManageICProductGroupIXController.cs" />
     <Compile Include="Controllers\ManageICProductGroupXController.cs" />
     <Compile Include="Controllers\ManageICUnitController.cs" />
+    <Compile Include="Controllers\ManagePO_GoodsReceivedNoteController.cs" />
     <Compile Include="Controllers\ManageProductController.cs" />
     <Compile Include="Controllers\ManageSupplierController.cs" />
+    <Compile Include="Controllers\ManageSupplierTypeController.cs" />
     <Compile Include="Controllers\ManageTransportasionAreaController.cs" />
+    <Compile Include="Controllers\POController.cs" />
+    <Compile Include="Controllers\PReqController.cs" />
     <Compile Include="Controllers\QsoftDepartController.cs" />
     <Compile Include="Controllers\MasterDataController.cs" />
     <Compile Include="Controllers\ReceivePlaceController.cs" />
@@ -935,6 +939,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccModel.cs" />
+    <Compile Include="Models\AccTypeModel.cs" />
     <Compile Include="Models\BadScrapModel.cs" />
     <Compile Include="Models\BankBookType.cs" />
     <Compile Include="Models\BankbookTypeModel.cs" />
@@ -944,28 +949,46 @@
     <Compile Include="Models\BranchModel.cs" />
     <Compile Include="Models\BusiType.cs" />
     <Compile Include="Models\CauseOfReductionDebtModel.cs" />
+    <Compile Include="Models\Channel.cs" />
+    <Compile Include="Models\CNRemarkType.cs" />
     <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Models\corpModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
+    <Compile Include="Models\CustomerPriority.cs" />
+    <Compile Include="Models\CustomerZoneModel.cs" />
+    <Compile Include="Models\custType.cs" />
     <Compile Include="Models\DepartModel.cs" />
+    <Compile Include="Models\doModel.cs" />
     <Compile Include="Models\EmployeeGroupModel.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\ExpnModel.cs" />
     <Compile Include="Models\FactoryModel.cs" />
     <Compile Include="Models\GroupCustomerModel.cs" />
+    <Compile Include="Models\GrouppreductModel.cs" />
     <Compile Include="Models\GroupProductModel.cs" />
+    <Compile Include="Models\GroupSupplierModel.cs" />
+    <Compile Include="Models\JobType.cs" />
     <Compile Include="Models\Media.cs" />
+    <Compile Include="Models\PR2Model.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\Product_ICModel.cs" />
+    <Compile Include="Models\PR_MemberModel.cs" />
     <Compile Include="Models\QuestionViewModel.cs" />
     <Compile Include="Models\ReceivePlaceModel.cs" />
+    <Compile Include="Models\SaleArea.cs" />
     <Compile Include="Models\SectionModel.cs" />
     <Compile Include="Models\Side.cs" />
     <Compile Include="Models\SupplierModel.cs" />
+    <Compile Include="Models\SupplierTypeModel.cs" />
+    <Compile Include="Models\TransportasionArea.cs" />
     <Compile Include="Models\TransportasionAreaModel.cs" />
+    <Compile Include="Models\TypeProductModel.cs" />
     <Compile Include="Models\UnitModel.cs" />
+    <Compile Include="Models\unitModeltest.cs" />
     <Compile Include="Models\VatDesModel.cs" />
     <Compile Include="Models\VATGroupModel.cs" />
+    <Compile Include="Models\VendorGroup.cs" />
+    <Compile Include="Models\VendorType.cs" />
     <Compile Include="Models\WarehouseModel.cs" />
     <Compile Include="Models\WarehouseTypeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1313,6 +1336,7 @@
     <Content Include="Views\ManageSupplier\ManageSupplier.cshtml" />
     <Content Include="Views\ManageEmployee\ManageEmployee.cshtml" />
     <Content Include="Views\ManageDeliveryOrder\ManageDeliveryOrder.cshtml" />
+    <Content Include="Views\ManagePO_GoodsReceivedNote\ManagePO_GoodsReceivedNote.cshtml" />
     <Content Include="Views\BankBookType\ManageBankBookType.cshtml" />
     <Content Include="Views\BankBrach\ManageBankBrach.cshtml" />
     <Content Include="Views\Brach\ManageBrach.cshtml" />
@@ -1323,6 +1347,9 @@
     <Content Include="Views\Section\ManageSection.cshtml" />
     <Content Include="Views\VatDes\ManageVatDes.cshtml" />
     <Content Include="Views\VatGroup\ManageVATGroup.cshtml" />
+    <Content Include="Views\ManageSupplierType\ManageSupplierType.cshtml" />
+    <Content Include="Views\PO\ManagePo.cshtml" />
+    <Content Include="Views\PReq\ManagePReq.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

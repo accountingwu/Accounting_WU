@@ -26,7 +26,7 @@ namespace AccountingSystemProject.Controllers
 
         [HttpPost]
 
-        public ActionResult SaveBrach(Models.BrachModel data)
+        public ActionResult SaveBrach(Models.BranchModel data)
         {
 
 

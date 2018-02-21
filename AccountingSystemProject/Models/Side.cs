@@ -17,13 +17,5 @@ namespace AccountingSystemProject.Models
         public string SideNameEng { get; set; }
         //[Required(ErrorMessage = "Remark is required.")]
         public string Remark { get; set; }
-    }
-
-    public class InsertSide
-    {
-        public string SideCode { get; set; }
-        public string SideName { get; set; }
-        public string SideNameEng { get; set; }
-        public string Remark { get; set; }
-    }
+    }    
 }

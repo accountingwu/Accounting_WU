@@ -9,7 +9,7 @@ namespace AccountingSystemProject.Models
     public class BusiType
     {
         public int BusiTypeID { get; set; }
-        //[Required(ErrorMessage = "BusiTypeCode is required.")]
+        //[Required(ErrorMessage = "BusiTypeCode is reqired.")]
         public string BusiTypeCode { get; set; }
         //[Required(ErrorMessage = "BusiTypeName is required.")]
         public string BusiTypeName { get; set; }

@@ -1,0 +1,881 @@
+﻿
+@{
+    ViewBag.Title = "ManagePO_GoodsReceivedNote";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+
+    div.scr {
+        background-color: white;
+        width: 100%;
+        height: 170px;
+        overflow: scroll;
+    }
+</style>
+
+
+<div class="container-fluid">
+    <h3 class="box-title">ใบขอซื้อ</h3>
+</div>
+
+<!-- Tab Menu -->
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#detail">Detail</a></li>
+    @* <li><a data-toggle="tab" href="#more">More</a></li>
+        <li><a data-toggle="tab" href="#rate">Rate</a></li>
+        <li><a data-toggle="tab" href="#description">Description</a></li>*@
+</ul>
+
+<div class="container-fluid">
+    <div class="btn-group" style="float: right">
+        <input type="submit" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="Clear" />
+        <input type="button" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+        <input type="button" value="ลบ" class="btn btn-primary btn-sm" id="Delete" />
+        <input type="submit" value="ค้นหา" class="btn btn-primary btn-sm" id="Find" />
+        <input type="submit" value="ดูตัวอย่าง" class="btn btn-primary btn-sm" id="Preview" />
+        <input type="submit" value="พิมพ์" class="btn btn-primary btn-sm" id="Print" />
+    </div>
+    <br />
+    <br />
+    <br />
+
+
+    <!-- Detail Tab -->
+    <!--รหัสลูกค้า&ชื้อลูกค้า-->
+    <div class="row">
+        <div class="col-md-2">
+            <div style="text-align: left">เล่มที่</div>
+            <select class="form-control" id="item">
+                <option value=""></option>
+                <option value=""></option>
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <div style="text-align: left">เลขที่</div>
+            <input class="form-control" placeholder="เลขที่" name="namecontact" ID="namecontact" />
+        </div>
+
+        <div class="col-md-4">
+            <div style="text-align: left">เลขที่อ้างอิง</div>
+            <div class="input-group">
+                <input class="form-control" placeholder="เลขที่อ้างอิง" name="invoiceNumber1" ID="invoiceNumber1" />
+                <span class="input-group-addon" data-toggle="modal" data-target="#FindRefNum" runat="server"><i class="glyphicon glyphicon-triangle-bottom"></i></span>
+                <div class="modal fade" id="FindRefNum" role="dialog">
+                    <div class="modal-dialog" style="width: 80%; height: 100%">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title"><b>Find เลขที่อ้างอิง</b></h4>
+                                </div>
+                                <div class="modal-body">
+
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" value="ตกลง" class="btn btn-primary btn-md" id="ok" />
+                                    <input type="submit" value="ยกเลิก" class="btn btn-danger btn-md" id="cancel" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div style="text-align: left">วันที่เอกสาร</div>
+            <input class="form-control" type="date" name="namecontact" ID="namecontact" />
+        </div>
+    </div>
+    <br />
+
+
+
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div style="text-align: left">ค้นหาเอกสาร PO</div>
+            <div class="input-group">
+                <input class="form-control" placeholder="เอกสาร PO" name="DocSo" ID="DocSo" />
+                <span class="input-group-addon" data-toggle="modal" data-target="#FindDocSo" runat="server"><i class="glyphicon glyphicon-triangle-bottom"></i></span>
+                <div class="modal fade" id="FindDocSo" role="dialog">
+                    <div class="modal-dialog" style="width: 80%; height: 100%">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title"><b>ใบรับคำสั่งซื้อ</b></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div style="text-align: left">เลือกสาขา</div>
+                                            <select class="form-control" id="item">
+                                                <option value=""></option>
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div style="text-align: left">เล่มที่เอกสาร</div>
+                                            <select class="form-control" id="item">
+                                                <option value=""></option>
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div style="text-align: left">ช่วงวันที่</div>
+                                            <input class="form-control" type="date" name="date" ID="date" />
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div style="text-align: left">ถึง</div>
+                                            <input class="form-control" type="date" name="date" ID="date" />
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div style="text-align: left">เลขที่</div>
+                                            <input class="form-control" name="number" ID="number" placeholder="เลขที่" />
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>เล่ม</th>
+                                                    <th>เลขที่</th>
+                                                    <th>เลขที่อ้างอิง</th>
+                                                    <th>ยกเลิก</th>
+                                                    <th>วันที่สั่งซื้อ</th>
+                                                    <th>ชื่อลูกค้า</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" value="ออก" class="btn btn-danger btn-md" id="exit" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div style="text-align: left">ผู้จำหน่าย</div>
+            <div class="input-group">
+                <input class="form-control" placeholder="รหัสผู้จำหหน่าย" name="namecontact" ID="namecontact" />
+                <span class="input-group-addon" data-toggle="modal" data-target="#FindNameContact" runat="server"><i class="glyphicon glyphicon-triangle-bottom"></i></span>
+                <div class="modal fade" id="FindNameContact" role="dialog">
+                    <div class="modal-dialog" style="width: 80%; height: 100%">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title"><b>Find รหัสผู้จำหน่าย</b></h4>
+                                </div>
+                                <div class="modal-body">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input class="form-control" placeholder="ชื่อผู้จำหน่าย" name="namecontact" ID="namecontact" />
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <br />
+            <input type="button" data-toggle="modal" data-target="#DocRemark" value="หมายเหตุเอกสาร" class="btn btn-default btn-sm" id="Clear" />
+            <div class="modal fade" id="DocRemark" role="dialog">
+                <div class="modal-dialog" style="width: 80%; height: 100%">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title"><b>หมายเหตุ</b></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div style="text-align: right">หมายเหตุ 1 </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" placeholder="หมายเหตุ 1 " name="poNo" ID="poNo" />
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div style="text-align: right">หมายเหตุ 2 </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" placeholder="หมายเหตุ 2 " name="poNo" ID="poNo" />
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div style="text-align: right">หมายเหตุ 3 </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" placeholder="หมายเหตุ 3 " name="poNo" ID="poNo" />
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div style="text-align: right">หมายเหตุ 4 </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" placeholder="หมายเหตุ 4 " name="poNo" ID="poNo" />
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div style="text-align: right">หมายเหตุ 5 </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" placeholder="หมายเหตุ 5 " name="poNo" ID="poNo" />
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div style="text-align: right">หมายเหตุ 6 </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" placeholder="หมายเหตุ 6 " name="poNo" ID="poNo" />
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div style="text-align: right">หมายเหตุ 7 </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" placeholder="หมายเหตุ 7 " name="poNo" ID="poNo" />
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div style="text-align: right">หมายเหตุ 8 </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" placeholder="หมายเหตุ 8 " name="poNo" ID="poNo" />
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div style="text-align: right">หมายเหตุ 9 </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" placeholder="หมายเหตุ 9 " name="poNo" ID="poNo" />
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div style="text-align: right">หมายเหตุ 10 </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" placeholder="หมายเหตุ 10 " name="poNo" ID="poNo" />
+                                    </div>
+                                </div>
+                                <br />
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" value="ตกลง" class="btn btn-primary btn-md" id="ok" />
+                                <input type="submit" value="ยกเลิก" class="btn btn-danger btn-md" id="cancel" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <br />
+
+    @*<div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>กำหนดส่งของ</th>
+                            <th>เครดิต(วัน)</th>
+                            <th>พนักงานขาย</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div style="width: 100%">
+                                    <input class="form-control" type="date" name="date" ID="date" />
+                                </div>
+                            </td>
+                            <td>
+                                <div style="width: 100%">
+                                    <input class="form-control" placeholder="เครดิต(วัน)" name="Credit" ID="Credit" />
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="พนักงานขาย" name="Emp" ID="Emp" />
+                                        <span class="input-group-addon" data-toggle="modal" data-target="#FindSalePerson" runat="server"><i class="glyphicon glyphicon-triangle-bottom"></i></span>
+                                        <div class="modal fade" id="FindSalePerson" role="dialog">
+                                            <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+
+                                                    <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            <h4 class="modal-title"><b>Find พนักงานขาย</b></h4>
+                                                        </div>
+                                                        <iframe class="embed-responsive-item" src="FindSalePerson.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>*@
+</div>
+
+
+<!-- Content Tab Detail -->
+<div class="tab-content">
+    <div id="detail" class="container-fluid tab-pane fade in active">
+        <div class="table-responsive table-hover">
+            &nbsp;&nbsp;<input class="form-check-input check" type="checkbox" value="" id="checkAll">
+            <b>เลือกทั้งหมด</b>
+            <div class="scr">
+                <table class="table">
+                    @*<thead>
+                            <tr>
+                                <td>
+                                    <input class="form-check-input check" type="checkbox" value="" id="checkAll">
+                                    <b>Check All</b>
+                                </td>
+                            </tr>
+                        </thead>*@
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input check" type="checkbox" value="" id="defaultCheck1">
+                                </div>
+                            </td>
+                            <td>รหัสสินค้า 1</td>
+                            <td>ชื่อสินค้า 1</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input check" type="checkbox" value="" id="defaultCheck1">
+                                </div>
+                            </td>
+                            <td>รหัสสินค้า 2</td>
+                            <td>ชื่อสินค้า 2</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input check" type="checkbox" value="" id="defaultCheck1">
+                                </div>
+                            </td>
+                            <td>รหัสสินค้า 3</td>
+                            <td>ชื่อสินค้า 3</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input check" type="checkbox" value="" id="defaultCheck1">
+                                </div>
+                            </td>
+                            <td>รหัสสินค้า 4</td>
+                            <td>ชื่อสินค้า 4</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input check" type="checkbox" value="" id="defaultCheck1">
+                                </div>
+                            </td>
+                            <td>รหัสสินค้า 5</td>
+                            <td>ชื่อสินค้า 5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br />
+
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>รหัสสินค้า</th>
+                        <th>ชื่อสินค้า</th>
+                        <th>คลัง</th>
+                        <th>Lot</th>
+                        <th>จำนวนซื้อ</th>
+                        <th>หน่วยซื้อ</th>
+                        <th>จำนวนมาตรฐาน</th>
+                        <th>หน่วยมาตรฐาน</th>
+                        <th>ราคาต่อหน่วย</th>
+                        <th>ราคารวม</th>
+                        <th>ส่วนลด</th>
+                        <th>TabId</th>
+                        <th>มูลค่า</th>
+                        <th>หมายเหตุ</th>
+                        <th>วันที่ส่งของ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- content Tab More -->
+   @* <div id="more" class="tab-pane fade container-fluid">
+        <div class="col-sm-1"></div>
+        <div class="row">
+            <div class="col-sm-5">
+                <div style="text-align: left">กลุ่มภาษี</div>
+                <div class="input-group">
+                    <input class="form-control" placeholder="กลุ่มภาษี" name="TaxGroup" ID="TaxGroup" />
+                    <span class="input-group-addon" data-toggle="modal" data-target="#FindTaxGroup" runat="server"><i class="glyphicon glyphicon-triangle-bottom"></i></span>
+                    <div class="modal fade" id="FindTaxGroup" role="dialog">
+                        <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+
+                                <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title"><b>Find กลุ่มภาษี</b></h4>
+                                    </div>
+                                    <iframe class="embed-responsive-item" src="FindTaxGroup.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div style="text-align: left">ประเภทภาษี(วัน)</div>
+                <input class="form-control" name="TaxType" ID="TaxType" disabled />
+            </div>
+            <div class="col-sm-2">
+                <div style="text-align: left">อัตราภาษี(%)</div>
+                <input class="form-control" name="taxra1" ID="taxra1" disabled />
+            </div>
+        </div>
+        <br />
+        <div class="col-sm-1"></div>
+        <div class="row">
+            <div class="col-sm-5">
+                <div style="text-align: left">สถานที่ส่งของ</div>
+                <div class="input-group">
+                    <input class="form-control" name="place" ID="place" placeholder="สถานที่ส่งของ" />
+                    <span class="input-group-addon" data-toggle="modal" data-target="#FindPlaceOfDelivery" runat="server"><i class="glyphicon glyphicon-triangle-bottom"></i></span>
+                    <div class="modal fade" id="FindPlaceOfDelivery" role="dialog">
+                        <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+
+                                <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title"><b>Find สถานที่ส่งของ</b></h4>
+                                    </div>
+                                    <iframe class="embed-responsive-item" src="FindPlaceOfDelivery.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <span class="input-group-addon" data-toggle="modal" data-target="#FindLocationDetail" runat="server"><i class="glyphicon glyphicon-search"></i></span>
+                    <div class="modal fade" id="FindLocationDetail" role="dialog">
+                        <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+
+                                <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title"><b>รายละเอียดสถานที่ส่งของ</b></h4>
+                                    </div>
+                                    <iframe class="embed-responsive-item" src="FindLocationDetail.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="col-sm-1"></div>
+        <div class="row">
+            <div class="col-sm-5">
+                <div style="text-align: left">ประเภทสินค้า</div>
+                <select class="form-control">
+                    <option selected disabled>ประเภทสินค้า</option>
+                    <option>ประเภทสินค้า</option>
+                    <option>สินค้า</option>
+                    <option>บริการ</option>
+                </select>
+            </div>
+        </div>
+        <br />
+        <div class="col-sm-1"></div>
+        <div class="row">
+            <div class="col-sm-5">
+                <div style="text-align: left">เขตการขาย</div>
+                <div class="input-group">
+                    <input class="form-control" placeholder="เขตการขาย" name="Textbox5" ID="Textbox5" />
+                    <span class="input-group-addon" data-toggle="modal" data-target="#FindSaleArea" runat="server"><i class="glyphicon glyphicon-triangle-bottom"></i></span>
+                    <div class="modal fade" id="FindSaleArea" role="dialog">
+                        <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+
+                                <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title"><b>Find เขตการขาย</b></h4>
+                                    </div>
+                                    <iframe class="embed-responsive-item" src="FindSaleArea.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="col-sm-5">
+                <input class="form-control" name="Textbox6" ID="Textbox6" disabled />
+            </div>
+        </div>
+        <br />
+        <div class="col-sm-1"></div>
+        <div class="row">
+            <div class="col-sm-5">
+                <div style="text-align: left">แผนก</div>
+                <div class="input-group">
+                    <input class="form-control" placeholder="แผนก" name="Textbox7" ID="Textbox7" />
+                    <span class="input-group-addon" data-toggle="modal" data-target="#FindDepartment" runat="server"><i class="glyphicon glyphicon-triangle-bottom"></i></span>
+                    <div class="modal fade" id="FindDepartment" role="dialog">
+                        <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+
+                                <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title"><b>Find แผนก</b></h4>
+                                    </div>
+                                    <iframe class="embed-responsive-item" src="FindDepartment.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="col-sm-5">
+                <input class="form-control" name="Textbox6" ID="Textbox6" disabled />
+            </div>
+        </div>
+        <br />
+        <div class="col-sm-1"></div>
+        <div class="row">
+            <div class="col-sm-5">
+                <div style="text-align: left">รหัส Job</div>
+                <div class="input-group">
+                    <input class="form-control" name="Textbox9" ID="Textbox9" placeholder="รหัส Job" />
+                    <span class="input-group-addon" data-toggle="modal" data-target="#FindIdJob" runat="server"><i class="glyphicon glyphicon-triangle-bottom"></i></span>
+                    <div class="modal fade" id="FindIdJob" role="dialog">
+                        <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+
+                                <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title"><b>Find รหัส Job</b></h4>
+                                    </div>
+                                    <iframe class="embed-responsive-item" src="FindIdJob.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <br />
+                <input class="form-control" name="Textbox10" ID="Textbox10" disabled />
+            </div>
+        </div><br />
+        <div class="col-sm-2"></div>
+        <div class="row">
+            <div class="col-sm-3">
+                <div style="text-align: left"></div>
+                <br>
+                <input type="checkbox" name="checkbox">
+                Clear
+            </div>
+        </div>
+        <br />
+        <div class="col-sm-2"></div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="form-group">
+                    เหตุผลการ Clear
+                    <textarea class="form-control" rows="5" id="comment" placeholder="เหตุผลการ Clear"></textarea>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+
+    </div>
+
+    <!-- content Tab Rate -->
+    <div id="rate" class="tab-pane fade container-fluid">
+        <div class="col-sm-3"></div>
+        <div class="row">
+            <div class="col-sm-3">
+                <div style="text-align: left"></div>
+                <br>
+                <input type="checkbox" name="checkbox">
+                Multicurrency
+            </div>
+        </div>
+        <br />
+        <br />
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-3">
+                <div style="text-align: left">วันที่อัตราแลกเปลี่ยน</div>
+                <input class="form-control" type="date" name="CurrDate" ID="CurrDate" />
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-3">
+                <div style="text-align: left">รหัสสกุลเงิน</div>
+                <div class="input-group">
+                    <input class="form-control" name="Textbox6" ID="Textbox6" placeholder="รหัสสกุลเงิน" />
+                    <span class="input-group-addon" data-toggle="modal" data-target="#FindCurrency" runat="server"><i class="glyphicon glyphicon-triangle-bottom"></i></span>
+                    <div class="modal fade" id="FindCurrency" role="dialog">
+                        <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+
+                                <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title"><b>Find รหัสสกุลเงิน</b></h4>
+                                    </div>
+                                    <iframe class="embed-responsive-item" src="FindCurrency.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="col-sm-3">
+                <input class="form-control" name="Textbox6" ID="Textbox6" disabled />
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-3">
+                <div style="text-align: left">รหัสประเภทอัตราแลกเปลี่ยน</div>
+                <div class="input-group">
+                    <input class="form-control" name="Textbox6" ID="Textbox6" placeholder="รหัสประเภทอัตราแลกเปลี่ยน" />
+                    <span class="input-group-addon" data-toggle="modal" data-target="#FindExchangeRateType" runat="server"><i class="glyphicon glyphicon-triangle-bottom"></i></span>
+                    <div class="modal fade" id="FindExchangeRateType" role="dialog">
+                        <div class="modal-dialog" style="width: 80%; height: 100%">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+
+                                <div class="modal-body tab-pane fade in active embed-responsive" style="width: 100%; height: 100%">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title"><b>Find รหัสประเภทอัตราแลกเปลี่ยน</b></h4>
+                                    </div>
+                                    <iframe class="embed-responsive-item" src="FindExchangeRateType.aspx" style="border: none; width: 100%; height: 100vh; position: relative;"></iframe>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="col-sm-3">
+                <input class="form-control" name="Textbox6" ID="Textbox6" disabled />
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-3">
+                <div style="text-align: left">อัตราแลกเปลี่ยน</div>
+                <input class="form-control" name="Textbox6" ID="Textbox6" disabled />
+            </div>
+        </div>
+
+
+
+        <br />
+        <br />
+        <br />
+    </div>
+
+    <!-- Content Tab Description -->
+    <div id="description" class="tab-pane fade container-fluid">
+
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    description
+                    <textarea class="form-control" rows="5" id="comment" placeholder="description"></textarea>
+                </div>
+            </div>
+        </div>
+
+
+        <br />
+        <br />
+        <br />
+    </div>*@
+</div>
+
+<script>
+    $("#checkAll").click(function () {
+        $(".check").prop('checked', $(this).prop('checked'));
+    });
+</script>
+
+

@@ -68,10 +68,18 @@
                                     <li><a href="@Url.Action("ManageFactory", "Factory")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสโรงงาน</a></li>
                                     <li><a href="@Url.Action("ManageBrach", "Brach")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสสาขา</a></li>
                                     <li><a href="@Url.Action("ManageDepart", "QsoftDepart")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสฝ่าย</a></li>
-                                    <li><a href="@Url.Action("ManageSection", "Section")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสแผนก</a></li>
-                                    <li><a href="@Url.Action("ManageExpn", "Expn")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสรายได้</a></li>
+                                    <li><a href="@Url.Action("ManageBaddEditSec", "ManageBaddEditSec")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสแผนก</a></li>
+                                    <li><a href="@Url.Action("ManageFactory", "Factory")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรายชื่อโรงงาน</a></li>
+                                    <li> <a href="@Url.Action("ManageExpn", "Expn")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสรายได้</a></li>
                                     <li><a href="@Url.Action("ManageExch", "Exch")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสค่าใช้จ่าย</a></li>
-                                    <li><a href="@Url.Action("ManageCNRemarkType", "ManageCNRemarkType")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสสาเหตุลดหนี้/เพิ่มหนี้</a></li>
+                                    @*<li><a href="..."><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขเล่มที่</a></li>
+                                    <li><a href="GeneralOption.aspx"><i class="fa fa-circle-o"></i>General Option</a></li>*@
+                                    <li><a href="@Url.Action("ManageCauseOfReductionDebt", "ManageCauseOfReductionDebt")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสสาเหตุลดหนี้/เพิ่มหนี้</a></li>
+                                    @*<li><a href="..."><i class="fa fa-circle-o"></i>Generate ประเภทธุรกิจ</a></li>
+                                    <li><a href="GenDefindCurrencyCode.aspx"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสสกุลเงิน</a></li>
+                                    <li><a href="GenDefindExchangeRateCode.aspx"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสประเภทอัตราแลกเปลี่ยน</a></li>
+                                    <li><a href="DefindExchangeRate.aspx"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขอัตราแลกเปลี่ยนเงินตรา</a></li>
+                                    <li><a href="GeneralOption.aspx"><i class="fa fa-circle-o"></i>PC Option</a></li>*@
                                 </ul>
                             </li>
                             @*AP Setup*@
@@ -86,7 +94,9 @@
                                     <li><a href="@Url.Action("ManageSupplier", "ManageSupplier")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสเจ้าหนี้</a></li>
                                     <li><a href="@Url.Action("ManageSupplierType", "ManageSupplierType")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสประเภทเจ้าหนี้</a></li>
                                     <li><a href="@Url.Action("ManageGroupSupplier", "GroupSupplier")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสกลุ่มเจ้าหนี้</a></li>
-                                    <li><a href="@Url.Action("ManageReceivePlace", "ReceivePlace")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสรหัสสถานที่รับของ</a></li>
+                                    <li><a href="CodeOfTheReceiverAPS.aspx"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสสถานที่รับของ</a></li>
+                                    <li><a href="APoption.aspx"><i class="fa fa-circle-o"></i>AP Option</a></li>
+                                    <li><a href="CreditLimitAPS.aspx"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขวงเงินการอนุมัติสั่งซื้อ</a></li>
                                 </ul>
                             </li>
                             @*AR Setup*@
@@ -99,17 +109,17 @@
                                 </a>
                                 <ul class="treeview-menu">
                                     <li><a href="@Url.Action("ManageCustomer", "ManageCustomer")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสลูกหนี้</a></li>
-                                    <li><a href="@Url.Action("ManageBusinessType", "MasterData")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสประเภทธุรกิจ</a></li>
+                                    @*<li><a href="@Url.Action("ManageBusinessType", "MasterData")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสประเภทธุรกิจ</a></li>*@
 
-                                    <li><a href="ARSDefineCustomerTypeCode.aspx"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสประเภทลูกหนี้</a></li>
+                                    @*<li><a href="ARSDefineCustomerTypeCode.aspx"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสประเภทลูกหนี้</a></li>*@
                                     <li><a href="@Url.Action("ManageGroupCustomer", "GroupCustomer")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสกลุ่มลูกหนี้</a></li>
                                     <li><a href="@Url.Action("ManageCustomerZone", "CustomerZone")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขเขตลูกหนี้</a></li>
-                                    <li><a href="@Url.Action("ManageBillGrp", "MasterData")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสกลุ่มวางบิล</a></li>
-                                    <li><a href="ARSCreditTemporary.aspx"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขวงเงินชั่วคราว</a></li>
+                                    @*<li><a href="@Url.Action("ManageBillGrp", "MasterData")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสกลุ่มวางบิล</a></li>*@
+                                    @*<li><a href="ARSCreditTemporary.aspx"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขวงเงินชั่วคราว</a></li>
                                     <li><a href="ARSDefineCustomerPriority.aspx"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสความสำคัญลูกหนี้</a></li>
                                     <li><a href="ARSOption.aspx"><i class="fa fa-circle-o"></i>AR Option</a></li>
-                                    <li><a href="ARSDefineCreditPeriodByDept.aspx"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขระยะเวลาเครดิตตามแผนก</a></li>
-                                    <li><a href="@Url.Action("ManageCustMedia", "MasterData")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสแหล่งข้อมูลลูกค้า</a></li>
+                                    <li><a href="ARSDefineCreditPeriodByDept.aspx"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขระยะเวลาเครดิตตามแผนก</a></li>*@
+                                    @*<li><a href="@Url.Action("ManageCustMedia", "MasterData")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสแหล่งข้อมูลลูกค้า</a></li>*@
                                 </ul>
                             </li>
                             @*CQ Setup*@
@@ -121,8 +131,12 @@
                                     </span>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li><a href="@Url.Action("ManageBankBrach", "BankBrach")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสสาขาธนาคาร</a></li>
-                                    <li><a href="@Url.Action("ManageBankBookType", "BankBookType")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสประเภทสมุดเงินฝาก</a></li>
+                                    <li><a href="CQSDefineBankCode.aspx"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสธนาคาร</a></li>
+                                    <li><a href="CQSDefindBankBranchCode.aspx"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสสาขาธนาคาร</a></li>
+                                    <li><a href="CQSDefindPassbookTypeCode.aspx"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสประเภทสมุดเงินฝาก</a></li>
+                                    <li><a href="CQSDefindChequeFormat.aspx"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรูปแบบเช็ค</a></li>
+                                    <li><a href="CQSOption.aspx"><i class="fa fa-circle-o"></i>CQ Option</a></li>
+                                    <li><a href="CQSPayInPayOut.aspx"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรูปแบบใบฝาก-ถอน</a></li>
                                 </ul>
                             </li>
                             @*GL Setup*@
@@ -163,9 +177,9 @@
                                         <li><a href="@Url.Action("ManageICProductGroupX", "ManageICProductGroupX")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขกลุ่มสินค้า/และวัตถุดิบ 5</a></li>*@
                                     <li><a href="@Url.Action("ManageICUnit", "ManageICUnit")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขหน่วยนับ</a></li>
                                     <li><a href="@Url.Action("ManageICdbStock", "ManageICdbStock")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขคลังสินค้า/วัตถุดิบ</a></li>
-                                    <li><a href="@Url.Action("ReOrderSafetyEOQ", "ReOrderSafetyEOQ")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขReroder Point.Safety Stock.E.O.Q</a></li>
+                                   @* <li><a href="@Url.Action("ReOrderSafetyEOQ", "ReOrderSafetyEOQ")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขReroder Point.Safety Stock.E.O.Q</a></li>*@
                                     <li><a href="@Url.Action("ManageBaddEditScrap", "ManageBaddEditScrap")"><i class="fa fa-circle-o"></i>ข้อมูลสาเหตุของเสีย</a></li>
-                                    <li><a href="@Url.Action("ManageCunitCurrency", "ManageCunitCurrency")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขสกุลเงินต่างประเทศ</a></li>
+                                    @*<li><a href="@Url.Action("ManageCunitCurrency", "ManageCunitCurrency")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขสกุลเงินต่างประเทศ</a></li>*@
                                     <li><a href="AddEditDocumentNumberIC.aspx"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขเลขที่เล่มเอกสาร</a></li>
                                 </ul>
                             </li>
@@ -218,9 +232,9 @@
                                 </a>
                                 <ul class="treeview-menu">
                                     <li><a href="@Url.Action("ManageEmployee", "ManageEmployee")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสพนักงาน</a></li>
-                                    <li><a href="@Url.Action("ManageSaleArea", "MasterData")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสเขตการขาย</a></li>
+                                    @*<li><a href="@Url.Action("ManageSaleArea", "MasterData")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสเขตการขาย</a></li>*@
                                     <li><a href="@Url.Action("ManageEmployeeGroup", "EmployeeGroup")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสกลุ่มพนักงาน</a></li>
-                                    <li><a href="@Url.Action("ManageChannel", "MasterData")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสช่องทางการขาย</a></li>
+                                   @* <li><a href="@Url.Action("ManageChannel", "MasterData")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสช่องทางการขาย</a></li>*@
                                     <li><a href="@Url.Action("ManageTransportasionArea", "ManageTransportasionArea")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสเขตการขนส่ง</a></li>
                                     <li><a href="CreditLimitEMSO.aspx"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขผู้อนุมัติวงเงินเครดิต</a></li>
                                     <li><a href="ApproveCreditEMSO.aspx"><i class="fa fa-circle-o"></i>อนุมัติวงเงินเครดิต</a></li>
@@ -235,8 +249,9 @@
                                     </span>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li><a href="@Url.Action("ManageVATGroup", "VatGroup")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสกลุ่มภาษี</a></li>
-                                    <li><a href="@Url.Action("ManageVatDes", "VatDes")"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขคำอธิบาย VAT</a></li>
+                                    <li><a href="TaxDefineTaxGroup.aspx"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขรหัสกลุ่มภาษี</a></li>
+                                    <li><a href="TaxDefineVatDesciption.aspx"><i class="fa fa-circle-o"></i>เพิ่ม/แก้ไขคำอธิบาย VAT</a></li>
+                                    <li><a href="TaxVatOption.aspx"><i class="fa fa-circle-o"></i>Vat Option</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -273,23 +288,24 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="PurchaseOrderPO.aspx"><i class="fa fa-circle-o"></i>ใบสั่งซื้อ</a></li>
+                            <li><a href="@Url.Action("ManagePO_GoodsReceivedNote", "ManagePO_GoodsReceivedNote")"><i class="fa fa-circle-o"></i>ใบขอซื้อ</a></li>
+                            <li><a href="@Url.Action("ManagePReq", "PReq")"><i class="fa fa-circle-o"></i>ใบสั่งซื้อ</a></li>
                             <li><a href="ApprovePO.aspx"><i class="fa fa-circle-o"></i>อนุมัติใบสั่งซื้อ</a></li>
-                            <li><a href="PaymentDepositPO.aspx"><i class="fa fa-circle-o"></i>จ่ายเงินมัดจำ</a></li>
-                            <li><a href="creditDepositPO.aspx"><i class="fa fa-circle-o"></i>จ่ายเงินมัดจำเครดิต</a></li>
-                            <li><a href="creditDepositPO.aspx"><i class="fa fa-circle-o"></i>ซื้อสด</a></li>
-                            <li><a href="CreditPurchasePO.aspx"><i class="fa fa-circle-o"></i>ซื้อเชื่อ</a></li>
-                            <li><a href="CreditNotePO.aspx"><i class="fa fa-circle-o"></i>ส่งคืน,ลดหนี้</a></li>
-                            <li><a href="CreditNote_CashPO.aspx"><i class="fa fa-circle-o"></i>ส่งคืน,ลดหนี้(เงินสด)</a></li>
-                            <li><a href="DebitNotePO.aspx"><i class="fa fa-circle-o"></i>เพิ่มหนี้</a></li>
-                            <li><a href="Landed_CostPO.aspx"><i class="fa fa-circle-o"></i>Landed Cost</a></li>
-                            <li><a href="PO_Export_Import.aspx"><i class="fa fa-circle-o"></i>PO Export/Import</a></li>
+                            @*<li><a href="PaymentDepositPO.aspx"><i class="fa fa-circle-o"></i>จ่ายเงินมัดจำ</a></li>
+                             <li><a href="creditDepositPO.aspx"><i class="fa fa-circle-o"></i>จ่ายเงินมัดจำเครดิต</a></li>
+                             <li><a href="creditDepositPO.aspx"><i class="fa fa-circle-o"></i>ซื้อสด</a></li>
+                             <li><a href="CreditPurchasePO.aspx"><i class="fa fa-circle-o"></i>ซื้อเชื่อ</a></li>
+                             <li><a href="CreditNotePO.aspx"><i class="fa fa-circle-o"></i>ส่งคืน,ลดหนี้</a></li>
+                             <li><a href="CreditNote_CashPO.aspx"><i class="fa fa-circle-o"></i>ส่งคืน,ลดหนี้(เงินสด)</a></li>
+                             <li><a href="DebitNotePO.aspx"><i class="fa fa-circle-o"></i>เพิ่มหนี้</a></li>
+                             <li><a href="Landed_CostPO.aspx"><i class="fa fa-circle-o"></i>Landed Cost</a></li>
+                             <li><a href="PO_Export_Import.aspx"><i class="fa fa-circle-o"></i>PO Export/Import</a></li>*@
                         </ul>
                     </li>
                     @*Accounts Receivable*@
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-edit"></i><span>บัญลูกหนี้</span>
+                            <i class="fa fa-edit"></i><span>บัญชีลูกหนี้</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
