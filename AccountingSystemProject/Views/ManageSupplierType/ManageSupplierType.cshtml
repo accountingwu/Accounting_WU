@@ -1,0 +1,224 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@using AccountingSystemProject.Models;
+@{
+    ViewBag.Title = "ManageSupplierType";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+<div class="container-fluid ">
+    <h3>เพิ่ม/แก้ไข รหัสประเภทเจ้าหนี้ </h3>
+    <div class="table-responsive table-hover" id="SupplierTypeModel">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>รหัสประเภท เจ้าหนี้</th>
+                    <th>ชื่อประเภท เจ้าหนี้</th>
+                    <th>ชื่อประเภท เจ้าหนี้ ภาษา2</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var supType in ViewBag.MyData)
+                {
+                    <tr>
+                        <td data-id="@supType.SupplierTypeID">
+                            @supType.SupplierTypeCode
+                        </td>
+                        <td>
+                            @supType.SupplierTypeName
+                        </td>
+                        <td>
+                            @supType.SupplierTypeENG
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("ManageSupplierType", new { page }))</div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="bg">
+            <div class="btn-group" style="float: right">
+                <input type="button" value="ล้างข้อมูล" class="btn btn-primary btn-sm" id="Clear" />
+                <input type="button" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+                <input type="button" value="ลบ" class="btn btn-primary btn-sm" id="Delete" />
+                <input type="button" value="ค้นหา" class="btn btn-primary btn-sm" id="Find" />
+                <input type="button" value="ดูตัวอย่าง" class="btn btn-primary btn-sm" id="Preview" />
+                <input type="button" value="พิมพ์" class="btn btn-primary btn-sm" id="Print" />
+            </div>
+            <br /><br /><br />
+
+            <form action="" id="formsupplierType" class="container-fluid">
+                <input type="hidden" name="SupplierTypeID" id="SupplierTypeID" value="" />
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2" id="head">รหัสประเภทเจ้าหนี้ : <font color="red"> * </font></div>
+                    <div class="col-md-4" id="head">
+                        <input class="form-control" placeholder="รหัสกลุ่มเจ้าหนี้" name="SupplierTypeCode" ID="SupplierTypeCode" />
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2" id="head">ชื่อประเภทเจ้าหนี้ : <font color="red"> * </font></div>
+                    <div class="col-md-4" id="head">
+                        <input class="form-control" placeholder="ชื่อกลุ่มเจ้าหนี้" name="SupplierTypeName" ID="SupplierTypeName" />
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2" id="head">ชื่อประเภทเจ้าหนี้ภาษา 2 : </div>
+                    <div class="col-md-4" id="head">
+                        <input class="form-control" placeholder="ชื่อกลุ่มเจ้าหนี้ภาษา 2" name="SupplierTypeENG" ID="SupplierTypeENG" />
+                    </div>
+                </div><br>
+                @*<div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2" id="head">หมายเหตุ : </div>
+                        <div class="col-md-4" id="head">
+                            <input class="form-control" placeholder="หมายเหตุ" name="Remark" ID="Remark" />
+                        </div>
+                    </div><br>*@
+            </form>
+            <br />
+            <br />
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/Scripts/validate/jquery.validate.js")
+    @Scripts.Render("~/Scripts/validate/formsupplierType.js")
+    <script>
+        $("div#SupplierTypeModel table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableGroupSupplier',
+                    type: 'post',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#SupplierTypeID').val(data.SupplierTypeID);
+                        $('#SupplierTypeCode').val(data.SupplierTypeCode);
+                        $('#SupplierTypeName').val(data.SupplierTypeName);
+                        $('#SupplierTypeENG').val(data.SupplierTypeENG);
+                        //$('#Remark').val((data.Remark == null) ? "" : data.Remark);
+                    }
+                });
+            } else {
+                $('#SupplierTypeID').val("");
+                $('#SupplierTypeCode').val("");
+                $('#SupplierTypeName').val("");
+                $('#SupplierTypeENG').val("");
+                //$('#Remark').val("");
+            }
+        })
+
+        $("#Clear").click(function () {
+
+            $('#SupplierTypeID').val("");
+            $('#SupplierTypeCode').val("");
+            $('#SupplierTypeName').val("");
+            $('#SupplierTypeENG').val("");
+            //$('#Remark').val("");
+
+        });
+
+        $("#Save").click(function () {
+            if ($("#formsupplierType").valid()) {
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveSupplierType", "ManageSupplierType")',
+                    data: JSON.stringify({
+                        SupplierTypeID: $("#SupplierTypeID").val(),
+                        SupplierTypeCode: $("#SupplierTypeCode").val(),
+                        SupplierTypeName: $("#SupplierTypeName").val(),
+                        SupplierTypeENG: $("#SupplierTypeENG").val(),
+                        //Remark: $("#Remark").val()
+                        ccode: "TBC"
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    success: function (response) {
+                        if (response == true) {
+                            alert("บันทึกสำเร็จ");
+                            window.location.reload(true);
+                        } else {
+                            alert("รหัสซ้ำ");
+                        }
+
+                    }
+                })
+            }
+        });
+
+        $("#Delete").click(function () {
+            if ($("#formsupplierType").valid()) {
+                if (confirm('ยืนยันการลบ')) {
+                    DeleteVendorGroup();
+                } else {
+                    return false;
+                }
+            }
+        });
+        function DeleteVendorGroup() {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("DeleteSupplierType", "ManageSupplierType")',
+                data: JSON.stringify({
+                    SupplierTypeID: $("#SupplierTypeID").val()
+                }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                processData: false,
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                }
+            })
+        }
+
+
+
+
+    </script>
+}
+
+
+
+

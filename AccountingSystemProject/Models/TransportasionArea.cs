@@ -5,17 +5,16 @@ using System.Web;
 
 namespace AccountingSystemProject.Models
 {
-    public class Media
+    public class TransportasionArea
     {
-        public int CustMediaID { get; set; }
+        public int TranspAreaID { get; set; }
         //[Required(ErrorMessage = "BusiTypeCode is required.")]
-        public string CustMediaCode { get; set; }
+        public string TranspAreaCode { get; set; }
         //[Required(ErrorMessage = "BusiTypeName is required.")]
-        public string CustMediaName { get; set; }
+        public string TranspAreaName { get; set; }
         //[Required(ErrorMessage = "BusiTypeNameEng is required.")]
-        public string CustMediaNameEng { get; set; }
+        public string TranspAreaNameEng { get; set; }
         //[Required(ErrorMessage = "Remark is required.")]
         public string Remark { get; set; }
     }
-    
 }
