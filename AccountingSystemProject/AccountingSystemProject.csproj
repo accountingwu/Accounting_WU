@@ -190,6 +190,8 @@
     <Compile Include="Controllers\ManageSupplierController.cs" />
     <Compile Include="Controllers\ManageSupplierTypeController.cs" />
     <Compile Include="Controllers\ManageTransportasionAreaController.cs" />
+    <Compile Include="Controllers\POController.cs" />
+    <Compile Include="Controllers\PReqController.cs" />
     <Compile Include="Controllers\QsoftDepartController.cs" />
     <Compile Include="Controllers\MasterDataController.cs" />
     <Compile Include="Controllers\ReceivePlaceController.cs" />
@@ -1346,6 +1348,8 @@
     <Content Include="Views\VatDes\ManageVatDes.cshtml" />
     <Content Include="Views\VatGroup\ManageVATGroup.cshtml" />
     <Content Include="Views\ManageSupplierType\ManageSupplierType.cshtml" />
+    <Content Include="Views\PO\ManagePo.cshtml" />
+    <Content Include="Views\PReq\ManagePReq.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
