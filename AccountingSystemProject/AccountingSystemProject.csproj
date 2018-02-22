@@ -163,6 +163,7 @@
     <Compile Include="Controllers\CustomerZoneController.cs" />
     <Compile Include="Controllers\ExchController.cs" />
     <Compile Include="Controllers\ExpnController.cs" />
+    <Compile Include="Controllers\ManageBusinessTypeController.cs" />
     <Compile Include="Controllers\ManageDeliveryOrderController.cs" />
     <Compile Include="Controllers\EmployeeGroupController.cs" />
     <Compile Include="Controllers\FactoryController.cs" />
@@ -1353,6 +1354,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ManageBusinessType\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
