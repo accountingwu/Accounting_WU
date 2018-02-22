@@ -1611,7 +1611,7 @@ warning 6002: The table/view 'QSoft_WU.dbo.MCP_RawMat' does not have a primary k
           <Key>
             <PropertyRef Name="BillGroupID" />
           </Key>
-          <Property Name="BillGroupID" Type="int" Nullable="false" />
+          <Property Name="BillGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BillGroupCode" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="BillGroupName" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="BillGroupNameEng" Type="varchar" MaxLength="255" />
@@ -1642,7 +1642,7 @@ warning 6002: The table/view 'QSoft_WU.dbo.MCP_RawMat' does not have a primary k
           <Key>
             <PropertyRef Name="BusiTypeID" />
           </Key>
-          <Property Name="BusiTypeID" Type="int" Nullable="false" />
+          <Property Name="BusiTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BusiTypeCode" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="BusiTypeName" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="BusiTypeNameEng" Type="varchar" MaxLength="255" />
@@ -1755,7 +1755,7 @@ warning 6002: The table/view 'QSoft_WU.dbo.MCP_RawMat' does not have a primary k
           <Key>
             <PropertyRef Name="CusMediaID" />
           </Key>
-          <Property Name="CusMediaID" Type="int" Nullable="false" />
+          <Property Name="CusMediaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CusMediaCode" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="CusMediaName" Type="varchar" MaxLength="255" />
           <Property Name="CusMediaNameEng" Type="varchar" MaxLength="255" />
@@ -3786,9 +3786,12 @@ warning 6013: The table/view 'QSoft_WU.dbo.PPR_member' does not have a primary k
           <Property Name="tagid" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'QSoft_WU.dbo.PR_member' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6002: The table/view 'QSoft_WU.dbo.PR_member' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PR_member">
-          <Property Name="pr_id" Type="int" />
+          <Key>
+            <PropertyRef Name="pr_id" />
+          </Key>
+          <Property Name="pr_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="pcode" Type="varchar" MaxLength="50" />
           <Property Name="num1" Type="decimal" Precision="23" Scale="8" />
           <Property Name="num2" Type="decimal" Precision="23" Scale="8" />
@@ -3809,7 +3812,7 @@ warning 6013: The table/view 'QSoft_WU.dbo.PR_member' does not have a primary ke
           <Property Name="sunitid" Type="int" />
           <Property Name="avaliable_stock" Type="decimal" Precision="18" Scale="8" />
           <Property Name="sumBook" Type="decimal" Precision="18" Scale="8" />
-        </EntityType>-->
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6013: The table/view 'QSoft_WU.dbo.PR_member2' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="PR_member2">
@@ -3833,8 +3836,6 @@ warning 6013: The table/view 'QSoft_WU.dbo.PR_member2' does not have a primary k
           <Property Name="pr_date2" Type="datetime" />
           <Property Name="sunitid" Type="int" />
         </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'QSoft_WU.dbo.PR2' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PR2">
           <Key>
             <PropertyRef Name="pr_id" />
@@ -4898,14 +4899,12 @@ warning 6013: The table/view 'QSoft_WU.dbo.SysVersion' does not have a primary k
           <Property Name="cst_value" Type="int" />
           <Property Name="cst_name" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'QSoft_WU.dbo.t_purchase_order' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="t_purchase_order">
           <Key>
             <PropertyRef Name="po_id" />
           </Key>
           <Property Name="po_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ccode" Type="varchar" MaxLength="255" />
+          <Property Name="ccode" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="bcode" Type="varchar" MaxLength="255" />
           <Property Name="po" Type="varchar" MaxLength="255" />
           <Property Name="po_no" Type="varchar" MaxLength="255" />
@@ -6144,6 +6143,7 @@ warning 6002: The table/view 'QSoft_WU.dbo.WT_Member' does not have a primary ke
           <EntitySet Name="pm_wp_workinstruction" EntityType="Self.pm_wp_workinstruction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="POOption" EntityType="Self.POOption" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PR" EntityType="Self.PR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PR2" EntityType="Self.PR2" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRDocNo" EntityType="Self.PRDocNo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRDocNo2" EntityType="Self.PRDocNo2" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="prepdoc_pm" EntityType="Self.prepdoc_pm" Schema="dbo" store:Type="Tables" />
@@ -6178,6 +6178,7 @@ warning 6002: The table/view 'QSoft_WU.dbo.WT_Member' does not have a primary ke
           <EntitySet Name="symptoms" EntityType="Self.symptoms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t_cost_type" EntityType="Self.t_cost_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t_count_stock_type" EntityType="Self.t_count_stock_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_purchase_order" EntityType="Self.t_purchase_order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t_sale_order" EntityType="Self.t_sale_order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t_warehouse_type" EntityType="Self.t_warehouse_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t_yesno" EntityType="Self.t_yesno" Schema="dbo" store:Type="Tables" />
@@ -6947,44 +6948,30 @@ warning 6002: The table/view 'QSoft_WU.dbo.WT_Member' does not have a primary ke
     [PowerLate].[fcode] AS [fcode]
     FROM [dbo].[PowerLate] AS [PowerLate]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="PR2" EntityType="Self.PR2" store:Type="Tables" store:Schema="dbo">
+          <EntitySet Name="PR_member" EntityType="Self.PR_member" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [PR2].[pr_id] AS [pr_id], 
-    [PR2].[ccode] AS [ccode], 
-    [PR2].[bcode] AS [bcode], 
-    [PR2].[pr] AS [pr], 
-    [PR2].[pr_no] AS [pr_no], 
-    [PR2].[ref_no] AS [ref_no], 
-    [PR2].[pr_date] AS [pr_date], 
-    [PR2].[sup_id] AS [sup_id], 
-    [PR2].[secode] AS [secode], 
-    [PR2].[curcode] AS [curcode], 
-    [PR2].[curexchange] AS [curexchange], 
-    [PR2].[vattype] AS [vattype], 
-    [PR2].[vat] AS [vat], 
-    [PR2].[verify] AS [verify], 
-    [PR2].[verify_date] AS [verify_date], 
-    [PR2].[PRstate] AS [PRstate], 
-    [PR2].[statusPR] AS [statusPR], 
-    [PR2].[total_qty] AS [total_qty], 
-    [PR2].[total_discount_p] AS [total_discount_p], 
-    [PR2].[total_discount_c] AS [total_discount_c], 
-    [PR2].[total_b_vat] AS [total_b_vat], 
-    [PR2].[total_vat] AS [total_vat], 
-    [PR2].[total_net] AS [total_net], 
-    [PR2].[note1] AS [note1], 
-    [PR2].[note2] AS [note2], 
-    [PR2].[note3] AS [note3], 
-    [PR2].[note4] AS [note4], 
-    [PR2].[note5] AS [note5], 
-    [PR2].[note6] AS [note6], 
-    [PR2].[note7] AS [note7], 
-    [PR2].[note8] AS [note8], 
-    [PR2].[note9] AS [note9], 
-    [PR2].[note10] AS [note10], 
-    [PR2].[PR_Num] AS [PR_Num], 
-    [PR2].[status_ref] AS [status_ref]
-    FROM [dbo].[PR2] AS [PR2]</DefiningQuery>
+    [PR_member].[pr_id] AS [pr_id], 
+    [PR_member].[pcode] AS [pcode], 
+    [PR_member].[num1] AS [num1], 
+    [PR_member].[num2] AS [num2], 
+    [PR_member].[price] AS [price], 
+    [PR_member].[discount] AS [discount], 
+    [PR_member].[cost] AS [cost], 
+    [PR_member].[note1] AS [note1], 
+    [PR_member].[note2] AS [note2], 
+    [PR_member].[note3] AS [note3], 
+    [PR_member].[note4] AS [note4], 
+    [PR_member].[note5] AS [note5], 
+    [PR_member].[note6] AS [note6], 
+    [PR_member].[note7] AS [note7], 
+    [PR_member].[note8] AS [note8], 
+    [PR_member].[note9] AS [note9], 
+    [PR_member].[note10] AS [note10], 
+    [PR_member].[pr_date2] AS [pr_date2], 
+    [PR_member].[sunitid] AS [sunitid], 
+    [PR_member].[avaliable_stock] AS [avaliable_stock], 
+    [PR_member].[sumBook] AS [sumBook]
+    FROM [dbo].[PR_member] AS [PR_member]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="RawMat" EntityType="Self.RawMat" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -7084,55 +7071,6 @@ warning 6002: The table/view 'QSoft_WU.dbo.WT_Member' does not have a primary ke
     [Stock].[status] AS [status], 
     [Stock].[bciid] AS [bciid]
     FROM [dbo].[Stock] AS [Stock]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="t_purchase_order" EntityType="Self.t_purchase_order" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [t_purchase_order].[po_id] AS [po_id], 
-    [t_purchase_order].[ccode] AS [ccode], 
-    [t_purchase_order].[bcode] AS [bcode], 
-    [t_purchase_order].[po] AS [po], 
-    [t_purchase_order].[po_no] AS [po_no], 
-    [t_purchase_order].[ref_no] AS [ref_no], 
-    [t_purchase_order].[po_date] AS [po_date], 
-    [t_purchase_order].[cust_id] AS [cust_id], 
-    [t_purchase_order].[secode] AS [secode], 
-    [t_purchase_order].[curcode] AS [curcode], 
-    [t_purchase_order].[curexchange] AS [curexchange], 
-    [t_purchase_order].[vattype] AS [vattype], 
-    [t_purchase_order].[vat] AS [vat], 
-    [t_purchase_order].[genmp] AS [genmp], 
-    [t_purchase_order].[POstate] AS [POstate], 
-    [t_purchase_order].[statusPO] AS [statusPO], 
-    [t_purchase_order].[verify] AS [verify], 
-    [t_purchase_order].[verify_date] AS [verify_date], 
-    [t_purchase_order].[total_qty] AS [total_qty], 
-    [t_purchase_order].[total_discount_p] AS [total_discount_p], 
-    [t_purchase_order].[total_discount_c] AS [total_discount_c], 
-    [t_purchase_order].[total_b_vat] AS [total_b_vat], 
-    [t_purchase_order].[total_vat] AS [total_vat], 
-    [t_purchase_order].[total_net] AS [total_net], 
-    [t_purchase_order].[im_status] AS [im_status], 
-    [t_purchase_order].[note1] AS [note1], 
-    [t_purchase_order].[note2] AS [note2], 
-    [t_purchase_order].[note3] AS [note3], 
-    [t_purchase_order].[note4] AS [note4], 
-    [t_purchase_order].[note5] AS [note5], 
-    [t_purchase_order].[note6] AS [note6], 
-    [t_purchase_order].[note7] AS [note7], 
-    [t_purchase_order].[note8] AS [note8], 
-    [t_purchase_order].[note9] AS [note9], 
-    [t_purchase_order].[note10] AS [note10], 
-    [t_purchase_order].[send_date] AS [send_date], 
-    [t_purchase_order].[sendnumdate] AS [sendnumdate], 
-    [t_purchase_order].[createBook] AS [createBook], 
-    [t_purchase_order].[Savestatus] AS [Savestatus], 
-    [t_purchase_order].[procode] AS [procode], 
-    [t_purchase_order].[complete] AS [complete], 
-    [t_purchase_order].[ref_pc] AS [ref_pc], 
-    [t_purchase_order].[fromPR] AS [fromPR], 
-    [t_purchase_order].[status_ref] AS [status_ref], 
-    [t_purchase_order].[ref_tr] AS [ref_tr]
-    FROM [dbo].[t_purchase_order] AS [t_purchase_order]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="t_purchase_order_member" EntityType="Self.t_purchase_order_member" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -8281,7 +8219,7 @@ warning 6002: The table/view 'QSoft_WU.dbo.WT_Member' does not have a primary ke
           <Key>
             <PropertyRef Name="BillGroupID" />
           </Key>
-          <Property Name="BillGroupID" Type="Int32" Nullable="false" />
+          <Property Name="BillGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BillGroupCode" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="BillGroupName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="BillGroupNameEng" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -8312,7 +8250,7 @@ warning 6002: The table/view 'QSoft_WU.dbo.WT_Member' does not have a primary ke
           <Key>
             <PropertyRef Name="BusiTypeID" />
           </Key>
-          <Property Name="BusiTypeID" Type="Int32" Nullable="false" />
+          <Property Name="BusiTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BusiTypeCode" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="BusiTypeName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="BusiTypeNameEng" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -8425,7 +8363,7 @@ warning 6002: The table/view 'QSoft_WU.dbo.WT_Member' does not have a primary ke
           <Key>
             <PropertyRef Name="CusMediaID" />
           </Key>
-          <Property Name="CusMediaID" Type="Int32" Nullable="false" />
+          <Property Name="CusMediaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CusMediaCode" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CusMediaName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="CusMediaNameEng" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -9691,6 +9629,46 @@ warning 6002: The table/view 'QSoft_WU.dbo.WT_Member' does not have a primary ke
           <Property Name="ref_doc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="tagid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="PR2">
+          <Key>
+            <PropertyRef Name="pr_id" />
+          </Key>
+          <Property Name="pr_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ccode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="bcode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="pr" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="pr_no" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ref_no" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="pr_date" Type="DateTime" Precision="3" />
+          <Property Name="sup_id" Type="Int32" />
+          <Property Name="secode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="curcode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="curexchange" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="vattype" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="vat" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="verify" Type="Boolean" />
+          <Property Name="verify_date" Type="DateTime" Precision="3" />
+          <Property Name="PRstate" Type="Int32" />
+          <Property Name="statusPR" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="total_qty" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="total_discount_p" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="total_discount_c" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="total_b_vat" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="total_vat" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="total_net" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="note1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="note2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="note3" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="note4" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="note5" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="note6" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="note7" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="note8" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="note9" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="note10" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PR_Num" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="status_ref" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+        </EntityType>
         <EntityType Name="PRDocNo">
           <Key>
             <PropertyRef Name="prdocid" />
@@ -10459,6 +10437,56 @@ warning 6002: The table/view 'QSoft_WU.dbo.WT_Member' does not have a primary ke
           <Property Name="cst_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="cst_value" Type="Int32" />
           <Property Name="cst_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_purchase_order">
+          <Key>
+            <PropertyRef Name="po_id" />
+          </Key>
+          <Property Name="po_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ccode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bcode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="po" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="po_no" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ref_no" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="po_date" Type="DateTime" Precision="3" />
+          <Property Name="cust_id" Type="Int32" />
+          <Property Name="secode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="curcode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="curexchange" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="vattype" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="vat" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="genmp" Type="Int32" />
+          <Property Name="POstate" Type="Int32" />
+          <Property Name="statusPO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="verify" Type="Boolean" />
+          <Property Name="verify_date" Type="DateTime" Precision="3" />
+          <Property Name="total_qty" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="total_discount_p" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="total_discount_c" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="total_b_vat" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="total_vat" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="total_net" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="im_status" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="note1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="note2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="note3" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="note4" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="note5" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="note6" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="note7" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="note8" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="note9" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="note10" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="send_date" Type="DateTime" Precision="3" />
+          <Property Name="sendnumdate" Type="Int32" />
+          <Property Name="createBook" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Savestatus" Type="String" MaxLength="255" FixedLength="true" Unicode="false" />
+          <Property Name="procode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="complete" Type="Boolean" />
+          <Property Name="ref_pc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="fromPR" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+          <Property Name="status_ref" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="ref_tr" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="t_sale_order">
           <Key>
@@ -11729,33 +11757,17 @@ warning 6002: The table/view 'QSoft_WU.dbo.WT_Member' does not have a primary ke
           <Property Name="bcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="fcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="PR2">
+        <EntityType Name="PR_member">
           <Key>
             <PropertyRef Name="pr_id" />
           </Key>
           <Property Name="pr_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ccode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="bcode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="pr" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="pr_no" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ref_no" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="pr_date" Type="DateTime" Precision="3" />
-          <Property Name="sup_id" Type="Int32" />
-          <Property Name="secode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="curcode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="curexchange" Type="Decimal" Precision="23" Scale="8" />
-          <Property Name="vattype" Type="Decimal" Precision="23" Scale="8" />
-          <Property Name="vat" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="verify" Type="Boolean" />
-          <Property Name="verify_date" Type="DateTime" Precision="3" />
-          <Property Name="PRstate" Type="Int32" />
-          <Property Name="statusPR" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="total_qty" Type="Decimal" Precision="23" Scale="8" />
-          <Property Name="total_discount_p" Type="Decimal" Precision="23" Scale="8" />
-          <Property Name="total_discount_c" Type="Decimal" Precision="23" Scale="8" />
-          <Property Name="total_b_vat" Type="Decimal" Precision="23" Scale="8" />
-          <Property Name="total_vat" Type="Decimal" Precision="23" Scale="8" />
-          <Property Name="total_net" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="pcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="num1" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="num2" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="price" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="discount" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="cost" Type="Decimal" Precision="23" Scale="8" />
           <Property Name="note1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="note2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="note3" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -11766,8 +11778,10 @@ warning 6002: The table/view 'QSoft_WU.dbo.WT_Member' does not have a primary ke
           <Property Name="note8" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="note9" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="note10" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="PR_Num" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="status_ref" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="pr_date2" Type="DateTime" Precision="3" />
+          <Property Name="sunitid" Type="Int32" />
+          <Property Name="avaliable_stock" Type="Decimal" Precision="18" Scale="8" />
+          <Property Name="sumBook" Type="Decimal" Precision="18" Scale="8" />
         </EntityType>
         <EntityType Name="RawMat">
           <Key>
@@ -11878,56 +11892,6 @@ warning 6002: The table/view 'QSoft_WU.dbo.WT_Member' does not have a primary ke
           <Property Name="outcrease" Type="Decimal" Precision="23" Scale="8" />
           <Property Name="status" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="bciid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-        </EntityType>
-        <EntityType Name="t_purchase_order">
-          <Key>
-            <PropertyRef Name="po_id" />
-          </Key>
-          <Property Name="po_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ccode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="bcode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="po" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="po_no" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ref_no" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="po_date" Type="DateTime" Precision="3" />
-          <Property Name="cust_id" Type="Int32" />
-          <Property Name="secode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="curcode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="curexchange" Type="Decimal" Precision="23" Scale="8" />
-          <Property Name="vattype" Type="Decimal" Precision="23" Scale="8" />
-          <Property Name="vat" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="genmp" Type="Int32" />
-          <Property Name="POstate" Type="Int32" />
-          <Property Name="statusPO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="verify" Type="Boolean" />
-          <Property Name="verify_date" Type="DateTime" Precision="3" />
-          <Property Name="total_qty" Type="Decimal" Precision="23" Scale="8" />
-          <Property Name="total_discount_p" Type="Decimal" Precision="23" Scale="8" />
-          <Property Name="total_discount_c" Type="Decimal" Precision="23" Scale="8" />
-          <Property Name="total_b_vat" Type="Decimal" Precision="23" Scale="8" />
-          <Property Name="total_vat" Type="Decimal" Precision="23" Scale="8" />
-          <Property Name="total_net" Type="Decimal" Precision="23" Scale="8" />
-          <Property Name="im_status" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="note1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="note2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="note3" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="note4" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="note5" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="note6" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="note7" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="note8" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="note9" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="note10" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="send_date" Type="DateTime" Precision="3" />
-          <Property Name="sendnumdate" Type="Int32" />
-          <Property Name="createBook" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Savestatus" Type="String" MaxLength="255" FixedLength="true" Unicode="false" />
-          <Property Name="procode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="complete" Type="Boolean" />
-          <Property Name="ref_pc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="fromPR" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
-          <Property Name="status_ref" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="ref_tr" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="t_purchase_order_member">
           <Key>
@@ -12379,6 +12343,7 @@ warning 6002: The table/view 'QSoft_WU.dbo.WT_Member' does not have a primary ke
           <EntitySet Name="pm_wp_workinstruction" EntityType="Self.pm_wp_workinstruction" />
           <EntitySet Name="POOption" EntityType="Self.POOption" />
           <EntitySet Name="PR" EntityType="Self.PR" />
+          <EntitySet Name="PR2" EntityType="Self.PR2" />
           <EntitySet Name="PRDocNo" EntityType="Self.PRDocNo" />
           <EntitySet Name="PRDocNo2" EntityType="Self.PRDocNo2" />
           <EntitySet Name="prepdoc_pm" EntityType="Self.prepdoc_pm" />
@@ -12413,6 +12378,7 @@ warning 6002: The table/view 'QSoft_WU.dbo.WT_Member' does not have a primary ke
           <EntitySet Name="symptoms" EntityType="Self.symptoms" />
           <EntitySet Name="t_cost_type" EntityType="Self.t_cost_type" />
           <EntitySet Name="t_count_stock_type" EntityType="Self.t_count_stock_type" />
+          <EntitySet Name="t_purchase_order" EntityType="Self.t_purchase_order" />
           <EntitySet Name="t_sale_order" EntityType="Self.t_sale_order" />
           <EntitySet Name="t_warehouse_type" EntityType="Self.t_warehouse_type" />
           <EntitySet Name="t_yesno" EntityType="Self.t_yesno" />
@@ -12482,13 +12448,12 @@ warning 6002: The table/view 'QSoft_WU.dbo.WT_Member' does not have a primary ke
           <EntitySet Name="pm_wo_workinstruction" EntityType="Self.pm_wo_workinstruction" />
           <EntitySet Name="PODocno" EntityType="Self.PODocno" />
           <EntitySet Name="PowerLate" EntityType="Self.PowerLate" />
-          <EntitySet Name="PR2" EntityType="Self.PR2" />
+          <EntitySet Name="PR_member" EntityType="Self.PR_member" />
           <EntitySet Name="RawMat" EntityType="Self.RawMat" />
           <EntitySet Name="SCC_Member" EntityType="Self.SCC_Member" />
           <EntitySet Name="SCG_Member" EntityType="Self.SCG_Member" />
           <EntitySet Name="SetProductloss" EntityType="Self.SetProductloss" />
           <EntitySet Name="Stock" EntityType="Self.Stock" />
-          <EntitySet Name="t_purchase_order" EntityType="Self.t_purchase_order" />
           <EntitySet Name="t_purchase_order_member" EntityType="Self.t_purchase_order_member" />
           <EntitySet Name="t_sale_order_member" EntityType="Self.t_sale_order_member" />
           <EntitySet Name="TmpPdst_opr" EntityType="Self.TmpPdst_opr" />
@@ -14894,6 +14859,47 @@ warning 6002: The table/view 'QSoft_WU.dbo.WT_Member' does not have a primary ke
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PR2">
+            <EntityTypeMapping TypeName="QSoft_WUModel.PR2">
+              <MappingFragment StoreEntitySet="PR2">
+                <ScalarProperty Name="pr_id" ColumnName="pr_id" />
+                <ScalarProperty Name="ccode" ColumnName="ccode" />
+                <ScalarProperty Name="bcode" ColumnName="bcode" />
+                <ScalarProperty Name="pr" ColumnName="pr" />
+                <ScalarProperty Name="pr_no" ColumnName="pr_no" />
+                <ScalarProperty Name="ref_no" ColumnName="ref_no" />
+                <ScalarProperty Name="pr_date" ColumnName="pr_date" />
+                <ScalarProperty Name="sup_id" ColumnName="sup_id" />
+                <ScalarProperty Name="secode" ColumnName="secode" />
+                <ScalarProperty Name="curcode" ColumnName="curcode" />
+                <ScalarProperty Name="curexchange" ColumnName="curexchange" />
+                <ScalarProperty Name="vattype" ColumnName="vattype" />
+                <ScalarProperty Name="vat" ColumnName="vat" />
+                <ScalarProperty Name="verify" ColumnName="verify" />
+                <ScalarProperty Name="verify_date" ColumnName="verify_date" />
+                <ScalarProperty Name="PRstate" ColumnName="PRstate" />
+                <ScalarProperty Name="statusPR" ColumnName="statusPR" />
+                <ScalarProperty Name="total_qty" ColumnName="total_qty" />
+                <ScalarProperty Name="total_discount_p" ColumnName="total_discount_p" />
+                <ScalarProperty Name="total_discount_c" ColumnName="total_discount_c" />
+                <ScalarProperty Name="total_b_vat" ColumnName="total_b_vat" />
+                <ScalarProperty Name="total_vat" ColumnName="total_vat" />
+                <ScalarProperty Name="total_net" ColumnName="total_net" />
+                <ScalarProperty Name="note1" ColumnName="note1" />
+                <ScalarProperty Name="note2" ColumnName="note2" />
+                <ScalarProperty Name="note3" ColumnName="note3" />
+                <ScalarProperty Name="note4" ColumnName="note4" />
+                <ScalarProperty Name="note5" ColumnName="note5" />
+                <ScalarProperty Name="note6" ColumnName="note6" />
+                <ScalarProperty Name="note7" ColumnName="note7" />
+                <ScalarProperty Name="note8" ColumnName="note8" />
+                <ScalarProperty Name="note9" ColumnName="note9" />
+                <ScalarProperty Name="note10" ColumnName="note10" />
+                <ScalarProperty Name="PR_Num" ColumnName="PR_Num" />
+                <ScalarProperty Name="status_ref" ColumnName="status_ref" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PRDocNo">
             <EntityTypeMapping TypeName="QSoft_WUModel.PRDocNo">
               <MappingFragment StoreEntitySet="PRDocNo">
@@ -15693,6 +15699,57 @@ warning 6002: The table/view 'QSoft_WU.dbo.WT_Member' does not have a primary ke
                 <ScalarProperty Name="cst_id" ColumnName="cst_id" />
                 <ScalarProperty Name="cst_value" ColumnName="cst_value" />
                 <ScalarProperty Name="cst_name" ColumnName="cst_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_purchase_order">
+            <EntityTypeMapping TypeName="QSoft_WUModel.t_purchase_order">
+              <MappingFragment StoreEntitySet="t_purchase_order">
+                <ScalarProperty Name="po_id" ColumnName="po_id" />
+                <ScalarProperty Name="ccode" ColumnName="ccode" />
+                <ScalarProperty Name="bcode" ColumnName="bcode" />
+                <ScalarProperty Name="po" ColumnName="po" />
+                <ScalarProperty Name="po_no" ColumnName="po_no" />
+                <ScalarProperty Name="ref_no" ColumnName="ref_no" />
+                <ScalarProperty Name="po_date" ColumnName="po_date" />
+                <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+                <ScalarProperty Name="secode" ColumnName="secode" />
+                <ScalarProperty Name="curcode" ColumnName="curcode" />
+                <ScalarProperty Name="curexchange" ColumnName="curexchange" />
+                <ScalarProperty Name="vattype" ColumnName="vattype" />
+                <ScalarProperty Name="vat" ColumnName="vat" />
+                <ScalarProperty Name="genmp" ColumnName="genmp" />
+                <ScalarProperty Name="POstate" ColumnName="POstate" />
+                <ScalarProperty Name="statusPO" ColumnName="statusPO" />
+                <ScalarProperty Name="verify" ColumnName="verify" />
+                <ScalarProperty Name="verify_date" ColumnName="verify_date" />
+                <ScalarProperty Name="total_qty" ColumnName="total_qty" />
+                <ScalarProperty Name="total_discount_p" ColumnName="total_discount_p" />
+                <ScalarProperty Name="total_discount_c" ColumnName="total_discount_c" />
+                <ScalarProperty Name="total_b_vat" ColumnName="total_b_vat" />
+                <ScalarProperty Name="total_vat" ColumnName="total_vat" />
+                <ScalarProperty Name="total_net" ColumnName="total_net" />
+                <ScalarProperty Name="im_status" ColumnName="im_status" />
+                <ScalarProperty Name="note1" ColumnName="note1" />
+                <ScalarProperty Name="note2" ColumnName="note2" />
+                <ScalarProperty Name="note3" ColumnName="note3" />
+                <ScalarProperty Name="note4" ColumnName="note4" />
+                <ScalarProperty Name="note5" ColumnName="note5" />
+                <ScalarProperty Name="note6" ColumnName="note6" />
+                <ScalarProperty Name="note7" ColumnName="note7" />
+                <ScalarProperty Name="note8" ColumnName="note8" />
+                <ScalarProperty Name="note9" ColumnName="note9" />
+                <ScalarProperty Name="note10" ColumnName="note10" />
+                <ScalarProperty Name="send_date" ColumnName="send_date" />
+                <ScalarProperty Name="sendnumdate" ColumnName="sendnumdate" />
+                <ScalarProperty Name="createBook" ColumnName="createBook" />
+                <ScalarProperty Name="Savestatus" ColumnName="Savestatus" />
+                <ScalarProperty Name="procode" ColumnName="procode" />
+                <ScalarProperty Name="complete" ColumnName="complete" />
+                <ScalarProperty Name="ref_pc" ColumnName="ref_pc" />
+                <ScalarProperty Name="fromPR" ColumnName="fromPR" />
+                <ScalarProperty Name="status_ref" ColumnName="status_ref" />
+                <ScalarProperty Name="ref_tr" ColumnName="ref_tr" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -16969,32 +17026,16 @@ warning 6002: The table/view 'QSoft_WU.dbo.WT_Member' does not have a primary ke
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PR2">
-            <EntityTypeMapping TypeName="QSoft_WUModel.PR2">
-              <MappingFragment StoreEntitySet="PR2">
+          <EntitySetMapping Name="PR_member">
+            <EntityTypeMapping TypeName="QSoft_WUModel.PR_member">
+              <MappingFragment StoreEntitySet="PR_member">
                 <ScalarProperty Name="pr_id" ColumnName="pr_id" />
-                <ScalarProperty Name="ccode" ColumnName="ccode" />
-                <ScalarProperty Name="bcode" ColumnName="bcode" />
-                <ScalarProperty Name="pr" ColumnName="pr" />
-                <ScalarProperty Name="pr_no" ColumnName="pr_no" />
-                <ScalarProperty Name="ref_no" ColumnName="ref_no" />
-                <ScalarProperty Name="pr_date" ColumnName="pr_date" />
-                <ScalarProperty Name="sup_id" ColumnName="sup_id" />
-                <ScalarProperty Name="secode" ColumnName="secode" />
-                <ScalarProperty Name="curcode" ColumnName="curcode" />
-                <ScalarProperty Name="curexchange" ColumnName="curexchange" />
-                <ScalarProperty Name="vattype" ColumnName="vattype" />
-                <ScalarProperty Name="vat" ColumnName="vat" />
-                <ScalarProperty Name="verify" ColumnName="verify" />
-                <ScalarProperty Name="verify_date" ColumnName="verify_date" />
-                <ScalarProperty Name="PRstate" ColumnName="PRstate" />
-                <ScalarProperty Name="statusPR" ColumnName="statusPR" />
-                <ScalarProperty Name="total_qty" ColumnName="total_qty" />
-                <ScalarProperty Name="total_discount_p" ColumnName="total_discount_p" />
-                <ScalarProperty Name="total_discount_c" ColumnName="total_discount_c" />
-                <ScalarProperty Name="total_b_vat" ColumnName="total_b_vat" />
-                <ScalarProperty Name="total_vat" ColumnName="total_vat" />
-                <ScalarProperty Name="total_net" ColumnName="total_net" />
+                <ScalarProperty Name="pcode" ColumnName="pcode" />
+                <ScalarProperty Name="num1" ColumnName="num1" />
+                <ScalarProperty Name="num2" ColumnName="num2" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
                 <ScalarProperty Name="note1" ColumnName="note1" />
                 <ScalarProperty Name="note2" ColumnName="note2" />
                 <ScalarProperty Name="note3" ColumnName="note3" />
@@ -17005,8 +17046,10 @@ warning 6002: The table/view 'QSoft_WU.dbo.WT_Member' does not have a primary ke
                 <ScalarProperty Name="note8" ColumnName="note8" />
                 <ScalarProperty Name="note9" ColumnName="note9" />
                 <ScalarProperty Name="note10" ColumnName="note10" />
-                <ScalarProperty Name="PR_Num" ColumnName="PR_Num" />
-                <ScalarProperty Name="status_ref" ColumnName="status_ref" />
+                <ScalarProperty Name="pr_date2" ColumnName="pr_date2" />
+                <ScalarProperty Name="sunitid" ColumnName="sunitid" />
+                <ScalarProperty Name="avaliable_stock" ColumnName="avaliable_stock" />
+                <ScalarProperty Name="sumBook" ColumnName="sumBook" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -17116,57 +17159,6 @@ warning 6002: The table/view 'QSoft_WU.dbo.WT_Member' does not have a primary ke
                 <ScalarProperty Name="outcrease" ColumnName="outcrease" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="bciid" ColumnName="bciid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="t_purchase_order">
-            <EntityTypeMapping TypeName="QSoft_WUModel.t_purchase_order">
-              <MappingFragment StoreEntitySet="t_purchase_order">
-                <ScalarProperty Name="po_id" ColumnName="po_id" />
-                <ScalarProperty Name="ccode" ColumnName="ccode" />
-                <ScalarProperty Name="bcode" ColumnName="bcode" />
-                <ScalarProperty Name="po" ColumnName="po" />
-                <ScalarProperty Name="po_no" ColumnName="po_no" />
-                <ScalarProperty Name="ref_no" ColumnName="ref_no" />
-                <ScalarProperty Name="po_date" ColumnName="po_date" />
-                <ScalarProperty Name="cust_id" ColumnName="cust_id" />
-                <ScalarProperty Name="secode" ColumnName="secode" />
-                <ScalarProperty Name="curcode" ColumnName="curcode" />
-                <ScalarProperty Name="curexchange" ColumnName="curexchange" />
-                <ScalarProperty Name="vattype" ColumnName="vattype" />
-                <ScalarProperty Name="vat" ColumnName="vat" />
-                <ScalarProperty Name="genmp" ColumnName="genmp" />
-                <ScalarProperty Name="POstate" ColumnName="POstate" />
-                <ScalarProperty Name="statusPO" ColumnName="statusPO" />
-                <ScalarProperty Name="verify" ColumnName="verify" />
-                <ScalarProperty Name="verify_date" ColumnName="verify_date" />
-                <ScalarProperty Name="total_qty" ColumnName="total_qty" />
-                <ScalarProperty Name="total_discount_p" ColumnName="total_discount_p" />
-                <ScalarProperty Name="total_discount_c" ColumnName="total_discount_c" />
-                <ScalarProperty Name="total_b_vat" ColumnName="total_b_vat" />
-                <ScalarProperty Name="total_vat" ColumnName="total_vat" />
-                <ScalarProperty Name="total_net" ColumnName="total_net" />
-                <ScalarProperty Name="im_status" ColumnName="im_status" />
-                <ScalarProperty Name="note1" ColumnName="note1" />
-                <ScalarProperty Name="note2" ColumnName="note2" />
-                <ScalarProperty Name="note3" ColumnName="note3" />
-                <ScalarProperty Name="note4" ColumnName="note4" />
-                <ScalarProperty Name="note5" ColumnName="note5" />
-                <ScalarProperty Name="note6" ColumnName="note6" />
-                <ScalarProperty Name="note7" ColumnName="note7" />
-                <ScalarProperty Name="note8" ColumnName="note8" />
-                <ScalarProperty Name="note9" ColumnName="note9" />
-                <ScalarProperty Name="note10" ColumnName="note10" />
-                <ScalarProperty Name="send_date" ColumnName="send_date" />
-                <ScalarProperty Name="sendnumdate" ColumnName="sendnumdate" />
-                <ScalarProperty Name="createBook" ColumnName="createBook" />
-                <ScalarProperty Name="Savestatus" ColumnName="Savestatus" />
-                <ScalarProperty Name="procode" ColumnName="procode" />
-                <ScalarProperty Name="complete" ColumnName="complete" />
-                <ScalarProperty Name="ref_pc" ColumnName="ref_pc" />
-                <ScalarProperty Name="fromPR" ColumnName="fromPR" />
-                <ScalarProperty Name="status_ref" ColumnName="status_ref" />
-                <ScalarProperty Name="ref_tr" ColumnName="ref_tr" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

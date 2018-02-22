@@ -202,739 +202,742 @@
     <Compile Include="Controllers\VatDesController.cs" />
     <Compile Include="Controllers\VatGroupController.cs" />
     <Compile Include="DAL\alccost.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\APSMyMenu.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\AROption.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\ASP_Permission_Menu_Users.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\audit.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Branch.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\causeLose_pm.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\coonectDB.Context.cs">
+    <Compile Include="DAL\connectDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>coonectDB.Context.tt</DependentUpon>
+      <DependentUpon>connectDB.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\coonectDB.cs">
+    <Compile Include="DAL\connectDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\coonectDB.Designer.cs">
+    <Compile Include="DAL\connectDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>coonectDB.edmx</DependentUpon>
+      <DependentUpon>connectDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="DAL\Corp.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\CQOption.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\CreditTermType.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\crepdoc_pm.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Currency.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Customer.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\CustomerZone.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Depart.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\do.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\DodocNo.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\door.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\dtproperties.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Employee.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\EmployeeGroup.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\EMTranspArea.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\EOQ_warehouse.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Factory.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Form.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\FormItem.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\FormName.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\GLOption.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Gmachine.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\grn.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\grnDetail.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\grndoc.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Groupcustomer.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Grouping.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Groupproduct.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Groupproduct2.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Groupproduct3.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Groupproduct4.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Groupproduct5.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\GroupSupplier.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Holiday.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\irepdoc_pm.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Location.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Lot.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Machine.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Machine2.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Machinept.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Machine_pms.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MCDocNo.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\McGM.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MCGM_Details.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MCGM_RawMat.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\McM.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MCM_Details.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MCM_RawMat.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\McP.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MCP_Details.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MCP_RawMat.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDAcc.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDAccType.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDBank.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDBankBookType.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDBankBrch.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDBillGroup.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDBranch.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDBusiType.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDChannel.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDCNRemarkType.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDCostCode.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDCQPicture.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDCreditDeptCus.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDCreditDeptCusGroup.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDCreditDeptHD.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDCusContact.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDCusMedia.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDCusTempCreditDT.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDCusTempCreditHD.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDCusType.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDEmGroup.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDEmpApprovCreditCus.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDEmpApprovCreditCusGroup.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDEmpApprovCreditHD.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDEmpApprovPOHD.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDEmpGroup.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDEmployee.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDEmPosition.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDExpn.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDPayPicture.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDPosition.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDPriorty.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDReceivePlace.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDRun.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDRunBrch.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDSaleArea.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDSalePeriod.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDSupplierType.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDTransp.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDTranspArea.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDTransportationzone.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDVatDes.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDVATGroup.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MDVatOption.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Menu.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MODocNo.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MoGM.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MOGM_RawMat.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MoM.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MOM_RawMat.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MoP.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MOP_RawMat.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\movement.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MovementTable.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MovementTableIn.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MPDocNo.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MpGM.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MpM.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MPM_RawMat.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MRPGenDate.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MRPGenDate_Plan.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\mrp_bookFG.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\mrp_bookFG_detail.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\MRP_SubMenu.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Mts.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\mtsdocno.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Mts_details.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\OSODocno.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Paret.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Pdst.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Pdst_opr.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Pdst_oprOLD.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_adjust.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_adjustdoc.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_groupline.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\PM_group_machine.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_issue.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_issuedoc.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_issue_componentcost.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_menuItems.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_menulist.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_plangroup.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_priorityJob.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_req.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_reqdoc.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_req_ComponentCost.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_ro.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_rodetail.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_statusJob.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_sym_workstep.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_userpermissionItems.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_wc.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_wcdoc.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_wo.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_wodoc.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_wo_changemachine.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_wo_componentcost.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_wo_workinstruction.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_wp.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_wp_componentcost.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\pm_wp_workinstruction.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\PODocno.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\POOption.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\PowerLate.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\PR.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\PR2.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\PRDocNo.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\PRDocNo2.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\prepdoc_pm.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Products.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\ProductSet_detail.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\ProductVersion.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Project.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\PR_member.cs">
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\RawMat.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\RCG.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\RCGDocNo.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\RCW.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\RCWDocNo.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Receipt.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\ReorderEOQ.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\RFG.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\RFGDocNo.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\SCC.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\SCCDocNo.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\SCC_Member.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\SCG.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\SCGDocNo.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\SCG_Member.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\schedualtime_pm.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Scrap.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Section.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Setproduct.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\SetProductloss.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Shelf.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\SOCreditApprov.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\SODocNo.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\SODT_2.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\SOOption.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\srepdoc_pm.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Stdoperate.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Stock.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Supplier.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\symptoms.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\TmpPdst_opr.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\TmpRawMat.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\TrAccconfig.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\TrWin_POWH.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Typeproduct.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\t_cost_type.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\t_count_stock_type.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\t_purchase_order.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\t_purchase_order_member.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\t_sale_order.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\t_sale_order_member.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\t_warehouse_type.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\t_yesno.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Unit.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\UnitResource.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\UserMenu.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\UserName.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\vat.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\W1.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\W1DocNo.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\W1P.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\W1PDocNo.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\W1P_Member.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\W1_Member.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Warehouse.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Waste.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\WasteDocNo.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Waste_Detail.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\WF.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\WFDocNo.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\WF_Member.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Workcenter.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Workplan.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\WP.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\WPDocNo.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\WP_Member.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\WT.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\WTDocNo.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\WT_Member.cs">
-      <DependentUpon>coonectDB.tt</DependentUpon>
+      <DependentUpon>connectDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1213,15 +1216,15 @@
     <Content Include="Content\plugins\timepicker\bootstrap-timepicker.js" />
     <Content Include="Content\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Content\plugins\timepicker\bootstrap-timepicker.min.js" />
-    <Content Include="DAL\coonectDB.Context.tt">
+    <Content Include="DAL\connectDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>coonectDB.edmx</DependentUpon>
-      <LastGenOutput>coonectDB.Context.cs</LastGenOutput>
+      <DependentUpon>connectDB.edmx</DependentUpon>
+      <LastGenOutput>connectDB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DAL\coonectDB.tt">
+    <Content Include="DAL\connectDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>coonectDB.edmx</DependentUpon>
-      <LastGenOutput>coonectDB.cs</LastGenOutput>
+      <DependentUpon>connectDB.edmx</DependentUpon>
+      <LastGenOutput>connectDB.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -1242,12 +1245,12 @@
     <Content Include="Content\dist\css\adminlte.min.css.map" />
     <Content Include="Content\plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="Content\plugins\input-mask\phone-codes\phone-codes.json" />
-    <EntityDeploy Include="DAL\coonectDB.edmx">
+    <EntityDeploy Include="DAL\connectDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>coonectDB.Designer.cs</LastGenOutput>
+      <LastGenOutput>connectDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="DAL\coonectDB.edmx.diagram">
-      <DependentUpon>coonectDB.edmx</DependentUpon>
+    <Content Include="DAL\connectDB.edmx.diagram">
+      <DependentUpon>connectDB.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1286,6 +1289,7 @@
     <Content Include="Scripts\Validate\ManageTax.js" />
     <Content Include="Scripts\Validate\Media.js" />
     <Content Include="Scripts\Validate\ReceiveTypedata.js" />
+    <Content Include="Scripts\Validate\ValiBusiType.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1351,10 +1355,10 @@
     <Content Include="Views\ManageSupplierType\ManageSupplierType.cshtml" />
     <Content Include="Views\PO\ManagePo.cshtml" />
     <Content Include="Views\PReq\ManagePReq.cshtml" />
+    <Content Include="Views\ManageBusinessType\ManageBusinessType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ManageBusinessType\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

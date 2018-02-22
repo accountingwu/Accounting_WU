@@ -140,6 +140,7 @@ namespace AccountingSystemProject.DAL
         public virtual DbSet<pm_wp_workinstruction> pm_wp_workinstruction { get; set; }
         public virtual DbSet<POOption> POOption { get; set; }
         public virtual DbSet<PR> PR { get; set; }
+        public virtual DbSet<PR2> PR2 { get; set; }
         public virtual DbSet<PRDocNo> PRDocNo { get; set; }
         public virtual DbSet<PRDocNo2> PRDocNo2 { get; set; }
         public virtual DbSet<prepdoc_pm> prepdoc_pm { get; set; }
@@ -174,6 +175,7 @@ namespace AccountingSystemProject.DAL
         public virtual DbSet<symptoms> symptoms { get; set; }
         public virtual DbSet<t_cost_type> t_cost_type { get; set; }
         public virtual DbSet<t_count_stock_type> t_count_stock_type { get; set; }
+        public virtual DbSet<t_purchase_order> t_purchase_order { get; set; }
         public virtual DbSet<t_sale_order> t_sale_order { get; set; }
         public virtual DbSet<t_warehouse_type> t_warehouse_type { get; set; }
         public virtual DbSet<t_yesno> t_yesno { get; set; }
@@ -243,13 +245,12 @@ namespace AccountingSystemProject.DAL
         public virtual DbSet<pm_wo_workinstruction> pm_wo_workinstruction { get; set; }
         public virtual DbSet<PODocno> PODocno { get; set; }
         public virtual DbSet<PowerLate> PowerLate { get; set; }
-        public virtual DbSet<PR2> PR2 { get; set; }
+        public virtual DbSet<PR_member> PR_member { get; set; }
         public virtual DbSet<RawMat> RawMat { get; set; }
         public virtual DbSet<SCC_Member> SCC_Member { get; set; }
         public virtual DbSet<SCG_Member> SCG_Member { get; set; }
         public virtual DbSet<SetProductloss> SetProductloss { get; set; }
         public virtual DbSet<Stock> Stock { get; set; }
-        public virtual DbSet<t_purchase_order> t_purchase_order { get; set; }
         public virtual DbSet<t_purchase_order_member> t_purchase_order_member { get; set; }
         public virtual DbSet<t_sale_order_member> t_sale_order_member { get; set; }
         public virtual DbSet<TmpPdst_opr> TmpPdst_opr { get; set; }

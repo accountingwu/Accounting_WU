@@ -1,0 +1,234 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "ManageBusinessType";
+}
+
+<style type="text/css">
+    .DetailsRequired {
+        font-size: 15px;
+        color: red;
+    }
+
+    .bg {
+        background-color: lightgrey;
+    }
+
+    #head {
+        padding: 1px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f3;
+        }
+
+    th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+
+<div class="container-fluid ">
+    <h3>เพิ่ม/แก้ไขรหัสประเภทธุรกิจ</h3>
+    <div class="table-responsive table-hover" id="businessType">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>รหัสประเภทธุรกิจ</th>
+                    <th>ชื่อประเภทธุรกิจ</th>
+                    <th>ชื่อประเภทธุรกิจ(Eng)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var businessType in ViewBag.MyData)
+                {
+                    <tr>
+                        <td data-id="@businessType.BusiTypeID">
+                            @businessType.BusiTypeCode
+                        </td>
+                        <td>
+                            @businessType.BusiTypeName
+                        </td>
+                        <td>
+                            @businessType.BusiTypeNameEng
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div style="text-align: center">@Html.PagedListPager((IPagedList)ViewBag.MyData, page => Url.Action("ManageBusinessType", new { page }))</div>
+    </div>
+</div>
+<br />
+
+
+<div class="container-fluid">
+    <div class="bg">
+        <div class="btn-group" style="float: right">
+            <input type="submit" value="เคลียร์" class="btn btn-primary btn-sm" id="Clear" />
+            <input type="button" value="บันทึก" class="btn btn-primary btn-sm" id="Save" />
+            <input type="submit" value="ลบ" class="btn btn-primary btn-sm" id="Delete" />
+            <input type="submit" value="ค้นหา" class="btn btn-primary btn-sm" id="Find" />
+            <input type="submit" value="ดูตัวอย่าง" class="btn btn-primary btn-sm" id="Preview" />
+            <input type="submit" value="พิมพ์" class="btn btn-primary btn-sm" id="Print" />
+        </div>
+        <br /><br /><br />
+
+
+
+        <form id="formBusi">
+            <input type="hidden" name="BusiTypeID" id="BusiTypeID" value="" />
+            <div class="from-group">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2" id="head">รหัสประเภทธุรกิจ : <font color="red"> * </font></div>
+                    <div class="col-md-4" id="head">
+                        <input class="form-control" placeholder="รหัสประเภทธุรกิจ" name="BusiTypeCode" ID="BusiTypeCode" />
+                    </div>
+                </div>
+            </div><br>
+
+            <div class="from-group">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2" id="head">ชื่อประเภทธุรกิจ : <font color="red"> * </font></div>
+                    <div class="col-md-4" id="head">
+                        <input class="form-control" placeholder="ชื่อประเภทธุรกิจ" name="BusiTypeName" ID="BusiTypeName" />
+                    </div>
+                </div>
+            </div><br>
+            <div class="from-group">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2" id="head">ชื่อประเภทธุรกิจ(Eng) :</div>
+                    <div class="col-md-4" id="head">
+                        <input class="form-control" placeholder="ชื่อประเภทธุรกิจ(Eng)" name="BusiTypeNameEng" ID="BusiTypeNameEng" />
+                    </div>
+                </div>
+            </div><br>
+            <div class="from-group">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2" id="head">หมายเหตุ :</div>
+                    <div class="col-md-4" id="head">
+                        <input class="form-control" placeholder="หมายเหตุ" name="Remark" ID="Remark" />
+                    </div>
+                </div>
+            </div><br>
+        </form>
+
+        <br />
+        <br />
+
+    </div>
+</div>
+
+@section scripts {
+
+    @Scripts.Render("~/Scripts/validate/jquery.validate.js")
+    @Scripts.Render("~/Scripts/validate/ValiBusiType.js")
+
+    <script>
+         
+        $("div#businessType table").delegate('tr', 'click', function () {
+            var id = $(this).find("td:first").data("id");
+            if (id != null) {
+                $.ajax({
+                    url: 'ShowTableBinessType',
+                    type: 'get',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#BusiTypeID').val(data.BusiTypeID);
+                        $('#BusiTypeCode').val(data.BusiTypeCode);
+                        $('#BusiTypeName').val(data.BusiTypeName);
+                        $('#BusiTypeNameEng').val(data.BusiTypeNameEng);
+                        $('#Remark').val((data.Remark == null) ? "" : data.Remark);
+                    }
+                });
+            } else {
+                $('#BusiTypeID').val("");
+                $('#BusiTypeCode').val("");
+                $('#BusiTypeName').val("");
+                $('#BusiTypeNameEng').val("");
+                $('#Remark').val("");
+            }
+        })
+
+     $("#Save").on('click', function () {
+         if ($("#formBusi").valid()) {
+             $.ajax({
+                 type: "POST",
+                 url: '@Url.Action("SaveBusinessType", "ManageBusinessType")',
+                 data: JSON.stringify({
+                     BusiTypeID: $("#BusiTypeID").val(),
+                     BusiTypeCode: $("#BusiTypeCode").val(),
+                     BusiTypeName: $("#BusiTypeName").val(),
+                     BusiTypeNameEng: $("#BusiTypeNameEng").val(),
+                     Remark: $("#Remark").val(),
+                     ccode: "TBC",
+                 }),
+                 dataType: "json",
+                 contentType: "application/json; charset=utf-8",
+                 processData: false,
+                 success: function (response) {
+                     if (response == true) {
+                         alert("บันทึกสำเร็จ");
+                         window.location.reload(true);
+                     } else {
+                         alert('รหัสธุรกิจมีค่าซ้ำ');
+                     }
+
+                 }
+             })
+         }
+        });
+
+        $("#Delete").click(function() {
+            if ($("#formBusi").valid()) {
+
+                if (confirm('ยืนยันการลบ')) {
+                    Delete();
+                } else {
+                    return false;
+                }
+            }
+        });
+
+        function Delete() {
+            $.ajax({
+                url: '@Url.Action("DeleteBusinessType", "ManageBusinessType")',
+                type: 'post',
+                data: JSON.stringify({
+                    BusiTypeID: $("#BusiTypeID").val()
+                }),
+                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                }
+            });
+        }
+
+        $("#Clear").click(function () {
+
+            $('#BusiTypeID').val("");
+            $('#BusiTypeCode').val("");
+            $('#BusiTypeName').val("");
+            $('#BusiTypeNameEng').val("");
+            $('#Remark').val("");
+
+        });
+
+    </script>
+}
