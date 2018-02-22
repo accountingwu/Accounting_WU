@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6d1be60d9c584a3db70c3379cd22a4d1" Name="Diagram1">
+      <Diagram DiagramId="b0c883221a0a4842a37539904e2a6b71" Name="Diagram1">
         <EntityTypeShape EntityType="QSoft_WUModel.alccost" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QSoft_WUModel.AROption" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QSoft_WUModel.Branch" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
